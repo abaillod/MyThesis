@@ -1,0 +1,13 @@
+% SPEC
+\chapter{The Stepped Pressure Equilibrium Code}
+
+\ac{SPEC} is a code developed by \citet{Hudson2012} to find solutions of the equilibrium equations of \ac{MRxMHD}, \textit{i.e.} eqs.(\ref{eq.BeltramiEquation})-(\ref{eq.force_balance}). \ac{SPEC} \citep{Hudson2012,Hudson2012} computes \ac{MRxMHD} equilibria numerically given discrete input profiles. \ac{SPEC} has been rigorously verified in stellarator geometry \citep{Loizu2016}, and has been successfully applied to study current sheets at rational surfaces \citep{Loizu2015,Loizu2015a}, tearing mode stability \citep{Loizu2019} and nonlinear tearing saturation \citep{Loizu2020}, equilibrium $\beta$-limits in a classical stellarator \citep{Loizu2017}, the penetration and amplification of resonant magnetic perturbations in the ideal limit \citep{Loizu2016}, and relaxation phenomenon in reversed field pinches such as the formation of helical states \citep{Dennis2013a} or the relaxation of flow during sawteeth \citep{Dennis2014,Qu2020}. \ac{MRxMHD} has also been extended theoretically to study two-fluid effects \citep{Lingam2016}, and time evolution \citep{Dewar2015,Dewar2017a,Dewar2020}. In addition, \ac{SPEC} has been recently upgraded to allow free-boundary calculations \citep{Hudson2020c} and its core algorithm has been improved to increase its speed and robustness \citep{Qu2020}.
+
+
+
+\section{Implementation of toroidal current constraint}
+
+\input{main/CurrentConstraint.tex}
+
+
+\section{Implementation of a unique angle representation}

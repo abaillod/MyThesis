@@ -1,0 +1,153 @@
+\appendix
+\chapter{Linear relation between surface currents and poloidal fluxes}\label{appA1}
+
+In this appendix we show the linear relation between the surface currents (\ref{eq.surf_current}) and the poloidal fluxes in an \ac{MRxMHD} equilibrium. We rewrite here Eq.(\ref{eq.surf_current}) for convenience,
+
+\begin{equation}
+	\mu_0I^s_{l,\phi} = 2\pi\left[\left[\tilde{B}_\theta\right]\right]_l.
+\end{equation}
+
+We use general coordinates notation, with $u^i\equiv\{s,\theta,\phi\}$, $\{\nabla s,\nabla\theta,\nabla\phi\}$ the contravariant basis, and $\mathbf{e_i}\equiv\{\mathbf{e_s},\mathbf{e_\theta},\mathbf{e_\phi}\}$ the covariant basis. This derivation is local to a volume and we drop the subscript $l$ everywhere for simplicity.
+
+We first show that the surface currents depend linearly on the vector potential degrees of freedom $\mathbf{a}$. The contravariant components of the magnetic field are obtained from $\nabla\times\mathbf{A}=\mathbf{B}$,
+\begin{equation}
+	B^k = \frac{\epsilon^{ijk}}{\sqrt{g}}\frac{\partial A_j}{\partial u^i},
+\end{equation}
+where  $\epsilon^{ijk}$ is the Levi-Civita tensor, $\sqrt{g}$ is the jacobian, and the Einstein summation convention has been used. The covariant component of the magnetic field can then easily be expressed by $B_\theta = g_{k\theta}B^k$. The $m=n=0$ Fourier mode of $B_\theta$ is then
+
+\begin{equation}
+	\tilde{B}_\theta = \frac{1}{S}\int_0^{2\pi}\int_0^{2\pi} g_{k\theta}\epsilon^{ijk}\frac{\partial A_j}{\partial u^i}|\nabla\psi_t| d\theta d\phi, \label{eq.AppA1.1}
+\end{equation}
+with $S$ the total area of the flux surface, which depends only on geometrical quantities. Derivatives of $A_j$ are
+
+\begin{align}
+	\frac{\partial A_j}{\partial s} &= \sum_{m,n}\sum_{k=0}^{L_{rad}} A_{i,k,m,n}T'_k(s)\cos(m\theta-nN_p\phi) \label{eq.AppA1.2} \\
+	\frac{\partial A_j}{\partial \theta} &= \sum_{m,n}\sum_{k=0}^{L_{rad}} -mA_{i,k,m,n}T_k(s)\sin(m\theta-nN_p\phi) \\
+	\frac{\partial A_j}{\partial \phi} &= \sum_{m,n}\sum_{k=0}^{L_{rad}} nN_pA_{i,k,m,n}T_k(s)\sin(m\theta-nN_p\phi) , \label{eq.AppA1.3}
+\end{align}
+where the prime denotes the derivative with respect to the main argument. Equations (\ref{eq.AppA1.1}) and (\ref{eq.AppA1.2})-(\ref{eq.AppA1.3}) combined show the linear dependence of $\tilde{B}_\theta$ on $\mathbf{a}$. Finally, the Beltrami equation (\ref{eq.linearized_beltrami_system}) provides a linear relation between $\mathbf{a}$ and $\{\psi_p,\psi_t,\mu\}$. All relations being linear, this shows that the surface currents depend linearly on the poloidal and toroidal magnetic fluxes.
+
+\chapter{Fixed toroidal current profiles in a free-boundary equilibrium}\label{appA}
+
+In this appendix, the main differences between a fixed- and free-boundary calculation with the new developed current constraint are outlined. The linear system (\ref{eq.psip_diff}) has to be rewritten by extending the arrays $\bm{\psi}$ and $\mathbf{I}$ with two new pairs of scalars $(\psi_{p,V}, \psi_{t,V})$ and ($I^s_{N_{vol}}, I_{coil}$), namely $\bm{\psi}\equiv(\psi_{p,2},\ldots,\psi_{N_{vol}}, \psi_{p,V}, \psi_{t,V})^t$ and $\bm{I}\equiv(I^s_1,\ldots,I^s_{N_{vol}},I_{coil})^t$. Then,
+
+\begin{equation}
+	\mathbf{M}_{Fr} (\overbar{\bm{\psi}} - \bm{\psi}) = \overbar{\bm{I}} - \bm{I},
+\end{equation}
+with the matrix $\mathbf{M}_{Fr}$,
+
+\begin{equation}
+	\mathbf{M}_{Fr} = \frac{2\pi}{\mu_0} \begin{bmatrix}
+		\dfrac{\partial \tilde{B}^-_{\theta,2}}{\partial{\psi_{p,2}}} & 0 & \cdots  & \cdots & \cdots & 0\\
+		-\dfrac{\partial \tilde{B}^+_{\theta,2}}{\partial{\psi_{p,2}}} & \dfrac{\partial \tilde{B}^-_{\theta,3}}{\partial{\psi_{p,3}}} & 0  & \cdots & \cdots & 0\\
+		\vdots  & \ddots  & \ddots & \ddots & \ddots & 0\\
+		0 & 0 & -\dfrac{\partial \tilde{B}^+_{\theta,N_{vol}-1}}{\partial{\psi_{p,N_{vol}-1}}} & \dfrac{\partial \tilde{B}^-_{\theta,N_{vol}}}{\partial{\psi_{p,N_{vol}}}} & 0 & 0 \\
+		\vdots & \cdots & 0 & -\dfrac{\partial \tilde{B}^+_{\theta,N_{vol}}}{\partial{\psi_{p,N_{vol}}}} & \dfrac{\partial \tilde{B}^-_{\theta,V}}{\partial{\psi_{p,V}}} & \dfrac{\partial \tilde{B}^-_{\theta,V}}{\partial{\psi_{t,V}}} \\
+		0 & \cdots & \cdots & 0 & \dfrac{\partial \tilde{B}_{\phi,V}^-}{\partial \psi_{p,V}} & \dfrac{\partial \tilde{B}_{\phi,V}^-}{\partial \psi_{t,V}}
+	\end{bmatrix},
+\end{equation}
+with $\tilde{B}^-_{\phi,V}$ the $m=n=0$ Fourier mode of the covariant toroidal magnetic field on the plasma boundary outer side. Regarding Eq.(\ref{eq.NewtonStep_Solution}), no changes are needed in the plasma volumes. In the vacuum region, however, the toroidal flux is not an input and an additional term is needed,
+
+\begin{equation}
+	A_{V,i} = \overbar{A_{V,i}} - \frac{\partial {A_{V,i}}}{\partial {\psi_{p,V}}} (\overbar{\psi_{p,V}} - \psi_{p,V}) - \frac{\partial {A_{V,i}}}{\partial {\psi_{t,V}}} (\overbar{\psi_{t,V}} - \psi_{t,V}),
+\end{equation}
+where the subscript $V$ denotes the vacuum region.
+
+Regarding the force gradient, the derivative of the toroidal flux with respect to the geometry is non-zero in the vacuum region. This means that
+\begin{equation}
+	\frac{d\tilde{B}_{\theta,V}}{dx_i} = \frac{\partial \tilde{B}^-_{\theta,V}}{\partial x_i} + \frac{\partial \tilde{B}^-_{\theta,V}}{\partial \psi_{t,V}}\frac{d \psi_{t,V}}{d x_i} + \frac{\partial \tilde{B}^-_{\theta,V}}{\partial \psi_{p,V}}\frac{d \psi_{p,V}}{d x_i},
+\end{equation}
+An additional equation is required for $\dfrac{d\psi_{t,V}}{dx_i}$, and is provided by
+
+\begin{equation}
+	\frac{dI_{coil}}{dx_i} = \frac{2\pi}{\mu_0}\left( \frac{\partial  \tilde{B}^+_{V,\phi}}{\partial x_i} + \frac{\partial  \tilde{B}^+_{V,\phi}}{\partial \psi_{p,V}}\frac{\partial\psi_{p,V}}{\partial x_i} +  \frac{\partial  \tilde{B}^+_{V,\phi}}{\partial \psi_{t,V}}\frac{\partial \psi_{t,V}}{\partial x_i} \right)   =0,
+\end{equation}
+leading to
+
+\begin{equation}
+	\mathbf{M}_{Fr} \cdot 
+	\dfrac{d}{dx_i}\bm{\psi} = \frac{2\pi}{\mu_0} \begin{bmatrix}
+		\dfrac{\partial \tilde{B}^+_{\theta,1}}{\partial x_i} - \dfrac{\partial \tilde{B}^-_{\theta,2}}{\partial x_i} \\
+		\vdots \\
+		\dfrac{\partial \tilde{B}^+_{\theta,N_{vol}} } {\partial x_i} - \dfrac{\partial \tilde{B}^-_{\theta,V}}{\partial x_i} \\
+		-\dfrac{\partial\tilde{B}^-_{\phi,V}}{\partial x_i}
+	\end{bmatrix}
+\end{equation}
+
+
+
+\chapter{Beltrami equation solution in an axisymmetric cylinder}\label{appB}
+
+The solution to the Beltrami equation (\ref{eq.BeltramiEquation}) in the $l^{\text{th}}$ volume of an axisymmetric cylinder is
+	\begin{equation}
+		\mathbf{B}_l = \left[c_{l,1}rJ_1(\mu_l r) + c_{l,2}rY_1(\mu_lr)\right] \nabla\theta + \left[c_{l,1}J_0(\mu_l r) + c_{l,2}Y_0(\mu_lr)\right] \nabla\phi,
+\end{equation}
+where the usual $(r,\theta,\phi)$ cylindrical coordinate system has been used, $J_i$ and $Y_i$ are the Bessel functions of the $i^\text{th}$ order of the first and second kind, respectively, and $c_{l,1}$, $c_{l,2}$ are integration constants. Here $\nabla\theta$ and $\nabla\phi$ are the contravariant basis vectors.
+
+In addition, since $B_\theta$ must vanish at the origin, we have that $c_{1,2}=0$. Indeed, the asymptotic expansion of $Y_1(x)$ close to $x=0$ gives \citep{abramowitz_handbook_1964}
+
+\begin{equation}
+	\lim_{r\rightarrow 0} c_{1,2}rY_1(\mu_1 r) \sim \lim_{r\rightarrow 0} -c_{1,2}r\frac{2}{\pi r} = -\frac{2c_{1,2}}{\pi},
+\end{equation}
+which is only zero if $c_{1,2}=0$. 
+
+We consider now the case of a screw pinch with three inner volumes, $N_{vol}=3$. The assumed constrained profiles are the toroidal flux $\{\psi_{t,l}\}_{l=1,2,3}$, the volume current $\{I^{v}_{l,\phi}\}_{l=1,2,3}$ and the surface current $\{I^{s}_{l,\phi}\}_{l=1,2}$. The constraint on the toroidal flux is
+
+\begin{align}
+	\psi_{t,l} &= \iint_{S_{l,\phi}} \mathbf{B}\cdot\nabla\phi \sqrt{g} dr d\theta\\
+	&= \int_{R_{l-1}}^{R_l} dr \int_0^{2\pi} d\theta \left[ c_{l,1} J_0(\mu_l r) r + c_{l,2} Y_0(\mu_l r)r \right]\\
+	&\equiv 2\pi c_{l,1} \bar{J}_l + 2\pi c_{l,2} \bar{Y}_l,
+\end{align}
+where $\sqrt{g}=r$ is the jacobian and $S_{l,\phi}$ is a constant-$\phi$ surface in volume $l$. The Bessel function integrals have been renamed as $\bar{J}_l$ and $\bar{Y}_l$, and $R_l$ is the radius of the $l^{\text{th}}$ interface. The constraints on the currents lead to
+
+\begin{align}
+	\mu_0I^{v}_{l,\phi} &= \frac{\mu_l}{\mu_0} \psi_{t,l}\\
+	\mu_0I^{s}_{l,\phi} &= 2\pi R_l \left[ c_{l+1,1}J_1(\mu_{l+1}R_l) - c_{l,1}J_1(\mu_{l}R_l) + c_{l+1,2}Y_1(\mu_{l+1}R_l) -
+	c_{l,2}Y_1(\mu_{l}R_l)\right],
+\end{align}
+Solving for $\{c_{l,1},c_{l,2}\}$ is equivalent to solving the linear system
+
+\begin{equation}
+	\begin{bmatrix}
+		\bar{J}_{1} & 0 & 0 & 0 & 0 \\
+		0 & \bar{J}_{2} & \bar{Y}_{2} & 0 & 0 \\
+		0 & 0 & 0 & \bar{J}_{3} & \bar{Y}_{3} \\
+		-J_1(\mu_1 R_1) & J_1(\mu_2 R_1) & Y_1(\mu_2 R_1) & 0 & 0 \\
+		0 & -J_1(\mu_2 R_2) & -Y_1(\mu_2 R_2) & J_1(\mu_3 R_2) & Y_1( \mu_3, R_2)
+	\end{bmatrix}
+	\begin{bmatrix}
+		c_{1,1}\\
+		c_{2,1}\\
+		c_{2,2}\\
+		c_{3,1}\\
+		c_{3,2}
+	\end{bmatrix}
+	=
+	\begin{bmatrix}
+		\psi_{t,1} / 2\pi\\
+		\psi_{t,2} / 2\pi\\
+		\psi_{t,3} / 2\pi\\
+		\mu_0I^{surf}_1 / 2\pi R_1\\
+		\mu_0I^{surf}_2 / 2\pi R_2
+	\end{bmatrix} \label{eq.linear_system_constraint_SP}
+\end{equation}
+
+Derivatives of the force $F_l= [(B_{l+1}(R_l))^2-(B_l(R_l))^2] / 2$ can also be expressed analytically, leading to
+
+\begin{align}
+	\frac{\partial F_l}{\partial R_j} = \frac{1}{2} \frac{\partial \left(B_{l+1}(R_l)\right)^2}{\partial R_j} - \frac{1}{2} \frac{\partial \left(B_{l}(R_l)\right)^2}{\partial R_j},
+\end{align}
+with $l,j\in\{1,2\}$. Consider, \textit{e.g.}, the derivative of $B_l(R_k),\ k=\{l-1,l\}$,
+
+\begin{align}
+	\left[B_l(R_k)\right]^2 &= \left[c_{l,1}J_1(\mu_lR_k)+c_{l,2}Y_1(\mu_lR_k)\right]^2 + \left[c_{l,1}J_0(\mu_lR_k)+c_{l,2}Y_0(\mu_lR_k)\right]^2  \\
+	B_l\frac{\partial B_l}{\partial R_k} &= (c_{l,1}J_1 + c_{l,2}Y_1)(c'_{l,1}J_1 + c_{l,1}\mu_lJ_1' + c_{l,2}'Y_1 + c_{l,2}\mu_lY_1') \\
+	&+ (c_{l,1}J_0 + c_{l,2}Y_0)(c'_{l,0}J_0 + c_{l,2}\mu_lJ_0' + c_{l,2}'Y_0 + c_{l,2}\mu_lY_0')
+\end{align}
+where the $'$ denotes a derivative with respect to the function argument, and all Bessel functions are evaluated at $\mu_lR_k$. Finally, all derivatives must be taken at constant $\psi_{t,l}$, $I^{vol}_l$ and $I^{surf}_l$. In particular, the coefficients $\dfrac{dc_{l,i}}{dR_k}$ are obtained from derivatives of Eq.(\ref{eq.linear_system_constraint_SP}) with respect to $R_k$.
+
+
+
+
+\chapter{Boozer coordinates}
+\label{appendix boozer coordinates}
