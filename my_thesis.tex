@@ -19,6 +19,7 @@
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{0pt} %(needs to be before titlepage and frontmatter to keep the table of contents lists short)
 \frontmatter
+
 \input{head/titlepage.tex}
 \include{head/dedication}
 \setcounter{page}{0}
@@ -53,18 +54,23 @@
 %%%%% MAIN: The chapters of the thesis
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \mainmatter
-\include{main/ch1_introduction}
+\part{Introduction}
+\subfile{main/ch1_introduction}
 \cleardoublepage
+
 \part{MRxMHD and SPEC}
 %\include{main/ch2_figures_tables}
-\include{main/ch2_3DEquilibria}
-\include{main/ch3_SPEC}
+\subfile{main/ch2_3DEquilibria}
+\subfile{main/ch3_SPEC}
 \cleardoublepage
+
 \part{Equilibrium $\beta$-limits}
-\include{main/ch4_integrability}
-\include{main/ch5_beta_limit}
+\subfile{main/ch4_integrability}
+\subfile{main/ch5_beta_limit}
+\cleardoublepage
+
 \part{Optimization}
-\include{main/ch6_optimization}
+\subfile{main/ch6_optimization}
 %\include{main/ch3_math}
 %\include{main/ch4_more_text}
 

@@ -1,13 +1,45 @@
-% SPEC
+\documentclass[my_thesis.tex]{subfiles}
+
+\begin{document}
 \chapter{The Stepped Pressure Equilibrium Code}
 
-\ac{SPEC} is a code developed by \citet{Hudson2012} to find solutions of the equilibrium equations of \ac{MRxMHD}, \textit{i.e.} eqs.(\ref{eq.BeltramiEquation})-(\ref{eq.force_balance}). \ac{SPEC} \citep{Hudson2012,Hudson2012} computes \ac{MRxMHD} equilibria numerically given discrete input profiles. \ac{SPEC} has been rigorously verified in stellarator geometry \citep{Loizu2016}, and has been successfully applied to study current sheets at rational surfaces \citep{Loizu2015,Loizu2015a}, tearing mode stability \citep{Loizu2019} and nonlinear tearing saturation \citep{Loizu2020}, equilibrium $\beta$-limits in a classical stellarator \citep{Loizu2017}, the penetration and amplification of resonant magnetic perturbations in the ideal limit \citep{Loizu2016}, and relaxation phenomenon in reversed field pinches such as the formation of helical states \citep{Dennis2013a} or the relaxation of flow during sawteeth \citep{Dennis2014,Qu2020}. \ac{MRxMHD} has also been extended theoretically to study two-fluid effects \citep{Lingam2016}, and time evolution \citep{Dewar2015,Dewar2017a,Dewar2020}. In addition, \ac{SPEC} has been recently upgraded to allow free-boundary calculations \citep{Hudson2020c} and its core algorithm has been improved to increase its speed and robustness \citep{Qu2020}.
+The SPEC code has been developed in the past decade to solve the MRxMHD equilibrium equations (see section \ref{sec. mrxmhd}); in 2012, \citep{Hudson2012} published a first version that computes fixed-boundary, stepped-pressure equilibria. Since then, it has been upgraded to allow free-boundary calculations \citep{Hudson2020c} and to allow the prescription of the net toroidal current profile \citep{Baillod2021} --- this constraint is explained in more details in section \ref{chap. current constraint}. The numerical robustness of the code was and is still continuously improves --- \citep{Qu2020} improved the radial discretization and the numerical solvers in the inner volume of the plasma, and a new boundary representation, based on work by \citet{Henneberg2021}, has been implemented; see details in section \ref{chap. henneberg representation}.
+
+In addition to these numerical developments, SPEC has been extensively used in the past decade to study diverse physics topics. The code has been rigorously verified in stellarator geometry \citep{Loizu2016}, and has been successfully applied to study current sheets at rational surfaces \citep{Loizu2015,Loizu2015a,huang_numerical_2022}, tearing mode stability \citep{Loizu2019} and nonlinear tearing saturation \citep{Loizu2020}, equilibrium $\beta$-limits in a classical stellarator \citep{Loizu2017}, the penetration and amplification of resonant magnetic perturbations in the ideal limit \citep{Loizu2016}, and relaxation phenomenon in reversed field pinches such as the formation of helical states \citep{Dennis2013a} or the relaxation of flow during sawteeth \citep{Dennis2014,Qu2020}. 
+
+%\ac{MRxMHD} has also been extended theoretically to study two-fluid effects \citep{Lingam2016}, and time evolution \citep{Dewar2015,Dewar2017a,Dewar2020}.
+
+In this chapter, an overview of the SPEC code is given. In section \ref{sec. spec_algorithm} some important parts of SPEC algorithm are explained. In section \ref{sec. current constraint} the implementation of the net toroidal current constraint is exposed (see \citep{Baillod2021} for the peer-reviewed publication on that topic). Section \ref{sec. angle representation} discusses some of SPEC numerical issues and how the implementation of a new angle representation is a step towards improving SPEC robustness. Finally, section \ref{sec. chap3 - conclusion} concludes the chapter with some summarizing remarks.
+
+\section{SPEC algorithm \label{sec. spec_algorithm}} 
 
 
 
-\section{Implementation of toroidal current constraint}
+
+\subsection{SPEC coordinates and spectral condensation}
+\subsection{Beltrami solver}
+\subsection{Evaluation of the force imbalance}
+\subsection{Evaluation of the force gradient}
+
+
+\section{Implementation of toroidal current constraint \label{sec. current constraint}}
 
 \input{main/CurrentConstraint.tex}
 
 
-\section{Implementation of a unique angle representation}
+\section{Implementation of a unique angle representation \label{sec. angle representation}}
+
+\subsection{Why a new angle representation is required}
+
+\subscetion{The Henneberg representation}
+
+\subscetion{Implementation}
+
+\subsection{Discussion }
+
+
+\section{Conclusion \label{sec. chap3 - conclusion}}
+
+
+
+\end{document}

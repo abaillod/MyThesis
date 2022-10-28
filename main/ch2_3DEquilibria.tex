@@ -1,8 +1,9 @@
-% Ideal MHD, Taylor states and MRxMHD
+\documentclass[my_thesis.tex]{subfiles}
 
+\begin{document}
 \chapter{3D magnetic equilibria}
 
-The description of a plasma starts with a mathematical model for its equilibrium. As we shall see, even in its simplest form, computing \ac{3D} equilibria is not a trivial task and one needs to restrict the classes of physical profiles one considers to get a well behaved mathematical solution. In what follows, we cover the derivation of equilibrium equations of the ideal \ac{MHD} model (section \ref{section ideal mhd}), the Taylor state (section \ref{section taylor state}) and of the \ac{MRxMHD} model (section \ref{section mrxmhd}) starting from the ideal \ac{MHD} energy functional $W$ \citep{kruskal_equilibrium_1958},
+The description of a plasma starts with a mathematical model for its equilibrium. As we shall see, even in its simplest form, computing \ac{3D} equilibria is not a trivial task and one needs to restrict the classes of physical profiles one considers to get a well behaved mathematical solution. In what follows, we cover the derivation of equilibrium equations of the ideal \ac{MHD} model (section \ref{section ideal mhd}), and of the \ac{MRxMHD} model (section \ref{section mrxmhd}) starting from the ideal \ac{MHD} energy functional $W$ \citep{kruskal_equilibrium_1958},
 \begin{equation}
 	W = \iiint_{\mathcal{V}_P} d\mathbf{x}^3 \left(\frac{\mathbf{B}^2}{2} + \frac{p}{\gamma-1}\right),
 \end{equation}
@@ -120,15 +121,10 @@ To circumvent this issue and obtain well defined, ideal MHD solutions, one can l
 In what follows, we will work with the third class of equilibria described above, namely stepped-pressure equilibria. The reason is three-fold: (i) these equilibria are numerically tractable, (ii) solutions with magnetic islands and chaos can be obtained and (iii) solutions have been proven to exist under some conditions. In particular, we will look at \ac{MRxMHD} equilibria, which can be seen as a combination of Taylor states, described in the next section.
 
 
-\section{Taylor state}
-\label{section taylor state}
-
-
 
 \section{MRxMHD}
 \label{section mrxmhd}
-\ac{3D} \ac{MHD} equilibria consist of a complex mixture of nested flux surfaces, magnetic islands and chaotic field lines \citep{Helander2014,Hudson2017a}, hence their computation represents a great challenge. 
-In fact, there is still no consensus in the community on how to best approach computation of \ac{3D} \ac{MHD} equilibria \citep{Hudson2010}. The \ac{MRxMHD} theory \citep{Dewar2015, Hole2006} has been developed to address this question. \ac{MRxMHD} minimizes the \ac{MHD} energy functional \citep{kruskal_equilibrium_1958} while keeping the magnetic helicity and the magnetic fluxes constant \citep{Dewar2015} in a finite set of $N_{vol}$ nested volumes $\mathcal{V}_l$ at constant pressure (see Figure \ref{fig:Illustration_SPEC}) but otherwise allowing arbitrary, non-ideal variations in the magnetic field. Interfaces $\delta\mathcal{V}_l$ separating the volumes are ideal flux surfaces which therefore cannot undergo magnetic re-connection, effectively constraining discretely the magnetic field topology. In the limit of a single volume, $N_{vol}=1$, Taylor's relaxation theory (section \ref{section taylor state}) is recovered, while in the limit of an infinite number of volumes, $N_{vol}\rightarrow\infty$, it has been proven that \ac{MRxMHD} recovers ideal \ac{MHD} (section \ref{section ideal mhd}) \citep{Dennis2013} in the limit of continuously nested flux surfaces, thereby bridging the gap between both theories.
+The \ac{MRxMHD} theory \citep{Dewar2015, Hole2006} has been developed to address this question. \ac{MRxMHD} minimizes the \ac{MHD} energy functional \citep{kruskal_equilibrium_1958} while keeping the magnetic helicity and the magnetic fluxes constant \citep{Dewar2015} in a finite set of $N_{vol}$ nested volumes $\mathcal{V}_l$ at constant pressure (see Figure \ref{fig:Illustration_SPEC}) but otherwise allowing arbitrary, non-ideal variations in the magnetic field. Interfaces $\delta\mathcal{V}_l$ separating the volumes are ideal flux surfaces which therefore cannot undergo magnetic re-connection, effectively constraining discretely the magnetic field topology. In the limit of a single volume, $N_{vol}=1$, Taylor states \citep{Taylor1974, Taylor1986} are recovered, while in the limit of an infinite number of volumes, $N_{vol}\rightarrow\infty$, it has been proven that \ac{MRxMHD} recovers ideal \ac{MHD} (section \ref{section ideal mhd}) \citep{Dennis2013} in the limit of continuously nested flux surfaces, thereby bridging the gap between both theories.
 
 
 \begin{figure}
@@ -179,3 +175,75 @@ where $\mathbf{A}_l$ is the vector potential of the magnetic field  $\mathbf{B}_
 where $[[\cdot]]_l$ denotes the discontinuity across interface $l^{\text{th}}$.
 
 In each volume $\mathcal{V}_l$, the solution to Eq.(\ref{eq.BeltramiEquation}) is completely determined by three scalars (for example $\{\mu_l,\psi_{t,l},\psi_{p,l}\}$), the geometry of interfaces bounding the volume and a boundary condition for the magnetic field normal to the interfaces $\mathbf{B}_l\cdot\hat{\mathbf{n}}_k$, $k=\{l-1,l\}$, with $\hat{\mathbf{n}}_k$ a unit vector perpendicular to the interface $k$. In \ac{MRxMHD}, the interfaces are imposed to be flux surfaces, with $\mathbf{B}_l\cdot\hat{\mathbf{n}}_k=0$. In the innermost volume, which is topologically different from the others, only two scalars are required in addition to the geometrical degrees of freedom and the condition $\mathbf{B}_1\cdot\hat{\mathbf{n}}_1=0$.
+
+
+
+\subsection{Currents in MRxMHD}
+
+
+In \ac{MRxMHD}, two spatially distinct net toroidal current profiles co-exist, namely currents flowing in the volumes, $\{I^v_{l,\phi}\}_{l=\{1,\ldots,N_{vol}\}}$, and surface currents flowing at the volumes' interfaces, $\{I^s_{l,\phi}\}_{l=\{1,\ldots,N_{vol}-1\}}$ (current sheets), where the subscript $\phi$ refers to the toroidal angle. The volume current $I^v_{l,\phi}$ in volume $\mathcal{V}_l$ is easily evaluated using Eq.(\ref{eq.BeltramiEquation}) and Ampere's law,
+\begin{equation}
+    \mu_0I^v_{l,\phi} = \mu_l\iint_{\mathcal{S}_{l,\phi}} \mathbf{B}\cdot\mathbf{dS}_{l,\phi} = \mu_l \psi_{t,l},
+    \label{eq.volume_current}
+\end{equation}
+where $\mathcal{S}_{l,\phi}$ is a constant-$\phi$ surface in volume $\mathcal{V}_l$ and $\mathbf{dS}_{l,\phi}$ is the differential surface element normal to $\mathcal{S}_{l,\phi}$. Volume currents include externally driven currents such as \ac{ECCD}, \ac{NBCD} or Ohmic current. Eq.(\ref{eq.volume_current}) might be surprising since toroidal currents are usually expressed in terms of functions of the poloidal fluxes and not the toroidal fluxes. In essence, the poloidal flux dependence is contained in $\mu_l$, which is related to the parallel current density, as $\mu_l = \mu_0 \mathbf{j}_l\cdot\mathbf{B}_l / B_l^2$, with $\mathbf{j}_l$ the current density in volume $\mathcal{V}_l$. The surface current $I^s_{l,\phi}$ at interface $\mathcal{I}_l$ can be evaluated using Ampere's law
+\begin{equation}
+    \mu_0I^s_{l,\phi} = \int_{\Gamma _l} \left[\left[ \mathbf{B} \right]\right]_l \cdot \mathbf{dl} = \oint_0^{2\pi} \left[\left[B_\theta\right]\right] d\theta \equiv 2\pi \left[\left[ \tilde{B}_{\theta} \right]\right]_l, \label{eq.surf_current}
+\end{equation}
+where $\Gamma_l$ is a closed curve following the interface $\mathcal{I}_l$ poloidally and $\tilde{B}_{\theta}$ is the $m=n=0$ Fourier mode of the covariant component of the poloidal magnetic field. In Eq.(\ref{eq.surf_current}), the poloidal and toroidal angles, $\theta$ and $\phi$, are as-of-yet arbitrary. However the surface currents $I^s_{l,\phi}$ are, as expected, independent of these angles choice, since the surface currents only depend on the $m=n=0$ mode of the field. Surface currents represent all equilibrium pressure-driven currents, such as diamagnetic, Pfirsch-Schl\"uter, and bootstrap currents, as well as shielding currents arising when an ideal interface is positioned on a resonance \citep{Loizu2015}.
+
+As a side note, we remark that while ideal \ac{MHD} equilibria are defined by two free functions (\textit{e.g.} the pressure and the rotational transform profiles, $p(\psi_t)$ and $\iotabar(\psi_t)$, or the pressure and the current profiles, $p(\psi_t)$ and $I_\phi(\psi_t)$), \ac{MRxMHD} requires two scalars to determine the solution in a volume $\mathcal{V}_l$, in addition to the pressure and toroidal flux. This can be considered as three independent discrete profiles that are required to determine an equilibrium. Examples are $\{p_l, \mu_l, \psi_{p,l}\}_{l=1,\ldots,N_{vol}}$, $\{p_l, \mu_l, K_l\}_{l=1,\ldots,N_{vol}}$ or $\{p_l,\iotabar^-_l,\iotabar^+_l\}_{l=1,\ldots,N_{vol}}$, with $\iotabar^\pm_l$ the rotational transform on the inner and outer side of the interface $\mathcal{I}_l$, or $\{p_l,I^v_{l,\phi},I^s_{l,\phi}\}_{l=1,\ldots,N_{vol}}$, as functions of $\{\psi_{t,l}\}_{l=1,\ldots,N_{vol}}$.
+
+\subsection{Currents discretization}
+
+Typically, continuous current profiles are provided by analytical models or after equilibrium reconstruction using experimental data. We now discuss how these profiles can be represented in the framework of \ac{MRxMHD}. Consider an externally driven current profile, \textit{e.g} \ac{ECCD}, provided as the enclosed toroidal current as a function of the toroidal magnetic flux, \textit{i.e.} $I_{\phi,ECCD}(\psi_t)$, and a pressure-driven current profile, \textit{e.g.} the bootstrap current, provided similarly as the enclosed toroidal current as a function of the toroidal flux, $I_{\phi,BS}(\psi_t)$. We also assume that the pressure profile, $p(\psi_t)$, the number of volumes, $N_{vol}$, and their enclosed toroidal fluxes, $\{\psi_{t,l}\}_{l=1,\ldots,N_{vol}}$, are given (see Figure \ref{fig:sketch_pressure}). The question of how many volumes and where to position their interfaces to best represent a given pressure profile is not addressed in this paper.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\linewidth]{main/Figures_CurrentConstraint/ABaillod_fig2.pdf}
+    \caption{Sketch of a pressure profile as a function of the toroidal flux. Blue: continuous pressure profile obtained via experiment or analytical model. Red: SPEC discretized pressure profile. Black dashed lines: volume interfaces.}
+    \label{fig:sketch_pressure}
+\end{figure}
+
+A proposed representation of these current density profiles in \ac{MRxMHD} is achieved as follows. The \ac{ECCD} current is an externally driven, parallel current and is thus represented as a volume current since it flows parallel to the field lines; on the other hand, the bootstrap current is a pressure-driven, self-generated current and is represented as a surface current, since it is localized at the pressure gradients. Volume currents are obtained by integrating the externally driven current density in each volume (Figure \ref{fig:sketch_eccd}), which is simply given by the difference
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\linewidth]{main/Figures_CurrentConstraint/ABaillod_fig3.pdf}
+    \caption{Sketch of externally driven current density (red curve). Colored area correspond to the \ac{MRxMHD} volume current. Black dashed lines represent volume interfaces.}
+    \label{fig:sketch_eccd}
+\end{figure}
+
+
+\begin{equation}
+    I^v_{l,\phi} = I_{\phi,ECCD}(\psi_{t,l}) - I_{\phi,ECCD}(\psi_{t,l-1}), \label{eq.rep_volume_current}
+\end{equation}
+and the surface currents are obtained by integrating the pressure driven current density around each interface (Figure \ref{fig:sketch_bootstrap}), which is expressed as
+
+\begin{equation}
+    I^s_{l,\phi} = I_{\phi,BS}(\psi_{l,out}) - I_{\phi,BS}(\psi_{l,in}), \label{eq.rep_surface_current}
+\end{equation}
+with
+
+\begin{align}
+    \psi_{l,in} &= \begin{cases}
+    0 & \text{if } l=1\\
+    \frac{\psi_{t,l-1} + \psi_{t,l}}{2} & \text{otherwise}
+    \end{cases}\label{eq.surf_disc1} \\
+    \psi_{l,out} &= \begin{cases}
+    \psi_{a} & \text{if } l=N_{vol}-1\\
+    \frac{\psi_{t,l} + \psi_{t,l+1}}{2} & \text{otherwise}
+    \end{cases},\label{eq.surf_disc2}
+\end{align}
+with $\psi_{a}$ the total toroidal magnetic flux enclosed by the plasma. In Eqs.(\ref{eq.surf_disc1})-(\ref{eq.surf_disc2}), care has been taken for the first and last interfaces, where the surface of integration has been extended to include the current density from the magnetic axis and up to the plasma boundary. Note that this difference in the definition of the first and last surface currents vanishes as the number of volumes $N_{vol}$ is increased. Eqs.(\ref{eq.rep_volume_current})-(\ref{eq.surf_disc2}) are only one possible discretization of the continuous current profiles, proposed by the authors for illustration. Advantages of this particular representation are (1) that the total toroidal current is always preserved and (2) that the currents are approximately localized at the same location in the discretized than in the continuous case. The following sections do not depend on the particular choice of discretization of the currents.
+
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\linewidth]{main/Figures_CurrentConstraint/ABaillod_fig4.pdf}
+    \caption{Sketch of pressure driven current density. Colored area correspond to the \ac{MRxMHD} surface current. Black dashed lines represent volume interfaces.}
+    \label{fig:sketch_bootstrap}
+\end{figure}
+
+
+\end{document}
