@@ -3,7 +3,7 @@
 \begin{document}
 \chapter{The Stepped Pressure Equilibrium Code}
 
-The SPEC code has been developed in the past decade to solve the MRxMHD equilibrium equations (see section \ref{section mrxmhd}); in 2012, \citep{Hudson2012} published a first version that computes fixed-boundary, stepped-pressure equilibria. Since then, it has been upgraded to allow free-boundary calculations \citep{Hudson2020c} and to allow the prescription of the net toroidal current profile \citep{Baillod2021} --- this constraint is explained in more details in section \ref{sec. current constraint}. The numerical robustness of the code was and is still continuously improves --- \citep{Qu2020} improved the radial discretization and the numerical solvers in the inner volume of the plasma, and a new boundary representation, based on work by \citet{Henneberg2021}, has been implemented; see details in section \ref{sec. angle representation}.
+The SPEC code has been developed in the past decade to solve the MRxMHD equilibrium equations (see section \ref{section mrxmhd}); in 2012, \citep{Hudson2012} published a first version that computes fixed-boundary, stepped-pressure equilibria. Since then, it has been upgraded to allow free-boundary calculations \citep{Hudson2020c} and to allow the prescription of the net toroidal current profile \citep{Baillod2021} --- this constraint is explained in more details in section \ref{sec. current constraint}. The numerical robustness of the code was and is still continuously improved --- \citep{Qu2020} improved the radial discretization and the numerical solvers in the inner volume of the plasma, and a new boundary representation, based on work by \citet{Henneberg2021}, has been implemented; see details in section \ref{sec. angle representation}.
 
 In addition to these numerical developments, SPEC has been extensively used in the past decade to study diverse physics topics. The code has been rigorously verified in stellarator geometry \citep{Loizu2016}, and has been successfully applied to study current sheets at rational surfaces \citep{Loizu2015,Loizu2015a,huang_numerical_2022}, tearing mode stability \citep{Loizu2019} and nonlinear tearing saturation \citep{Loizu2020}, equilibrium $\beta$-limits in a classical stellarator \citep{Loizu2017}, the penetration and amplification of resonant magnetic perturbations in the ideal limit \citep{Loizu2016}, and relaxation phenomenon in reversed field pinches such as the formation of helical states \citep{Dennis2013a} or the relaxation of flow during sawteeth \citep{Dennis2014,Qu2020}. 
 
@@ -13,30 +13,29 @@ In this chapter, an overview of the SPEC code is given. In section \ref{sec. spe
 
 \section{SPEC algorithm \label{sec. spec_algorithm}} 
 
-SPEC algorithm can be summarized as follows. First, inputs are read and some pre-processing of input data is performed. This stage is mainly used to normalize some physics profiles, and setup important flags for the execution. Then, SPEC is built around nested loops, their number depending whether a fixed- or free-boundary calculation is made, and depending on the kind of input physics profile.
-
-
 \subsection{Inputs}
-Different inputs are available to SPEC. They depend whether a fixed- or a free-boundary equilibrium is computer, and which kind of input physics profile is constrained.
-
-In case of a fixed-boundary calculation \citep{hudsonComputationMultiregionRelaxed2012}, the plasma boundary $\Gamma_{PB}$. Free-boundary calculations \citep{Hudson2020c}, on the other hand, require the definition of computational boundary $\Gamma_{CB}$, located between the plasma boundary and the coils. Using standard cylindrical coordinates $\mathbf{x}={R}\mathbf{e}_R + {Z}\mathbf{e}_Z$, the toroidal surfaces are described using double Fourier series,
+We describe here what are the degrees of freedom in a fixed- and free-boundary SPEC equilibrium. Using the standard cylindrical coordinate system $(R,\phi,Z)$, a plasma boundary surface $\Gamma_{PB}$ is parameterized by $R(\theta,\phi),\ Z(\theta,\phi)$, where $\theta$ is an as of yet undetermined poloidal angle. Toroidal surfaces can be written as double Fourier series,
 \begin{align}
-	{R}(\theta,\phi) &= \sum_{m=0}^{M_{pol}}\sum_{n=-N_{tor}}^{N_{tor}} R_{mn}\cos(m\theta-nN_{fp}\phi)\\
-	{Z}(\theta,\phi) &= \sum_{m=0}^{M_{pol}}\sum_{n=-N_{tor}}^{N_{tor}} Z_{mn}\sin(m\theta-nN_{fp}\phi),
+	{R}(\theta,\phi) &= \sum_{m=0}^{M_{pol}}\sum_{n=-N_{tor}}^{N_{tor}} R_{mn}\cos(m\theta-nN_{fp}\phi) \label{eq.toroidal surface 1}\\
+	{Z}(\theta,\phi) &= \sum_{m=0}^{M_{pol}}\sum_{n=-N_{tor}}^{N_{tor}} Z_{mn}\sin(m\theta-nN_{fp}\phi) \label{eq.toroidal surface 2},
 \end{align}
 where $M_{pol}$ and $N_{tor}$ are the maximum poloidal and toroidal mode numbers respectively, $R_{mn}$ and $Z_{mn}$ are the Fourier modes of $R$ and $Z$ respectively, $N_{fp}$ is the number of field periods (discrete symmetry) of the system, and $(\theta,\phi)$ are the poloidal and toroidal angles. Note that we assumed stellarator symmetry \citep{pfefferleEnergeticIonDynamics2015} to lighten the notation.
 
-This boundary is in general not a magnetic surface, thus $\mathbf{B}\cdot\mathbf{n}\ne 0$, with $\mathbf{n}=\mathbf{e}_\theta\times\mathbf{e}_\phi$ a vector normal to the computational boundary. The magnetic field is the sum of the magnetic field produced by the coils $\mathbf{B}^c$ and by the plasma $\mathbf{B}^p$. To compute the magnetic field inside the vacuum region, the boundary condition $\mathbf{B}\cdot\mathbf{n}$ on $\Gamma_{CB}$ have to be known. The contribution from the coils, $\mathbf{B}^c\cdot\mathbf{n}$ is provided as input. the field produced by the plasma is however unknown, and an initial guess for $\mathbf{B}^p\cdot\mathbf{n}$ has to be provided.  Finally, for free-boundary calculations, the total toroidal current flowing in the plasma $I_{pl}$ and flowing in the coils $I_{coil}$ have to be given, 
-\begin{align}
-	\mu_0 I_{coil} &= 2\pi\tilde{B}^+_{V,\phi}\\
-	\mu_0 I_{pl} &= 2\pi\tilde{B}^-_{V,\theta},
-\end{align}
-with $\tilde{B}^+_{V,\phi}$ the $m=n=0$ Fourier mode of the covariant toroidal magnetic field on the computational boundary and $\tilde{B}^-_{V,\theta}$ the $m=n=0$ Fourier mode of the covariant poloidal magnetic field on the outer side of the plasma boundary.
+A fixed-boundary \ac{SPEC} equilibrium is then determined by $\Gamma_{PB}$, which is parametrized by the harmonics $(R^{PB_{mn}},Z^{PB_{mn}})$, the number of volumes $N_{vol}$ and the toroidal flux they enclose $\{\psi_{l}\}_{l=\{1,\ldots,N_{vol}\}}$, the pressure in each volume $\{p_l\}_{l=\{1,\ldots,N_{vol}\}}$, the net toroidal  current flowing at the volumes' interfaces $\{I^s_{\phi,l}\}_{l=\{1,\ldots,N_{vol}-1\}}$ and the net toroidal current flowing in each volume $\{I^v_{\phi,l}\}_{l=\{1,\ldots,N_{vol}\}}$.
+Note that \ac{SPEC} can be run with different constraints, for example by constraining the toroidal, poloidal and constraint $\mu$ in each volume, $(\psi_{t,l},\psi_{p,l},\mu_l)$, or by constraining the toroidal flux in each volume and the rotational transform on each side of the volume's interfaces $(\psi_{t,l},\iota_-,\iota_+)$. As an output of a fixed-boundary calculation, \ac{SPEC} gives the magnetic field in each plasma volume as well as the geometry of each interface.
+
+A free-boundary equilibrium is determined by a computational boundary surface $\Gamma_{CB}$ surrounding the plasma and enclosed by the coils. This boundary is parametrized by the harmonics $(R^{CB_{mn}},Z^{CB_{mn}})$, according to Eqs.(\ref{eq.toroidal surface 1})-(\ref{eq.toroidal surface 2}). This boundary is in general not a magnetic surface, thus $\mathbf{B}\cdot\mathbf{n}\ne 0$, with $\mathbf{n}=\mathbf{e}_\theta\times\mathbf{e}_\phi$ a vector normal to the computational boundary. The magnetic field is the sum of the magnetic field produced by the coils $\mathbf{B}^c$ and by the plasma $\mathbf{B}^p$. To compute the magnetic field inside the vacuum region, the boundary condition $\mathbf{B}\cdot\mathbf{n}$ on $\Gamma_{CB}$ have to be known. The contribution from the coils, $\mathbf{B}^c\cdot\mathbf{n}$ is provided as input, as Fourier harmonics $V_{mn}$, \textit{i.e.}
+\begin{equation}
+    \mathbf{B}^c\cdot\mathbf{n} = \sum_{n=-N_{tor}}^{N_{tor}}\sum_{m=0}^{M_{pol}} V_{mn} \sin(m\theta-nN_{fp}\phi),
+\end{equation}
+where $\mathbf{n}=\mathbf{e}_\theta\times \mathbf{e}_\phi$ is a vector normal to $\Gamma_{CB}$, $\mathbf{B}^c$ is the magnetic field produced by the coils, $M_{pol}$ and $N_{tor}$ are respectively the number of poloidal and toroidal Fourier modes used in the calculation, $N_{fp}$ is the number of field periods, and stellarator symmetry has been assumed. The Fourier harmonics $V_{mn}$ can be obtained from the coil geometry and coil currents; changing the coil shapes, coil currents or the computational boundary $\Gamma_{CB}$ will modify the $V_{mn}$ harmonics non-linearly.  
+
+The field produced by the plasma is \textit{a priori} unknown, and an initial guess for the Fourier harmonics $B_{mn}$ of $\mathbf{B}^p\cdot\mathbf{n}$ have to be provided. Then, SPEC will iterate on the $B_{mn}$ until these are consistant with the actual field profuced by the plasma.
+
+Finally, the calculation of a free-boundary equilibrium requires specifying the total coil current flowing through the torus hole, and, as in fixed-boundary calculations, the profiles $\{\psi_{l}\}_{l=\{1,\ldots,N_{vol}-1\}}$,  $\{p_l\}_{l=\{1,\ldots,N_{vol}-1\}}$,  $\{I^s_{\phi,l}\}_{l=\{1,\ldots,N_{vol}-1\}}$ and $\{I^v_{\phi,l}\}_{l=\{1,\ldots,N_{vol}-1\}}$. The pressure and currents in the last region ($l=N_{vol}$) are set to zero, thereby emulating a vacuum region.  As an output of a free-boundary calculation, SPEC gives the plasma boundary geometry $\Gamma_{PB}$ (\textit{i.e.} the geometry of the outer interface of volume $N_{vol}-1$), the magnetic field in each plasma volume as well as in the vacuum region between $\Gamma_{PB}$ and $\Gamma_{CB}$, the total toroidal flux enclosed by $\Gamma_{CB}$, denoted hereafter by $\widehat\Psi\equiv\sum_{l=1}^{N_{vol}} \psi_l$, and the geometry of the interfaces.
 
 
-Other physics inputs are the number of volumes and the toroidal flux they enclose $\psi_{t,l}$, as well as an initial guess for their interfaces. Then, different kind of profiles can be constrained: either (i) the constant $\mu_l$ and the poloidal flux $\psi_{p,l}$, or (ii) the rotational transform on the inner $\iota_-$ and outer $\iota_+$ interfaces of each volume, or (iii) the net toroidal current flowing in each volume $I^v_{\phi,l}$ and at each interface (current sheet) $I^s_{\phi,l}$. The implementation of the last constraint is the topic of section \ref{sec. current constraint}.
-
-SPEC  will then iterate on the volume's boundary geometries until force balance is found, \textit{i.e.} equation \ref{eq. force balance} is satisfied. The geometrical degrees of freedom are the Fourier modes of the inner interfaces, \textit{i.e.} $(R_{lmn},Z_{lmn})$ with $l\in\{1,\ldots,N_{vol}-1\}$ and of the plasma boundary in case of free-boundary calculations. These modes are packed in a single array for each interface, named $\mathbf{x}_l$.
+%SPEC  will then iterate on the volume's boundary geometries until force balance is found, \textit{i.e.} equation \ref{eq. force balance} is satisfied. The geometrical degrees of freedom are the Fourier modes of the inner interfaces, \textit{i.e.} $(R_{lmn},Z_{lmn})$ with $l\in\{1,\ldots,N_{vol}-1\}$ and of the plasma boundary in case of free-boundary calculations. These modes are packed in a single array for each interface, named $\mathbf{x}_l$.
 
 
 
@@ -79,15 +78,15 @@ In SPEC, the toroidal angle $\phi$ is the cylindrical angle,
 \end{equation}
 with $(x,y)$ the Cartesian coordinates. The choice of poloidal angle, on the other hand, is more complex. In SPEC, a so-called \emph{spectral condensation} \citep{Hirshman1986} is implemented to select the poloidal angle. The idea is to minimize the number of Fourier harmonics required to represent a surface, \textit{i.e.} minimize
 \begin{equation}
-	M_l = \frac{1}{2}\sum_{m=0}^{M_{pol}}\sum_{n=-N_{tor}}^{N_{tor}} m^\lambda (R_{mn}^2 + Z_{mn}^2),
+	M_l = \frac{1}{2}\sum_{m=0}^{M_{pol}}\sum_{n=-N_{tor}}^{N_{tor}} m^\lambda (R_{mn}^2 + Z_{mn}^2), \label{eq.spectral width}
 \end{equation}
 where only variations tangential to the surface are allowed, $\delta R = R_\theta\delta u$ and $\delta Z = Z_\theta\delta u$, where the $X_i$ designates a derivative of $X$ with respect to $i$ and $\delta u$ is arbitrary, and $\lambda$ is a user input. In SPEC, an additional target is included in the minimization, called the \emph{spectral length} --- its role is to ensure smooth transition between the angles used to represent inner plasma interfaces and the plasma boundary. It is expressed for volume $\mathcal{V}_l$ as 
 \begin{equation}
-	L_l = \oint\oint\sum_{i=1}^{N_s}\sqrt{[R_l(\theta,\phi)-R_{l-1}(\theta,\phi)]^2 +  [Z_l(\theta,\phi)-Z_{l-1}(\theta,\phi)]^2}d\theta d\phi,
+	L_l = \oint\oint\sum_{i=1}^{N_s}\sqrt{[R_l(\theta,\phi)-R_{l-1}(\theta,\phi)]^2 +  [Z_l(\theta,\phi)-Z_{l-1}(\theta,\phi)]^2}d\theta d\phi, \label{eq.spectral length}
 \end{equation}
 where $N_s$ is the number of radial grid points $s_i$. Finally, the zero of the poloidal angle is constrained to be such that ${Z}_l(\theta=0,\phi)$ is equal to the geometrical center of the interface $Z_{l,0}$, which can be enforced by minimizing
 \begin{equation}
-	S_l = \frac{1}{2}\oint ({Z}_l(0,\phi) - Z_{l,0})^2 d\phi,
+	S_l = \frac{1}{2}\oint ({Z}_l(0,\phi) - Z_{l,0})^2 d\phi, \label{eq.spectral zero}
 \end{equation}
 with
 \begin{equation}
@@ -96,7 +95,7 @@ with
 
 
 
-The target ot minimize is then a linear combination of all angular targets, 
+The target ot minimize is then a linear combination of all angular targets, Eqs.(\ref{eq.spectral width})-(\ref{eq.spectral zero}),
 \begin{equation}
 	W_{sc} = \sum_{l=1}^{N_{vol}-1} \alpha_lM_l + \beta_lL_l + \gamma_l S_l,
 \end{equation}
@@ -182,6 +181,15 @@ Finally, SPEC will iterate on $\mathbf{x}_l$ until $\mathbf{F}$ is smaller than 
 It is worth noting that even though the magnetic helicity is not conserved when \ac{SPEC} iterates on $\{x_i\}_{i=1,\ldots,N}$ to find an equilibrium that matches a given input $\{\psi_{t,l}, \psi_{p,l}, \mu_l\}_{l=1,\ldots,N_{vol}}$ or $\{\psi_{t,l},\ \iotabar_l^+,\  \iotabar_l^-\}_{l=1,\ldots,N_{vol}}$, the final equilibrium satisfies the \ac{MRxMHD} equilibrium equations (Eq.(\ref{eq.BeltramiEquation})-(\ref{eq.force_balance})). There is a magnetic helicity profile $\{K_l\}_{l=1,\ldots,N_{vol}}$ corresponding to this equilibrium which is unknown \textit{a priori}. Thus, the same equilibrium could have been found by minimizing the \ac{MRxMHD} energy functional while keeping the magnetic helicity profile constant if the initial state had the same magnetic helicity profile (bifurcations are not considered in this chapter). This capability is also available in \ac{SPEC}, and details can be found in the literature \citep{Hudson2012,Dennis2013a}.
  
 
+\subsection{Free-boundary iterations}
+In case of free-boundary calculations, the magnetic field produced by the plasma on the computational boundary, $\mathbf{B}^p$ is not known \textit{a priori}. This information is however required for the Beltrami solver in the vacuum region to find the magnetic field in agreement with the boundary condition $()\mathbf{B}^p+\mathbf{B}^c)\cdot\mathbf{n}$.
+
+To find self consistent solutions, an additional loop in SPEC is thus required. An initial guess for the Fourier harmonics of $\mathbf{B}^p\cdot \mathbf{n}$, denoted $B_{mn}^0$, is given as input; SPEC finds a solution in agreement with this boundary condition and recompute the harmoncis of $\mathbf{B}^p\cdot\mathbf{n}$, denoted $\tilde{B}_{mn}^1$. Generally, $B_{mn}^0\neq \tilde{B}_{mn}^1$. Thus, a Piccard iteration is performed,
+
+\begin{equation}
+	B_{mn}^1 = \alpha B_{mn}^0 + (1-\alpha) \tilde{B}_{mn}^1,
+\end{equation}
+with $\alpha\in[0,1[$, and SPEC re-evaluate the equilibrium with this new boundary condition. This loop continues until $B_{mn}^i\neq \tilde{B}_{mn}^{i+1}$.
 
 
 \section{Implementation of toroidal current constraint \label{sec. current constraint}}
@@ -423,7 +431,7 @@ where $\alpha$ is the number of poloidal rotation of the ellipse per field perio
 
 The representation given by Eqs.(\ref{eq.Rfctrhophi})-(\ref{eq.Z0_series}) is unique and does not require spectral condensation. Indeed, the poloidal angle is given by
 \begin{equation}
-	
+	to complte
 \end{equation}
 
 
