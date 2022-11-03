@@ -3,17 +3,35 @@
 \begin{document}
 \chapter{3D magnetic equilibria}
 
-The description of a plasma starts with a mathematical model for its equilibrium. As we shall see, even in its simplest form, computing \ac{3D} equilibria is not a trivial task and one needs to restrict the classes of physical profiles one considers to get a well behaved mathematical solution. In what follows, we cover the derivation of equilibrium equations of the ideal \ac{MHD} model (section \ref{section ideal mhd}), and of the \ac{MRxMHD} model (section \ref{section mrxmhd}) starting from the ideal \ac{MHD} energy functional $W$ \citep{kruskal_equilibrium_1958},
-\begin{equation}
-	W = \iiint_{\mathcal{V}_P} d\mathbf{x}^3 \left(\frac{\mathbf{B}^2}{2} + \frac{p}{\gamma-1}\right),
-\end{equation}
-where $\mathcal{V}_P$ is the plasma volume, $d\mathbf{x}^3$ is a volume element, $\mathbf{B}$ is the magnetic field, $p$ is the pressure and $\gamma$ is the ratio of the fluid specific heats.
+The description of a plasma starts with a mathematical model for its equilibrium. As we shall see, even in its simplest form, computing \ac{3D} equilibria is not a trivial task and one needs to restrict the classes of physical profiles one considers to get a well behaved mathematical solution. In what follows, we cover the derivation of equilibrium equations of the ideal \ac{MHD} model (section \ref{section ideal mhd}), and of the \ac{MRxMHD} model (section \ref{section mrxmhd}).
+
+
+
+% starting from the ideal \ac{MHD} energy functional $W$ \citep{kruskal_equilibrium_1958},
+%\begin{equation}
+%	W = \iiint_{\mathcal{V}_P} d\mathbf{x}^3 \left(\frac{\mathbf{B}^2}{2} + \frac{p}{\gamma-1}\right), \label{eq. energy functional}
+%\end{equation}
+%where $\mathcal{V}_P$ is the plasma volume, $d\mathbf{x}^3$ is a volume element, $\mathbf{B}$ is the magnetic field, $p$ is the pressure and $\gamma$ is the ratio of the fluid specific heats.
+%
+%Minimizing $W$ given $p$ is trivial if no constraints are applied - the minimum is simply given for $\mathbf{B}=0$. This however shows that the minimization has to be performed while maintaining some constraints. 
+%
+%Let us define the magnetic helicity,
+%\begin{equation}
+%	K = \iiint_{\Omega} d\mathbf{x}^3 \mathbf{A}\cdot\mathbf{B},
+%\end{equation}
+%where $\mathbf{B}=\nabla\times\mathbf{A}$ and $\Omega$ is a volume bounded by a magnetic surface, \textit{i.e.} $\mathbf{B}\cdot\mathbf{n}=0$ on $\delta\Omega$, where $\mathbf{n}$ is a vector normal to $\delta\Omega$. The magnetic helicity has been shown to be approximately conserved during fast reconnection events \citep{bergerIntroductionMagneticHelicity1999}, and has been observed to be conserved in tokamak sawtooth crashes \citep{Heidbrink2000}. The plasma will then reduce its energy $W$ by diverse mechanisms, such as magnetic reconnection or tearing modes, while keeping its magnetic helicity constant.
+%
+%We can thus minimize the MHD energy functional Eq.(\ref{eq. energy functional}) while maintaining the magnetic helicity constant. In the case of ideal MHD, the magnetic helicity is constant in \emph{any} volume $\Omega$, while in a Taylor state, it is conserved globally in $\mathcal{V}_P$. In multi-region, relaxed MHD, the magnetic helicity is conserved in a finite number of nested volumes.
+%
+%An additional important property of magnetic helicity is its correlation with magnetic field line topologies. One can show \citep{moffattDegreeKnottednessTangled1969,arnoldTopologicalPropertiesMagnetic1998,bergerIntroductionMagneticHelicity1999} that the magnetic helicity is the sum of the Gauss linking number over every pair of field lines within a volume. Note the following implication: in ideal MHD, the magnetic helicity is conserved \emph{everywhere}, meaning that the magnetic topology is conserved during the energy minimization.
+
 
 
 \section{Ideal MHD}
 \label{section ideal mhd}
+Ideal \ac{MHD} is probably the most well-known and used model to describe macroscopic plasma equilibria. It aims at describing slow phenomena on macroscopic scales. Quasi-neutrality is assumed, \textit{i.e.} $n_e=n_i=n$, where $n_e$ and $n_i$ are the electron and ion densities respectively. The plasma is modeled with a single fluid approximation, where the pressure is defined as the sum of the ion and electron pressure, $p=p_i+p_e=2nT$, and the temperature is defined as the average of the ion and electron temperature, $T=(T_i+T_e)/2$. In addition, it is assumed that electromagnetic waves have phase velocities negligible in comparison to the speed of light, $\omega/k\ll c$, the thermal velocities of ions and electrons are non-relativistic, $v_{Ti}\ll v_{Te}\ll c$, with $v_{Ti}=(kT_i/m_i)^{1/2}$, $k$ is Boltzmann constant, and $m_i$ the ion mass. Phenomena described by ideal MHD have frequencies smaller than the electron plasma frequency, $\omega\ll \omega_{pe}=(n_ee^2/m_e\epsilon_0)^{1/2}$, where $e$ the elementary charge, $m_e$ the electron mass and $\epsilon_0$ the vacuum permittivity, and have characteristic length larger than the Debye length, $a\gg \lambda_D=(kT_e/4\pi n_e e^2)^{1/2}$. Finally, electron inertia is neglected, \textit{i.e.} their response to a force is instantaneous.
 
-The ideal \ac{MHD} model is probably the most well-known and used model to describe toroidal plasma equilibria. The ideal \ac{MHD} equations are \citep{Freidberg2014},
+The ideal \ac{MHD} equations are \citep{Freidberg2014},
 \begin{align}
 	\frac{\partial \rho}{\partial t} + \nabla\cdot(\rho\mathbf{v}) &= 0 \label{mass equation}\\
 	\rho\frac{d\mathbf{v}}{dt} &= \mathbf{J}\times\mathbf{B} - \nabla p \label{momentum equation}\\
@@ -29,24 +47,34 @@ where $\mathbf{J}$ and $\rho$ are the current and mass densities, $\mu_0=4\pi 10
 	\nabla\cdot\mathbf{J} = 0\label{equation charge conservation}
 \end{equation}
 
-In an equilibrium without flow ($\mathbf{v}=0$), all time derivatives vanish ($\partial/\partial t = 0$), leading to
+At equilibrium, all time derivatives vanish ($\partial/\partial t = 0$), and assuming zero flow ($\mathbf{v}=0$), we get the \emph{ideal MHD equilibrium equations},
 \begin{align}
 	\mathbf{J}\times\mathbf{B} &= \nabla p \label{equation perp force balance}\\
 	\nabla\times\mathbf{B} &=\mu_0\mathbf{J}\\
-	\nabla\cdot\mathbf{B}&=0.
+	\nabla\cdot\mathbf{B}&=0.\label{equation div B ideal mhd}
 \end{align}
 
 \subsection{Conservation of field line topology}
-In ideal \ac{MHD}, it is assumed that the plasma is \emph{ideal}, meaning that it has zero resistivity. There are thus no mechanisms for energy dissipation and the plasma is not allowed to reconnect, \textit{i.e.} only plasma displacements that conserve the topology of magnetic field lines are allowed. It has been shown \citep{woltjer_theorem_1958} that this constraint is equivalent to conserving the magnetic helicity $K$ in any plasma volume $\mathcal{V}_i$, with
+%In ideal \ac{MHD}, it is assumed that the plasma is \emph{ideal}, meaning that it has zero resistivity. There are thus no mechanisms for energy dissipation and the plasma is not allowed to reconnect, \textit{i.e.} only plasma displacements that conserve the topology of magnetic field lines are allowed. It has been shown \citep{woltjer_theorem_1958} that this constraint is equivalent to conserving the magnetic helicity $K$ in any plasma volume $\mathcal{V}_i$, with
+An important property of the ideal MHD model is that the magnetic helicity $K$ is conserved everywhere under ideal MHD evolution, with
 \begin{equation}
 	K = \iiint_{\mathcal{V}_i} d\mathbf{x}^3 \mathbf{A} \cdot \mathbf{B},
 \end{equation}
-with $\mathbf{A}=\nabla\times\mathbf{B}$ the magnetic vector potential. Indeed, we find
+where $\mathbf{A}=\nabla\times\mathbf{B}$ is the magnetic vector potential. Indeed, we find
 \begin{align}
 	\frac{dK}{dt} &= \iiint_{\mathcal{V}_i} d\mathbf{x}^3 \frac{d\mathbf{A}}{dt}\cdot\mathbf{B} + \mathbf{A}\cdot\frac{d\mathbf{B}}{dt} + \iint_{\delta\mathcal{V}_i} \mathbf{A}\cdot\mathbf{B}(\mathbf{n}\cdot\mathbf{v})d\mathbf{x}^2, \\
 	&= -2\iiint_{\mathcal{V}_i}\mathbf{E}\cdot\mathbf{B} d\mathbf{x}^3 + \iint_{\delta\mathcal{V}_i}(\mathbf{n}\times\mathbf{A})\cdot(\mathbf{E}+\mathbf{v}\times\mathbf{B})d\mathbf{x}^2.
 \end{align}
-Applying the ideal Ohm's law (Eq.(\ref{ideal Ohms law})), we obtain $dK/dt = 0$, \textit{i.e.} the magnetic helicity is conserved everywhere in the plasma in ideal MHD. 
+Applying the ideal Ohm's law (Eq.(\ref{ideal Ohms law})), we obtain $dK/dt = 0$, \textit{i.e.} the magnetic helicity is conserved everywhere in the plasma in ideal MHD. Indeed, the magnetic helicity has been shown to be approximately conserved during fast reconnection events \citep{bergerIntroductionMagneticHelicity1999}, and has been observed to be conserved in tokamak sawtooth crashes \citep{Heidbrink2000}. 
+
+An important property of magnetic helicity is its correlation with magnetic field line topologies. One can show \citep{moffattDegreeKnottednessTangled1969, arnoldTopologicalPropertiesMagnetic1998, bergerIntroductionMagneticHelicity1999} that the magnetic helicity is the sum of the Gauss linking number over every pair of field lines within a volume. Note the following implication: in ideal MHD, the magnetic helicity is conserved \emph{everywhere}, meaning that the magnetic topology is conserved during plasma motion.
+
+\subsection{Energy principle}
+The ideal MHD equilibrium equations, Eqs.(\ref{equation perp force balance})-(\ref{equation div B ideal mhd}), can be derived from an energy principle \citep{kruskalEquilibriumMagneticallyConfined1958}. Consider the energy functional 
+\begin{equation}
+	W = \iiint_{\mathcal{V}_P} d\mathbf{x}^3 \left(\frac{\mathbf{B}^2}{2} + \frac{p}{\gamma-1}\right), \label{eq. energy functional}
+\end{equation}
+where $\mathcal{V}_P$ is the plasma volume, $d\mathbf{x}^3$ is a volume element, $\mathbf{B}$ is the magnetic field, and $\gamma$ is the ratio of the fluid specific heats. Minimizing $W$ under the constraint of conservation of magnetic helicity everywhere in the plasma leads to the ideal MHD equilibrium equations. 
 
 \subsection{Currents in ideal MHD equilibria}
 
@@ -56,8 +84,7 @@ Following \citet{Helander2014}, the perpendicular component is required to count
 \begin{equation}
 	\mathbf{J}_\perp = \frac{\mathbf{B}\times\nabla p}{\mathbf{B}^2}.
 \end{equation}
-
-Charge conservation (Eq.(\ref{equation charge conservation})) is obtained by imposing $\nabla \cdot (J_\parallel\mathbf{\hat{b}}) = - \nabla\cdot\mathbf{J}_\perp$, leading to 
+Parallel current $J_\parallel$ are then generated to ensure charge conservation (Eq.(\ref{equation charge conservation})). Imposing $\nabla \cdot (J_\parallel\mathbf{\hat{b}}) = - \nabla\cdot\mathbf{J}_\perp$ leads to 
 \begin{equation}
 	J_\parallel = u(\psi_t,\theta,\phi)\frac{dp}{d\psi_t}B + \frac{\langle J_\parallel B\rangle B}{\langle B^2\rangle},
 \end{equation}
@@ -65,7 +92,6 @@ where $(\psi_t,\theta,\phi)$ are the toroidal flux, a poloidal angle and a toroi
 \begin{equation}
 	\mathbf{B}\cdot\nabla u = -(\mathbf{B}\times\nabla\psi_t)\cdot\nabla\left(\frac{1}{B^2}\right). \label{eq.diff_u}
 \end{equation}
-
 The total current density is thus
 \begin{equation}
 	\mathbf{J} = \frac{\mathbf{B}\times\nabla p}{\mathbf{B}^2} + \left(u(\psi_t,\theta,\phi)\frac{dp}{d\psi_t} + \frac{\langle J_\parallel B\rangle}{\langle B^2\rangle}\right)\mathbf{B}, \label{equation current density}
@@ -75,36 +101,30 @@ where the first term on the right hand side of Eq.(\ref{equation current density
 
 \subsection{Classes of well posed 3D magnetic equilibria}
 
-As we shall see, the magnetic differential equation \ref{eq.diff_u} has important implications on the existence of 3D magnetic equilibria with nested magnetic surfaces. In the discussion below, we will use the coordinate system $(\psi_t,\theta_b,\phi_b)$, where $(\theta_b,\phi_b)$ are the poloidal and toroidal Boozer angles (see appendix \ref{appendix boozer coordinates}). We write the functions $u(\psi_t,\theta_b,\phi_b), B^{-2}(\psi_t,\theta_b,\phi_b)$ as Fourier series,
-
+As we shall see, the magnetic differential equation \ref{eq.diff_u} has important implications on the existence of 3D magnetic equilibria with nested magnetic surfaces. In the discussion below, we will use the coordinate system $(\psi_t,\theta_b,\phi_b)$, where $(\theta_b,\phi_b)$ are the poloidal and toroidal Boozer angles (see appendix \ref{appendix boozer coordinates}). We write the functions $u(\psi_t,\theta_b,\phi_b)$ and $B^{-2}(\psi_t,\theta_b,\phi_b)$ as Fourier series,
 \begin{align}
 	u(\psi_t,\theta_b,\phi_b) &= \sum_{m,n} u_{mn}(\psi_t) e^{i(m\theta_b-n\phi_b)}\\
 	\frac{1}{B^2}(\psi_t,\theta_b,\phi_b) &= \sum_{m,n} h_{mn}(\psi_t) e^{i(m\theta_b-n\phi_b)}.
 \end{align}
 Writing $\mathbf{B}$ as
-
 \begin{equation}
 	\mathbf{B} = I(\psi_t)\nabla\theta_b + G(\psi_t)\nabla\phi_b + K(\psi_t,\theta_b,\phi_b)\nabla\psi_t,
 \end{equation}
 we obtain for the right hand side of Eq.(\ref{eq.diff_u})
-
 \begin{align}
 	\mathbf{B}\cdot\nabla u &= \mathbf{B}\cdot\nabla\theta_b\frac{\partial u}{\partial \theta_b} + \mathbf{B}\cdot\nabla\phi_b\frac{\partial u}{\partial \phi_b} + \mathbf{B}\cdot\nabla\psi_t\frac{\partial u}{\partial \psi_t} \\
 	&= \left(\iotabar \frac{\partial u}{\partial \theta_b} + \frac{\partial u}{\partial \phi_b} + \frac{\mathbf{B}\cdot\nabla\psi_t}{\mathbf{B}\cdot\nabla\theta_b}\frac{\partial u}{\partial\psi_t}\right)\mathbf{B}\cdot\nabla\theta_b,
 \end{align}
 and for the left hand side
-
 \begin{align}
 	\left(\mathbf{B}\times\nabla\psi_t\right)\cdot\nabla \frac{1}{B^2} &= \left(I\nabla\theta_b\times\nabla\psi_t + G\nabla\phi_b\times\nabla\psi_t\right)\cdot\nabla\frac{1}{B^2}\\
 	&= \sqrt{g}\left(G\frac{\partial}{\partial\theta_b} - I \frac{\partial}{\partial \phi_b}\right)\frac{1}{B^2},
 \end{align}
 with $\nabla\psi_t\cdot(\nabla\theta_b\times\nabla\phi_b) = \sqrt{g}$ the coordinate jacobian. Substituting the Fourier series for $u$ and $1/B^2$, we finally obtain
-
 \begin{equation}
 	(m\iotabar - n)u_{mn} - i \frac{\mathbf{B}\cdot\nabla\psi_t}{\mathbf{B}\cdot\nabla\theta_b} u'_{mn} = \frac{\sqrt{g}}{\mathbf{B}\cdot\nabla\theta_b}(mG + nI)h_{mn}.
 \end{equation}
 Rearranging the terms, we get an expression for $u_{mn}$,
-
 \begin{equation}
 	u_{mn} = \frac{\sqrt{g}}{\mathbf{B}\cdot\nabla\theta_b}\frac{(mG + nI)}{m\iotabar - n}h_{mn} + i \frac{1}{m\iotabar-n}\frac{\mathbf{B}\cdot\nabla\psi_t}{\mathbf{B}\cdot\nabla\theta_b} u'_{mn}.
 \end{equation}
@@ -117,7 +137,6 @@ To circumvent this issue and obtain well defined, ideal MHD solutions, one can l
 	\item Similarly, one could consider stepped-pressure equilibria, where the pressure gradient is finite only at irrational surfaces. Since rationals are dense in $\mathbb{R}$, the pressure profile is either discontinuous or fractal. Equilibria of this class have been proven to exist close to axisymmetry \citep{Bruno1996}.
 	\item Finally, a combination of the second and third class discussed above, where the rotational transform profile and the pressure profile are alternatively constant, can be constructed to obtain solution with continuous but non-smooth solutions \citep{Hudson2017a}
 \end{enumerate}
-
 In what follows, we will work with the third class of equilibria described above, namely stepped-pressure equilibria. The reason is three-fold: (i) these equilibria are numerically tractable, (ii) solutions with magnetic islands and chaos can be obtained and (iii) solutions have been proven to exist under some conditions. In particular, we will look at \ac{MRxMHD} equilibria, which can be seen as a combination of Taylor states, described in the next section.
 
 
