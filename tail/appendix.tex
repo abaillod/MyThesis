@@ -1,4 +1,29 @@
 \appendix
+\chapter{Analytical solution to force balance equations}
+
+\section{Ideal MHD}
+\label{appendix jxb=grad p solution}
+We solve here the ideal MHD equilibrium equations (\ref{equation perp force balance})-(\ref{equation div B ideal mhd}) in a cylinder or length $L$ and radius $a$. We work with cylindrical coordinate $(r,\theta,z)$. We assume that the cylinder boundary is a perfectly conducting wall, \textit{i.e.} $\mathbf{B}\cdot\nabla r=0$ at $r=a$. Assuming symmetries along $\theta$ and $z$ (equivalent to axisymmetry in a toroidal geometry), we directly get that $p=p(r)$, \textit{i.e.} isopressure surfaces are cylinders with constant radii. Since the magnetic field lies on constant pressure surfaces, axisymmetry implies the existence of magnetic surfaces everywhere.
+
+We now search for a solution to the equilibrium equation. One gets from equation (\ref{equation div B ideal mhd})
+\begin{align}
+\frac{1}{r}\frac{\partial}{\partial r}(r B_r) &= 0, 
+\end{align}
+which, once the boundary condition is applied, leads to $B_r=0$. In addition, exploiting Ampere's law, we write the current densities as
+\begin{align}
+	\mu_0J_r &= 0\\
+	\mu_0J_\theta &= -\frac{\partial B_z}{\partial r}\\
+	\mu_0J_z &= \frac{1}{r}\frac{\partial}{\partial r}(rB_\theta).
+\end{align} 
+Finally, taking the cross product of the current density with the magnetic field and rearranging the terms, one gets
+\begin{equation}
+	\frac{d}{dr}\left(\mu_0p + \frac{B_\theta^2 + B_z^2}{2}\right) + \frac{B_\theta^2}{r} = 0.
+\end{equation}
+
+The equilibrium is thus completely determined if one provides (i) a pressure profile $p(r)$ and (ii) a constraint on either the poloidal or toroidal magnetic field --- for example by providing the poloidal flux profile $\psi_p(r)$ or the rotational transform profile $\iotabar(r)$.
+
+
+
 \chapter{Linear relation between surface currents and poloidal fluxes}\label{appA1}
 
 In this appendix we show the linear relation between the surface currents (\ref{eq.surf_current}) and the poloidal fluxes in an \ac{MRxMHD} equilibrium. We rewrite here Eq.(\ref{eq.surf_current}) for convenience,
@@ -151,3 +176,4 @@ where the $'$ denotes a derivative with respect to the function argument, and al
 
 \chapter{Boozer coordinates}
 \label{appendix boozer coordinates}
+In this appendix, we follow \citet{Helander2014} to derive a transformation from general toroidal coordinates $p,\theta,\phi$ to boozer coordinates $\psi_t,\theta_b,\phi_b$ and express the magnetic field $\mathbf{B}$ in this new coordinate system.

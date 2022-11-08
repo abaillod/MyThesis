@@ -3,13 +3,16 @@
 \begin{document}
 \chapter{3D magnetic equilibria}
 
-The description of a plasma starts with a mathematical model for its equilibrium. Three dimensional magnetic fields are, in general, composed of  magnetic surfaces, magnetic islands and magnetic field line chaos. At zeroth order, particle and energy confinement is obtained on magnetic surfaces; magnetic islands and magnetic field line chaos, on the other hand, may increase radial transport. To accurately model and understand the physics in a stellarator, it is thus important to consider equilibrium models that allow all three magnetic field line topologies to exist.
+The description of a plasma starts with a mathematical model for its equilibrium. Three dimensional magnetic fields are, in general, composed of  magnetic surfaces, magnetic islands and magnetic field line chaos (see Figure \ref{fig. topology examples}). Magnetic surfaces are toroidal surfaces on which the magnetic lays, \textit{i.e.} $\mathbf{B}\cdot\mathbf{n}=0$ with $\mathbf{n}$ a vector normal to the magnetic surface. In axisymmetric devices such as tokamaks, one can prove that nested magnetic surfaces exist everywhere, from the plasma edge to the magnetic axis, which is the innermost field line. Magnetic islands are formed when (i) the magnetic field is perturbed with a mode $\delta B_r \propto exp(i(m\theta-n\phi))$, with $(\theta,\phi)$ a poloidal and toroidal angle, and $m$, $n$ the poloidal and toroidal mode number, and (ii) the rotational transform is a rational number equal to $\iotabar=n/m$. Finally, magnetic field line chaos is formed when two or more island chains overlap --- this is the so-called Chirikov criterion \citep{chirikov}. Further details about these magnetic field line topologies and their hamiltonian description can be found in the review paper by \citet{Meiss1992c}.
 
+At zeroth order, particle and energy confinement is obtained on magnetic surfaces; magnetic islands and magnetic field line chaos, on the other hand, may increase radial transport. To accurately model and understand the physics in a stellarator, it is thus important to consider equilibrium models that allow all magnetic field line topologies to exist. In what follows, we discuss important properties the ideal \ac{MHD} model (section \ref{section ideal mhd}), the Taylor state equation (section \ref{section taylor state}) and of the \ac{MRxMHD} model (section \ref{section mrxmhd}).
 
-
-As we shall see, even in its simplest form, computing \ac{3D} equilibria is not a trivial task and one needs to restrict the classes of physical profiles one considers to get a well behaved mathematical solution. In what follows, we cover the derivation of equilibrium equations of the ideal \ac{MHD} model (section \ref{section ideal mhd}), and of the \ac{MRxMHD} model (section \ref{section mrxmhd}).
-
-
+\begin{figure}
+\centering
+\includegraphics[width=\linewidth]{images/example-image-a.pdf}
+\caption{Example of a magnetic surface, a magnetic island chain and magnetic field line chaos.}
+\label{fig. topology examples}
+\end{figure}
 
 % starting from the ideal \ac{MHD} energy functional $W$ \citep{kruskal_equilibrium_1958},
 %\begin{equation}
@@ -33,7 +36,7 @@ As we shall see, even in its simplest form, computing \ac{3D} equilibria is not 
 
 \section{Ideal MHD}
 \label{section ideal mhd}
-Ideal \ac{MHD} is probably the most well-known and used model to describe macroscopic plasma equilibria. It aims at describing slow phenomena on macroscopic scales. Quasi-neutrality is assumed, \textit{i.e.} $n_e=n_i=n$, where $n_e$ and $n_i$ are the electron and ion densities respectively. The plasma is modeled with a single fluid approximation, where the pressure is defined as the sum of the ion and electron pressure, $p=p_i+p_e=2nT$, and the temperature is defined as the average of the ion and electron temperature, $T=(T_i+T_e)/2$. In addition, it is assumed that electromagnetic waves have phase velocities negligible in comparison to the speed of light, $\omega/k\ll c$, the thermal velocities of ions and electrons are non-relativistic, $v_{Ti}\ll v_{Te}\ll c$, with $v_{Ti}=(kT_i/m_i)^{1/2}$, $k$ is Boltzmann constant, and $m_i$ the ion mass. Phenomena described by ideal MHD have frequencies smaller than the electron plasma frequency, $\omega\ll \omega_{pe}=(n_ee^2/m_e\epsilon_0)^{1/2}$, where $e$ the elementary charge, $m_e$ the electron mass and $\epsilon_0$ the vacuum permittivity, and have characteristic length larger than the Debye length, $a\gg \lambda_D=(kT_e/4\pi n_e e^2)^{1/2}$. Finally, electron inertia is neglected, \textit{i.e.} their response to a force is instantaneous.
+Ideal \ac{MHD} is probably the most well-known and used model to describe macroscopic plasma equilibria. It aims at describing slow phenomena on macroscopic scales. Quasi-neutrality is assumed, \textit{i.e.} $n_e=n_i=n$, where $n_e$ and $n_i$ are the electron and ion densities respectively. The plasma is modeled with a single fluid approximation, where the pressure is isotropic and defined as the sum of the ion and electron pressure, $p=p_i+p_e=2nT$, and the temperature is defined as the average of the ion and electron temperature, $T=(T_i+T_e)/2$. In addition, it is assumed that electromagnetic waves have phase velocities negligible in comparison to the speed of light, $\omega/k\ll c$, the thermal velocities of ions and electrons are non-relativistic, $v_{Ti}\ll v_{Te}\ll c$, with $v_{Ti}=(kT_i/m_i)^{1/2}$, $k$ is Boltzmann constant, and $m_i$ the ion mass. Phenomena described by ideal MHD have frequencies smaller than the electron plasma frequency, $\omega\ll \omega_{pe}=(n_ee^2/m_e\epsilon_0)^{1/2}$, where $e$ the elementary charge, $m_e$ the electron mass and $\epsilon_0$ the vacuum permittivity, and have characteristic length larger than the Debye length, $a\gg \lambda_D=(kT_e/4\pi n_e e^2)^{1/2}$. Finally, electron inertia is neglected, \textit{i.e.} their response to a force is instantaneous.
 
 The ideal \ac{MHD} equations are \citep{Freidberg2014},
 \begin{align}
@@ -46,7 +49,6 @@ The ideal \ac{MHD} equations are \citep{Freidberg2014},
 	\nabla\times\mathbf{E}&=-\frac{\partial \mathbf{B}}{\partial t}, \label{equation rot E}
 \end{align}
 where $\mathbf{J}$ and $\rho$ are the current and mass densities, $\mu_0=4\pi 10^{-7}$ is the vacuum permeability, $\mathbf{E}$ is the electric field and $\mathbf{v}$ is the fluid velocity. Note that Ampere's law, Eq.(\ref{equation ampere}), implies charge conservation,
-
 \begin{equation}
 	\nabla\cdot\mathbf{J} = 0\label{equation charge conservation}
 \end{equation}
@@ -58,6 +60,12 @@ At equilibrium, all time derivatives vanish ($\partial/\partial t = 0$), and ass
 	\nabla\cdot\mathbf{B}&=0.\label{equation div B ideal mhd}
 \end{align}
 
+Equation (\ref{equation perp force balance}) implies that $\mathbf{B}\cdot\nabla p=0$, \textit{i.e.} the pressure is constant along a field line. Analytical solutions to the equations (\ref{equation perp force balance})-(\ref{equation div B ideal mhd}) can be found in different geometries; an example is cylindrical geometry is provided in appendix \ref{appendix jxb=grad p solution}.
+
+
+
+
+% ================================================ HELICITY ================================================
 \subsection{Conservation of field line topology}
 %In ideal \ac{MHD}, it is assumed that the plasma is \emph{ideal}, meaning that it has zero resistivity. There are thus no mechanisms for energy dissipation and the plasma is not allowed to reconnect, \textit{i.e.} only plasma displacements that conserve the topology of magnetic field lines are allowed. It has been shown \citep{woltjer_theorem_1958} that this constraint is equivalent to conserving the magnetic helicity $K$ in any plasma volume $\mathcal{V}_i$, with
 An important property of the ideal MHD model is that the magnetic helicity $K$ is conserved everywhere under ideal MHD evolution, with
@@ -73,6 +81,10 @@ Applying the ideal Ohm's law (Eq.(\ref{ideal Ohms law})), we obtain $dK/dt = 0$,
 
 An important property of magnetic helicity is its correlation with magnetic field line topologies. One can show \citep{moffattDegreeKnottednessTangled1969, arnoldTopologicalPropertiesMagnetic1998, bergerIntroductionMagneticHelicity1999} that the magnetic helicity is the sum of the Gauss linking number over every pair of field lines within a volume. Note the following implication: in ideal MHD, the magnetic helicity is conserved \emph{everywhere}, meaning that the magnetic topology is conserved during plasma motion.
 
+
+
+
+% ================================================ ENERGY PRINCIPLE ================================================
 \subsection{Energy principle}
 The ideal MHD equilibrium equations, Eqs.(\ref{equation perp force balance})-(\ref{equation div B ideal mhd}), can be derived from an energy principle \citep{kruskalEquilibriumMagneticallyConfined1958}. Consider the energy functional 
 \begin{equation}
@@ -80,8 +92,9 @@ The ideal MHD equilibrium equations, Eqs.(\ref{equation perp force balance})-(\r
 \end{equation}
 where $\mathcal{V}_P$ is the plasma volume, $d\mathbf{x}^3$ is a volume element, $\mathbf{B}$ is the magnetic field, and $\gamma$ is the ratio of the fluid specific heats. Minimizing $W$ under the constraint of conservation of magnetic helicity everywhere in the plasma leads to the ideal MHD equilibrium equations. 
 
-\subsection{Currents in ideal MHD equilibria}
 
+% ================================================ CURRENTS ================================================
+\subsection{Currents in ideal MHD equilibria}
 The current density can be written as the sum of a component parallel to the magnetic field $J_\parallel \hat{\mathbf{b}}$, with $\hat{\mathbf{b}}=\mathbf{B}/B$ and of a component perpendicular to the magnetic field $\mathbf{J}_\perp$.
 
 Following \citet{Helander2014}, the perpendicular component is required to counter-balance the pressure gradient in the force balance, \textit{i.e.} taking the cross product of $\mathbf{B}$ with Eq.(\ref{equation perp force balance}), we get
@@ -103,9 +116,12 @@ The total current density is thus
 where the first term on the right hand side of Eq.(\ref{equation current density}) is the \emph{diamagnetic current}, the second is the \emph{Pfirsch-Schl\"uter current} and the last term encompasses other parallel currents, such as the externally driven currents (Ohmic, \ac{ECCD}, \ac{NBCD}) or bootstrap current.
 
 
+
+
+% ================================================ CLASSES OF EQUILIBRIA ================================================
 \subsection{Classes of well posed 3D magnetic equilibria}
 
-As we shall see, the magnetic differential equation \ref{eq.diff_u} has important implications on the existence of 3D magnetic equilibria with nested magnetic surfaces. In the discussion below, we will use the coordinate system $(\psi_t,\theta_b,\phi_b)$, where $(\theta_b,\phi_b)$ are the poloidal and toroidal Boozer angles (see appendix \ref{appendix boozer coordinates}). We write the functions $u(\psi_t,\theta_b,\phi_b)$ and $B^{-2}(\psi_t,\theta_b,\phi_b)$ as Fourier series,
+As we shall see, the magnetic differential equation \ref{eq.diff_u} has important implications on the existence of 3D magnetic equilibria with nested magnetic surfaces. In the discussion below, we will assume the existence of magnetic surfaces and use the coordinate system $(\psi_t,\theta_b,\phi_b)$, where $(\theta_b,\phi_b)$ are the poloidal and toroidal Boozer angles (see appendix \ref{appendix boozer coordinates}). We write the functions $u(\psi_t,\theta_b,\phi_b)$ and $B^{-2}(\psi_t,\theta_b,\phi_b)$ as Fourier series,
 \begin{align}
 	u(\psi_t,\theta_b,\phi_b) &= \sum_{m,n} u_{mn}(\psi_t) e^{i(m\theta_b-n\phi_b)}\\
 	\frac{1}{B^2}(\psi_t,\theta_b,\phi_b) &= \sum_{m,n} h_{mn}(\psi_t) e^{i(m\theta_b-n\phi_b)}.
@@ -143,6 +159,8 @@ To circumvent this issue and obtain well defined, ideal MHD solutions, one can l
 \end{enumerate}
 In what follows, we will work with the third class of equilibria described above, namely stepped-pressure equilibria. The reason is three-fold: (i) these equilibria are numerically tractable, (ii) solutions with magnetic islands and chaos can be obtained and (iii) solutions have been proven to exist under some conditions. In particular, we will look at \ac{MRxMHD} equilibria, which can be seen as a combination of Taylor states, described in the next section.
 
+\section{Taylor state}
+\label{section taylor state}
 
 
 \section{MRxMHD}
