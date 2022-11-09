@@ -3,34 +3,50 @@
 \begin{document}
 \chapter{3D magnetic equilibria}
 
-The description of a plasma starts with a mathematical model for its equilibrium. Three dimensional magnetic fields are, in general, composed of  magnetic surfaces, magnetic islands and magnetic field line chaos (see Figure \ref{fig. topology examples}). Magnetic surfaces are toroidal surfaces on which the magnetic lays, \textit{i.e.} $\mathbf{B}\cdot\mathbf{n}=0$ with $\mathbf{n}$ a vector normal to the magnetic surface. In axisymmetric devices such as tokamaks, one can prove that nested magnetic surfaces exist everywhere, from the plasma edge to the magnetic axis, which is the innermost field line. Magnetic islands are formed when (i) the magnetic field is perturbed with a mode $\delta B_r \propto exp(i(m\theta-n\phi))$, with $(\theta,\phi)$ a poloidal and toroidal angle, and $m$, $n$ the poloidal and toroidal mode number, and (ii) the rotational transform is a rational number equal to $\iotabar=n/m$. Finally, magnetic field line chaos is formed when two or more island chains overlap --- this is the so-called Chirikov criterion \citep{chirikov}. Further details about these magnetic field line topologies and their hamiltonian description can be found in the review paper by \citet{Meiss1992c}.
+The description of a plasma starts with a mathematical model for its equilibrium. In this chapter, we start by discussing the phenomenology of mangetic field equilibrium, and what kind of field line topologies exist in 3D equilibria. We then discuss properties of different equilibrium mathematical models, namely the ideal MHD model, the Taylor state, and the MRxMHD model.
 
-At zeroth order, particle and energy confinement is obtained on magnetic surfaces; magnetic islands and magnetic field line chaos, on the other hand, may increase radial transport. To accurately model and understand the physics in a stellarator, it is thus important to consider equilibrium models that allow all magnetic field line topologies to exist. In what follows, we discuss important properties the ideal \ac{MHD} model (section \ref{section ideal mhd}), the Taylor state equation (section \ref{section taylor state}) and of the \ac{MRxMHD} model (section \ref{section mrxmhd}).
+\section{Magnetic field line topologies}
+Three dimensional magnetic fields are, in general, composed of  magnetic surfaces, magnetic islands and magnetic field line chaos (see Figure \ref{fig. topology examples}). Measurements in the Wendelstein-7X stellarator via injection of an electron beam in a dilute gas \citep{pedersenConfirmationTopologyWendelstein2016} showed experimentally the existance of magnetic surfaces (Figure \ref{fig w7x magnetic surface}) and of the edge magnetic island chain (Figure \ref{fig w7x magnetic island}).
 
-\begin{figure}
-\centering
-\includegraphics[width=\linewidth]{images/example-image-a.pdf}
-\caption{Example of a magnetic surface, a magnetic island chain and magnetic field line chaos.}
-\label{fig. topology examples}
+\begin{figure}%
+	\centering
+	\subfloat[][Magnetic surface]{\label{fix w7x magnetic surface}\includegraphics[height=4.8cm]{images/Pedersen2016_MagneticSurface_W7X.pdf}}%
+	\qquad
+	\subfloat[][Magnetic islands]{\label{fix w7x magnetic island}\includegraphics[height=4.8cm]{images/Pedersen2016_MagneticIsland_W7X.pdf}}
+	\caption{Measurement of the field line topology in W7-X via injection of an electron beam in a dilute gas \citep{pedersenConfirmationTopologyWendelstein2016}.}
+	\label{fig. w7x topology measurement}%
 \end{figure}
 
-% starting from the ideal \ac{MHD} energy functional $W$ \citep{kruskal_equilibrium_1958},
-%\begin{equation}
-%	W = \iiint_{\mathcal{V}_P} d\mathbf{x}^3 \left(\frac{\mathbf{B}^2}{2} + \frac{p}{\gamma-1}\right), \label{eq. energy functional}
-%\end{equation}
-%where $\mathcal{V}_P$ is the plasma volume, $d\mathbf{x}^3$ is a volume element, $\mathbf{B}$ is the magnetic field, $p$ is the pressure and $\gamma$ is the ratio of the fluid specific heats.
-%
-%Minimizing $W$ given $p$ is trivial if no constraints are applied - the minimum is simply given for $\mathbf{B}=0$. This however shows that the minimization has to be performed while maintaining some constraints. 
-%
-%Let us define the magnetic helicity,
-%\begin{equation}
-%	K = \iiint_{\Omega} d\mathbf{x}^3 \mathbf{A}\cdot\mathbf{B},
-%\end{equation}
-%where $\mathbf{B}=\nabla\times\mathbf{A}$ and $\Omega$ is a volume bounded by a magnetic surface, \textit{i.e.} $\mathbf{B}\cdot\mathbf{n}=0$ on $\delta\Omega$, where $\mathbf{n}$ is a vector normal to $\delta\Omega$. The magnetic helicity has been shown to be approximately conserved during fast reconnection events \citep{bergerIntroductionMagneticHelicity1999}, and has been observed to be conserved in tokamak sawtooth crashes \citep{Heidbrink2000}. The plasma will then reduce its energy $W$ by diverse mechanisms, such as magnetic reconnection or tearing modes, while keeping its magnetic helicity constant.
-%
-%We can thus minimize the MHD energy functional Eq.(\ref{eq. energy functional}) while maintaining the magnetic helicity constant. In the case of ideal MHD, the magnetic helicity is constant in \emph{any} volume $\Omega$, while in a Taylor state, it is conserved globally in $\mathcal{V}_P$. In multi-region, relaxed MHD, the magnetic helicity is conserved in a finite number of nested volumes.
-%
-%An additional important property of magnetic helicity is its correlation with magnetic field line topologies. One can show \citep{moffattDegreeKnottednessTangled1969,arnoldTopologicalPropertiesMagnetic1998,bergerIntroductionMagneticHelicity1999} that the magnetic helicity is the sum of the Gauss linking number over every pair of field lines within a volume. Note the following implication: in ideal MHD, the magnetic helicity is conserved \emph{everywhere}, meaning that the magnetic topology is conserved during the energy minimization.
+Now, suppose that an equilibrium is given --- by that, we mean that the magnetic field $\mathbf{B}$ is known everywhere, \textit{i.e.} at any position $(r,\theta,\phi)$, where r is a radial coordinate, $\theta$ is a poloidal angle and $\phi$ is the usual cylindrical toroidal angle. To visually see the magnetic field line topologies, a Poincare section can be plotted. To do so, the field line is followed by solving the differential equation
+\begin{equation}
+	\frac{d\theta}{d\phi} = \frac{\mathbf{B}\cdot\nabla\theta}{\mathbf{B}\cdot\nabla\phi},
+\end{equation}
+with initial condition $r(0)=r_0$, $\theta(0)=\theta_0$ where $(r_0,\theta_0)$ are the initial field line position at $\phi=0$. An example of a field line followed on a magnetic surface is shown on Figure \ref{fig. field line tracing}. The field line is followed for multiple toroidal transits, and its position $(r_k,\theta_k)$ is saved whenever $\phi=2k\pi$, with $k\in\mathbb{N}$. The Poincare section is then plotted on the $(R,Z)$ plane. An example of a Poincare section with different field line topologies is shown on Figure \ref{fig topology examples}.
+
+\begin{figure}
+	\centering
+	\subfloat[][Field line]{\label{fig. field line tracing}\includegraphics[height=4cm]{images/3d_field_line_tracing.pdf}}
+	\hfill
+	\subfloat[][Poincare section]{\label{fig. topology examples}\includegraphics[height=4cm]{images/poincare_section_example.pdf}}
+	\caption{Example of field line tracing and Poincare section in a rotating ellipse. Left: 3D mesh of a magnetic surface (red) and a traced field line over two periods (blue). Right: Poincare section of multiple field lines, a magnetic surface (orange), a magnetic island (blue) and a chaotic field line (red).}
+	\label{fig poincare section}
+\end{figure}
+
+%Magnetic surfaces are toroidal surfaces on which the magnetic lays, \textit{i.e.} $\mathbf{B}\cdot\mathbf{n}=0$ with $\mathbf{n}$ a vector normal to the magnetic surface. In axisymmetric devices such as tokamaks, one can prove that nested magnetic surfaces exist everywhere, from the plasma edge to the magnetic axis, which is the innermost field line. Magnetic islands are formed when (i) the magnetic field is perturbed with a mode $\delta B_r \propto exp(i(m\theta-n\phi))$, with $(\theta,\phi)$ a poloidal and toroidal angle, and $m$, $n$ the poloidal and toroidal mode number, and (ii) the rotational transform is a rational number equal to $\iotabar=n/m$. Finally, magnetic field line chaos is formed when two or more island chains overlap --- this is the so-called Chirikov criterion \citep{Chirikov1979}. Further details about these magnetic field line topologies and their hamiltonian description can be found in the review paper by \citet{Meiss1992c} and references therein. 
+
+To accurately model and understand the physics in a stellarator, it is important to consider equilibria that allow magnetic islands and magnetic field line topologies. In what follows, we discuss important properties of the ideal \ac{MHD} model (section \ref{section ideal mhd}), the Taylor relaxation model (section \ref{section taylor state}) and of the \ac{MRxMHD} model (section \ref{section mrxmhd}).
+
+%At zeroth order, particle and energy confinement is obtained on magnetic surfaces; magnetic islands and magnetic field line chaos, on the other hand, may increase radial transport. This is not the full story; structures in regions occupied by chaotic field lines can potentially support pressure gradient \citep{Hudson2008}, but in general the transport in these regions will be greater than in regions occupied by magnetic surfaces. 
+
+% \begin{figure}
+% \centering
+% \includegraphics[width=\linewidth]{images/example-image-a.pdf}
+% \caption{Example of a magnetic surface, a magnetic island chain and magnetic field line chaos.}
+% \label{fig. topology examples}
+% \end{figure}
+
+%In the next sections, we will discuss different mathematical models that have been developed to describe 3D magnetic equilibria, \textit{i.e.} answering the question "\emph{Given a boundary, pressure and current profiles, what is the magnetic field in a plasma?}"
+
 
 
 
@@ -59,38 +75,10 @@ At equilibrium, all time derivatives vanish ($\partial/\partial t = 0$), and ass
 	\nabla\times\mathbf{B} &=\mu_0\mathbf{J}\\
 	\nabla\cdot\mathbf{B}&=0.\label{equation div B ideal mhd}
 \end{align}
+Analytical solutions to the equations (\ref{equation perp force balance})-(\ref{equation div B ideal mhd}) can be found in different geometries; an example is cylindrical geometry is provided in appendix \ref{appendix jxb=grad p solution}.
 
-Equation (\ref{equation perp force balance}) implies that $\mathbf{B}\cdot\nabla p=0$, \textit{i.e.} the pressure is constant along a field line. Analytical solutions to the equations (\ref{equation perp force balance})-(\ref{equation div B ideal mhd}) can be found in different geometries; an example is cylindrical geometry is provided in appendix \ref{appendix jxb=grad p solution}.
+Equation (\ref{equation perp force balance}) implies that $\mathbf{B}\cdot\nabla p=0$, \textit{i.e.} the pressure is constant along a field line. If the pressure profile is smooth and not constant in any region, then equation ()\ref{equation perp force balance}) implies that magnetic field lays on surfaces of constant pressure, \textit{i.e.} the magnetic surfaces. The existence of magnetic  surfaces where $\nabla p\neq 0$ is however the source of diverging currents, as we shall discuss in the next sections.
 
-
-
-
-% ================================================ HELICITY ================================================
-\subsection{Conservation of field line topology}
-%In ideal \ac{MHD}, it is assumed that the plasma is \emph{ideal}, meaning that it has zero resistivity. There are thus no mechanisms for energy dissipation and the plasma is not allowed to reconnect, \textit{i.e.} only plasma displacements that conserve the topology of magnetic field lines are allowed. It has been shown \citep{woltjer_theorem_1958} that this constraint is equivalent to conserving the magnetic helicity $K$ in any plasma volume $\mathcal{V}_i$, with
-An important property of the ideal MHD model is that the magnetic helicity $K$ is conserved everywhere under ideal MHD evolution, with
-\begin{equation}
-	K = \iiint_{\mathcal{V}_i} d\mathbf{x}^3 \mathbf{A} \cdot \mathbf{B},
-\end{equation}
-where $\mathbf{A}=\nabla\times\mathbf{B}$ is the magnetic vector potential. Indeed, we find
-\begin{align}
-	\frac{dK}{dt} &= \iiint_{\mathcal{V}_i} d\mathbf{x}^3 \frac{d\mathbf{A}}{dt}\cdot\mathbf{B} + \mathbf{A}\cdot\frac{d\mathbf{B}}{dt} + \iint_{\delta\mathcal{V}_i} \mathbf{A}\cdot\mathbf{B}(\mathbf{n}\cdot\mathbf{v})d\mathbf{x}^2, \\
-	&= -2\iiint_{\mathcal{V}_i}\mathbf{E}\cdot\mathbf{B} d\mathbf{x}^3 + \iint_{\delta\mathcal{V}_i}(\mathbf{n}\times\mathbf{A})\cdot(\mathbf{E}+\mathbf{v}\times\mathbf{B})d\mathbf{x}^2.
-\end{align}
-Applying the ideal Ohm's law (Eq.(\ref{ideal Ohms law})), we obtain $dK/dt = 0$, \textit{i.e.} the magnetic helicity is conserved everywhere in the plasma in ideal MHD. Indeed, the magnetic helicity has been shown to be approximately conserved during fast reconnection events \citep{bergerIntroductionMagneticHelicity1999}, and has been observed to be conserved in tokamak sawtooth crashes \citep{Heidbrink2000}. 
-
-An important property of magnetic helicity is its correlation with magnetic field line topologies. One can show \citep{moffattDegreeKnottednessTangled1969, arnoldTopologicalPropertiesMagnetic1998, bergerIntroductionMagneticHelicity1999} that the magnetic helicity is the sum of the Gauss linking number over every pair of field lines within a volume. Note the following implication: in ideal MHD, the magnetic helicity is conserved \emph{everywhere}, meaning that the magnetic topology is conserved during plasma motion.
-
-
-
-
-% ================================================ ENERGY PRINCIPLE ================================================
-\subsection{Energy principle}
-The ideal MHD equilibrium equations, Eqs.(\ref{equation perp force balance})-(\ref{equation div B ideal mhd}), can be derived from an energy principle \citep{kruskalEquilibriumMagneticallyConfined1958}. Consider the energy functional 
-\begin{equation}
-	W = \iiint_{\mathcal{V}_P} d\mathbf{x}^3 \left(\frac{\mathbf{B}^2}{2} + \frac{p}{\gamma-1}\right), \label{eq. energy functional}
-\end{equation}
-where $\mathcal{V}_P$ is the plasma volume, $d\mathbf{x}^3$ is a volume element, $\mathbf{B}$ is the magnetic field, and $\gamma$ is the ratio of the fluid specific heats. Minimizing $W$ under the constraint of conservation of magnetic helicity everywhere in the plasma leads to the ideal MHD equilibrium equations. 
 
 
 % ================================================ CURRENTS ================================================
@@ -121,7 +109,7 @@ where the first term on the right hand side of Eq.(\ref{equation current density
 % ================================================ CLASSES OF EQUILIBRIA ================================================
 \subsection{Classes of well posed 3D magnetic equilibria}
 
-As we shall see, the magnetic differential equation \ref{eq.diff_u} has important implications on the existence of 3D magnetic equilibria with nested magnetic surfaces. In the discussion below, we will assume the existence of magnetic surfaces and use the coordinate system $(\psi_t,\theta_b,\phi_b)$, where $(\theta_b,\phi_b)$ are the poloidal and toroidal Boozer angles (see appendix \ref{appendix boozer coordinates}). We write the functions $u(\psi_t,\theta_b,\phi_b)$ and $B^{-2}(\psi_t,\theta_b,\phi_b)$ as Fourier series,
+As we shall see, the magnetic differential equation \ref{eq.diff_u} has important implications on the existence of 3D magnetic equilibria with nested magnetic surfaces. In the discussion below, we follow \citet{Helander2014} and solve equation (\ref{eq.diff_u}) assuming the existence of magnetic surfaces and using the coordinate system $(\psi_t,\theta_b,\phi_b)$, where $(\theta_b,\phi_b)$ are the poloidal and toroidal Boozer angles (see appendix \ref{appendix boozer coordinates}). We write the functions $u(\psi_t,\theta_b,\phi_b)$ and $B^{-2}(\psi_t,\theta_b,\phi_b)$ as Fourier series,
 \begin{align}
 	u(\psi_t,\theta_b,\phi_b) &= \sum_{m,n} u_{mn}(\psi_t) e^{i(m\theta_b-n\phi_b)}\\
 	\frac{1}{B^2}(\psi_t,\theta_b,\phi_b) &= \sum_{m,n} h_{mn}(\psi_t) e^{i(m\theta_b-n\phi_b)}.
@@ -133,31 +121,36 @@ Writing $\mathbf{B}$ as
 we obtain for the right hand side of Eq.(\ref{eq.diff_u})
 \begin{align}
 	\mathbf{B}\cdot\nabla u &= \mathbf{B}\cdot\nabla\theta_b\frac{\partial u}{\partial \theta_b} + \mathbf{B}\cdot\nabla\phi_b\frac{\partial u}{\partial \phi_b} + \mathbf{B}\cdot\nabla\psi_t\frac{\partial u}{\partial \psi_t} \\
-	&= \left(\iotabar \frac{\partial u}{\partial \theta_b} + \frac{\partial u}{\partial \phi_b} + \frac{\mathbf{B}\cdot\nabla\psi_t}{\mathbf{B}\cdot\nabla\theta_b}\frac{\partial u}{\partial\psi_t}\right)\mathbf{B}\cdot\nabla\theta_b,
+	&= \left(\iotabar \frac{\partial u}{\partial \theta_b} + \frac{\partial u}{\partial \phi_b}\right)\mathbf{B}\cdot\nabla\phi_b,
 \end{align}
 and for the left hand side
 \begin{align}
 	\left(\mathbf{B}\times\nabla\psi_t\right)\cdot\nabla \frac{1}{B^2} &= \left(I\nabla\theta_b\times\nabla\psi_t + G\nabla\phi_b\times\nabla\psi_t\right)\cdot\nabla\frac{1}{B^2}\\
-	&= \sqrt{g}\left(G\frac{\partial}{\partial\theta_b} - I \frac{\partial}{\partial \phi_b}\right)\frac{1}{B^2},
+	&= \frac{1}{\sqrt{g}}\left(G\frac{\partial}{\partial\theta_b} - I \frac{\partial}{\partial \phi_b}\right)\frac{1}{B^2},
 \end{align}
-with $\nabla\psi_t\cdot(\nabla\theta_b\times\nabla\phi_b) = \sqrt{g}$ the coordinate jacobian. Substituting the Fourier series for $u$ and $1/B^2$, we finally obtain
+with $(\nabla\psi_t\cdot(\nabla\theta_b\times\nabla\phi_b))^{-1} = \sqrt{g}$ the Boozer coordinate jacobian. Substituting the Fourier series for $u$ and $1/B^2$, we finally obtain
 \begin{equation}
-	(m\iotabar - n)u_{mn} - i \frac{\mathbf{B}\cdot\nabla\psi_t}{\mathbf{B}\cdot\nabla\theta_b} u'_{mn} = \frac{\sqrt{g}}{\mathbf{B}\cdot\nabla\theta_b}(mG + nI)h_{mn}.
+	(m\iotabar - n)u_{mn} = \frac{1}{\sqrt{g}}\frac{1}{\mathbf{B}\cdot\nabla\phi_b}(mG + nI)h_{mn}.
 \end{equation}
 Rearranging the terms, we get an expression for $u_{mn}$,
 \begin{equation}
-	u_{mn} = \frac{\sqrt{g}}{\mathbf{B}\cdot\nabla\theta_b}\frac{(mG + nI)}{m\iotabar - n}h_{mn} + i \frac{1}{m\iotabar-n}\frac{\mathbf{B}\cdot\nabla\psi_t}{\mathbf{B}\cdot\nabla\theta_b} u'_{mn}.
+	u_{mn} = \frac{1}{\sqrt{g}}\frac{1}{\mathbf{B}\cdot\nabla\phi_b}\frac{(mG + nI)}{m\iotabar - n}h_{mn} + \Delta_{mn}\delta(\psi_t-\psi_{t,mn}),
 \end{equation}
-We see that at rational surfaces ($\iotabar=n/m$), the Pfirsch-Schl\"uter current density diverges as a $1/x$ singularity if the pressure gradient is finite. This is not physical since the net toroidal current would diverge as well.
+where $\Delta_{mn}$ is an arbitrary constant and $\psi_{t,mn}$ is the toroidal flux enclosed by a magnetic surface where $\iotabar=n/m$. The Pfirsch-Schl\"uter current density (Eq.(\ref{equation current density})) has then two parts; one is a delta function, and the other is
+\begin{equation}
+	J_{mn} = \frac{1}{\sqrt{g}}\frac{1}{\mathbf{B}\cdot\nabla\phi_b}\frac{(mG + nI)}{m\iotabar - n}h_{mn}p'(\psi_t).\label{diverging current}
+\end{equation}
 
-To circumvent this issue and obtain well defined, ideal MHD solutions, one can look into reduced classes of equilibria.
+We see that at rational surfaces ($\iotabar=n/m$), the current density (\ref{diverging current}) diverges as a $1/x$ singularity if the pressure gradient is finite. This is not physical since the integrated net toroidal current would diverge as well. To circumvent this issue and obtain well defined, ideal MHD solutions, one has to consider constrained classes of equilibria.
 \begin{enumerate}
-	\item One solution is to consider equilibria where the magnetic field resonant harmonic is zero at each rational surface, \emph{i.e.} $h_{mn}=0$, discussed by \citet{Weitzner2014}.
+	\item One possibility is to consider equilibria where the inverse magnetic field squared resonant harmonic is zero at each rational surface, \emph{i.e.} $h_{mn}=0$, discussed by \citet{Weitzner2014}.
 	\item Another is to relax the assumption of smooth, continuous solutions, and consider rotational transform profiles that are stepped --- essentially jumping from irrational to irrational values, and entirely avoiding rational surfaces. This has been discussed by \citet{Loizu2015a}.
-	\item Similarly, one could consider stepped-pressure equilibria, where the pressure gradient is finite only at irrational surfaces. Since rationals are dense in $\mathbb{R}$, the pressure profile is either discontinuous or fractal. Equilibria of this class have been proven to exist close to axisymmetry \citep{Bruno1996}.
+	\item Similarly, one could consider equilibria where the pressure is constant around resonant surfaces. Since rationals are dense in $\mathbb{R}$, the pressure profile is either stepped or fractal. Stepped pressure equilibria have been proven to exist close to axisymmetry by \citet{Bruno1996}.
 	\item Finally, a combination of the second and third class discussed above, where the rotational transform profile and the pressure profile are alternatively constant, can be constructed to obtain solution with continuous but non-smooth solutions \citep{Hudson2017a}
 \end{enumerate}
-In what follows, we will work with the third class of equilibria described above, namely stepped-pressure equilibria. The reason is three-fold: (i) these equilibria are numerically tractable, (ii) solutions with magnetic islands and chaos can be obtained and (iii) solutions have been proven to exist under some conditions. In particular, we will look at \ac{MRxMHD} equilibria, which can be seen as a combination of Taylor states, described in the next section.
+In what follows, we will work with the third class of equilibria described above, namely stepped-pressure equilibria. The reason is three-fold: (i) these equilibria are numerically tractable, (ii) solutions with magnetic islands and chaos can be obtained and (iii) solutions have been proven to exist under some conditions. In particular, we will look at \ac{MRxMHD} equilibria, which can be seen as a combination of Taylor states, described in section \ref{section taylor state}.
+
+
 
 \section{Taylor state}
 \label{section taylor state}
@@ -165,8 +158,17 @@ In what follows, we will work with the third class of equilibria described above
 
 \section{MRxMHD}
 \label{section mrxmhd}
-The \ac{MRxMHD} theory \citep{Dewar2015, Hole2006} has been developed to address this question. \ac{MRxMHD} minimizes the \ac{MHD} energy functional \citep{kruskal_equilibrium_1958} while keeping the magnetic helicity and the magnetic fluxes constant \citep{Dewar2015} in a finite set of $N_{vol}$ nested volumes $\mathcal{V}_l$ at constant pressure (see Figure \ref{fig:Illustration_SPEC}) but otherwise allowing arbitrary, non-ideal variations in the magnetic field. Interfaces $\delta\mathcal{V}_l$ separating the volumes are ideal flux surfaces which therefore cannot undergo magnetic re-connection, effectively constraining discretely the magnetic field topology. In the limit of a single volume, $N_{vol}=1$, Taylor states \citep{Taylor1974, Taylor1986} are recovered, while in the limit of an infinite number of volumes, $N_{vol}\rightarrow\infty$, it has been proven that \ac{MRxMHD} recovers ideal \ac{MHD} (section \ref{section ideal mhd}) \citep{Dennis2013} in the limit of continuously nested flux surfaces, thereby bridging the gap between both theories.
+%The \ac{MRxMHD} theory \citep{Dewar2015, Hole2006} has been developed to address this question. \ac{MRxMHD} minimizes the \ac{MHD} energy functional \citep{kruskal_equilibrium_1958} while keeping the magnetic helicity and the magnetic fluxes constant \citep{Dewar2015} in a finite set of $N_{vol}$ nested volumes $\mathcal{V}_l$ at constant pressure (see Figure \ref{fig:Illustration_SPEC}) but otherwise allowing arbitrary, non-ideal variations in the magnetic field. Interfaces $\delta\mathcal{V}_l$ separating the volumes are ideal flux surfaces which therefore cannot undergo magnetic re-connection, effectively constraining discretely the magnetic field topology. In the limit of a single volume, $N_{vol}=1$, Taylor states \citep{Taylor1974, Taylor1986} are recovered, while in the limit of an infinite number of volumes, $N_{vol}\rightarrow\infty$, it has been proven that \ac{MRxMHD} recovers ideal \ac{MHD} (section \ref{section ideal mhd}) \citep{Dennis2013} in the limit of continuously nested flux surfaces, thereby bridging the gap between both theories.
 
+Taylor states can not describe plasma equilibria with pressure profile. An alternative is proposed by the MRxMHD equilibrium model, which describes solutions to equations (\ref{equation perp force balance})-(\ref{equation div B ideal mhd}) assuming stepped-pressure profiles. The pressure steps are supported by magnetic surfaces $\mathcal{I}_l$, $l\in\{1,\ldots,N_{vol}\}$, with irrational rotational transform, \textit{i.e.} $\iotabar\in\mathbb{R}\setminus\mathbb{Z}$, which defines a finite number of volumes $\mathbf{V}_l$ between each couple of interface (see Figure \ref{fig:Illustration_SPEC}). In each volume, the magnetic field is described by a Taylor state, 
+\begin{equation}
+	\nabla\times\mathbf{B}=\mu_l\mathbf{B}. \label{eq.BeltramiEquation}
+\end{equation}
+In addition, the total pressure (plasma and magnetic pressure) is required to be continuous across each volume interface $\mathcal{I}_l$,
+\begin{equation}
+	\left[\left[p + \frac{B^2}{2\mu_0}\right]\right]_l = 0, \label{eq.force_balance}
+\end{equation}
+where $[[x]]_l\equiv x_{l+1}-x_l$ denotes the discontinuity across interface $l^{\text{th}}$. The MRxMHD equilibrium can then be seen as a collection of nested Taylor state at equilibrium with one another. 
 
 \begin{figure}
 	\centering
@@ -187,40 +189,12 @@ The \ac{MRxMHD} theory \citep{Dewar2015, Hole2006} has been developed to address
 	\label{fig:Illustration_SPEC}
 \end{figure}
 
-The plasma is divided in $N_{vol}$ nested volumes $\mathcal{V}_l$, $l\in\{1,\ldots,N_{vol}\}$, so that the MHD energy $W_l$ \citep{kruskal_equilibrium_1958} local to each volume can be written as
-
-\begin{equation}
-	W_l = \int_{\mathcal{V}_l} \left(\frac{p_l}{\gamma-1}+\frac{B^2}{2\mu_0}\right)dv,
-\end{equation}
-where $p_l$ is the pressure, $B=|\mathbf{B}|$ is the magnetic field strength, $\mu_0$ is the vacuum permeability, $\gamma$ is the adiabatic constant and $dv$ is an infinitesimal volume element. The \ac{MRxMHD} energy functional is \citep{Hudson2012}
-
-\begin{equation}
-	W = \sum_{l=1}^{N_{vol}} \left[W_l -\frac{\mu_l}{2}(K_l-K_{l,0})\right], \label{eq.energy}
-\end{equation}
-where $\mu_l$ is a Lagrange multiplier, $K_l$ is the magnetic helicity in volume $l$ and $K_{l,0}$ the magnetic helicity constraint. The magnetic helicity is defined as 
-
-\begin{equation}
-	K_l = \int_{\mathcal{V}_l} \mathbf{A}_l\cdot \mathbf{B}_l dv,
-\end{equation}
-where $\mathbf{A}_l$ is the vector potential of the magnetic field  $\mathbf{B}_l$, \textit{i.e.} $\mathbf{B}_l=\nabla\times\mathbf{A}_l$. In each volume $\mathcal{V}_l$, $l\in\{1,\ldots,N_{vol}\}$, the magnetic field $\mathbf{B}_l$ is varied while keeping the toroidal magnetic flux, $\psi_{t,l}$, and poloidal magnetic flux, $\psi_{p,l}$, constant, until the \ac{MRxMHD} energy (Eq.\ref{eq.energy}) is minimized. The corresponding Euler-Lagrange equations \citep{Hudson2012} describe a force-free magnetic field $\mathbf{B}_l$ satisfying a Beltrami equation,
-
-\begin{equation}
-	\nabla\times\mathbf{B}_l = \mu_l\mathbf{B}_l. \label{eq.BeltramiEquation}
-\end{equation}
-
-
-\noindent In addition, the total pressure (plasma and magnetic pressure) is required to be continuous across each volume interface $\mathcal{I}_l$,
-\begin{equation}
-	\left[\left[p + \frac{B^2}{2\mu_0}\right]\right]_l = 0, \label{eq.force_balance}
-\end{equation}
-where $[[\cdot]]_l$ denotes the discontinuity across interface $l^{\text{th}}$.
-
 In each volume $\mathcal{V}_l$, the solution to Eq.(\ref{eq.BeltramiEquation}) is completely determined by three scalars (for example $\{\mu_l,\psi_{t,l},\psi_{p,l}\}$), the geometry of interfaces bounding the volume and a boundary condition for the magnetic field normal to the interfaces $\mathbf{B}_l\cdot\hat{\mathbf{n}}_k$, $k=\{l-1,l\}$, with $\hat{\mathbf{n}}_k$ a unit vector perpendicular to the interface $k$. In \ac{MRxMHD}, the interfaces are imposed to be flux surfaces, with $\mathbf{B}_l\cdot\hat{\mathbf{n}}_k=0$. In the innermost volume, which is topologically different from the others, only two scalars are required in addition to the geometrical degrees of freedom and the condition $\mathbf{B}_1\cdot\hat{\mathbf{n}}_1=0$.
 
 
 
 \subsection{Currents in MRxMHD}
-
+One important part of the work presented in this thesis is the implementation of a new capability in the SPEC code (introduced in the next chapter) to run at fixed net toroidal current profile. The numerical implementation will be explained in great details in section \ref{sec. current constraint}; we describe in this section how currents are represented in the MRxMHD theory. This section has been part of a publication by \citet{Baillod2021}.
 
 In \ac{MRxMHD}, two spatially distinct net toroidal current profiles co-exist, namely currents flowing in the volumes, $\{I^v_{l,\phi}\}_{l=\{1,\ldots,N_{vol}\}}$, and surface currents flowing at the volumes' interfaces, $\{I^s_{l,\phi}\}_{l=\{1,\ldots,N_{vol}-1\}}$ (current sheets), where the subscript $\phi$ refers to the toroidal angle. The volume current $I^v_{l,\phi}$ in volume $\mathcal{V}_l$ is easily evaluated using Eq.(\ref{eq.BeltramiEquation}) and Ampere's law,
 \begin{equation}
@@ -235,8 +209,8 @@ where $\Gamma_l$ is a closed curve following the interface $\mathcal{I}_l$ poloi
 
 As a side note, we remark that while ideal \ac{MHD} equilibria are defined by two free functions (\textit{e.g.} the pressure and the rotational transform profiles, $p(\psi_t)$ and $\iotabar(\psi_t)$, or the pressure and the current profiles, $p(\psi_t)$ and $I_\phi(\psi_t)$), \ac{MRxMHD} requires two scalars to determine the solution in a volume $\mathcal{V}_l$, in addition to the pressure and toroidal flux. This can be considered as three independent discrete profiles that are required to determine an equilibrium. Examples are $\{p_l, \mu_l, \psi_{p,l}\}_{l=1,\ldots,N_{vol}}$, $\{p_l, \mu_l, K_l\}_{l=1,\ldots,N_{vol}}$ or $\{p_l,\iotabar^-_l,\iotabar^+_l\}_{l=1,\ldots,N_{vol}}$, with $\iotabar^\pm_l$ the rotational transform on the inner and outer side of the interface $\mathcal{I}_l$, or $\{p_l,I^v_{l,\phi},I^s_{l,\phi}\}_{l=1,\ldots,N_{vol}}$, as functions of $\{\psi_{t,l}\}_{l=1,\ldots,N_{vol}}$.
 
-\subsection{Currents discretization}
 
+\subsection{Currents discretization}
 Typically, continuous current profiles are provided by analytical models or after equilibrium reconstruction using experimental data. We now discuss how these profiles can be represented in the framework of \ac{MRxMHD}. Consider an externally driven current profile, \textit{e.g} \ac{ECCD}, provided as the enclosed toroidal current as a function of the toroidal magnetic flux, \textit{i.e.} $I_{\phi,ECCD}(\psi_t)$, and a pressure-driven current profile, \textit{e.g.} the bootstrap current, provided similarly as the enclosed toroidal current as a function of the toroidal flux, $I_{\phi,BS}(\psi_t)$. We also assume that the pressure profile, $p(\psi_t)$, the number of volumes, $N_{vol}$, and their enclosed toroidal fluxes, $\{\psi_{t,l}\}_{l=1,\ldots,N_{vol}}$, are given (see Figure \ref{fig:sketch_pressure}). The question of how many volumes and where to position their interfaces to best represent a given pressure profile is not addressed in this paper.
 
 \begin{figure}
@@ -285,6 +259,68 @@ with $\psi_{a}$ the total toroidal magnetic flux enclosed by the plasma. In Eqs.
     \caption{Sketch of pressure driven current density. Colored area correspond to the \ac{MRxMHD} surface current. Black dashed lines represent volume interfaces.}
     \label{fig:sketch_bootstrap}
 \end{figure}
+
+
+
+
+
+
+
+\section{Energy principles}
+To complete this chapter, we show here that the ideal MHD equilibrium equations, the Taylor state, and the MRxMHD equations can all be derived from an energy principle. In fact, all three models derive from the same energy functional, which is minimized under different topological constraints. We first start by discussing the relation between magnetic helicity and field line topology conservation.
+
+% ================================================ HELICITY ================================================
+\subsection{Conservation of field line topology}
+%In ideal \ac{MHD}, it is assumed that the plasma is \emph{ideal}, meaning that it has zero resistivity. There are thus no mechanisms for energy dissipation and the plasma is not allowed to reconnect, \textit{i.e.} only plasma displacements that conserve the topology of magnetic field lines are allowed. It has been shown \citep{woltjer_theorem_1958} that this constraint is equivalent to conserving the magnetic helicity $K$ in any plasma volume $\mathcal{V}_i$, with
+An important property of the ideal MHD model is that the magnetic helicity $K$ is conserved everywhere under ideal MHD evolution, with
+\begin{equation}
+	K = \iiint_{\mathcal{V}_i} d\mathbf{x}^3 \mathbf{A} \cdot \mathbf{B},
+\end{equation}
+where $\mathbf{A}=\nabla\times\mathbf{B}$ is the magnetic vector potential. Indeed, we find
+\begin{align}
+	\frac{dK}{dt} &= \iiint_{\mathcal{V}_i} d\mathbf{x}^3 \frac{d\mathbf{A}}{dt}\cdot\mathbf{B} + \mathbf{A}\cdot\frac{d\mathbf{B}}{dt} + \iint_{\delta\mathcal{V}_i} \mathbf{A}\cdot\mathbf{B}(\mathbf{n}\cdot\mathbf{v})d\mathbf{x}^2, \\
+	&= -2\iiint_{\mathcal{V}_i}\mathbf{E}\cdot\mathbf{B} d\mathbf{x}^3 + \iint_{\delta\mathcal{V}_i}(\mathbf{n}\times\mathbf{A})\cdot(\mathbf{E}+\mathbf{v}\times\mathbf{B})d\mathbf{x}^2.
+\end{align}
+Applying the ideal Ohm's law (Eq.(\ref{ideal Ohms law})), we obtain $dK/dt = 0$, \textit{i.e.} the magnetic helicity is conserved everywhere in the plasma in ideal MHD. Indeed, the magnetic helicity has been shown to be approximately conserved during fast reconnection events \citep{bergerIntroductionMagneticHelicity1999}, and has been observed to be conserved in tokamak sawtooth crashes \citep{Heidbrink2000}. 
+
+An important property of magnetic helicity is its correlation with magnetic field line topologies. One can show \citep{moffattDegreeKnottednessTangled1969, arnoldTopologicalPropertiesMagnetic1998, bergerIntroductionMagneticHelicity1999} that the magnetic helicity is the sum of the Gauss linking number over every pair of field lines within a volume. Note the following implication: in ideal MHD, the magnetic helicity is conserved \emph{everywhere}, meaning that the magnetic topology is conserved during plasma motion.
+
+
+
+
+
+% ================================================ ENERGY PRINCIPLE ================================================
+\subsection{Energy principle}
+The ideal MHD equilibrium equations, Eqs.(\ref{equation perp force balance})-(\ref{equation div B ideal mhd}), can be derived from an energy principle \citep{kruskalEquilibriumMagneticallyConfined1958}. Consider the energy functional 
+\begin{equation}
+	W = \iiint_{\mathcal{V}_P} d\mathbf{x}^3 \left(\frac{\mathbf{B}^2}{2} + \frac{p}{\gamma-1}\right), \label{eq. energy functional}
+\end{equation}
+where $\mathcal{V}_P$ is the plasma volume, $d\mathbf{x}^3$ is a volume element, $\mathbf{B}$ is the magnetic field, and $\gamma$ is the ratio of the fluid specific heats. Minimizing $W$ under the constraint of conservation of magnetic helicity everywhere in the plasma leads to the ideal MHD equilibrium equations. 
+
+
+
+
+
+The plasma is divided in $N_{vol}$ nested volumes $\mathcal{V}_l$, , so that the MHD energy $W_l$ \citep{kruskal_equilibrium_1958} local to each volume can be written as
+
+\begin{equation}
+	W_l = \int_{\mathcal{V}_l} \left(\frac{p_l}{\gamma-1}+\frac{B^2}{2\mu_0}\right)dv,
+\end{equation}
+where $p_l$ is the pressure, $B=|\mathbf{B}|$ is the magnetic field strength, $\mu_0$ is the vacuum permeability, $\gamma$ is the adiabatic constant and $dv$ is an infinitesimal volume element. The \ac{MRxMHD} energy functional is \citep{Hudson2012}
+
+\begin{equation}
+	W = \sum_{l=1}^{N_{vol}} \left[W_l -\frac{\mu_l}{2}(K_l-K_{l,0})\right], \label{eq.energy}
+\end{equation}
+where $\mu_l$ is a Lagrange multiplier, $K_l$ is the magnetic helicity in volume $l$ and $K_{l,0}$ the magnetic helicity constraint. The magnetic helicity is defined as 
+
+\begin{equation}
+	K_l = \int_{\mathcal{V}_l} \mathbf{A}_l\cdot \mathbf{B}_l dv,
+\end{equation}
+where $\mathbf{A}_l$ is the vector potential of the magnetic field  $\mathbf{B}_l$, \textit{i.e.} $\mathbf{B}_l=\nabla\times\mathbf{A}_l$. In each volume $\mathcal{V}_l$, $l\in\{1,\ldots,N_{vol}\}$, the magnetic field $\mathbf{B}_l$ is varied while keeping the toroidal magnetic flux, $\psi_{t,l}$, and poloidal magnetic flux, $\psi_{p,l}$, constant, until the \ac{MRxMHD} energy (Eq.\ref{eq.energy}) is minimized. The corresponding Euler-Lagrange equations \citep{Hudson2012} describe a force-free magnetic field $\mathbf{B}_l$ satisfying a Beltrami equation,
+
+\begin{equation}
+	\nabla\times\mathbf{B}_l = \mu_l\mathbf{B}_l.
+\end{equation}
 
 
 \end{document}

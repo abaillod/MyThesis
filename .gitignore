@@ -6,5 +6,4 @@
 *.log
 *.synctex.gz
 *.toc
-*.pdf
 .DS_Store
