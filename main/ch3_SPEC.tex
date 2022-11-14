@@ -1,7 +1,7 @@
 \documentclass[my_thesis.tex]{subfiles}
 
 \begin{document}
-\chapter{The Stepped Pressure Equilibrium Code}
+\chapter{The Stepped Pressure Equilibrium Code}\label{ch3.SPEC}
 
 The SPEC code has been developed in the past decade to solve the MRxMHD equilibrium equations (see section \ref{section mrxmhd}); in 2012, \citep{Hudson2012} published a first version that computes fixed-boundary, stepped-pressure equilibria. Since then, it has been upgraded to allow free-boundary calculations \citep{Hudson2020c} and to allow the prescription of the net toroidal current profile \citep{Baillod2021} --- this constraint is explained in more details in section \ref{sec. current constraint}. The numerical robustness of the code was and is still continuously improved --- \citep{Qu2020} improved the radial discretization and the numerical solvers in the inner volume of the plasma, and a new boundary representation, based on work by \citet{Henneberg2021}, has been implemented; see details in section \ref{sec. angle representation}.
 

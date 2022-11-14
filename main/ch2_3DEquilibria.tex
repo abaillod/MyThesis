@@ -107,7 +107,7 @@ where the first term on the right hand side of Eq.(\ref{equation current density
 
 
 % ================================================ CLASSES OF EQUILIBRIA ================================================
-\subsection{Classes of well posed 3D magnetic equilibria}
+\subsection{Classes of well posed 3D magnetic equilibria}\label{sec. diverging currents}
 
 As we shall see, the magnetic differential equation \ref{eq.diff_u} has important implications on the existence of 3D magnetic equilibria with nested magnetic surfaces. In the discussion below, we follow \citet{Helander2014} and solve equation (\ref{eq.diff_u}) assuming the existence of magnetic surfaces and using the coordinate system $(\psi_t,\theta_b,\phi_b)$, where $(\theta_b,\phi_b)$ are the poloidal and toroidal Boozer angles (see appendix \ref{appendix boozer coordinates}). We write the functions $u(\psi_t,\theta_b,\phi_b)$ and $B^{-2}(\psi_t,\theta_b,\phi_b)$ as Fourier series,
 \begin{align}
@@ -161,8 +161,43 @@ The Taylor state \citep{Taylor1974,Taylor1986} is a particular case of force-fre
 	\nabla\times\mathbf{B}=\mu\mathbf{B}. \label{equation Taylor state}
 \end{equation}
 
-Solution to the equation (\ref{equation Taylor state}) in a slab and a cylinder are provided in appendix \ref{appendix taylor state}.
+Solution to the equation (\ref{equation Taylor state}) in a slab and a cylinder are derived below.
 
+\subsection{Solution in a plasma slab}
+We solve equation (\ref{equation Taylor state}) in a plasma Slab. We use Cartesian coordinates $(x,y,z)$, where the $x$ coordinate is a radial-like coordinate, and the $y$ and $z$ coordinates are $2\pi$-periodic. The plasma slab is bounded by two surfaces at $x=0$ and $x=a$, and we assume that these surfaces are magnetic surfaces, \textit{i.e.} $\mathbf{B}\cdot\mathbf{e}_x=0$ on both boundaries, with $\mathbf{e}_x$ the cartesian basis vector in the $x$ direction. Finally we assume that the equilibrium is axisymmetric, \textit{i.e.} there are no dependencies on $y$ and $z$.
+
+The equation $\nabla\cdot\mathbf{B}=0$ implies that $B_x=0$, while equation (\ref{equation Taylor state}) can be written as
+\begin{align}
+	\frac{\partial B_z}{\partial x} &= -\mu B_y\\
+	\frac{\partial B_y}{\partial x} &= \mu B_z,
+\end{align}
+whose solution is
+\begin{align}
+	B_y &= B_0 \cos(\mu (x + x_0))\\
+	B_z &= -B_0 \sin(\mu (x + x_0)),
+\end{align}
+where $B_0$ and $x_0$ are integration constant, which can be fixed by providing, for example, a constraint on the poloidal and toroidal fluxes. Note that, in this geometry, three constants (or constraints) $(\mu,B_0,x_0)$ have to be provided to fully determine the equilibrium.
+
+\subsection{Solution in a plasma cylinder}
+We now solve equation (\ref{equation Taylor state}) in a plasma cylinder. We use cylindrical coordinates $(r,\theta,z)$, and assume that the $z$ coordinate is $2\pi$-periodic. The plasma cylinder is bounded by a single surface at $r=a$, which we assume to be a magnetic surface,  \textit{i.e.} $\mathbf{B}\cdot\mathbf{e}_r=0$ at $r=a$, with $\mathbf{e}_r$ the cylindrical coordinate covariant basis vector in the $r$ direction. Again, we assume the equilibrium to be axisymmetric, \textit{i.e.} there are no dependencies on $\theta$ and $z$.
+
+The equation $\nabla\cdot\mathbf{B}=0$ implies that $B_r=0$, and equation (\ref{equation Taylor state}) leads to
+\begin{align}
+	\mu B_\theta &= -\frac{\partial B_z}{\partial r}\\
+	\mu B_z = \frac{1}{r}\frac{\partial}{\partial r}(rB_\theta),
+\end{align}
+which, one defining $x=\mu r$, lead to 
+\begin{equation}
+	x^2 \frac{\partial^2 B_\theta}{\partial x^2} + x \frac{\partial B_\theta}{\partial x} + (x^2-1) B_\theta = 0,
+\end{equation}
+which can be identified with Bessel's differential equation. The solutions are then
+\begin{align}
+	B_\theta &= B_0 J_1(\mu r)\\
+	B_z &= B_0 J_0(\mu r),
+\end{align}
+where $J_i$ is the Bessel function of the $i^{\text{th}}$, and $B_0$ is an integration constant, which can be fixed by providing an additional constraint, for example the toroidal flux. Note that in a cylinder only two constants (or constraints) $(\mu,B_0)$ have to be provided to fully determine the equilibrium. This is in opposition to the plasma slab case, where three constants had to be provided. This difference is intransically linked to the topology of the domain; in a slab, there are two boundaries to the plasma, one at $x=0$ and one at $x=a$, while in a cylinder there is only one boundary, at $r=a$. 
+
+These important topological properties are also true in toroidal geometries; two constants are required to fully determine the Taylor state in a torus, while three constants are required in a toroidal annulus.
 
 \section{MRxMHD}
 \label{section mrxmhd}
@@ -170,9 +205,11 @@ Solution to the equation (\ref{equation Taylor state}) in a slab and a cylinder 
 
 Taylor states can not describe plasma equilibria with pressure profile. An alternative is proposed by the MRxMHD equilibrium model, which describes solutions to equations (\ref{equation perp force balance})-(\ref{equation div B ideal mhd}) assuming stepped-pressure profiles. The pressure steps are supported by magnetic surfaces $\mathcal{I}_l$, $l\in\{1,\ldots,N_{vol}\}$, with irrational rotational transform, \textit{i.e.} $\iotabar\in\mathbb{R}\setminus\mathbb{Z}$, which defines a finite number of volumes $\mathbf{V}_l$ between each couple of interface (see Figure \ref{fig:Illustration_SPEC}). In each volume, the magnetic field is described by a Taylor state, 
 \begin{equation}
-	\nabla\times\mathbf{B}=\mu_l\mathbf{B}. \label{eq.BeltramiEquation}
+	\nabla\times\mathbf{B}=\mu_l\mathbf{B}, \label{eq.BeltramiEquation}
 \end{equation}
-In addition, the total pressure (plasma and magnetic pressure) is required to be continuous across each volume interface $\mathcal{I}_l$,
+which can be solved given the volume's boundaries and three scalars, for example $(\mu_l,\psi_{p,l},\psi_{t,l})$, where $\psi_{p,l}$ and $\psi_{t,l}$ are the poloidal and toroidal fluxes in volume $l$ respectively. Note the special case of the inner most voume, which only has one boundary; the magnetic field in the inner most volume is thus fully determined by two scalars, for example $(\mu_1,\psi_{t,1})$.
+
+The geometry of the volumes' boundary is chosen such that force balance is achieved, \textit{i.e.} the total pressure (plasma and magnetic pressure) is continuous across each volume interface $\mathcal{I}_l$,
 \begin{equation}
 	\left[\left[p + \frac{B^2}{2\mu_0}\right]\right]_l = 0, \label{eq.force_balance}
 \end{equation}
@@ -197,12 +234,16 @@ where $[[x]]_l\equiv x_{l+1}-x_l$ denotes the discontinuity across interface $l^
 	\label{fig:Illustration_SPEC}
 \end{figure}
 
-In each volume $\mathcal{V}_l$, the solution to Eq.(\ref{eq.BeltramiEquation}) is completely determined by three scalars (for example $\{\mu_l,\psi_{t,l},\psi_{p,l}\}$), the geometry of interfaces bounding the volume and a boundary condition for the magnetic field normal to the interfaces $\mathbf{B}_l\cdot\hat{\mathbf{n}}_k$, $k=\{l-1,l\}$, with $\hat{\mathbf{n}}_k$ a unit vector perpendicular to the interface $k$. In \ac{MRxMHD}, the interfaces are imposed to be flux surfaces, with $\mathbf{B}_l\cdot\hat{\mathbf{n}}_k=0$. In the innermost volume, which is topologically different from the others, only two scalars are required in addition to the geometrical degrees of freedom and the condition $\mathbf{B}_1\cdot\hat{\mathbf{n}}_1=0$.
+The MRxMHD class of equilibrium thus extends the Taylor state to equilibria with pressure gradients. Magnetic field line topologies is discretely constrained to be magnetic surfaces at the volumes' boundaries, while magnetic islands and magnetic field line chaos can be present in the volumes between the interfaces. Diverging currents, as described in section \ref{sec. diverging currents}, are avoided since magnetic surfaces are only assumed to exist when the rotational transform is irrational. 
 
+There are however some drawbacks; the magnetic field, and so the rotational transform, pressure and other physical profiles, are in general discontinuous accross the interfaces. Finally, interfaces may not always exist --- either a magnetic island or magnetic field line chaos is present, or the pressure jump is too large for a single surface to support it \citep{Qu2021}. Therefore, care must be taken when constructing MRxMHD equilibria, and in their analysis. 
+
+
+%In each volume $\mathcal{V}_l$, the solution to Eq.(\ref{eq.BeltramiEquation}) is completely determined by three scalars (for example $\{\mu_l,\psi_{t,l},\psi_{p,l}\}$), the geometry of interfaces bounding the volume and a boundary condition for the magnetic field normal to the interfaces $\mathbf{B}_l\cdot\hat{\mathbf{n}}_k$, $k=\{l-1,l\}$, with $\hat{\mathbf{n}}_k$ a unit vector perpendicular to the interface $k$. In \ac{MRxMHD}, the interfaces are imposed to be flux surfaces, with $\mathbf{B}_l\cdot\hat{\mathbf{n}}_k=0$. In the innermost volume, which is topologically different from the others, only two scalars are required in addition to the geometrical degrees of freedom and the condition $\mathbf{B}_1\cdot\hat{\mathbf{n}}_1=0$.
 
 
 \subsection{Currents in MRxMHD}
-One important part of the work presented in this thesis is the implementation of a new capability in the SPEC code (introduced in the next chapter) to run at fixed net toroidal current profile. The numerical implementation will be explained in great details in section \ref{sec. current constraint}; we describe in this section how currents are represented in the MRxMHD theory. This section has been part of a publication by \citet{Baillod2021}.
+One important part of the work presented in this thesis is the implementation of a new capability in the SPEC code (introduced in chapter \ref{ch3.SPEC}) to run at fixed net toroidal current profile. The numerical implementation will be explained in great details in section \ref{sec. current constraint}; we describe in this section how currents are represented in the MRxMHD theory. This section has been part of a publication by \citet{Baillod2021}.
 
 In \ac{MRxMHD}, two spatially distinct net toroidal current profiles co-exist, namely currents flowing in the volumes, $\{I^v_{l,\phi}\}_{l=\{1,\ldots,N_{vol}\}}$, and surface currents flowing at the volumes' interfaces, $\{I^s_{l,\phi}\}_{l=\{1,\ldots,N_{vol}-1\}}$ (current sheets), where the subscript $\phi$ refers to the toroidal angle. The volume current $I^v_{l,\phi}$ in volume $\mathcal{V}_l$ is easily evaluated using Eq.(\ref{eq.BeltramiEquation}) and Ampere's law,
 \begin{equation}
@@ -218,7 +259,7 @@ where $\Gamma_l$ is a closed curve following the interface $\mathcal{I}_l$ poloi
 As a side note, we remark that while ideal \ac{MHD} equilibria are defined by two free functions (\textit{e.g.} the pressure and the rotational transform profiles, $p(\psi_t)$ and $\iotabar(\psi_t)$, or the pressure and the current profiles, $p(\psi_t)$ and $I_\phi(\psi_t)$), \ac{MRxMHD} requires two scalars to determine the solution in a volume $\mathcal{V}_l$, in addition to the pressure and toroidal flux. This can be considered as three independent discrete profiles that are required to determine an equilibrium. Examples are $\{p_l, \mu_l, \psi_{p,l}\}_{l=1,\ldots,N_{vol}}$, $\{p_l, \mu_l, K_l\}_{l=1,\ldots,N_{vol}}$ or $\{p_l,\iotabar^-_l,\iotabar^+_l\}_{l=1,\ldots,N_{vol}}$, with $\iotabar^\pm_l$ the rotational transform on the inner and outer side of the interface $\mathcal{I}_l$, or $\{p_l,I^v_{l,\phi},I^s_{l,\phi}\}_{l=1,\ldots,N_{vol}}$, as functions of $\{\psi_{t,l}\}_{l=1,\ldots,N_{vol}}$.
 
 
-\subsection{Currents discretization}
+\subsubsection{Currents discretization}
 Typically, continuous current profiles are provided by analytical models or after equilibrium reconstruction using experimental data. We now discuss how these profiles can be represented in the framework of \ac{MRxMHD}. Consider an externally driven current profile, \textit{e.g} \ac{ECCD}, provided as the enclosed toroidal current as a function of the toroidal magnetic flux, \textit{i.e.} $I_{\phi,ECCD}(\psi_t)$, and a pressure-driven current profile, \textit{e.g.} the bootstrap current, provided similarly as the enclosed toroidal current as a function of the toroidal flux, $I_{\phi,BS}(\psi_t)$. We also assume that the pressure profile, $p(\psi_t)$, the number of volumes, $N_{vol}$, and their enclosed toroidal fluxes, $\{\psi_{t,l}\}_{l=1,\ldots,N_{vol}}$, are given (see Figure \ref{fig:sketch_pressure}). The question of how many volumes and where to position their interfaces to best represent a given pressure profile is not addressed in this paper.
 
 \begin{figure}
@@ -291,9 +332,17 @@ where $\mathbf{A}=\nabla\times\mathbf{B}$ is the magnetic vector potential. Inde
 \end{align}
 Applying the ideal Ohm's law (Eq.(\ref{ideal Ohms law})), we obtain $dK/dt = 0$, \textit{i.e.} the magnetic helicity is conserved everywhere in the plasma in ideal MHD. Indeed, the magnetic helicity has been shown to be approximately conserved during fast reconnection events \citep{bergerIntroductionMagneticHelicity1999}, and has been observed to be conserved in tokamak sawtooth crashes \citep{Heidbrink2000}. 
 
-An important property of magnetic helicity is its correlation with magnetic field line topologies. One can show \citep{moffattDegreeKnottednessTangled1969, arnoldTopologicalPropertiesMagnetic1998, bergerIntroductionMagneticHelicity1999} that the magnetic helicity is the sum of the Gauss linking number over every pair of field lines within a volume. Note the following implication: in ideal MHD, the magnetic helicity is conserved \emph{everywhere}, meaning that the magnetic topology is conserved during plasma motion.
+Magnetic helicity can be linked to the magnetic field line topologies. One can show \citep{moffattDegreeKnottednessTangled1969, arnoldTopologicalPropertiesMagnetic1998, bergerIntroductionMagneticHelicity1999} that the magnetic helicity is the sum of the Gauss linking number over every pair of field lines within a volume, where the Gauss linking number is a measure of how intertwined field lines are (see Figure \ref{fig gauss linking number}). Note the following implication: in ideal MHD, the magnetic helicity is conserved \emph{everywhere}, meaning that the magnetic topology is conserved during plasma motion. Therefore, no magnetic reconnection event can be discribed by ideal MHD dynamics.
 
-
+\begin{figure}
+	\hspace{.125\linewidth}
+	\subfloat[][Gauss linking number is 1]{\includegraphics[height=4cm]{images/Gauss_linking_number_001.pdf}}
+	\hfill
+	\subfloat[][Gauss linking number is 3]{\includegraphics[height=4cm]{images/Gauss_linking_number_002.pdf}}
+	\hspace{.125\linewidth}
+	\caption{Sketch of two intertwined curves (one in red, one in blue), and their related Gauss linking number}
+	\label{fig gauss linking number}
+\end{figure}
 
 
 
@@ -309,12 +358,12 @@ where $\mathcal{V}_P$ is the plasma volume, $d\mathbf{x}^3$ is a volume element,
 
 
 
-The plasma is divided in $N_{vol}$ nested volumes $\mathcal{V}_l$, , so that the MHD energy $W_l$ \citep{kruskal_equilibrium_1958} local to each volume can be written as
+In MRxMHD, the plasma is divided in $N_{vol}$ nested volumes $\mathcal{V}_l$, so that the MHD energy $W_l$ \citep{kruskal_equilibrium_1958} local to each volume can be written as
 
 \begin{equation}
 	W_l = \int_{\mathcal{V}_l} \left(\frac{p_l}{\gamma-1}+\frac{B^2}{2\mu_0}\right)dv,
 \end{equation}
-where $p_l$ is the pressure, $B=|\mathbf{B}|$ is the magnetic field strength, $\mu_0$ is the vacuum permeability, $\gamma$ is the adiabatic constant and $dv$ is an infinitesimal volume element. The \ac{MRxMHD} energy functional is \citep{Hudson2012}
+where $p_l$ is the pressure, $B=|\mathbf{B}|$ is the magnetic field strength, $\mu_0$ is the vacuum permeability, $\gamma$ is the adiabatic constant and $dv$ is an infinitesimal volume element. Minimizing $W$ is then equivalent to minimizing each individual $W_l$. The magnetic helicity is however only constrained to be conserved in each volume $\mathcal{V}_l$ and not everywhere in the plasma. The \ac{MRxMHD} energy functional is then \citep{Hudson2012}
 
 \begin{equation}
 	W = \sum_{l=1}^{N_{vol}} \left[W_l -\frac{\mu_l}{2}(K_l-K_{l,0})\right], \label{eq.energy}
