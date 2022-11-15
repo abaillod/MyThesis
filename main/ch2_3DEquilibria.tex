@@ -141,14 +141,11 @@ where $\Delta_{mn}$ is an arbitrary constant and $\psi_{t,mn}$ is the toroidal f
 	J_{mn} = \frac{1}{\sqrt{g}}\frac{1}{\mathbf{B}\cdot\nabla\phi_b}\frac{(mG + nI)}{m\iotabar - n}h_{mn}p'(\psi_t).\label{diverging current}
 \end{equation}
 
-We see that at rational surfaces ($\iotabar=n/m$), the current density (\ref{diverging current}) diverges as a $1/x$ singularity if the pressure gradient is finite. This is not physical since the integrated net toroidal current would diverge as well. To circumvent this issue and obtain well defined, ideal MHD solutions, one has to consider constrained classes of equilibria.
-\begin{enumerate}
-	\item One possibility is to consider equilibria where the inverse magnetic field squared resonant harmonic is zero at each rational surface, \emph{i.e.} $h_{mn}=0$, discussed by \citet{Weitzner2014}.
-	\item Another is to relax the assumption of smooth, continuous solutions, and consider rotational transform profiles that are stepped --- essentially jumping from irrational to irrational values, and entirely avoiding rational surfaces. This has been discussed by \citet{Loizu2015a}.
-	\item Similarly, one could consider equilibria where the pressure is constant around resonant surfaces. Since rationals are dense in $\mathbb{R}$, the pressure profile is either stepped or fractal. Stepped pressure equilibria have been proven to exist close to axisymmetry by \citet{Bruno1996}.
-	\item Finally, a combination of the second and third class discussed above, where the rotational transform profile and the pressure profile are alternatively constant, can be constructed to obtain solution with continuous but non-smooth solutions \citep{Hudson2017a}
-\end{enumerate}
-In what follows, we will work with the third class of equilibria described above, namely stepped-pressure equilibria. The reason is three-fold: (i) these equilibria are numerically tractable, (ii) solutions with magnetic islands and chaos can be obtained and (iii) solutions have been proven to exist under some conditions. In particular, we will look at \ac{MRxMHD} equilibria, which can be seen as a combination of Taylor states, described in section \ref{section taylor state}.
+We see that at rational surfaces ($\iotabar=n/m$), the current density (\ref{diverging current}) diverges as a $1/x$ singularity if the pressure gradient is finite and if the magnetic field harmonics $h_{mn}$ is non zero. This particular singularity is unphysical since the integrated net toroidal current would diverge as well; note that the current density $\Delta_{mn} p'(\psi_t) \delta(\psi_t-\psi_{t,mn})$, is, on the other hand, physical, since it is a finite quantity once integrated. To circumvent the issue of unphysical diverging currents and obtain well defined, ideal MHD solutions, one has to consider constrained classes of equilibria.
+
+One possibility is to consider equilibria where the inverse magnetic field squared resonant harmonic is zero at each rational surface, \emph{i.e.} $h_{mn}=0$, discussed by \citet{Weitzner2014}. Another is to relax the assumption of smooth, continuous solutions, and consider rotational transform profiles that are stepped --- essentially jumping from irrational to irrational values, and entirely avoiding rational surfaces. This has been discussed by \citet{Loizu2015a}. Similarly, one could consider equilibria where the pressure is constant around resonant surfaces. Since rationals are dense in $\mathbb{R}$, the pressure profile is either stepped or fractal. Stepped pressure equilibria have been proven to exist close to axisymmetry by \citet{Bruno1996}. Finally, a combination of the second and third class discussed above, where the rotational transform profile and the pressure profile are alternatively constant, can be constructed to obtain solution with continuous profiles \citep{Hudson2017a}.
+
+In the remaining of this thesis, we will work with stepped-pressure equilibria. The reason is three-fold: (i) these equilibria are numerically tractable, (ii) solutions with magnetic islands and chaos can be obtained and (iii) solutions have been proven to exist under some conditions. In particular, we will look at \ac{MRxMHD} equilibria, which can be seen as a combination of Taylor states, described in section \ref{section taylor state}.
 
 
 
@@ -330,7 +327,7 @@ where $\mathbf{A}=\nabla\times\mathbf{B}$ is the magnetic vector potential. Inde
 	\frac{dK}{dt} &= \iiint_{\mathcal{V}_i} d\mathbf{x}^3 \frac{d\mathbf{A}}{dt}\cdot\mathbf{B} + \mathbf{A}\cdot\frac{d\mathbf{B}}{dt} + \iint_{\delta\mathcal{V}_i} \mathbf{A}\cdot\mathbf{B}(\mathbf{n}\cdot\mathbf{v})d\mathbf{x}^2, \\
 	&= -2\iiint_{\mathcal{V}_i}\mathbf{E}\cdot\mathbf{B} d\mathbf{x}^3 + \iint_{\delta\mathcal{V}_i}(\mathbf{n}\times\mathbf{A})\cdot(\mathbf{E}+\mathbf{v}\times\mathbf{B})d\mathbf{x}^2.
 \end{align}
-Applying the ideal Ohm's law (Eq.(\ref{ideal Ohms law})), we obtain $dK/dt = 0$, \textit{i.e.} the magnetic helicity is conserved everywhere in the plasma in ideal MHD. Indeed, the magnetic helicity has been shown to be approximately conserved during fast reconnection events \citep{bergerIntroductionMagneticHelicity1999}, and has been observed to be conserved in tokamak sawtooth crashes \citep{Heidbrink2000}. 
+Applying the ideal Ohm's law (Eq.(\ref{ideal Ohms law})), we obtain $dK/dt = 0$, \textit{i.e.} the magnetic helicity is conserved everywhere in the plasma according to ideal MHD. Indeed, the magnetic helicity has been shown to be approximately conserved during fast reconnection events \citep{bergerIntroductionMagneticHelicity1999}, and has been observed to be conserved in tokamak sawtooth crashes \citep{Heidbrink2000}. 
 
 Magnetic helicity can be linked to the magnetic field line topologies. One can show \citep{moffattDegreeKnottednessTangled1969, arnoldTopologicalPropertiesMagnetic1998, bergerIntroductionMagneticHelicity1999} that the magnetic helicity is the sum of the Gauss linking number over every pair of field lines within a volume, where the Gauss linking number is a measure of how intertwined field lines are (see Figure \ref{fig gauss linking number}). Note the following implication: in ideal MHD, the magnetic helicity is conserved \emph{everywhere}, meaning that the magnetic topology is conserved during plasma motion. Therefore, no magnetic reconnection event can be discribed by ideal MHD dynamics.
 
@@ -348,15 +345,92 @@ Magnetic helicity can be linked to the magnetic field line topologies. One can s
 
 % ================================================ ENERGY PRINCIPLE ================================================
 \subsection{Energy principle}
-The ideal MHD equilibrium equations, Eqs.(\ref{equation perp force balance})-(\ref{equation div B ideal mhd}), can be derived from an energy principle \citep{kruskalEquilibriumMagneticallyConfined1958}. Consider the energy functional 
+The ideal MHD equilibrium equations, Eqs.(\ref{equation perp force balance})-(\ref{equation div B ideal mhd}), can be derived from an energy principle. Consider the energy functional 
 \begin{equation}
 	W = \iiint_{\mathcal{V}_P} d\mathbf{x}^3 \left(\frac{\mathbf{B}^2}{2} + \frac{p}{\gamma-1}\right), \label{eq. energy functional}
 \end{equation}
-where $\mathcal{V}_P$ is the plasma volume, $d\mathbf{x}^3$ is a volume element, $\mathbf{B}$ is the magnetic field, and $\gamma$ is the ratio of the fluid specific heats. Minimizing $W$ under the constraint of conservation of magnetic helicity everywhere in the plasma leads to the ideal MHD equilibrium equations. 
+where $\mathcal{V}_P$ is the plasma volume, $d\mathbf{x}^3$ is a volume element. We now follow \citet{kruskalEquilibriumMagneticallyConfined1958} to minimize $W$ under ideal MHD motions. We assume that the plasma is in an initial state with magnetic surfaces; in general, this initial state will however not be at equilibrium. We now wish to minimize $W$ while conserving the same magnetic topology, \textit{i.e.} conserving the magnetic helicity.
+
+The first step in the derivation is to exploit property of ideal MHD to describe the plasma as a fluid --- a fluid mass element $dm=\rho dv$ is then conserved. Leveraging the ideal gas law, another constant, namely $p^{1/\gamma} / \rho$ is derived. We can thus define the conserved quantity $M(c)$,
+\begin{equation}
+	M(c) = \int_{\psi_t\leq c} p^{1/\gamma}d\mathbf{x}^3, \label{eq. def M}
+\end{equation}
+where $c$ is a flux surface label, and $c=C$ is the plasma boundary. Variation of $M$ with respect to $p$ gives
+\begin{align}
+	0=\delta M &= \frac{1}{\gamma}\int_{\psi_t\leq c} p^{1/\gamma-1}\delta pd\mathbf{x}^3\\
+	&=\frac{1}{\gamma}\int_0^c dc \int_{\psi_t=c} p^{1/\gamma-1}\delta p\frac{dS}{|\nabla\psi_t|}, \label{eq. variation M w.r.t p}
+\end{align}
+while variation of the energy with respect to $p$ gives
+\begin{align}
+	0=\delta W &= \frac{1}{\gamma-1} \int_0^C dc \int_{\psi_t=c} \frac{dS}{|\nabla\psi_t|}\delta p. \label{eq. variation W w.r.t p}
+\end{align}
+Both equation (\ref{eq. variation M w.r.t p}) and (\ref{eq. variation W w.r.t p}) have to be satisfied for any variation $\delta p$; in particular, we can choose a variation such that $p^{1/\gamma-1}\delta p/|\nabla \psi_t| = \delta(\mathbf{x}-\mathbf{x}_1)-\delta(\mathbf{x}-\mathbf{x}_2)$, with $\mathbf{x}_i$ a point on the surface $\psi_t=c$. Then equation (\ref{eq. variation M w.r.t p}) is satisfied by construction, and equation (\ref{eq. variation W w.r.t p}) implies
+\begin{equation}
+	0 = \int_{\psi_t=c}\frac{\delta p}{|\nabla \psi_t|} = \int_{\psi_t=c}\frac{1}{p^{1/\gamma-1}}\delta(\mathbf{x}-\mathbf{x}_1)-\delta(\mathbf{x}-\mathbf{x}_2),
+\end{equation}
+which is satisfied if $p(\mathbf{x}_1)=p(\mathbf{x}_2)$. Since the $\mathbf{x}_i$ are arbitrary, the pressure must be a function of $c$, \textit{i.e.} $p = p(c)$. Equation (\ref{eq. def M}) can thus be used to express $p(c)$ as
+\begin{equation}
+	p(c) = \left[\frac{M'(c)}{\int_{\psi_t=c}dS/|\nabla\psi_t|}\right]^\gamma.
+\end{equation}
+
+We now express the magnetic field using straight-field line coordinates $(c,\theta_s,\phi)$ \citep{Helander2014} using the Clebsch form,
+\begin{equation}
+	\mathbf{B} = \nabla\psi_t\times\nabla\nu,
+\end{equation}
+with
+\begin{equation}
+	\nu = \lambda(c,\theta,\phi) + \iotabar\phi - \theta,
+\end{equation}
+and $\lambda$ a function that transform arbitrary toroidal coordinates $(c,\theta,\phi)$ into straight field line coordinates. Variation of the energy function $W$ with respect to $\lambda$ gives
+\begin{equation}
+	0=\delta W = \int_{\mathcal{V}_P}\mathbf{B}\cdot(\nabla\psi_t\times\nabla\delta\lambda)d\mathbf{x}^3=-\int_{\mathcal{V}_P} \delta\lambda\nabla\cdot(\mathbf{B}\times\nabla\psi_t)d\mathbf{x}^3,
+\end{equation}
+which implies
+\begin{equation}
+	\nabla\psi_t\cdot(\nabla\times\mathbf{B})=0,
+\end{equation}
+\textit{i.e.} magnetic surfaces are current surfaces as well. The final stage of the derivation is to consider variations of $W$ with respect to the toroidal flux. Careful consideration of how the pressure varies as the toroidal flux is varied lead to
+\begin{align}
+	\int_{\mathcal{V}_P} \delta P(c) \mathbf{x}^3 &= \int_{\mathcal{V}_P}P  \delta \log P\mathbf{x}^3 = \int_0^C dc \int_{\psi_t=c} \frac{dS}{|\nabla\psi_t|} P \gamma \delta\left[\log \left(\frac{M'(c)}{\int dS/|\nabla\psi_t|}\right)\right].
+\end{align}
+Let us define $I(c)=\int_{\psi_t=c}dS/|\psi_t|$ to lighten the notation. Expanding the variation of the logarithm, we obtain
+\begin{align}
+	\delta\left[\log\left(\frac{M'(c)}{I(c)}\right)\right] &= \frac{I(c)}{M'(c)} \frac{\delta(M'(c))I(c) - M'(c)\delta(I(c))}{I(c)^2} \\
+	&= \frac{\delta(I(c))}{I(c)},
+\end{align}
+since $M(c)$ is an ideal MHD invariant, \textit{i.e.} $\delta M(c)=0$ and thus $\delta M'(c)=0$. Note that the variation of $I(c)$ can be written as
+\begin{equation}
+	\delta(I(c)) = \delta\left(\int_{\psi_t=c}\frac{dS}{|\nabla\psi_t|}\right) = \delta \frac{d}{dc}\int_{\mathcal{V}_P}d\mathbf{x}^3 = -\frac{d}{dc}\int_{\psi_t=c}dS\frac{\delta\psi_t}{|\nabla\psi_t|},
+\end{equation}
+which leads to
+\begin{align}
+	\int_{\mathcal{V}_P}\delta P(c)d\mathbf{x}^3 &= \gamma\int_0^c dc P(c) \frac{d}{dc}\int_{\psi_t=c}dS\frac{\delta\psi_t}{|\nabla\psi_t|}\\
+	&= -\gamma\int_0^c dc P'(c) \int_{\psi_t=c}dS\frac{\delta\psi_t}{|\nabla\psi_t|}\\
+	&= -\gamma\int_{\mathcal{V}_P} d\mathbf{x}^3 P'(\psi_t)\delta\psi_t,
+\end{align}
+where we integrated by part the first equation, and used the assumption that $\delta\psi_t=0$ on the plasma boundary. We can now finally write the variation of the energy,
+\begin{align}
+	0 = \delta W &= d\mathbf{x}^3 \left[\mathbf{B}\cdot\delta\mathbf{B} + \frac{P'\delta\psi_t + \delta P}{\gamma-1}\right]\\
+	&= d\mathbf{x}^3 \left[\mathbf{B}\cdot (\nabla\delta\psi_t\times\nabla\nu + \nabla\psi_t\times\nabla\delta\nu) -P'\delta\psi_t\right]\\
+	&= d\mathbf{x}^3 \delta\psi_t\left[(\nabla\times\mathbf{B})\cdot\nabla\nu -P'\right].
+\end{align}
+To obtain the force balance equation, one needs to take the cross product between $\nabla\times\mathbf{B}$ and $\mathbf{B}$; we get
+\begin{equation}
+	\mathbf{B}\times(\nabla\times\mathbf{B}) = \nabla\psi_t\times(\nabla\times\mathbf{B}) + \nabla\nu\times(\nabla\times\mathbf{B}) = \nabla\nu\times(\nabla\times\mathbf{B}) = -P',
+\end{equation}
+which is equivalent to
+\begin{equation}
+	(\nabla\times\mathbf{B})\times\mathbf{B} = \nabla p.
+\end{equation}
 
 
 
 
+
+
+
+
+\subsubsection{MRxMHD}
 
 In MRxMHD, the plasma is divided in $N_{vol}$ nested volumes $\mathcal{V}_l$, so that the MHD energy $W_l$ \citep{kruskal_equilibrium_1958} local to each volume can be written as
 
