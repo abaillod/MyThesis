@@ -180,4 +180,93 @@ where the $'$ denotes a derivative with respect to the function argument, and al
 
 \chapter{Boozer coordinates}
 \label{appendix boozer coordinates}
-In this appendix, we follow \citet{Helander2014} to derive a transformation from general toroidal coordinates $p,\theta,\phi$ to boozer coordinates $\psi_t,\theta_b,\phi_b$ and express the magnetic field $\mathbf{B}$ in this new coordinate system.
+In this appendix, we follow \citet{Helander2014} to derive a transformation from general toroidal coordinates $(p,\theta,\phi)$, where $p$ is the pressure, and $(\theta,\phi)$ are general poloidal and toroidal angles, to boozer coordinates $(\psi_t,\theta_b,\phi_b)$, where $\psi_t$ is the toroidal flux and $(\theta_b,\phi_b)$ are the poloidal and toroidal Boozer angles. We start by considering the force balance equation of ideal MHD, \textit{i.e.} equation (\ref{equation perp force balance}), which implies that $\mathbf{B}\cdot\nabla p =0$. The magnetic field can thus be written as
+\begin{equation}
+	\mathbf{B} = B_1(p,\theta,\phi)\nabla p\times\nabla\theta + B_2(p,\theta,\phi)\nabla\phi\times\nabla p.
+\end{equation}
+We derive 
+\begin{align}
+	\nabla\cdot[B_1\nabla p \times\nabla\theta] &= \frac{\partial B_1}{\partial \phi}\nabla\phi\cdot(\nabla p \times\nabla\theta)\\
+	\nabla\cdot[B_2\nabla\phi\times\nabla p] &= \frac{\partial B_2}{\partial \phi}\nabla\phi\cdot(\nabla p \times\nabla\theta),
+\end{align}
+which, according to the equation $\nabla\times\mathbf{B}=0$, imply
+\begin{equation}
+	\left(\frac{\partial B_1}{\partial\phi}+\frac{\partial B_2}{\partial \theta}\right) \nabla p \cdot(\nabla\theta\times\nabla\phi)=0.
+\end{equation}
+As we assume our coordinates not to be degenerate, \textit{i.e.} the inverse jacobian never cancels, $\nabla p \cdot(\nabla\theta\times\nabla\phi) = 1/\sqrt{g} \neq 0$, we deduce $\partial B_1/\partial\phi + \partial B_2/\partial\theta =0$. Integrating over a poloidal loop, and leveraging the $2\pi$ periodicity of $\mathbf{B}$ on $\theta$, we get that
+\begin{align}
+	{}&\frac{\partial}{\partial\phi} \int_0^{2\pi} B_1d\theta =0\qquad\forall\{p,\phi\}\\
+	\text{Thus}\qquad &\int_0^{2\pi}B_1 d\theta = g(p)\\
+	\text{and}\qquad&B_1=\frac{\partial f}{\partial\theta} + \frac{g(p)}{2\pi}.
+\end{align}
+with $f=f(p,\theta,\phi)$ and $g=g(p)$ two functions. Similarly, we get for $B_2$,
+\begin{equation}
+	B_2 = -\frac{\partial f}{\partial \phi} + \frac{h(p)}{2\pi},
+\end{equation}
+with $h=h(p)$ another function. Defining $\psi_t'(p)=g(p)/2\pi$, $\psi_p'(p)=h(p)/2\pi$ and $\lambda=f(p,\theta,\phi)/\psi_t'(p)$, we get
+\begin{equation}
+	\mathbf{B} = \left(1=\frac{\partial\lambda}{\partial\theta}\right)\psi_t'(p)\nabla p\times\nabla\theta + \left(\psi_p'(p)-\psi_t'(p)\frac{\partial\lambda}{\partial\phi}\right)\nabla\phi\times\nabla p.
+\end{equation}
+We define now the \emph{straight field line angle} $\theta_s$ as 
+\begin{equation}
+	\theta_s = \theta + \lambda.
+\end{equation}
+Using the \emph{straight field line coordinates} $(\psi_t,\theta_s,\phi)$, the magnetic field can be written as
+\begin{equation}
+	\mathbf{B}=\nabla\psi_t\times\nabla\theta_s + \nabla\phi\times\nabla\psi_t. \label{eq.magnetic field covariant}
+\end{equation}
+It can be easily verified that the functions $\psi_t(p)$ and $\psi_p(p)$ are the toroidal and poloidal fluxes respectively. The straight field line coordinates have the property that magnetic field lines are straight when plotted in the $(\theta_s,\phi)$ plane --- indeed, the rotational transform is defined as $\iotabar=d\psi_p/d\psi_t$, and since the poloidal flux depends on the toroidal flux only, $\iotabar=\iotabar(\psi_t)$. We thus have
+\begin{equation}
+	\iotabar(\psi_t) = \frac{\nabla\psi_p}{\nabla\psi_t} = \frac{(\nabla\theta_s\times\nabla\phi)\cdot\nabla\psi_p}{(\nabla\theta_s\times\nabla\phi)\cdot\nabla\psi_t} = \frac{(\nabla\phi\times\nabla\psi_p)\cdot\nabla\theta_s}{(\nabla\psi_t\times\nabla\theta_s)\cdot\nabla\phi} = \frac{\mathbf{B}\cdot\nabla\theta_s}{\mathbf{B}\cdot\nabla\phi} = \left.\frac{d\theta_s}{d\phi}\right|_{\text{along }\mathbf{B}}
+\end{equation}
+\textit{i.e.} field lines are straight in the $(\theta_s,\phi)$ plane. Here, $B^i$ is the contravariant componant of the magnetic field.
+
+Equation (\ref{eq.magnetic field covariant}) is the covariant representation of the magnetic field in straight field line coordinates. Leveraging the charge conservation equation $\nabla\cdot\mathbf{J}=0$ and $\nabla\times\mathbf{B}=\mathbf{J}$, one can derive a contravariant representation. We start by noticing that the force balance equation (\ref{equation perp force balance}) implies that $\mathbf{J}\cdot\nabla p =0$. Using the same reasoning as for the magnetic field, we can write
+\begin{equation}
+	\mathbf{J}=J_1\nabla\psi_t\times\nabla\theta_s + J_2\nabla\phi\times\nabla\psi_t.
+\end{equation}
+Charge conservation implies
+\begin{align}
+	J_1(\psi_t,\theta_s,\phi) &= I'(\psi_t) - \frac{\partial K}{\partial \theta_s}\\
+	J_2(\psi_t,\theta_s,\phi) &= -G'(\psi_t) + \frac{\partial K}{\partial \phi},
+\end{align}
+with $I=I(\psi_t)$ and $G=G(\psi_t)$ two functions that depend only on the toroidal flux and $K=K(\psi_t,\theta_s,\phi)$ another function that depends on the position. Now, we notice that the curl of $I\nabla\theta_s + G\nabla\phi + K\nabla\psi_t$ gives
+\begin{equation}
+	\nabla\times(I\nabla\theta_s + G\nabla\phi + K\nabla\psi_t) = \left(I'-\frac{\partial K}{\partial \theta_s}\right) \nabla\psi_t\times\nabla\theta_s + \left(-G'+\frac{\partial K}{\partial \phi}\right) \nabla\psi_t\times\nabla\phi.
+\end{equation}
+We can thus identify
+\begin{align}
+	J_1 &= I'-\frac{\partial K}{\partial \theta_s}\\
+	J_2 &= -G'+\frac{\partial K}{\partial \phi}\\
+	\mathbf{B} &= I\nabla\theta_s + G\nabla\phi + K\nabla\psi_t + \nabla H, \label{eq. contravariant magnetic field}
+\end{align}
+where $H=H(\psi_t,\theta_s,\phi)$ is an integration constant. Equation (\ref{eq. contravariant magnetic field}) is the contravariant representation of the magnetic field in straight field line coordinates. Note that $I$ can easily be identified as the total toroidal current enclosed by the magnetic surface labelled by $\psi_t$ and $G$ as the total poloidal current outside the magnetic surface labelled by $\psi_t$.
+
+In the straight field line coordinates derived above, the toroidal angle $\phi$ is still completely general --- a straight field line poloidal angle $\theta_s$ exist for any choice of toroidal angle $\phi$. There is however a specific choice of toroidal angle $\phi_b$, called the Boozer angle, for which $H=0$. To derive it, we define a function $\omega=\omega(\psi_t,\theta_s,\phi)$ and the transformation
+\begin{align}
+	\theta_b &= \theta_s -\iotabar\omega\\
+	\phi_b &= \phi - \omega.
+\end{align}
+Note that
+\begin{align}
+	\mathbf{B} &= \nabla\psi_t\times\nabla\theta_s + \nabla\phi\times\nabla\psi_p\\
+	&= \nabla\psi_t\times\nabla(\theta_b+\iotabar\omega) + \nabla(\phi_b+\omega)\times\nabla\psi_p\\
+	&= \nabla\psi_t\times\nabla\theta_b + \nabla\phi_b\times\nabla\psi_p + \underbrace{\frac{d\psi_p}{d\psi_t}\nabla\psi_t\times\nabla\omega - \nabla\psi_p\times\nabla\omega}_{=0}\\
+	&= \nabla\psi_t\times\nabla\theta_b + \nabla\phi_b\times\nabla\psi_p,
+\end{align}
+\textit{i.e.} the angles $(\theta_b,\phi_b)$ are also straight field line angles. Similarly, 
+\begin{align}
+	\mathbf{B} &= I\nabla(\theta_b+\iotabar\omega) + G\nabla(\phi_b+\omega) + K \nabla\psi_t + \nabla H\\
+	&= I\nabla\theta_b + G\nabla\phi_b + \left[K-\omega\left(\iotabar\frac{dI}{d\psi_t}+\frac{dG}{d\psi_t}\right)\right]\nabla\psi_t + \nabla\left[H+(I\iotabar+G)\omega\right]\\
+	&= I\nabla\theta_b + G\nabla\phi_b + K_b\nabla\psi_t + \nabla H_b,
+\end{align}
+where 
+\begin{align}
+	K_b &= K-\omega\left(\iotabar\frac{dI}{d\psi_t}+\frac{dG}{d\psi_t}\right)\\
+	H_b &= H + \left(\iotabar I + G\right) \omega.
+\end{align}
+Thus, choosing the function $\omega$ to be 
+\begin{equation}
+	\omega = -\frac{H}{\iotabar I + G},
+\end{equation}
+we get the Boozer coordinates, where $H_b = 0$.
