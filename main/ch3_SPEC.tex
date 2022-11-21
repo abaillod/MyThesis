@@ -14,7 +14,7 @@ In this chapter, an overview of the SPEC code is given. In section \ref{sec. spe
 \section{SPEC algorithm \label{sec. spec_algorithm}} 
 
 \subsection{Inputs}
-We describe here what are the degrees of freedom in a fixed- and free-boundary SPEC equilibrium. Using the standard cylindrical coordinate system $(R,\phi,Z)$, a plasma boundary surface $\Gamma_{PB}$ is parameterized by $R(\theta,\phi),\ Z(\theta,\phi)$, where $\theta$ is an as of yet undetermined poloidal angle. Toroidal surfaces can be written as double Fourier series,
+We describe here what are the degrees of freedom in a fixed- and free-boundary SPEC equilibrium. Using the standard cylindrical coordinate system $(R,\phi,Z)$, a plasma boundary surface $\Gamma_{PB}$ is parameterized by $R(\theta,\phi),\ Z(\theta,\phi)$, where $\theta$ is an as of yet undetermined poloidal angle. Toroidal surfaces can be written as double Fourier series, thereafter named the \emph{standard representation},
 \begin{align}
 	{R}(\theta,\phi) &= \sum_{m=0}^{M_{pol}}\sum_{n=-N_{tor}}^{N_{tor}} R_{mn}\cos(m\theta-nN_{fp}\phi) \label{eq.toroidal surface 1}\\
 	{Z}(\theta,\phi) &= \sum_{m=0}^{M_{pol}}\sum_{n=-N_{tor}}^{N_{tor}} Z_{mn}\sin(m\theta-nN_{fp}\phi) \label{eq.toroidal surface 2},
@@ -39,7 +39,7 @@ Finally, the calculation of a free-boundary equilibrium requires specifying the 
 
 
 
-\subsection{SPEC coordinates and spectral condensation}
+\subsection{SPEC coordinates and spectral condensation} \label{spec coord and spectral constraints}
 %SPEC can run in three different geometries, namely in slab \citep{Loizu2019},  cylindrical \citep{Loizu2016a} and toroidal geometry \citep{Loizu2016}. The coordinates used to describe position are
 %
 %\begin{equation}
@@ -115,7 +115,7 @@ meaning that the minimum of $W_{sc}$ is found for
 
 
 
-\subsection{Beltrami solver}
+\subsection{Beltrami solver} \label{spec beltrami solver}
 At the core of SPEC stands the \emph{Beltrami solver}, which finds the magnetic field that satisfies the Beltrami equation (\ref{eq. beltrami}) given the volume geometry and the profiles. The magnetic field is written as the curl of the magnetic vector potential, $\mathbf{B}_l=\nabla\times\mathbf{A}_l$, which is expanded on a Chebyshev-Fourier basis,
 
 \begin{equation}
@@ -410,34 +410,124 @@ Both the new constraint and the force gradient implementation have been verified
 \section{Implementation of a unique angle representation \label{sec. angle representation}}
 
 \subsection{Why a new angle representation is required}
-In simple geometries, SPEC provides solutions to the MRxMHD equations in a fast and reliable way. For example, see the studies of \citet{Qu2021,Loizu2020} in slab geometry, or \citet{Kumar2021} in cylindrical geometries or \citet{Kumar2022} in some toroidal geoemtries. However, it is well known by SPEC users that any attempt in strongly shaped geometries will require, at best, a lot of work to help SPEC find a force-balanced equilibrium. In some extreme cases, SPEC does not find an equilibrium no matter what the user tries. In this chapter, we will explore the likely numerical issues of SPEC, and explain one approach based on an alternative representation of the volumes interfaces.
+In simple geometries, SPEC provides solutions to the MRxMHD equations in a fast and reliable way. For example, see the studies of \citet{Qu2021,Loizu2020} in slab geometry, or \citet{Kumar2021} in cylindrical geometries or \citet{Kumar2022} in some toroidal geoemtries. However, it is well known by SPEC users that any attempt in strongly shaped geometries will require, at best, a lot of work to help SPEC find a force-balanced equilibrium. In some extreme cases, SPEC does not find an equilibrium, which can either be the case if no solution exist to the equilibrium problem, or if the numerical problem is ill-posed. 
+
+
+One hypothesis is that the spectral condensation generates many local extrema in the parameter space, which causes the hybrid Powell method used by SPEC not to converge. One solution to this problem would be to choose a suitable poloidal angle $\theta_h$ and thus remove the spectral condensation. In this chapter, we will discuss the implementation of an alternative parametrization for the toroidal surfaces proposed by \citep{Henneberg2021}, which uses such a unique angle. 
 
 \subsection{The Henneberg representation}
-One hypothesis is that the spectral condensation generates many local extrema in the parameter space, which causes the hybrid Powell method used by SPEC not to converge. One solution to this problem would be to choose a suitable parameter $\theta$ and remove the spectral condensation.
-
-One advantageous choice of angle $\theta$ has been proposed by \citet{Henneberg2021}, where they leveraged the fact that magnetic surfaces close to the magnetic axis are ellipses \citep{Helander2014}. The poloidal angle $\theta$ is thus chosen to be optimal to represent ellipses. With this angle, a toroidal surface is parametrized by
+One advantageous choice of angle $\theta_h$, called thereafter the \emph{Henneberg angle}, has been proposed by \citet{Henneberg2021}, where they leveraged the fact that magnetic surfaces close to the magnetic axis are ellipses \citep{Helander2014}. The poloidal angle $\theta_h$ is thus chosen to be optimal to represent ellipses. With this angle, a toroidal surface is parametrized by
 \begin{eqnarray}
-	R(\theta,\phi) &= R_0(\phi) + \rho(\theta,\phi)\cos(\alpha \phi) - \zeta(\theta,\phi)\sin(\alpha \phi), \label{eq.Rfctrhophi}\\
-	Z(\theta,\phi) &= Z_0(\phi) + \rho(\theta,\phi)\sin(\alpha \phi) + \zeta(\theta,\phi)\cos(\alpha \phi),\label{eq.Zfctrhophi}
+	R(\theta_h,\phi) &= R_0(\phi) + \rho(\theta_h,\phi)\cos(\alpha \phi) - \zeta(\theta_h,\phi)\sin(\alpha \phi), \label{eq.Rfctrhophi}\\
+	Z(\theta_h,\phi) &= Z_0(\phi) + \rho(\theta_h,\phi)\sin(\alpha \phi) + \zeta(\theta_h,\phi)\cos(\alpha \phi),\label{eq.Zfctrhophi}
 \end{eqnarray}
-where $\alpha$ is the number of poloidal rotation of the ellipse per field period --- in general, $\alpha=1/2$. The functions $R_0(\phi)$, $Z_0(\phi)$, $\rho(\theta,\phi)$ and $\zeta(\theta,\phi)$ are written as
+where $\alpha$ is the number of poloidal rotation of the ellipse per field period --- in general, $\alpha=1/2$. Figure (\ref{sketch Henneberg representation}) shows how the coordinate axis $(\rho,\zeta)$ can be represented. The functions $R_0(\phi)$, $Z_0(\phi)$, $\rho(\theta_h,\phi)$ and $\zeta(\theta_h,\phi)$ are written as
 
 \begin{align}
-	\rho(\theta,\phi) &= \sum_{m=1}^{M}\sum_{n=-N}^N \rho_{mn}\cos(m\theta +n\phi -\alpha \phi),\label{eq.rho_series}\\
-	\zeta(\theta,\phi) &= b(\phi)\sin(\theta-\alpha\phi) =  \sum_{n=0}^N b_n\cos(n\phi)\sin(\theta-\alpha \phi), \label{eq.zeta_series}\\
+	\rho(\theta_h,\phi) &= \sum_{m=1}^{M}\sum_{n=-N}^N \rho_{mn}\cos(m\theta_h +n\phi -\alpha \phi),\label{eq.rho_series}\\
+	\zeta(\theta_h,\phi) &= b(\phi)\sin(\theta_h-\alpha\phi) =  \sum_{n=0}^N b_n\cos(n\phi)\sin(\theta_h-\alpha \phi), \label{eq.zeta_series}\\
 	R_0(\phi) &= \sum_{n=0}^{N} r_n \cos(n \phi)\label{eq.R0_series}\\
-	Z_0(\phi) &= \sum_{n=1}^{N} z_n \sin(n \phi).\label{eq.Z0_series}
+	Z_0(\phi) &= \sum_{n=1}^{N} z_n \sin(n \phi)\label{eq.Z0_series}
 \end{align}
 
-The representation given by Eqs.(\ref{eq.Rfctrhophi})-(\ref{eq.Z0_series}) is unique and does not require spectral condensation. Indeed, the poloidal angle is given by
+\begin{figure}
+	\centering
+	\begin{tikzpicture}
+		\node (fig) at (0,0) {
+			\includegraphics[width=.75\linewidth]{images/HennebergRepresentationSketch}
+		};
+		\node (Raxis) at (5.1,-3.9) {$\mathbf{e}_R$};
+		\node (Zaxis) at (-4.8,3.7) {$\mathbf{e}_Z$};
+		\node (Rhoaxis) at (4.6,3.1) {$\mathbf{e}_\rho$};
+		\node (Zetaaxis) at (-2.5,4.3) {$\mathbf{e}_\zeta$};
+		\node (b) at (.4,1.4) {\color{red}$b(\phi)$};
+		\node (theta) at (1.35,1.35) {\color{red}$\theta_h$};
+		\node (alphaphi) at (1.9,0.5) {$\alpha\phi$};
+		\node (R0) at (-2.1,-0.5) {\color{gray}$R_0(\phi)$};
+		\node (Z0) at (.6,-2.1) {\color{gray}$Z_0(\phi)$};
+	\end{tikzpicture}
+	\caption{Sketch of a toroidal surface (blue) in the $(R,Z)$ plane, and the corresponding coordinates of the Henneberg representation.}
+	\label{fig. sketch Henneberg representation}
+\end{figure}
+
+The representation given by Eqs.(\ref{eq.Rfctrhophi})-(\ref{eq.Z0_series}) is unique and does not require spectral condensation. Indeed, 
 \begin{equation}
-	to complte
+	\theta_h = \arcsin\left(\frac{\zeta}{b}\right) + \alpha\phi. \label{eq. henneberg angle}
 \end{equation}
 
+One can easily derive a linear relation between the modes $(R_{mn},Z_{mn})$ and the $(r_n,z_n,\rho_{mn},b_n)$. For example, expanding equation (\ref{eq.Rfctrhophi}) with the Fourier series (\ref{eq.rho_series})-(\ref{eq.Z0_series}), we get
+\begin{align}
+	R(\theta_h,\phi) &= \sum_{n=0}^Nr_n \cos(n \phi) + \sum_{m=1}^{M}\sum_{n=-N}^N \rho_{mn}\cos(m\theta_h +n\phi -\alpha \phi)\cos(\alpha \phi)\\
+	&\qquad - \sum_{n=0}^N b_n\cos(n\phi)\sin(\theta_h-\alpha \phi)\sin(\alpha \phi)\\
+	&=\sum_{m=1}^{M}\sum_{n=-N}^N \frac{\rho_{mn}}{2}\left[\cos(m\theta_h +n\phi -2\alpha \phi)+\cos(m\theta_h+n\phi)\right]\\
+	&\qquad- \sum_{n=0}^N \frac{b_n}{4}\left[\cos(\theta_h-(n+2\alpha)\phi)+\cos(\theta_h-(-n+2\alpha)\phi)\right.\\
+	&\qquad\left.-\cos(\theta_h-n\phi)-\cos(\theta_h+n\phi)\right] +  \sum_{n=0}^Nr_n \cos(n \phi),
+\end{align}
+from which we easily identify
+\begin{align}
+	R_{0n} &= r_n\\
+	R_{mn} &= \frac{1}{2}(\rho_{m,-n+2\alpha}+\rho_{m,-n}) + \frac{\delta_{m1}}{4}\left[b_n+b_-n-b_{n+2\alpha}-b_{n-2\alpha}\right], \qquad \forall m>0. \label{eq, linear relation Rmn}
+\end{align}
+Similarly, we get
+\begin{align}
+	Z_{0n} &= z_n\\
+	Z_{mn} &= \frac{1}{2}(-\rho_{m,-n+2\alpha}+\rho_{m,-n}) + \frac{\delta_{m1}}{4}\left[b_n+b_-n+b_{n+2\alpha}+b_{n-2\alpha}\right], \qquad \forall m>0.	\label{eq, linear relation Zmn}
+\end{align}
+Note that to not lose information, the Fourier series of $\rho$ must be truncated at $M=M_{pol}$ and $N=N_{tor}+2\alpha$. Packing the geometrical modes $(R_{mn},Z_{mn})$ in a one dimensional array $\mathbf{x}$ and the modes $(r_n,z_n,\rho_{mn},b_n)$ in another one dimensional array $\mathbf{x}_h$, one can thus write
+\begin{equation}
+	\mathbf{x}_h = \mathbf{H}\mathbf{x}, \label{eq. henneberg linear system}
+\end{equation}
+where $\mathbf{H}$ is a matrix of size $(N_h\times N_g)$, with
+\begin{align}
+	N_h &= 3N + M(2N+1) -1 \\
+	&= 3N_{tor} + M_{pol}(2N_{tor}+1) + 4\alpha M_{pol} + 6\alpha N_{tor} -1\\
+	N_g & = 2[N_{tor}+M_{pol}(2N_{tor}+1)]+1.
+\end{align}
+In general, $N_h \neq N_g$, and $\mathbf{H}$ is not a square matrix. In most useful cases ($N$ reasonably large and $\alpha=1/2$), $N_h>N_g$ and the system (\ref{eq. henneberg linear system}) is overdetermined. A solution exist if there is a single maximum and minimum in $\zeta$ for each toroidal plane.
 
-\subsection{Implementation}
+\subsection{Fourier transform}
+Note that the relations (\ref{eq, linear relation Rmn}) and (\ref{eq, linear relation Zmn}) assume that the $(R_{mn},Z_{mn})$ are constructed using the same angle $\theta_h$ as the Henneberg representation. The question, then, is the following: given a general surface $(R(\theta,\phi),Z(\theta,\phi))$, how can the Fourier harmonics $(r_n,z_n,\rho_{mn},b_n)$ which describe a surface $(R'(\theta_h,\phi),Z'(\theta_h,\phi))$ and that matches best the input surface be found?
 
-\subsection{Discussion }
+%The starting point is to evaluate the functions $(R(\theta,\phi),Z(\theta,\phi))$ on a sufficient number of grid points $(\theta_i,\phi_j)$, giving $R(\theta_i,\phi_j)\equiv R_{ij}$ and $Z(\theta_i,\phi_j)=Z_{ij}$.
+We first construct the function $b(\phi)$. As $b(\phi)$ is independent of $(R_0,Z_0)$, we can set $R_0=Z_0=0$ and identify the poloidal angle $\theta$ that extremizes the $\zeta$ coordinate for each angle $\phi$,
+\begin{align}
+	\tilde\zeta(\theta_+,\phi) &= \max_{\theta\in[0,2\pi]}\tilde\zeta(\theta,\phi)\\
+	\tilde\zeta(\theta_-,\phi) &= \min_{\theta\in[0,2\pi]}\tilde\zeta(\theta,\phi)
+\end{align}
+with $\tilde\zeta$ the coordinate $\zeta$ if $R_0=Z_0=0$.
+\begin{equation}
+	\tilde\zeta(\theta,\phi) = \sqrt{R^2+Z^2}\cos\left[\alpha\phi+\arctan\left(\frac{R}{Z}\right)\right].
+\end{equation}
+Then
+\begin{equation}
+	b(\phi) = \frac{1}{2}\left[\tilde\zeta(\theta_+,\phi)-\tilde\zeta(\theta_-,\phi)\right],
+\end{equation}
+As $\max_{\theta\in[0,2\pi]}\zeta(\theta,\phi)=-\max_{\theta\in[0,2\pi]}\zeta(\theta,\phi)=b(\phi)$, the position $(R_0(\phi),Z_0(\phi))$ must be 
+\begin{align}
+	R_0(\phi) &= \frac{1}{2}\left(R(\theta_+,\phi)+R(\theta_-,\phi)\right)\\
+	Z_0(\phi) &= \frac{1}{2}\left(Z(\theta_+,\phi)+Z(\theta_-,\phi)\right).
+\end{align}
+Finally, the coordinate $\rho(\theta,\zeta)$ can be evaluated by
+\begin{equation}
+	\rho(\theta,\zeta) = (R-R_0)\cos(\alpha\phi) + (Z-Z_0)\sin(\alpha\phi),
+\end{equation}
+and the Henneberg angle $\theta_h$ can be evaluated via equation (\ref{eq. henneberg angle}). The Fourier harmonics $(r_n,z_n,b_n,\rho_{mn})$ can then be evaluated by standard Fourier transforms. This method can easily be used to transform inputs that uses the more conventional standard representation to inputs that uses the Henneberg representation. The only free parameter in this transformation is the parameter $\alpha$, that has to be choosen by the user. 
+
+\subsection{Implementation in SPEC}
+The Beltrami solver in SPEC (section \ref{spec beltrami solver}) has been implemented using the standard representation. To simplify the required changes, it has been decided to not change the Beltrami solver. Instead, the geometrical degrees of freedom on which SPEC iterates to find force balance are the $\mathbf{x}_h=\{r_n,z_n,b_n,\rho_{mn}\}$ harmonics. Then, before entering the Beltrami solver, the mapping (\ref{eq. henneberg linear system}) is applied to get the corresponding $\mathbf{x}=\{R_{mn},Z_{mn}\}$ harmonics. Once the force has been evaluated, a new iteration on the geometry can be made by changing the $\mathbf{x}_h$ harmonics. No backward map from the standard representation to the Henneberg representation is required.
+
+Note that the matrix $\mathbf{H}$ is independent of the geometry, and can be evaluated once at the beginning of SPEC execution. This is of course very advantageous for keeping SPEC speed.
+
+The force gradient, \textit{i.e.} the derivatives of the force Fourier harmonics $F_j$ with respect to the harmonics $(r_n,z_n,b_n,\rho_{mn})$, can be easily obtained by applying the chain rule,
+\begin{equation}
+	\frac{dF_j}{dx_{h,i}} = \frac{dF_j}{dx_k}\frac{\partial x_k}{\partial x_{h,i}},
+\end{equation}
+where the matrices elements $dF_j/dx_k$ are the force gradient computed using the standard representation, described in section \ref{sec. force gradient}, and the matrices element $\partial x_k/\partial x_{h,i}$ are obtained by taking the derivative of equation (\ref{eq. henneberg linear system}).
+
+Finally, one has to be careful about the truncation of the Force in Fourier space. The hybrid Powell method used to iterate on the interfaces geometry requires the same number of degrees of freedom as equations, \textit{i.e.} the force must be truncated such that it has $N_h$ Fourier harmonics. This is possible if $m\leq M^f_{pol}= M_{pol}+1$ and $|n|\leq N^f_{tor}= N_{tor}$. The magnetic field and vector potential are, however, still truncated at the same resolution as the standard representation, $M_{pol}$ and $N_{tor}$.
+
+
+\subsection{Verification and comparison }
 
 
 \section{Conclusion \label{sec. chap3 - conclusion}}
