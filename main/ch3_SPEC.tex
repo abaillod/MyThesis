@@ -146,7 +146,10 @@ The physical force is an even function the poloidal and toroidal angle, and can 
 
 Given the magnetic field in each volume computed by the Beltrami solver, it is trivial to evaluate the magnetic field on a $(\theta,\phi)$ grid on each side of each volume's interface. Taking the difference between the outer and inner side values, and performing a Fourier transformation gives the Fourier harmonics $F^{ph}_{mn}$. All Fourier harmonics of the physical force and of the spectral constraint are packed in a single array, name $\mathbf{F}$.
 
-Finally, SPEC will iterate on $\mathbf{x}_l$ until $\mathbf{F}$ is smaller than a tolerance set by the user. A Powell hybrid method is used, and analytical derivatives of $F_{mn}$ with respect to the interface geometry harmonics $(R_{lmn}, Z_{lmn})$ are provided. Details about their computations are given in the case of the toroidal current constraint in section \ref{sec. force gradient}. The SPEC algorithm is summarized in Figure \ref{fig.spec algorithm complete}.
+Finally, SPEC will iterate on $\mathbf{x}_l$ until $\mathbf{F}$ is smaller than a tolerance set by the user. A Powell hybrid method is used, and analytical derivatives of $F_{mn}$ with respect to the interface geometry harmonics $(R_{lmn}, Z_{lmn})$ are provided. Details about their computations are given in the case of the toroidal current constraint in section \ref{sec. force gradient}. The SPEC algorithm is summarized in Figure \ref{fig.spec algorithm complete}. A useful scalar to represent the force-balance convergence of SPEC is provided by the L2-norm of $\mathbf{F}$, which we denote by
+\begin{equation}
+	|f| = \sum_{m=0}^{M_{pol}}\sum_{n=-N_{tor}}{N_{tor}} F_{mn}^2. \label{eq. l2-norm of the force in spec}
+\end{equation}
 
 \begin{figure}
 	\centering
