@@ -3,7 +3,7 @@
 \begin{document}
 \chapter{The Stepped Pressure Equilibrium Code}\label{ch3.SPEC}
 
-The SPEC code has been developed in the past decade to solve the MRxMHD equilibrium equations (see section \ref{section mrxmhd}); in 2012, \citep{Hudson2012} published a first version that computes fixed-boundary, stepped-pressure equilibria. Since then, it has been upgraded to allow free-boundary calculations \citep{Hudson2020c} and to allow the prescription of the net toroidal current profile \citep{Baillod2021} --- the implementation of this constraint is explained in more details in section \ref{sec. current constraint}. The numerical robustness of the code was and is still continuously improved --- \citep{Qu2020} improved the radial discretization and the numerical solvers in the inner volume of the plasma, and a new boundary representation, based on work by \citet{Henneberg2021}, has been implemented; see details in section \ref{sec. angle representation}.
+The SPEC code has been developed in the past decade to solve the MRxMHD equilibrium equations (see section \ref{section mrxmhd}); in 2012, \citet{Hudson2012} published a first version that computes fixed-boundary, stepped-pressure equilibria. Since then, it has been upgraded to allow free-boundary calculations \citep{Hudson2020c} and to allow the prescription of the net toroidal current profile \citep{Baillod2021} --- the implementation of this constraint is explained in more details in section \ref{sec. current constraint}. The numerical robustness of the code was and is still continuously improved --- \citet{Qu2020} improved the radial discretization and the numerical solvers in the inner volume of the plasma, and a new representation for the volume interfaces, based on the work by \citet{Henneberg2021}, has been implemented. Details about this new representation implementation are given in section \ref{sec. angle representation}.
 
 In addition to these numerical developments, SPEC has been extensively used in the past decade to study diverse physics topics. The code has been rigorously verified in stellarator geometry \citep{Loizu2016}, and has been successfully applied to study current sheets at rational surfaces \citep{Loizu2015,Loizu2015a,Huang2021}, tearing mode stability \citep{Loizu2019} and nonlinear tearing saturation \citep{Loizu2020}, equilibrium $\beta$-limits in a classical stellarator \citep{Loizu2017}, the penetration and amplification of resonant magnetic perturbations in the ideal limit \citep{Loizu2016}, and relaxation phenomenon in reversed field pinches such as the formation of helical states \citep{Dennis2013a} or the relaxation of flow during sawteeth \citep{Dennis2014,Qu2020}. 
 
@@ -12,19 +12,26 @@ In addition to these numerical developments, SPEC has been extensively used in t
 In this chapter, an overview of the SPEC code is given. In section \ref{sec. spec_algorithm} some important parts of SPEC algorithm are explained. In section \ref{sec. current constraint} the implementation of the net toroidal current constraint is exposed (see \citep{Baillod2021} for the peer-reviewed publication on that topic). Section \ref{sec. angle representation} discusses some of SPEC numerical issues and how the implementation of a new angle representation is a step towards improving SPEC robustness. Finally, section \ref{sec. chap3 - conclusion} concludes the chapter with some summarizing remarks.
 
 \section{SPEC algorithm \label{sec. spec_algorithm}} 
+The SPEC algorithm can be seen as a number of nested loops. The innermost loop solves the magnetic field in each volume $\mathcal{V}_l$ given the geometry of their interfaces and some constraints --- for example the rotational transform on each boundary of the volume can be imposed. Given the magnetic field in each volume, the force imbalance, Eq.(\ref{eq.force_balance}), at each interface can be evaluated. The second loop is then an iteration on the volume interfaces geometry until the force balance condition is satisfied. Finally, an additional but optionnal final loop, will iterate on the boundary condition in case of free-boundary calculations.
 
-\subsection{Inputs}
-We describe here what are the degrees of freedom in a fixed- and free-boundary SPEC equilibrium. Using the standard cylindrical coordinate system $(R,\phi,Z)$, a plasma boundary surface $\Gamma_{PB}$ is parameterized by $R(\theta,\phi),\ Z(\theta,\phi)$, where $\theta$ is an as of yet undetermined poloidal angle. Toroidal surfaces can be written as double Fourier series, thereafter named the \emph{standard representation},
+\subsection{Parameterization of interfaces and magnetic field}
+Using the standard cylindrical coordinate system $(R,\phi,Z)$, a plasma boundary surface $\Gamma_{PB}$ is parameterized by $R(\theta,\phi),\ Z(\theta,\phi)$, where $\theta$ is an as of yet undetermined poloidal angle. Toroidal surfaces can be written as double Fourier series, thereafter named the \emph{standard representation},
 \begin{align}
 	{R}(\theta,\phi) &= \sum_{m=0}^{M_{pol}}\sum_{n=-N_{tor}}^{N_{tor}} R_{mn}\cos(m\theta-nN_{fp}\phi) \label{eq.toroidal surface 1}\\
 	{Z}(\theta,\phi) &= \sum_{m=0}^{M_{pol}}\sum_{n=-N_{tor}}^{N_{tor}} Z_{mn}\sin(m\theta-nN_{fp}\phi) \label{eq.toroidal surface 2},
 \end{align}
 where $M_{pol}$ and $N_{tor}$ are the maximum poloidal and toroidal mode numbers respectively, $R_{mn}$ and $Z_{mn}$ are the Fourier modes of $R$ and $Z$ respectively, $N_{fp}$ is the number of field periods (discrete symmetry) of the system, and $(\theta,\phi)$ are the poloidal and toroidal angles. Note that we assumed stellarator symmetry \citep{pfefferleEnergeticIonDynamics2015} to lighten the notation.
 
-A fixed-boundary \ac{SPEC} equilibrium is then determined by $\Gamma_{PB}$, which is parametrized by the harmonics $(R^{PB_{mn}},Z^{PB_{mn}})$, the number of volumes $N_{vol}$ and the toroidal flux they enclose $\{\psi_{l}\}_{l=\{1,\ldots,N_{vol}\}}$, the pressure in each volume $\{p_l\}_{l=\{1,\ldots,N_{vol}\}}$, the net toroidal  current flowing at the volumes' interfaces $\{I^s_{\phi,l}\}_{l=\{1,\ldots,N_{vol}-1\}}$ and the net toroidal current flowing in each volume $\{I^v_{\phi,l}\}_{l=\{1,\ldots,N_{vol}\}}$.
+
+
+
+\subsection{Inputs}
+We describe here what are the degrees of freedom in a fixed- and free-boundary SPEC equilibrium. 
+
+A fixed-boundary \ac{SPEC} equilibrium is then determined by the geometry of the plasma boundary $\Gamma_{PB}$, which is parametrized by the harmonics $(R^{PB_{mn}},Z^{PB_{mn}})$, the number of volumes $N_{vol}$ and the toroidal flux they enclose $\{\psi_{l}\}_{l=\{1,\ldots,N_{vol}\}}$, the pressure in each volume $\{p_l\}_{l=\{1,\ldots,N_{vol}\}}$, and the net toroidal  current flowing at the volume interfaces $\{I^s_{\phi,l}\}_{l=\{1,\ldots,N_{vol}-1\}}$ and the net toroidal current flowing in each volume $\{I^v_{\phi,l}\}_{l=\{1,\ldots,N_{vol}\}}$.
 Note that \ac{SPEC} can be run with different constraints, for example by constraining the toroidal, poloidal and constraint $\mu$ in each volume, $(\psi_{t,l},\psi_{p,l},\mu_l)$, or by constraining the toroidal flux in each volume and the rotational transform on each side of the volume's interfaces $(\psi_{t,l},\iota_-,\iota_+)$. As an output of a fixed-boundary calculation, \ac{SPEC} gives the magnetic field in each plasma volume as well as the geometry of each interface.
 
-A free-boundary equilibrium is determined by a computational boundary surface $\Gamma_{CB}$ surrounding the plasma and enclosed by the coils. This boundary is parametrized by the harmonics $(R^{CB_{mn}},Z^{CB_{mn}})$, according to Eqs.(\ref{eq.toroidal surface 1})-(\ref{eq.toroidal surface 2}). This boundary is in general not a magnetic surface, thus $\mathbf{B}\cdot\mathbf{n}\ne 0$, with $\mathbf{n}=\mathbf{e}_\theta\times\mathbf{e}_\phi$ a vector normal to the computational boundary. The magnetic field is the sum of the magnetic field produced by the coils $\mathbf{B}^c$ and by the plasma $\mathbf{B}^p$. To compute the magnetic field inside the vacuum region, the boundary condition $\mathbf{B}\cdot\mathbf{n}$ on $\Gamma_{CB}$ have to be known. The contribution from the coils, $\mathbf{B}^c\cdot\mathbf{n}$ is provided as input, as Fourier harmonics $V_{mn}$, \textit{i.e.}
+A free-boundary equilibrium is determined by a computational boundary surface $\Gamma_{CB}$ surrounding the plasma and enclosed by the coils. This boundary is parametrized by the harmonics $(R^{CB}_{mn},Z^{CB}_{mn})$, according to Eqs.(\ref{eq.toroidal surface 1})-(\ref{eq.toroidal surface 2}). This boundary is in general not a magnetic surface, thus $\mathbf{B}\cdot\mathbf{n}\ne 0$, with $\mathbf{n}=\mathbf{e}_\theta\times\mathbf{e}_\phi$ a vector normal to the computational boundary. The magnetic field is the sum of the magnetic field produced by the coils $\mathbf{B}^c$ and by the plasma $\mathbf{B}^p$. To compute the magnetic field inside the vacuum region, the boundary condition $\mathbf{B}\cdot\mathbf{n}$ on $\Gamma_{CB}$ have to be known. The contribution from the coils, $\mathbf{B}^c\cdot\mathbf{n}$ is provided as input, as Fourier harmonics $V_{mn}$, \textit{i.e.}
 \begin{equation}
     \mathbf{B}^c\cdot\mathbf{n} = \sum_{n=-N_{tor}}^{N_{tor}}\sum_{m=0}^{M_{pol}} V_{mn} \sin(m\theta-nN_{fp}\phi),
 \end{equation}
@@ -530,8 +537,16 @@ where the matrices elements $dF_j/dx_k$ are the force gradient computed using th
 Finally, one has to be careful about the truncation of the Force in Fourier space. The hybrid Powell method used to iterate on the interfaces geometry requires the same number of degrees of freedom as equations, \textit{i.e.} the force must be truncated such that it has $N_h$ Fourier harmonics. This is possible if $m\leq M^f_{pol}= M_{pol}+1$ and $|n|\leq N^f_{tor}= N_{tor}$. The magnetic field and vector potential are, however, still truncated at the same resolution as the standard representation, $M_{pol}$ and $N_{tor}$.
 
 
-\subsection{Verification and comparison }
+\subsection{Verification and comparison with the standard representation}
+We propose here to compare the solution obtained by SPEC using the Henneberg representation to the one obtained using the standard representation. In addition, we plot the scalar metric $|f|$ from Eq.(\ref{eq. l2-norm of the force in spec}), which goes to zero when the equilibrium is found, as a function of the number of force evaluation. 
 
+In the case of a axisymmetric bean-shaped tokamak...
+
+In the case of a stellarator with circular cross-sections and large magnetic axis torsion, ...
+
+In the case of a rotating ellipse, ...
+
+Finally, we can test the case of W7-X. With two volumes, ... With more volumes, ...
 
 \section{Conclusion \label{sec. chap3 - conclusion}}
 
