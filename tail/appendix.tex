@@ -270,3 +270,55 @@ Thus, choosing the function $\omega$ to be
 	\omega = -\frac{H}{\iotabar I + G},
 \end{equation}
 we get the Boozer coordinates, where $H_b = 0$.
+
+
+
+\subsection{SPEC spectral condensation} \label{spec coord and spectral constraints}
+%SPEC can run in three different geometries, namely in slab \citep{Loizu2019},  cylindrical \citep{Loizu2016a} and toroidal geometry \citep{Loizu2016}. The coordinates used to describe position are
+%
+%\begin{equation}
+%	\mathbf{x} = \begin{cases}
+%		\theta\hat{\mathbf{i}} + \phi\hat{\mathbf{j}} + R\hat{\mathbf{k}} \qquad &\text{in slab geometry},\\
+%		R\cos\theta\hat{\mathbf{i}} + R\sin\theta\hat{\mathbf{j}} + \phi\hat{\mathbf{k}} \qquad &\text{in cylindrical geometry},\\
+%		R\cos\phi\hat{\mathbf{i}} + R\sin\phi\hat{\mathbf{j}} + Z\hat{\mathbf{k}} \qquad &\text{in toroidal geometry},
+%	\end{cases}
+%\end{equation}
+%where $\{\hat{\mathbf{i}},\hat{\mathbf{j}},\hat{\mathbf{k}}\}$ is the unitary Cartesian basis, $\theta$ is a poloidal angle and $\phi$ is the usual toroidal angle. The geometry of interface $\mathcal{I}_l$, are described by decomposing the coordinates $R$ and $Z$ on a Fourier basis,
+%
+%\begin{align}
+%	R_l(\theta,\phi) &= \sum_{m=0}^{M_{pol}}\sum_{n=-N_{tor}}^{N_{tor}}R_{l,m,n} \cos(m\theta-nN_p\phi)\\
+%	Z_l(\theta,\phi) &= \sum_{m=0}^{M_{pol}}\sum_{n=-N_{tor}}^{N_{tor}}Z_{l,m,n} \sin(m\theta-nN_p\phi),
+%\end{align}
+%where $N_p$ is the number of field periods, $M_{pol}$ and $N_{tor}$ are the poloidal and toroidal mode numbers above which Fourier series are truncated, \textit{i.e.} $m=\{0,\ldots,M_{pol}\}$, $n=\{-N_{tor},\ldots,N_{tor}\}$, and stellarator symmetry has been assumed for simplicity. Between interfaces $l$ and $l+1$, coordinates are constructed by linear interpolation of $(R,Z)_l$ and $(R,Z)_{l+1}$ using a radial-like coordinate $s$. 
+The standard representation given in Eqs.(\ref{eq.Rmns})-(\ref{eq.Zmns})) depends on the choice of poloidal angle $\theta$. In SPEC, a so-called \emph{spectral condensation} \citep{Hirshman1986} is implemented to select the poloidal angle. The idea is to minimize the number of Fourier harmonics required to represent a surface, \textit{i.e.} minimize
+\begin{equation}
+	M_l = \frac{1}{2}\sum_{m=0}^{M_{pol}}\sum_{n=-N_{tor}}^{N_{tor}} m^\lambda (R_{mn}^2 + Z_{mn}^2), \label{eq.spectral width}
+\end{equation}
+where only variations tangential to the surface are allowed, $\delta R = R_\theta\delta u$ and $\delta Z = Z_\theta\delta u$, where the $X_i$ designates a derivative of $X$ with respect to $i$ and $\delta u$ is arbitrary, and $\lambda$ is a user input. In SPEC, an additional target is included in the minimization, called the \emph{spectral length} --- its role is to ensure smooth transition between the angles used to represent inner plasma interfaces and the plasma boundary. It is expressed for volume $\mathcal{V}_l$ as 
+\begin{equation}
+	L_l = \oint\oint\sum_{i=1}^{N_s}\sqrt{[R_l(\theta,\phi)-R_{l-1}(\theta,\phi)]^2 +  [Z_l(\theta,\phi)-Z_{l-1}(\theta,\phi)]^2}d\theta d\phi, \label{eq.spectral length}
+\end{equation}
+where $N_s$ is the number of radial grid points $s_i$. Finally, the zero of the poloidal angle is constrained to be such that ${Z}_l(\theta=0,\phi)$ is equal to the geometrical center of the interface $Z_{l,0}$, which can be enforced by minimizing
+\begin{equation}
+	S_l = \frac{1}{2}\oint ({Z}_l(0,\phi) - Z_{l,0})^2 d\phi, \label{eq.spectral zero}
+\end{equation}
+with
+\begin{equation}
+	Z_{l,0} = \oint d\theta Z_l(\theta,\phi)\sqrt{R_{l,\theta}(\theta,\phi)^2 + Z_{l,\theta}(\theta,\phi)^2}.
+\end{equation}
+
+The target ot minimize is then a linear combination of all angular targets, Eqs.(\ref{eq.spectral width})-(\ref{eq.spectral zero}),
+\begin{equation}
+	W_{sc} = \sum_{l=1}^{N_{vol}-1} \alpha_lM_l + \beta_lL_l + \gamma_l S_l,
+\end{equation}
+where $(\alpha_l,\beta_l,\gamma_l)$ are user supplied weights, and $\psi_a$ is the total toroidal flux enclosed by the plasma. One can show that this can be written under the form
+
+\begin{equation}
+	\delta W_{sc} = \oint\oint F^{sc}(\theta,\phi) \delta u d\theta d\phi,
+\end{equation}
+meaning that the minimum of $W_{sc}$ is found for 
+
+\begin{equation}
+	F^{sc} = \sum_{m=0}^{M_{pol}} \sum_{n=-N_{tor}}^{N_{tor}} F^{sc}_{mn} \sin(m\theta-nN_{fp}\phi) = 0. \label{eq. spectral constraint}
+\end{equation}
+
