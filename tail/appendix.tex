@@ -273,7 +273,10 @@ we get the Boozer coordinates, where $H_b = 0$.
 
 
 
-\subsection{SPEC spectral condensation} \label{spec coord and spectral constraints}
+
+
+
+\chapter{SPEC spectral condensation} \label{spec coord and spectral constraints}
 %SPEC can run in three different geometries, namely in slab \citep{Loizu2019},  cylindrical \citep{Loizu2016a} and toroidal geometry \citep{Loizu2016}. The coordinates used to describe position are
 %
 %\begin{equation}
@@ -321,4 +324,35 @@ meaning that the minimum of $W_{sc}$ is found for
 \begin{equation}
 	F^{sc} = \sum_{m=0}^{M_{pol}} \sum_{n=-N_{tor}}^{N_{tor}} F^{sc}_{mn} \sin(m\theta-nN_{fp}\phi) = 0. \label{eq. spectral constraint}
 \end{equation}
+
+
+\chapter{Toroidal coordinates} \label{app. toroidal coordinates}
+
+
+% \chapter{Derivation of the Beltrami linear system} \label{app. beltrami eq coef derivation}
+
+% Consider the Beltrami equation (\ref{eq.BeltramiEquation}). It is a linear relation between the vector potential Fourier-Chebyshev harmonics $A_{likmn}$ (see section \ref{sec. spec_algorithm}). We derive in this appendix how the Beltrami equation can be cast into a linear system
+% \begin{equation}
+% 	\left(\mathbf{A}_l-\mu_l\mathbf{D}_l\right)\mathbf{a_l} = \mathbf{C}_l.
+% \end{equation}
+
+% We rewrite for convenience the magnetic field contravariant components expressed with the vector potential harmonics (Eqs.(\ref{eq.bs contravariant})-(\ref{eq.bz contravariant})),
+% \begin{align}
+% 	B^s &= \frac{1}{\sqrt{g}}\sum_{k=0}^{L_{rad}}\sum_{m=0}^{M_{pol}}\sum_{n=-N_{tor}}^{N_{tor}} -(mA_{l\phi kmn}+nA_{l\theta kmn})T_{km}(s)\sin(m\theta-nN_{fp}\phi) \label{eq. bs app}\\
+% 	B^\theta &= \frac{1}{\sqrt{g}}\sum_{k=0}^{L_{rad}}\sum_{m=0}^{M_{pol}}\sum_{n=-N_{tor}}^{N_{tor}} -A_{l\phi kmn}T_{km}'(s)\cos(m\theta-nN_{fp}\phi)\label{eq. bt app}\\
+% 	B^\phi &= \frac{1}{\sqrt{g}}\sum_{k=0}^{L_{rad}}\sum_{m=0}^{M_{pol}}\sum_{n=-N_{tor}}^{N_{tor}} A_{l\phi kmn}T_{km}'(s)\cos(m\theta-nN_{fp}\phi).\label{eq. bz app}
+% \end{align}
+
+
+
+% Derivatives of Eqs.(\ref{eq. bs app})-(\ref{eq. bz app}) with respect to $(s,\theta,\phi)$ are trivial. We have,
+% \begin{align}
+% 	\frac{\partial B^s}{\partial s} &= \frac{\partial}{\partial s}\left(\frac{1}{\sqrt{g}}\right)\sqrt{g}B^s \\
+% 	&+ \frac{1}{\sqrt{g}}\sum_{k=0}^{L_{rad}}\sum_{m=0}^{M_{pol}}\sum_{n=-N_{tor}}^{N_{tor}} -(mA_{l\phi kmn}+nA_{l\theta kmn})T_{km}'(s)\sin(m\theta-nN_{fp}\phi) \label{eq. dbsds app}\\
+% 	\frac{\partial B^\theta}{\partial s} &= \frac{\partial}{\partial s}\left(\frac{1}{\sqrt{g}}\right)\sqrt{g}B^\theta\\
+% 	&+ \frac{1}{\sqrt{g}}\sum_{k=0}^{L_{rad}}\sum_{m=0}^{M_{pol}}\sum_{n=-N_{tor}}^{N_{tor}} -A_{l\phi kmn}T_{km}'(s)\cos(m\theta-nN_{fp}\phi)\label{eq. dbtds app}\\
+% 	\frac{\partial B^\phi}{\partial s} &= \frac{\partial}{\partial s}\left(\frac{1}{\sqrt{g}}\right)\sqrt{g}B^\phi \\
+% 	&+ \frac{1}{\sqrt{g}}\sum_{k=0}^{L_{rad}}\sum_{m=0}^{M_{pol}}\sum_{n=-N_{tor}}^{N_{tor}} A_{l\phi kmn}T_{km}'(s)\cos(m\theta-nN_{fp}\phi).\label{eq. dbzds app}
+% \end{align}
+
 
