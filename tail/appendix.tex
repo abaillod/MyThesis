@@ -23,11 +23,6 @@ Finally, taking the cross product of the current density with the magnetic field
 The equilibrium is thus completely determined if one provides (i) a pressure profile $p(r)$ and (ii) a constraint on either the poloidal or toroidal magnetic field --- for example by providing the poloidal flux profile $\psi_p(r)$ or the rotational transform profile $\iotabar(r)$.
 
 
-\section{Taylor state}
-\label{appendix taylor state}
-{\color{red} TO COMPLETE}
-
-
 \chapter{Linear relation between surface currents and poloidal fluxes}\label{appA1}
 
 In this appendix we show the linear relation between the surface currents (\ref{eq.surf_current}) and the poloidal fluxes in an \ac{MRxMHD} equilibrium. We rewrite here Eq.(\ref{eq.surf_current}) for convenience,
@@ -327,8 +322,39 @@ meaning that the minimum of $W_{sc}$ is found for
 
 
 \chapter{Toroidal coordinates} \label{app. toroidal coordinates}
-{\color{red} TO COMPLETE}
-
+We derive in this appendix the metric and jacobian analytical relations in toroidal coordinates $(s,\theta,\zeta)$. The position vector is given by
+\begin{equation}
+	\mathbf{x}=R(s,\theta,\zeta)\mathbf{e}_R+Z(s,\theta,\zeta)\mathbf{e}_Z,
+\end{equation}
+with $\mathbf{e}_R$, $\mathbf{e}_\phi$, and $\mathbf{e}_Z$ the usual unitary basis vector in cylindrical geometry (see Figure \ref{fig.spec coordinates}). The covariant basis vector are given by $\mathbf{e}_i=\partial\mathbf{x}/\partial u^i$, 
+\begin{align}
+	\mathbf{e}_s &= R_s\mathbf{e}_R+Z_s\mathbf{e}_Z\\
+	\mathbf{e}_\theta &= R_\theta\mathbf{e}_R+Z_\theta\mathbf{e}_Z\\
+	\mathbf{e}_\zeta &= R_\zeta\mathbf{e}_R+R\mathbf{e}_\phi +Z_\zeta\mathbf{e}_Z,
+\end{align}
+where the subscripts denote partial derivatives. The jacobian is then obtained by taking the triple product between the covariant basis vector, 
+\begin{align}
+	\sqrt{g}&=\mathbf{e}_s\cdot (-RR_\theta\mathbf{e}_R + (R_\theta Z_\zeta-R_\zeta Z_\theta)\mathbf{e}_\zeta + RR_\theta\mathbf{e}_Z)\\
+	&= R(R_\theta Z_s - R_s Z_\theta).
+\end{align}
+The contravariant basis is obtained by taking the cross-product of the covariant basis and normalizing by the jacobian,
+\begin{align}
+	\nabla s &= \frac{1}{\sqrt{g}} \mathbf{e}_\theta\times\mathbf{e}_\zeta \\
+	&= \frac{-RR_\theta\mathbf{e}_R + (R_\theta Z_\zeta-R_\zeta Z_\theta)\mathbf{e}_\zeta + RR_\theta\mathbf{e}_Z}{\sqrt{g}},
+\end{align}
+and similarly
+\begin{align}
+	\nabla\theta &= \frac{RR_s\mathbf{e}_R - (R_s Z_\zeta-R_\zeta Z_s)\mathbf{e}_\zeta - RR_s\mathbf{e}_Z}{\sqrt{g}}\\
+	\nabla\zeta &= \frac{1}{\sqrt{g}}(R_\theta Z_s-R_s Z_\theta)\mathbf{e}_\phi.
+\end{align}
+Finally, the metric elements $g_{ij}$ are
+\begin{equation}
+	\mathbf{g}=\begin{pmatrix}
+		R_s^2 + Z_s^2 & R_s R_\theta + Z_s Z_\theta &  R_s R_\phi + Z_s Z_\phi\\
+		R_s R_\theta + Z_s Z_\theta & R_\theta^2 + Z_\theta^2 &  R_\theta R_\phi + Z_\theta Z_\phi\\
+		R_s R_\phi + Z_s Z_\phi & R_\theta R_\phi + Z_\theta Z_\phi & R_\phi^2 + R^2 + Z_\phi^2
+	\end{pmatrix}.
+\end{equation}
 
 
 
