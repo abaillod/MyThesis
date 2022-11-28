@@ -21,12 +21,12 @@ Note that \ac{SPEC} can be run with different constraints, for example by constr
 We discuss now how, given these inputs, SPEC finds fixed-boundary equilibria, how SPEC evaluates the magnetic field in each plasma volume as well as the geometry of each interface.
 
 \subsection{Parameterization of interfaces and magnetic field}
-Using the standard cylindrical coordinate system $(R,\phi,Z)$, the plasma boundary surface $\Gamma_{PB}$ is parameterized by $R(\theta,\phi),\ Z(\theta,\phi)$, where $\theta$ is an as-of-yet undetermined poloidal angle, and $\phi$ is the usual cylindrical angle. Toroidal surfaces can be written as double Fourier series, thereafter named the \emph{standard representation},
+Using the standard cylindrical coordinate system $(R,\zeta,Z)$, the plasma boundary surface $\Gamma_{PB}$ is parameterized by $R(\theta,\zeta),\ Z(\theta,\zeta)$, where $\theta$ is an as-of-yet undetermined poloidal angle, and $\zeta$ is the usual cylindrical angle. Toroidal surfaces can be written as double Fourier series, thereafter named the \emph{standard representation},
 \begin{align}
-	{R}(\theta,\phi) &= \sum_{m=0}^{M_{pol}}\sum_{n=-N_{tor}}^{N_{tor}} R_{mn}\cos(m\theta-nN_{fp}\phi) \label{eq.toroidal surface 1}\\
-	{Z}(\theta,\phi) &= \sum_{m=0}^{M_{pol}}\sum_{n=-N_{tor}}^{N_{tor}} Z_{mn}\sin(m\theta-nN_{fp}\phi) \label{eq.toroidal surface 2},
+	{R}(\theta,\zeta) &= \sum_{m=0}^{M_{pol}}\sum_{n=-N_{tor}}^{N_{tor}} R_{mn}\cos(m\theta-nN_{fp}\zeta) \label{eq.toroidal surface 1}\\
+	{Z}(\theta,\zeta) &= \sum_{m=0}^{M_{pol}}\sum_{n=-N_{tor}}^{N_{tor}} Z_{mn}\sin(m\theta-nN_{fp}\zeta) \label{eq.toroidal surface 2},
 \end{align}
-where $M_{pol}$ and $N_{tor}$ are the maximum poloidal and toroidal mode numbers respectively, $R_{mn}$ and $Z_{mn}$ are the Fourier modes of $R$ and $Z$ respectively, $N_{fp}$ is the number of field periods (discrete symmetry) of the system, and $(\theta,\phi)$ are the poloidal and toroidal angles. Note that we assumed stellarator symmetry \citep{pfefferleEnergeticIonDynamics2015} to lighten the notation.
+where $M_{pol}$ and $N_{tor}$ are the maximum poloidal and toroidal mode numbers respectively, $R_{mn}$ and $Z_{mn}$ are the Fourier modes of $R$ and $Z$ respectively, $N_{fp}$ is the number of field periods (discrete symmetry) of the system, and $(\theta,\zeta)$ are the poloidal and toroidal angles. Note that we assumed stellarator symmetry \citep{pfefferleEnergeticIonDynamics2015} to lighten the notation.
 
 \begin{figure}
 	\centering
@@ -34,7 +34,7 @@ where $M_{pol}$ and $N_{tor}$ are the maximum poloidal and toroidal mode numbers
 		\draw[thick] (0,0) circle (3) node (center) {};
 		\filldraw[black] (center) circle (2pt);
 		\draw[thick] (3,0) arc (0:50:8);
-		\draw[-latex, thick, dashed] (0,0) arc (0:35:8) node[right,anchor=west] {\Large $\mathbf{e}_\phi$};
+		\draw[-latex, thick, dashed] (0,0) arc (0:35:8) node[right,anchor=west] {\Large $\mathbf{e}_\zeta$};
 		\draw[thick] (0,0) arc (0:-12:8);
 		\draw[thick] (-3,0) arc (0:50:4);
 		\draw[-latex,thick] (0,0) -- (2.12, 2.12) node[midway,below,anchor=north west]  {\Large  $\mathbf{e}_s$};
@@ -46,16 +46,16 @@ where $M_{pol}$ and $N_{tor}$ are the maximum poloidal and toroidal mode numbers
 	\label{fig.spec coordinates}
 \end{figure}
 
-In appendix \ref{spec coord and spectral constraints} we discuss how the so-called spectral condensation is used to constraint the poloidal angle to minimize the number of required Fourier modes to represent a surface. For the purpose of the discussion, we simply mention that the poloidal angle is chosen such that a numerical function, $F^{sc}(\theta,\phi)$ is set to zero. Expressed on a Fourier basis, we get
+In appendix \ref{spec coord and spectral constraints} we discuss how the so-called spectral condensation is used to constraint the poloidal angle to minimize the number of required Fourier modes to represent a surface. For the purpose of the discussion, we simply mention that the poloidal angle is chosen such that a numerical function, $F^{sc}(\theta,\zeta)$ is set to zero. Expressed on a Fourier basis, we get
 \begin{equation}
-	F^{sc} = \sum_{m=0}^{M_{pol}}\sum_{n=-N_{tor}}^{N_{tor}} F^{sc}_{mn}\sin(m\theta-nN_{fp}\phi),\label{eq. txt spectral constraint}
+	F^{sc} = \sum_{m=0}^{M_{pol}}\sum_{n=-N_{tor}}^{N_{tor}} F^{sc}_{mn}\sin(m\theta-nN_{fp}\zeta),\label{eq. txt spectral constraint}
 \end{equation}
 where again stellarator symmetry has been assumed.
 
-Each volume interface $\mathcal{I}_l$ is also represented by Fourier series, with modes $\{R^l_{mn},Z^l_{mn}\}$. Between each interface, SPEC uses toroidal coordinates $(s,\theta,\phi)$ (see Figure \ref{fig.spec coordinates}), where $s\in[-1,1]$ is a radial-like coordinate. In each volume, coordinates $\mathbf{x}=R_l(s,\theta,\phi)\mathbf{e}_R+Z_l(s,\theta,\phi)\mathbf{e}_Z$ are constructed by interpolation between the volume's interfaces, \textit{i.e.}
+Each volume interface $\mathcal{I}_l$ is also represented by Fourier series, with modes $\{R^l_{mn},Z^l_{mn}\}$. Between each interface, SPEC uses toroidal coordinates $(s,\theta,\zeta)$ (see Figure \ref{fig.spec coordinates}), where $s\in[-1,1]$ is a radial-like coordinate. In each volume, coordinates $\mathbf{x}=R_l(s,\theta,\zeta)\mathbf{e}_R+Z_l(s,\theta,\zeta)\mathbf{e}_Z$ are constructed by interpolation between the volume's interfaces, \textit{i.e.}
 \begin{align}
-	R(s,\theta,\phi) &= {R}_l(\theta,\phi) + {R}_{l+1}(\theta,\phi)f_{lmn}(s)\label{eq.Rmns}\\
-	Z(s,\theta,\phi) &= {Z}_l(\theta,\phi) + {Z}_{l+1}(\theta,\phi)f_{lmn}(s),\label{eq.Zmns}
+	R(s,\theta,\zeta) &= {R}_l(\theta,\zeta) + {R}_{l+1}(\theta,\zeta)f_{lmn}(s)\label{eq.Rmns}\\
+	Z(s,\theta,\zeta) &= {Z}_l(\theta,\zeta) + {Z}_{l+1}(\theta,\zeta)f_{lmn}(s),\label{eq.Zmns}
 \end{align}
 with $f_{lmn}$ a regularization factor, 
 \begin{equation}
@@ -73,21 +73,21 @@ Coordinate covariant and contravariant basis are easily computed (see appendix \
 
 In each volume $\mathcal{V}_l$, the magnetic field vector potential $\mathbf{A}_l$ is  expanded on a polynomial basis in the radial direction and a double Fourier series in the poloidal and toroidal directions,
 \begin{equation}
-	A_{l,i} = \sum_{k=0}^{L_{rad}}\sum_{m=0}^{M_{pol}}\sum_{n=-N_{tor}}^{N_{tor}} A_{likmn} T_{km}(s)\cos(m\theta-nN_{fp}\phi),
+	A_{l,i} = \sum_{k=0}^{L_{rad}}\sum_{m=0}^{M_{pol}}\sum_{n=-N_{tor}}^{N_{tor}} A_{likmn} T_{km}(s)\cos(m\theta-nN_{fp}\zeta),
 \end{equation}
 Where $L_{rad}$ is the radial resolution, and the polynomials $T_{km}(s)$ are Zernike polynomials in the innermost volume, and Chebyshev polynomials in the others. Note that gauge freedom is used to set $A_{l,s}=0\ \forall l$. The magnetic field is then given by 
 \begin{align}
-\mathbf{B}_l &=  \frac{\mathbf{e}_s}{\sqrt{g}}\sum_{k=0}^{L_{rad}}\sum_{m=0}^{M_{pol}}\sum_{n=-N_{tor}}^{N_{tor}} -(mA_{l\phi kmn}+nA_{l\theta kmn})T_{km}(s)\sin(m\theta-nN_{fp}\phi) \label{eq.bs contravariant}\\
-&+ \frac{\mathbf{e}_\theta }{\sqrt{g}}\sum_{k=0}^{L_{rad}}\sum_{m=0}^{M_{pol}}\sum_{n=-N_{tor}}^{N_{tor}} -A_{l\phi kmn}T_{km}'(s)\cos(m\theta-nN_{fp}\phi)\label{eq.bt contravariant}\\
-&+ \frac{\mathbf{e}_\phi}{\sqrt{g}}\sum_{k=0}^{L_{rad}}\sum_{m=0}^{M_{pol}}\sum_{n=-N_{tor}}^{N_{tor}} A_{l\phi kmn}T_{km}'(s)\cos(m\theta-nN_{fp}\phi),\label{eq.bz contravariant}
+\mathbf{B}_l &=  \frac{\mathbf{e}_s}{\sqrt{g}}\sum_{k=0}^{L_{rad}}\sum_{m=0}^{M_{pol}}\sum_{n=-N_{tor}}^{N_{tor}} -(mA_{l\zeta kmn}+nA_{l\theta kmn})T_{km}(s)\sin(m\theta-nN_{fp}\zeta) \label{eq.bs contravariant}\\
+&+ \frac{\mathbf{e}_\theta }{\sqrt{g}}\sum_{k=0}^{L_{rad}}\sum_{m=0}^{M_{pol}}\sum_{n=-N_{tor}}^{N_{tor}} -A_{l\zeta kmn}T_{km}'(s)\cos(m\theta-nN_{fp}\zeta)\label{eq.bt contravariant}\\
+&+ \frac{\mathbf{e}_\zeta}{\sqrt{g}}\sum_{k=0}^{L_{rad}}\sum_{m=0}^{M_{pol}}\sum_{n=-N_{tor}}^{N_{tor}} A_{l\zeta kmn}T_{km}'(s)\cos(m\theta-nN_{fp}\zeta),\label{eq.bz contravariant}
 \end{align}
 where the prime denotes the derivative. The inverse jacobian is also easily expressed on a Chebyshev-Fourier basis,
 \begin{equation}
-\frac{1}{\sqrt{g}} = \sum_{k=0}^{L_{rad}}\sum_{m=0}^{M_{pol}}\sum_{n=-N_{tor}}^{N_{tor}} g_{kmn}T_{km}(s)\cos(m\theta-nN_{fp}\phi).
+\frac{1}{\sqrt{g}} = \sum_{k=0}^{L_{rad}}\sum_{m=0}^{M_{pol}}\sum_{n=-N_{tor}}^{N_{tor}} g_{kmn}T_{km}(s)\cos(m\theta-nN_{fp}\zeta).
 \end{equation}
 Note that the coefficients $g_{kmn}$ are obtained by performing volume integrals,
 \begin{equation}
-   g_{kmn} \propto \int_{-1}^{1} \int_0^{2\pi}\int_0^{2\pi} \frac{1}{\sqrt{g}} \frac{T_k(s)}{\sqrt{1-s^2}}\cos(m\theta-nN_{fp}\phi)dsd\theta d\phi, \label{eq. sqrtg volume integral}
+   g_{kmn} \propto \int_{-1}^{1} \int_0^{2\pi}\int_0^{2\pi} \frac{1}{\sqrt{g}} \frac{T_k(s)}{\sqrt{1-s^2}}\cos(m\theta-nN_{fp}\zeta)dsd\theta d\zeta, \label{eq. sqrtg volume integral}
 \end{equation}
 which can be expensive to evaluate.
 
@@ -96,18 +96,18 @@ which can be expensive to evaluate.
 % \subsection{Inputs}
 % We describe here what are the degrees of freedom in a fixed- and free-boundary SPEC equilibrium. 
 
-% A fixed-boundary \ac{SPEC} equilibrium is then determined by the geometry of the plasma boundary $\Gamma_{PB}$, which is parametrized by the harmonics $(R^{PB_{mn}},Z^{PB_{mn}})$, the number of volumes $N_{vol}$ and the toroidal flux they enclose $\{\psi_{l}\}_{l=\{1,\ldots,N_{vol}\}}$, the pressure in each volume $\{p_l\}_{l=\{1,\ldots,N_{vol}\}}$, and the net toroidal  current flowing at the volume interfaces $\{I^s_{\phi,l}\}_{l=\{1,\ldots,N_{vol}-1\}}$ and the net toroidal current flowing in each volume $\{I^v_{\phi,l}\}_{l=\{1,\ldots,N_{vol}\}}$.
+% A fixed-boundary \ac{SPEC} equilibrium is then determined by the geometry of the plasma boundary $\Gamma_{PB}$, which is parametrized by the harmonics $(R^{PB_{mn}},Z^{PB_{mn}})$, the number of volumes $N_{vol}$ and the toroidal flux they enclose $\{\psi_{l}\}_{l=\{1,\ldots,N_{vol}\}}$, the pressure in each volume $\{p_l\}_{l=\{1,\ldots,N_{vol}\}}$, and the net toroidal  current flowing at the volume interfaces $\{I^s_{\zeta,l}\}_{l=\{1,\ldots,N_{vol}-1\}}$ and the net toroidal current flowing in each volume $\{I^v_{\zeta,l}\}_{l=\{1,\ldots,N_{vol}\}}$.
 % Note that \ac{SPEC} can be run with different constraints, for example by constraining the toroidal, poloidal and constraint $\mu$ in each volume, $(\psi_{t,l},\psi_{p,l},\mu_l)$, or by constraining the toroidal flux in each volume and the rotational transform on each side of the volume's interfaces $(\psi_{t,l},\iota_-,\iota_+)$. As an output of a fixed-boundary calculation, \ac{SPEC} gives the magnetic field in each plasma volume as well as the geometry of each interface.
 
-% A free-boundary equilibrium is determined by a computational boundary surface $\Gamma_{CB}$ surrounding the plasma and enclosed by the coils. This boundary is parametrized by the harmonics $(R^{CB}_{mn},Z^{CB}_{mn})$, according to Eqs.(\ref{eq.toroidal surface 1})-(\ref{eq.toroidal surface 2}). This boundary is in general not a magnetic surface, thus $\mathbf{B}\cdot\mathbf{n}\ne 0$, with $\mathbf{n}=\mathbf{e}_\theta\times\mathbf{e}_\phi$ a vector normal to the computational boundary. The magnetic field is the sum of the magnetic field produced by the coils $\mathbf{B}^c$ and by the plasma $\mathbf{B}^p$. To compute the magnetic field inside the vacuum region, the boundary condition $\mathbf{B}\cdot\mathbf{n}$ on $\Gamma_{CB}$ have to be known. The contribution from the coils, $\mathbf{B}^c\cdot\mathbf{n}$ is provided as input, as Fourier harmonics $V_{mn}$, \textit{i.e.}
+% A free-boundary equilibrium is determined by a computational boundary surface $\Gamma_{CB}$ surrounding the plasma and enclosed by the coils. This boundary is parametrized by the harmonics $(R^{CB}_{mn},Z^{CB}_{mn})$, according to Eqs.(\ref{eq.toroidal surface 1})-(\ref{eq.toroidal surface 2}). This boundary is in general not a magnetic surface, thus $\mathbf{B}\cdot\mathbf{n}\ne 0$, with $\mathbf{n}=\mathbf{e}_\theta\times\mathbf{e}_\zeta$ a vector normal to the computational boundary. The magnetic field is the sum of the magnetic field produced by the coils $\mathbf{B}^c$ and by the plasma $\mathbf{B}^p$. To compute the magnetic field inside the vacuum region, the boundary condition $\mathbf{B}\cdot\mathbf{n}$ on $\Gamma_{CB}$ have to be known. The contribution from the coils, $\mathbf{B}^c\cdot\mathbf{n}$ is provided as input, as Fourier harmonics $V_{mn}$, \textit{i.e.}
 % \begin{equation}
-%     \mathbf{B}^c\cdot\mathbf{n} = \sum_{n=-N_{tor}}^{N_{tor}}\sum_{m=0}^{M_{pol}} V_{mn} \sin(m\theta-nN_{fp}\phi),
+%     \mathbf{B}^c\cdot\mathbf{n} = \sum_{n=-N_{tor}}^{N_{tor}}\sum_{m=0}^{M_{pol}} V_{mn} \sin(m\theta-nN_{fp}\zeta),
 % \end{equation}
-% where $\mathbf{n}=\mathbf{e}_\theta\times \mathbf{e}_\phi$ is a vector normal to $\Gamma_{CB}$, $\mathbf{B}^c$ is the magnetic field produced by the coils, $M_{pol}$ and $N_{tor}$ are respectively the number of poloidal and toroidal Fourier modes used in the calculation, $N_{fp}$ is the number of field periods, and stellarator symmetry has been assumed. The Fourier harmonics $V_{mn}$ can be obtained from the coil geometry and coil currents; changing the coil shapes, coil currents or the computational boundary $\Gamma_{CB}$ will modify the $V_{mn}$ harmonics non-linearly.  
+% where $\mathbf{n}=\mathbf{e}_\theta\times \mathbf{e}_\zeta$ is a vector normal to $\Gamma_{CB}$, $\mathbf{B}^c$ is the magnetic field produced by the coils, $M_{pol}$ and $N_{tor}$ are respectively the number of poloidal and toroidal Fourier modes used in the calculation, $N_{fp}$ is the number of field periods, and stellarator symmetry has been assumed. The Fourier harmonics $V_{mn}$ can be obtained from the coil geometry and coil currents; changing the coil shapes, coil currents or the computational boundary $\Gamma_{CB}$ will modify the $V_{mn}$ harmonics non-linearly.  
 
 % The field produced by the plasma is \textit{a priori} unknown, and an initial guess for the Fourier harmonics $B_{mn}$ of $\mathbf{B}^p\cdot\mathbf{n}$ have to be provided. Then, SPEC will iterate on the $B_{mn}$ until these are consistant with the actual field profuced by the plasma.
 
-% Finally, the calculation of a free-boundary equilibrium requires specifying the total coil current flowing through the torus hole, and, as in fixed-boundary calculations, the profiles $\{\psi_{l}\}_{l=\{1,\ldots,N_{vol}-1\}}$,  $\{p_l\}_{l=\{1,\ldots,N_{vol}-1\}}$,  $\{I^s_{\phi,l}\}_{l=\{1,\ldots,N_{vol}-1\}}$ and $\{I^v_{\phi,l}\}_{l=\{1,\ldots,N_{vol}-1\}}$. The pressure and currents in the last region ($l=N_{vol}$) are set to zero, thereby emulating a vacuum region.  As an output of a free-boundary calculation, SPEC gives the plasma boundary geometry $\Gamma_{PB}$ (\textit{i.e.} the geometry of the outer interface of volume $N_{vol}-1$), the magnetic field in each plasma volume as well as in the vacuum region between $\Gamma_{PB}$ and $\Gamma_{CB}$, the total toroidal flux enclosed by $\Gamma_{CB}$, denoted hereafter by $\widehat\Psi\equiv\sum_{l=1}^{N_{vol}} \psi_l$, and the geometry of the interfaces.
+% Finally, the calculation of a free-boundary equilibrium requires specifying the total coil current flowing through the torus hole, and, as in fixed-boundary calculations, the profiles $\{\psi_{l}\}_{l=\{1,\ldots,N_{vol}-1\}}$,  $\{p_l\}_{l=\{1,\ldots,N_{vol}-1\}}$,  $\{I^s_{\zeta,l}\}_{l=\{1,\ldots,N_{vol}-1\}}$ and $\{I^v_{\zeta,l}\}_{l=\{1,\ldots,N_{vol}-1\}}$. The pressure and currents in the last region ($l=N_{vol}$) are set to zero, thereby emulating a vacuum region.  As an output of a free-boundary calculation, SPEC gives the plasma boundary geometry $\Gamma_{PB}$ (\textit{i.e.} the geometry of the outer interface of volume $N_{vol}-1$), the magnetic field in each plasma volume as well as in the vacuum region between $\Gamma_{PB}$ and $\Gamma_{CB}$, the total toroidal flux enclosed by $\Gamma_{CB}$, denoted hereafter by $\widehat\Psi\equiv\sum_{l=1}^{N_{vol}} \psi_l$, and the geometry of the interfaces.
 
 
 %SPEC  will then iterate on the volume's boundary geometries until force balance is found, \textit{i.e.} equation \ref{eq. force balance} is satisfied. The geometrical degrees of freedom are the Fourier modes of the inner interfaces, \textit{i.e.} $(R_{lmn},Z_{lmn})$ with $l\in\{1,\ldots,N_{vol}-1\}$ and of the plasma boundary in case of free-boundary calculations. These modes are packed in a single array for each interface, named $\mathbf{x}_l$.
@@ -121,14 +121,14 @@ which can be expensive to evaluate.
 \subsection{Beltrami solver} \label{spec beltrami solver}
 At the core of SPEC stands the \emph{Beltrami solver}, which finds the magnetic field that satisfies the Beltrami equation (\ref{eq.BeltramiEquation}) given the volume geometry and the input profiles. we first realize that the constraints given by the fluxes $(\psi_{p,l},\psi_{t,l})$ depend linearly on the vector potential harmonics. Indeed, applying Eqs(\ref{eq.bt contravariant})-(\ref{eq.bz contravariant}), we obtain
 \begin{align}
-	\psi_{t,l} &= \iint B^\phi \sqrt{g}d\theta ds\\
+	\psi_{t,l} &= \iint B^\zeta \sqrt{g}d\theta ds\\
 	&= 2\pi\sum_{k=0}^{L_{rad}} A_{l\theta k 0 0 } [T_{km}(s=1)-T_{km}(s=-1)] \label{eq.toroidal flux discrete}\\
 	\psi_{p,l} &= \iint B^\theta \sqrt{g}d\theta ds\\
-	&= -2\pi\sum_{k=0}^{L_{rad}} A_{l\phi k 0 0 }[T_{km}(s=1)-T_{km}(s=-1)]
+	&= -2\pi\sum_{k=0}^{L_{rad}} A_{l\zeta k 0 0 }[T_{km}(s=1)-T_{km}(s=-1)]
 \end{align}
 Similarly, the boundary conditions, \textit{i.e.} enforcing the volume's interfaces to be magnetic surfaces, is set by requiring $B^s=0$. Using Eq.(\ref{eq.bs contravariant}), we obtain
 \begin{equation}
-	\sum_{k=0}^{L_{rad}}\sum_{m=0}^{M_{pol}}\sum_{n=-N_{tor}}^{N_{tor}} (mA_{l\phi k mn}+ n A_{l\theta k mn})T_{km}(\pm 1) = 0.\label{eq.bnd conditions discrete}
+	\sum_{k=0}^{L_{rad}}\sum_{m=0}^{M_{pol}}\sum_{n=-N_{tor}}^{N_{tor}} (mA_{l\zeta k mn}+ n A_{l\theta k mn})T_{km}(\pm 1) = 0.\label{eq.bnd conditions discrete}
 \end{equation}
 Finally, the Beltrami equation (\ref{eq.BeltramiEquation}) can be written as a linear equation for the harmonics $A_{likmn}$, by using the definition of the curl in curvilinear coordinates to express $\nabla\times(\nabla\times\mathbf{A})=\mu_l\nabla\times\mathbf{A}$. The coefficients $A_{l,i,k,m,n}$ are then packed in a single array $\mathbf{a}_l$. In each volume $\mathcal{V}_l$, given $(\mu_l,\psi_{p.l},\psi_{t,l})$, the volume inner interface geometry $\{R^{l-1}_{mn},Z^{l-1}_{mn}\}$ packed in an array $\mathbf{x}_{l-1}$, and the equivalent outer interface geometry $\mathbf{x}_l$, we construct matrices $\mathbf{G}_l$, $\mathbf{D}_l$ and $\mathbf{C}_l$ using Eqs.(\ref{eq.toroidal flux discrete})-(\ref{eq.bnd conditions discrete}) and the expanded Beltrami equation. We finally get a linear system,
 \begin{equation}
@@ -146,14 +146,14 @@ As an output of the Beltrami solver, the magnetic field $\mathbf{B}_l$ in agreem
 \subsection{Force solver}
 SPEC searches the geometry of the inner plasma interfaces that minimizes (i) the physical force, \textit{i.e.} Eq.(\ref{eq.force_balance}) and (ii) the spectral constraint, \textit{i.e.} Eq.(\ref{eq. txt spectral constraint}). The physical force is an even function the poloidal and toroidal angle, and can be written as a double Fourier series 
 \begin{equation}
-	F^{ph}(\theta,\phi) = \left[\left[ p + \frac{B^2}{2\mu_0}\right]\right] = \sum_{m=0}^{M_{pol}}\sum_{n=-N_{tor}}^{N_{tor}} F^{ph}_{mn}\cos(m\theta-nN_{fp}\phi).
+	F^{ph}(\theta,\zeta) = \left[\left[ p + \frac{B^2}{2\mu_0}\right]\right] = \sum_{m=0}^{M_{pol}}\sum_{n=-N_{tor}}^{N_{tor}} F^{ph}_{mn}\cos(m\theta-nN_{fp}\zeta).
 \end{equation}
 
-Given the magnetic field in each volume computed by the Beltrami solver, it is trivial to evaluate the magnetic field on a $(\theta,\phi)$ grid on each side of each volume's interface. Taking the difference between the outer and inner side, and performing a Fourier transformation gives the Fourier harmonics $F^{ph}_{mn}$. All Fourier harmonics of the physical force and of the spectral constraint are packed in a single array, named $\mathbf{F}$.
+Given the magnetic field in each volume computed by the Beltrami solver, it is trivial to evaluate the magnetic field on a $(\theta,\zeta)$ grid on each side of each volume's interface. Taking the difference between the outer and inner side, and performing a Fourier transformation gives the Fourier harmonics $F^{ph}_{mn}$. All Fourier harmonics of the physical force and of the spectral constraint are packed in a single array, named $\mathbf{F}$.
 
 Finally, SPEC will iterate on all geometry interfaces $\mathbf{x}_l$ until $\mathbf{F}$ is smaller than a tolerance set by the user. A Powell hybrid method is used, and analytical derivatives of $F_{mn}$ with respect to the interface geometry harmonics $(R_{lmn}, Z_{lmn})$ are provided. Details about their computations are given in the case of the toroidal current constraint in section \ref{sec. force gradient}. The SPEC algorithm is summarized in Figure \ref{fig.spec algorithm complete}. 
 
-Let us finally introduce a useful scalar to represent the force-balance convergence of SPEC, provided by the $L^2$-norm of $\mathbf{F}$, which we denote by
+Let us finally introduce a useful scalar, thereafter named \emph{force scalar}, to represent the force-balance convergence of SPEC, provided by the $L^2$-norm of $\mathbf{F}$, which we denote by
 \begin{equation}
 	|f| = \sum_{m=0}^{M_{pol}}\sum_{n=-N_{tor}}^{N_{tor}} F_{mn}^2. \label{eq. l2-norm of the force in spec}
 \end{equation}
@@ -198,7 +198,7 @@ It is worth noting that even though the magnetic helicity is not conserved when 
 \subsection{Free-boundary iterations}
 In case of free-boundary calculations, the plasma is allowed to move in a vacuum. We define a toroidal computational boundary $\Gamma_{CB}$ outside the plasma and inside the coils. This boundary is an otherwise arbitrary mathematical surface, and is generally not a magnetic surface, \textit{i.e.} $\mathbf{B}\cdot\mathbf{n} = (\mathbf{B}^c+\mathbf{B}^p)\cdot\mathbf{n}\neq 0$, with $\mathbf{B}^c$ the magnetic field produced by the coils, $\mathbf{B}^p$ the magnetic field produced by the plasma, and $\mathbf{n}$ the normal to $\Gamma_{CB}$.
 
-Inputs to free-boundary calculations are then the computational boundary, parametrized with Fourier harmonics $(R^{CB}_{mn},Z^{CB}_mn)$, and the magnetic field produces by the coils. The vacuum region, outside $\Gamma_{PB}$ and within $\Gamma_{CB}$, can be seen as an additional volume surrounding the plasma where $\mu=0$, $p=0$, and the boundary condition on $\Gamma_{CB}$ is $\mathbf{B}\cdot\mathbf{n}=(\mathbf{B}^c+\mathbf{B}^p)\cdot\mathbf{n}$. To fully define the magnetic field in the vacuum region, the net toroidal current flowing in the plasma $I_\phi$ and the total poloidal current flowing in the coils $I_c$ have to be provided.
+Inputs to free-boundary calculations are then the computational boundary, parametrized with Fourier harmonics $(R^{CB}_{mn},Z^{CB}_mn)$, and the magnetic field produces by the coils. The vacuum region, outside $\Gamma_{PB}$ and within $\Gamma_{CB}$, can be seen as an additional volume surrounding the plasma where $\mu=0$, $p=0$, and the boundary condition on $\Gamma_{CB}$ is $\mathbf{B}\cdot\mathbf{n}=(\mathbf{B}^c+\mathbf{B}^p)\cdot\mathbf{n}$. To fully define the magnetic field in the vacuum region, the net toroidal current flowing in the plasma $I_\zeta$ and the total poloidal current flowing in the coils $I_c$ have to be provided.
 
 While the magnetic field on the computational boundary produced by the coils $\mathbf{B}^p\cdot\mathbf{n}$ is an input, the contribution from the plasma, $\mathbf{B}^p\cdot\mathbf{n}$ is not known \textit{a priori}. This information is however required for the Beltrami solver in the vacuum region to find the magnetic field in agreement with the boundary condition $(\mathbf{B}^p+\mathbf{B}^c)\cdot\mathbf{n}$. To find self consistent solutions, an additional loop in SPEC is thus required. An initial guess for the Fourier harmonics of $\mathbf{B}^p\cdot \mathbf{n}$, denoted $B_{mn}^0$, is given as input; SPEC finds a solution in agreement with this boundary condition and recompute the harmoncis of $\mathbf{B}^p\cdot\mathbf{n}$, denoted $\tilde{B}_{mn}^1$, using a virtual casing method \citep{Lazerson2012,Hanson2015}. Generally, $B_{mn}^0\neq \tilde{B}_{mn}^1$. Thus, a Piccard iteration is performed,
 \begin{equation}
@@ -212,7 +212,7 @@ with $\alpha\in[0,1[$, and SPEC re-evaluate the equilibrium with this new bounda
 The computation of equilibria at fixed toroidal current profile is crucial for basic physic studies \citep{Loizu2017,Suzuki2020}, equilibrium reconstruction \citep{Lao1985,Hanson2009}, and stellarator optimization \citep{Geiger2010,Geiger2015}.  Most \ac{MHD} equilbrium codes (VMEC \citep{Hirshman1983,Hirshman1986}, SIESTA \citep{Hirshman2008,Peraza-Rodriguez2017}, HINT \citep{Harafuji1989,Suzuki2006}, or PIES \citep{Reiman1986,Drevlak2005}) can calculate equilibria at chosen rotational transform or toroidal current profile. \ac{SPEC} could run at fixed rotational transform but only recently its capability to run at fixed toroidal current profile has been implemented. This capability is crucial for studying the effect of toroidal current on 3D magnetic equilibria. Examples are the study of the effect of bootstrap current on equilibrium beta limits, or the study of the sensitivity of a given equilibrium to toroidal current fluctuations. In  this  chapter  we describe the implementation of the  new  capability  for  \ac{SPEC}, that allows \ac{MRxMHD} equilibria to be calculated at prescribed toroidal current profiles.
 \subsection{Constraining the toroidal current profiles in \ac{SPEC}}
 
-\ac{SPEC} has been extended to allow the triplet $\{\psi_{t,l}, I^v_{l,\phi}, I^s_{l,\phi}\}_{l=1,\ldots,N_{vol}}$ as a constraint, herein \textit{current constraint}. In the case of the rotational transform constraint, \ac{SPEC} finds the solution to the linear system (\ref{eq.BeltramiEquation}) volume by volume and iterates on $\{\mu_l, \psi_{p,l}\}$ until the field has the desired rotational transform at the volume interfaces. In the case of the current constraint, the constants $\{\mu_l\}_{l=1,\ldots,N_{vol}}$ are determined using Eq.(\ref{eq.volume_current}), without the need for iterations, and this directly constrains the value of volume currents $\{I^v_{l,\phi}\}_{l=1,\ldots,N_{vol}}$.
+\ac{SPEC} has been extended to allow the triplet $\{\psi_{t,l}, I^v_{l,\zeta}, I^s_{l,\zeta}\}_{l=1,\ldots,N_{vol}}$ as a constraint, herein \textit{current constraint}. In the case of the rotational transform constraint, \ac{SPEC} finds the solution to the linear system (\ref{eq.BeltramiEquation}) volume by volume and iterates on $\{\mu_l, \psi_{p,l}\}$ until the field has the desired rotational transform at the volume interfaces. In the case of the current constraint, the constants $\{\mu_l\}_{l=1,\ldots,N_{vol}}$ are determined using Eq.(\ref{eq.volume_current}), without the need for iterations, and this directly constrains the value of volume currents $\{I^v_{l,\zeta}\}_{l=1,\ldots,N_{vol}}$.
 
 Regarding the poloidal fluxes, it can be shown  (Appendix \ref{appA1}) that the surface currents depend linearly on the poloidal fluxes, \textit{i.e.} 
 
@@ -230,7 +230,7 @@ where $\overbar{\bm{\psi}_p}$ is an arbitrary choice of poloidal fluxes, and $\o
 The matrix $\mathbf{M}$ is evaluated by taking the derivatives of Eq.(\ref{eq.complicado}) with respect to the poloidal fluxes, \textit{i.e.}
 
 \begin{equation}
-	M_{ij} = \frac{\partial I^s_{i,\phi}}{\partial \psi_{p,j}},\label{eq.coef_M}
+	M_{ij} = \frac{\partial I^s_{i,\zeta}}{\partial \psi_{p,j}},\label{eq.coef_M}
 \end{equation}
 which leads to the following bi-diagonal matrix
 
@@ -294,12 +294,12 @@ Constraining the toroidal current profile takes away the control of other profil
 
 \subsection{Force gradient}
 \label{sec. force gradient}
-The hybrid Powell algorithm used in SPEC to iterate on the interfaces geometry uses analytic derivatives, which is faster than finite differentiation. To keep good performance while using the current constraint, derivatives of the force Fourier coefficients, $\{F_j\}_{j=1,\ldots,N}$, with respect to the interfaces degrees of freedom, $\{x_i\}_{i=\{1,\ldots,N\}}$, at constant $\{\psi_{t,l}, I^v_{l,\phi},\ I^s_{l,\phi}\}_{l=1,\ldots,N_{vol}}$ are provided. Derivatives are first evaluated in real space and then Fourier-transformed. Using the chain rule,
+The hybrid Powell algorithm used in SPEC to iterate on the interfaces geometry uses analytic derivatives, which is faster than finite differentiation. To keep good performance while using the current constraint, derivatives of the force Fourier coefficients, $\{F_j\}_{j=1,\ldots,N}$, with respect to the interfaces degrees of freedom, $\{x_i\}_{i=\{1,\ldots,N\}}$, at constant $\{\psi_{t,l}, I^v_{l,\zeta},\ I^s_{l,\zeta}\}_{l=1,\ldots,N_{vol}}$ are provided. Derivatives are first evaluated in real space and then Fourier-transformed. Using the chain rule,
 \begin{align}
 	\frac{d}{d x_i}\left[\left[p + \frac{B^2}{2\mu_0}\right]\right]_l &= \frac{1}{\mu_0}\left( B^-_{l+1}\frac{d B^-_{l+1}}{d x_i} - B^+_l \frac{d B^+_{l}}{d x_i}\right)\\ \label{eq.force_gradient}
 	\frac{d B^{\pm}_l}{d x_i} &= \frac{\partial B^\pm_l}{\partial x_i} + \frac{\partial B^\pm_l}{\partial \psi_{p,l}}\frac{d \psi_{p,l}}{d x_i} + \frac{\partial B^\pm_l}{\partial \mu_l}\frac{d\mu_l}{d x_i}+ \frac{\partial B^\pm_l}{\partial \psi_{t,l}}\frac{d\psi_{t,l}}{d x_i}
 \end{align}
-where $B^-_l$, $B^+_l$ are the magnetic field strength on the inner and outer side of volume $l$, respectively, and the pressure, $p_l$, is considered constant in each volume with respect to variations in the geometry, $\mu_l$ and $\psi_{p,l}$. Note that all derivatives are taken at constant toroidal flux, volume current and surface current. Enforcing $ d\psi_{t,l} / dx_i=0$ and $d I^v_{l,\phi} / dx_i=0$ leads to $d \mu_l/dx_i=0$ using Eq.(\ref{eq.volume_current}). The surface current constraint, $d I^s_{l,\phi}/dx_i=0$, leads to a system of coupled equations using Eq.(\ref{eq.surf_current}),
+where $B^-_l$, $B^+_l$ are the magnetic field strength on the inner and outer side of volume $l$, respectively, and the pressure, $p_l$, is considered constant in each volume with respect to variations in the geometry, $\mu_l$ and $\psi_{p,l}$. Note that all derivatives are taken at constant toroidal flux, volume current and surface current. Enforcing $ d\psi_{t,l} / dx_i=0$ and $d I^v_{l,\zeta} / dx_i=0$ leads to $d \mu_l/dx_i=0$ using Eq.(\ref{eq.volume_current}). The surface current constraint, $d I^s_{l,\zeta}/dx_i=0$, leads to a system of coupled equations using Eq.(\ref{eq.surf_current}),
 
 \begin{equation}
 	\frac{\partial \tilde{B}^-_{l+1,\theta}}{\partial x_i} + \frac{\partial \tilde{B}^-_{l+1,\theta}}{\partial \psi_{p,l+1}} \frac{\partial\psi_{p,l+1}}{\partial x_i} - \frac{\partial \tilde{B}^+_{l,\theta}}{\partial x_i} - \frac{\partial \tilde{B}^+_{l,\theta}}{\partial \psi_{p,l}}\frac{\partial\psi_{p,l}}{\partial x_i} = 0, \label{eq.Isurface_derivative}
@@ -372,8 +372,8 @@ The force gradient can also be expressed in terms of Bessel functions integrals 
 A verification is proposed here in the more complex case of a free-boundary, rotating ellipse (also called classical stellarator) equilibrium with $5$ field periods ($N_p=5$), multiple poloidal and toroidal modes ($M_{pol}=4$ and $N_{tor}=2$) and seven plasma volumes ($N_{vol}=7$). The pressure is set to zero and the computational boundary is defined by
 
 \begin{align}
-	R &= R_{00} + R_{10} \cos\theta + R_{11}\cos(\theta - N_p\phi)\label{eq.RotEllipse_R}\\
-	Z &= Z_{00} + Z_{10} \sin\theta + Z_{11}\sin(\theta - N_p\phi),\label{eq.RotEllipse_Z}
+	R &= R_{00} + R_{10} \cos\theta + R_{11}\cos(\theta - N_p\zeta)\label{eq.RotEllipse_R}\\
+	Z &= Z_{00} + Z_{10} \sin\theta + Z_{11}\sin(\theta - N_p\zeta),\label{eq.RotEllipse_Z}
 \end{align}
 with $R_{00}=10$m, $Z_{00}=0$m, $R_{10}=-Z_{10}=1$m, $R_{11}=Z_{11}=0.25$m and $N_p = 5$ (see Figure \ref{fig:3Dplot}). We suppose here that some hypothetical coils with a total current of $\mu_0I_{coil}=42.87$Tm are able to generate a vacuum field without normal component to the computational boundary. The total toroidal magnetic flux in the plasma is set to $\psi_a=0.61\text{Tm}^2$ and the toroidal magnetic flux in the vacuum region is set to $\psi_{t,V}=1.39\text{Tm}^2$, adding up to a total toroidal magnetic flux enclosed by the computational boundary of $\psi_{t,V} + \psi_a = 2\text{Tm}^2$.
 
@@ -386,7 +386,7 @@ with $R_{00}=10$m, $Z_{00}=0$m, $R_{10}=-Z_{10}=1$m, $R_{11}=Z_{11}=0.25$m and $
 
 To the authors knowledge, no analytical solution to Eqs.(\ref{eq.BeltramiEquation}) and (\ref{eq.force_balance}) exists in this geometry. The verification is thus carried out as follows: first, a rotational transform constraint case is run with an input $\iotabar$-profile that is chosen to be $10\%$ larger than the vacuum rotational transform $\iotabar_{vac}$, \textit{i.e.} $\iotabar = 1.10\cdot\iotabar_{vac}$, so that there is a non-zero contribution from the current to the rotational transform. The volume and surface currents are evaluated from the obtained equilibrium and used to run a current constraint calculation to obtain a second equilibrium. The same initial guess for the geometry and the interfaces is used for both calculations. The rotational transform profile $\bar{\iotabar}$ is then extracted from the second equilibrium and compared to the reference $\iotabar$-profile.
 
-The vacuum rotational transform profile, as well as the profiles $\iotabar$ and $\bar{\iotabar}$ are shown in Figure \ref{fig:iota_and_current_profile} (left). The toroidal current enclosed by the plasma is mostly contained in the volumes and adds up to a total of $\sim 2.7$kA, see Figure \ref{fig:iota_and_current_profile} (right). As expected the surfaces currents $I^s_{\phi,l}$ remain small ($<10^{-2}$kA), since there are no pressure gradients to drive them. The constraint on the rotational transform $\iotabar$ is enforced on each side of the volumes' interfaces, indicated by gray dashed lines on Figure \ref{fig:iota_and_current_profile} (left). The value of $\iotabar$ at the computational boundary is not constrained. Agreement between $\iotabar$ and $\bar{\iotabar}$ up to a relative error of $\max(\mid\iotabar-\bar{\iotabar}\mid / \mid\iotabar\mid)\sim 10^{-5}$ is observed, showing that the same equilibrium can be obtained using either constraint. The maximum error between both profiles decreases as the numerical resolution is increased (data not shown).
+The vacuum rotational transform profile, as well as the profiles $\iotabar$ and $\bar{\iotabar}$ are shown in Figure \ref{fig:iota_and_current_profile} (left). The toroidal current enclosed by the plasma is mostly contained in the volumes and adds up to a total of $\sim 2.7$kA, see Figure \ref{fig:iota_and_current_profile} (right). As expected the surfaces currents $I^s_{\zeta,l}$ remain small ($<10^{-2}$kA), since there are no pressure gradients to drive them. The constraint on the rotational transform $\iotabar$ is enforced on each side of the volumes' interfaces, indicated by gray dashed lines on Figure \ref{fig:iota_and_current_profile} (left). The value of $\iotabar$ at the computational boundary is not constrained. Agreement between $\iotabar$ and $\bar{\iotabar}$ up to a relative error of $\max(\mid\iotabar-\bar{\iotabar}\mid / \mid\iotabar\mid)\sim 10^{-5}$ is observed, showing that the same equilibrium can be obtained using either constraint. The maximum error between both profiles decreases as the numerical resolution is increased (data not shown).
 
 
 \begin{figure}
@@ -396,7 +396,7 @@ The vacuum rotational transform profile, as well as the profiles $\iotabar$ and 
 	\hfill
 	\subfloat[][]{\includegraphics[width=0.45\linewidth]{main/Figures_CurrentConstraint/ABaillod_fig9b.pdf}}
 	\hfill
-	\caption{Left: rotational transform profile versus effective minor radius. Red triangles: $\iotabar$, input profile used in \ac{SPEC} when run at fixed rotational transform. Black, dashed line: $\bar{\iotabar}$, the output profile obtained from \ac{SPEC} when run at fixed toroidal current profile. Blue line: $\iota$-profile in vacuum. Gray dashed lines: Position of volume interfaces. Right: total toroidal current enclosed by each volume. Surface currents (not plotted), $I^s_{\phi,l}$, are smaller than $10^{-2}$[kA] and are negligible in comparison to the volume current.}
+	\caption{Left: rotational transform profile versus effective minor radius. Red triangles: $\iotabar$, input profile used in \ac{SPEC} when run at fixed rotational transform. Black, dashed line: $\bar{\iotabar}$, the output profile obtained from \ac{SPEC} when run at fixed toroidal current profile. Blue line: $\iota$-profile in vacuum. Gray dashed lines: Position of volume interfaces. Right: total toroidal current enclosed by each volume. Surface currents (not plotted), $I^s_{\zeta,l}$, are smaller than $10^{-2}$[kA] and are negligible in comparison to the volume current.}
 	\label{fig:iota_and_current_profile}
 \end{figure}
 
@@ -434,16 +434,16 @@ One hypothesis is that the spectral condensation generates many local extrema in
 \subsection{The Henneberg representation}
 One advantageous choice of angle $\theta_h$, called thereafter the \emph{Henneberg angle}, has been proposed by \citet{Henneberg2021}, where they leveraged the fact that magnetic surfaces close to the magnetic axis are ellipses \citep{Helander2014}. The poloidal angle $\theta_h$ is thus chosen to be optimal to represent ellipses. With this angle, a toroidal surface is parametrized by
 \begin{eqnarray}
-	R(\theta_h,\phi) &= R_0(\phi) + \rho(\theta_h,\phi)\cos(\alpha \phi) - \zeta(\theta_h,\phi)\sin(\alpha \phi), \label{eq.Rfctrhophi}\\
-	Z(\theta_h,\phi) &= Z_0(\phi) + \rho(\theta_h,\phi)\sin(\alpha \phi) + \zeta(\theta_h,\phi)\cos(\alpha \phi),\label{eq.Zfctrhophi}
+	R(\theta_h,\zeta) &= R_0(\zeta) + \rho(\theta_h,\zeta)\cos(\alpha \zeta) - \zeta(\theta_h,\zeta)\sin(\alpha \zeta), \label{eq.Rfctrhophi}\\
+	Z(\theta_h,\zeta) &= Z_0(\zeta) + \rho(\theta_h,\zeta)\sin(\alpha \zeta) + \zeta(\theta_h,\zeta)\cos(\alpha \zeta),\label{eq.Zfctrhophi}
 \end{eqnarray}
-where $\alpha$ is the number of poloidal rotation of the ellipse per field period --- in general, $\alpha=1/2$. Figure (\ref{sketch Henneberg representation}) shows how the coordinate axis $(\rho,\zeta)$ can be represented. The functions $R_0(\phi)$, $Z_0(\phi)$, $\rho(\theta_h,\phi)$ and $\zeta(\theta_h,\phi)$ are written as
+where $\alpha$ is the number of poloidal rotation of the ellipse per field period --- in general, $\alpha=1/2$. Figure (\ref{sketch Henneberg representation}) shows how the coordinate axis $(\rho,\zeta)$ can be represented. The functions $R_0(\zeta)$, $Z_0(\zeta)$, $\rho(\theta_h,\zeta)$ and $\zeta(\theta_h,\zeta)$ are written as
 
 \begin{align}
-	\rho(\theta_h,\phi) &= \sum_{m=1}^{M}\sum_{n=-N}^N \rho_{mn}\cos(m\theta_h +n\phi -\alpha \phi),\label{eq.rho_series}\\
-	\zeta(\theta_h,\phi) &= b(\phi)\sin(\theta_h-\alpha\phi) =  \sum_{n=0}^N b_n\cos(n\phi)\sin(\theta_h-\alpha \phi), \label{eq.zeta_series}\\
-	R_0(\phi) &= \sum_{n=0}^{N} r_n \cos(n \phi)\label{eq.R0_series}\\
-	Z_0(\phi) &= \sum_{n=1}^{N} z_n \sin(n \phi)\label{eq.Z0_series}
+	\rho(\theta_h,\zeta) &= \sum_{m=1}^{M}\sum_{n=-N}^N \rho_{mn}\cos(m\theta_h +n\zeta -\alpha \zeta),\label{eq.rho_series}\\
+	\zeta(\theta_h,\zeta) &= b(\zeta)\sin(\theta_h-\alpha\zeta) =  \sum_{n=0}^N b_n\cos(n\zeta)\sin(\theta_h-\alpha \zeta), \label{eq.zeta_series}\\
+	R_0(\zeta) &= \sum_{n=0}^{N} r_n \cos(n \zeta)\label{eq.R0_series}\\
+	Z_0(\zeta) &= \sum_{n=1}^{N} z_n \sin(n \zeta)\label{eq.Z0_series}
 \end{align}
 
 \begin{figure}
@@ -456,11 +456,11 @@ where $\alpha$ is the number of poloidal rotation of the ellipse per field perio
 		\node (Zaxis) at (-4.8,3.7) {$\mathbf{e}_Z$};
 		\node (Rhoaxis) at (4.6,3.1) {$\mathbf{e}_\rho$};
 		\node (Zetaaxis) at (-2.5,4.3) {$\mathbf{e}_\zeta$};
-		\node (b) at (.4,1.4) {\color{red}$b(\phi)$};
+		\node (b) at (.4,1.4) {\color{red}$b(\zeta)$};
 		\node (theta) at (1.35,1.35) {\color{red}$\theta_h$};
-		\node (alphaphi) at (1.9,0.5) {$\alpha\phi$};
-		\node (R0) at (-2.1,-0.5) {\color{gray}$R_0(\phi)$};
-		\node (Z0) at (.6,-2.1) {\color{gray}$Z_0(\phi)$};
+		\node (alphaphi) at (1.9,0.5) {$\alpha\zeta$};
+		\node (R0) at (-2.1,-0.5) {\color{gray}$R_0(\zeta)$};
+		\node (Z0) at (.6,-2.1) {\color{gray}$Z_0(\zeta)$};
 	\end{tikzpicture}
 	\caption{Sketch of a toroidal surface (blue) in the $(R,Z)$ plane, and the corresponding coordinates of the Henneberg representation.}
 	\label{fig. sketch Henneberg representation}
@@ -468,16 +468,16 @@ where $\alpha$ is the number of poloidal rotation of the ellipse per field perio
 
 The representation given by Eqs.(\ref{eq.Rfctrhophi})-(\ref{eq.Z0_series}) is unique and does not require spectral condensation. Indeed, 
 \begin{equation}
-	\theta_h = \arcsin\left(\frac{\zeta}{b}\right) + \alpha\phi. \label{eq. henneberg angle}
+	\theta_h = \arcsin\left(\frac{\zeta}{b}\right) + \alpha\zeta. \label{eq. henneberg angle}
 \end{equation}
 
 One can easily derive a linear relation between the modes $(R_{mn},Z_{mn})$ and the $(r_n,z_n,\rho_{mn},b_n)$. For example, expanding equation (\ref{eq.Rfctrhophi}) with the Fourier series (\ref{eq.rho_series})-(\ref{eq.Z0_series}), we get
 \begin{align}
-	R(\theta_h,\phi) &= \sum_{n=0}^Nr_n \cos(n \phi) + \sum_{m=1}^{M}\sum_{n=-N}^N \rho_{mn}\cos(m\theta_h +n\phi -\alpha \phi)\cos(\alpha \phi)\\
-	&\qquad - \sum_{n=0}^N b_n\cos(n\phi)\sin(\theta_h-\alpha \phi)\sin(\alpha \phi)\\
-	&=\sum_{m=1}^{M}\sum_{n=-N}^N \frac{\rho_{mn}}{2}\left[\cos(m\theta_h +n\phi -2\alpha \phi)+\cos(m\theta_h+n\phi)\right]\\
-	&\qquad- \sum_{n=0}^N \frac{b_n}{4}\left[\cos(\theta_h-(n+2\alpha)\phi)+\cos(\theta_h-(-n+2\alpha)\phi)\right.\\
-	&\qquad\left.-\cos(\theta_h-n\phi)-\cos(\theta_h+n\phi)\right] +  \sum_{n=0}^Nr_n \cos(n \phi),
+	R(\theta_h,\zeta) &= \sum_{n=0}^Nr_n \cos(n \zeta) + \sum_{m=1}^{M}\sum_{n=-N}^N \rho_{mn}\cos(m\theta_h +n\zeta -\alpha \zeta)\cos(\alpha \zeta)\\
+	&\qquad - \sum_{n=0}^N b_n\cos(n\zeta)\sin(\theta_h-\alpha \zeta)\sin(\alpha \zeta)\\
+	&=\sum_{m=1}^{M}\sum_{n=-N}^N \frac{\rho_{mn}}{2}\left[\cos(m\theta_h +n\zeta -2\alpha \zeta)+\cos(m\theta_h+n\zeta)\right]\\
+	&\qquad- \sum_{n=0}^N \frac{b_n}{4}\left[\cos(\theta_h-(n+2\alpha)\zeta)+\cos(\theta_h-(-n+2\alpha)\zeta)\right.\\
+	&\qquad\left.-\cos(\theta_h-n\zeta)-\cos(\theta_h+n\zeta)\right] +  \sum_{n=0}^Nr_n \cos(n \zeta),
 \end{align}
 from which we easily identify
 \begin{align}
@@ -502,30 +502,30 @@ where $\mathbf{H}$ is a matrix of size $(N_h\times N_g)$, with
 In general, $N_h \neq N_g$, and $\mathbf{H}$ is not a square matrix. In most useful cases ($N$ reasonably large and $\alpha=1/2$), $N_h>N_g$ and the system (\ref{eq. henneberg linear system}) is overdetermined. A solution exist if there is a single maximum and minimum in $\zeta$ for each toroidal plane.
 
 \subsection{Fourier transform}
-Note that the relations (\ref{eq, linear relation Rmn}) and (\ref{eq, linear relation Zmn}) assume that the $(R_{mn},Z_{mn})$ are constructed using the same angle $\theta_h$ as the Henneberg representation. The question, then, is the following: given a general surface $(R(\theta,\phi),Z(\theta,\phi))$, how can the Fourier harmonics $(r_n,z_n,\rho_{mn},b_n)$ which describe a surface $(R'(\theta_h,\phi),Z'(\theta_h,\phi))$ and that matches best the input surface be found?
+Note that the relations (\ref{eq, linear relation Rmn}) and (\ref{eq, linear relation Zmn}) assume that the $(R_{mn},Z_{mn})$ are constructed using the same angle $\theta_h$ as the Henneberg representation. The question, then, is the following: given a general surface $(R(\theta,\zeta),Z(\theta,\zeta))$, how can the Fourier harmonics $(r_n,z_n,\rho_{mn},b_n)$ which describe a surface $(R'(\theta_h,\zeta),Z'(\theta_h,\zeta))$ and that matches best the input surface be found?
 
-%The starting point is to evaluate the functions $(R(\theta,\phi),Z(\theta,\phi))$ on a sufficient number of grid points $(\theta_i,\phi_j)$, giving $R(\theta_i,\phi_j)\equiv R_{ij}$ and $Z(\theta_i,\phi_j)=Z_{ij}$.
-We first construct the function $b(\phi)$. As $b(\phi)$ is independent of $(R_0,Z_0)$, we can set $R_0=Z_0=0$ and identify the poloidal angle $\theta$ that extremizes the $\zeta$ coordinate for each angle $\phi$,
+%The starting point is to evaluate the functions $(R(\theta,\zeta),Z(\theta,\zeta))$ on a sufficient number of grid points $(\theta_i,\zeta_j)$, giving $R(\theta_i,\zeta_j)\equiv R_{ij}$ and $Z(\theta_i,\zeta_j)=Z_{ij}$.
+We first construct the function $b(\zeta)$. As $b(\zeta)$ is independent of $(R_0,Z_0)$, we can set $R_0=Z_0=0$ and identify the poloidal angle $\theta$ that extremizes the $\zeta$ coordinate for each angle $\zeta$,
 \begin{align}
-	\tilde\zeta(\theta_+,\phi) &= \max_{\theta\in[0,2\pi]}\tilde\zeta(\theta,\phi)\\
-	\tilde\zeta(\theta_-,\phi) &= \min_{\theta\in[0,2\pi]}\tilde\zeta(\theta,\phi)
+	\tilde\zeta(\theta_+,\zeta) &= \max_{\theta\in[0,2\pi]}\tilde\zeta(\theta,\zeta)\\
+	\tilde\zeta(\theta_-,\zeta) &= \min_{\theta\in[0,2\pi]}\tilde\zeta(\theta,\zeta)
 \end{align}
 with $\tilde\zeta$ the coordinate $\zeta$ if $R_0=Z_0=0$.
 \begin{equation}
-	\tilde\zeta(\theta,\phi) = \sqrt{R^2+Z^2}\cos\left[\alpha\phi+\arctan\left(\frac{R}{Z}\right)\right].
+	\tilde\zeta(\theta,\zeta) = \sqrt{R^2+Z^2}\cos\left[\alpha\zeta+\arctan\left(\frac{R}{Z}\right)\right].
 \end{equation}
 Then
 \begin{equation}
-	b(\phi) = \frac{1}{2}\left[\tilde\zeta(\theta_+,\phi)-\tilde\zeta(\theta_-,\phi)\right],
+	b(\zeta) = \frac{1}{2}\left[\tilde\zeta(\theta_+,\zeta)-\tilde\zeta(\theta_-,\zeta)\right],
 \end{equation}
-As $\max_{\theta\in[0,2\pi]}\zeta(\theta,\phi)=-\max_{\theta\in[0,2\pi]}\zeta(\theta,\phi)=b(\phi)$, the position $(R_0(\phi),Z_0(\phi))$ must be 
+As $\max_{\theta\in[0,2\pi]}\zeta(\theta,\zeta)=-\max_{\theta\in[0,2\pi]}\zeta(\theta,\zeta)=b(\zeta)$, the position $(R_0(\zeta),Z_0(\zeta))$ must be 
 \begin{align}
-	R_0(\phi) &= \frac{1}{2}\left(R(\theta_+,\phi)+R(\theta_-,\phi)\right)\\
-	Z_0(\phi) &= \frac{1}{2}\left(Z(\theta_+,\phi)+Z(\theta_-,\phi)\right).
+	R_0(\zeta) &= \frac{1}{2}\left(R(\theta_+,\zeta)+R(\theta_-,\zeta)\right)\\
+	Z_0(\zeta) &= \frac{1}{2}\left(Z(\theta_+,\zeta)+Z(\theta_-,\zeta)\right).
 \end{align}
 Finally, the coordinate $\rho(\theta,\zeta)$ can be evaluated by
 \begin{equation}
-	\rho(\theta,\zeta) = (R-R_0)\cos(\alpha\phi) + (Z-Z_0)\sin(\alpha\phi),
+	\rho(\theta,\zeta) = (R-R_0)\cos(\alpha\zeta) + (Z-Z_0)\sin(\alpha\zeta),
 \end{equation}
 and the Henneberg angle $\theta_h$ can be evaluated via equation (\ref{eq. henneberg angle}). The Fourier harmonics $(r_n,z_n,b_n,\rho_{mn})$ can then be evaluated by standard Fourier transforms. This method can easily be used to transform inputs that uses the more conventional standard representation to inputs that uses the Henneberg representation. The only free parameter in this transformation is the parameter $\alpha$, that has to be choosen by the user. 
 
@@ -544,14 +544,28 @@ Finally, one has to be careful about the truncation of the Force in Fourier spac
 
 
 \subsection{Verification and comparison with the standard representation}
-We propose here to compare the solution obtained by SPEC using the Henneberg representation to the one obtained using the standard representation. In addition, we plot the scalar metric $|f|$ from Eq.(\ref{eq. l2-norm of the force in spec}), which goes to zero when the equilibrium is found, as a function of the number of force evaluation. 
+We compare here the solution obtained by SPEC using the Henneberg representation to the one obtained using the standard representation. In addition, we plot the scalar force $|f|$ from Eq.(\ref{eq. l2-norm of the force in spec}), which goes to zero when the equilibrium is found, as a function of the number of force evaluation. 
 
-In the case of a axisymmetric bean-shaped tokamak...
+\subsubsection{Bean shaped tokamak}
+We first look at an axisymmetric configuration with a bean shaped cross-section, proposed by \citet{hirshmanOptimizedFourierRepresentations1985}. The boundary is described by
+\begin{align}
+	R(\theta,\zeta) &= -0.32+1.115\cos\theta+0.383\cos 2\theta-0.0912\cos 3\theta+0.0358\cos 4\theta-0.0164\cos 5\theta\\
+	Z(\theta,\zeta) &= 1.408\sin\theta +0.154\sin 2\theta-0.0264\sin 3\theta,
+\end{align}
+or, using the Henneberg representation,
+\begin{align}
+	\rho(\theta,\zeta) &= 1.184\cos\theta +0.208\cos 2\theta - 0.143 3\theta + 0.064\cos 4\theta-0.032\cos 5\theta +0.011\cos 6\theta\\
+	b &= 1.419.
+\end{align}
+The poincare section, rotational transform profile and 
 
+\subsubsection{Circular cross-section, large torsion configuration}
 In the case of a stellarator with circular cross-sections and large magnetic axis torsion, ...
 
+\subsubsection{Rotating ellipse}
 In the case of a rotating ellipse, ...
 
+\subsubsection{W7-X}
 Finally, we can test the case of W7-X. With two volumes, ... With more volumes, ...
 
 \subsection{Conclusion}
@@ -562,7 +576,7 @@ The implementation has been verified in multiple geometries, namely a bean-shape
 
 It is however important to emphasize that while this new representation does not solve SPEC robustness issues, it greatly simplified the problem to solve. Essentially, we showed that SPEC robustness issues are not only related the spectral condensation. The next obvious step is to make SPEC more robust using the Henneberg representation. Once SPEC is able to reliably find a solution with zero physical force, one can look at implementing a more robust spectral condensation algorithm.
 
-Ideas to improve SPEC convergence are numerous. One proposition would be to change the hybrid-Powell method for another algorithm that might be more adapted to SPEC problem. Another suggestion is to redifine how the force is numerically evaluated. Indeed, the force is a quadratic function of the magnetic field; by truncating its Fourier series at the same modes than the magnetic field, one might lose useful information. A solution would be to evaluate the force in real space on a number of cleverly chosen collocation points (as proposed by the DESC team \citep{Dudt2020}), and to minimize their $L^2$-norm. This could have the benefits to not change the function SPEC is trying to minimize (the force) when moving from low resolution to higher resolution, and could greatly help with SPEC robustness. These ideas could unfortunately not be explored further in the time frame of this thesis.
+Ideas to improve SPEC convergence are numerous. We could trz to combine both representations --- use the Henneberg representation when SPEC is far from the equilibrium, and switch to the standard representation once the force is alreadz quite small. Another proposition would be to change the hybrid-Powell method for another algorithm that might be more adapted to SPEC problem. Another suggestion is to redifine how the force is numerically evaluated. Indeed, the force is a quadratic function of the magnetic field; by truncating its Fourier series at the same modes than the magnetic field, one might lose useful information. A solution would be to evaluate the force in real space on a number of cleverly chosen collocation points (as proposed by the DESC team \citep{Dudt2020}), and to minimize their $L^2$-norm. This could have the benefits to not change the function SPEC is trying to minimize (the force) when moving from low resolution to higher resolution, and could greatly help with SPEC robustness. These ideas could unfortunately not be explored further in the time frame of this thesis.
 
 \section{Conclusion \label{sec. chap3 - conclusion}}
 
