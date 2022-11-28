@@ -356,30 +356,59 @@ Finally, the metric elements $g_{ij}$ are
 	\end{pmatrix}.
 \end{equation}
 
-% \chapter{Derivation of the Beltrami linear system} \label{app. beltrami eq coef derivation}
-
-% Consider the Beltrami equation (\ref{eq.BeltramiEquation}). It is a linear relation between the vector potential Fourier-Chebyshev harmonics $A_{likmn}$ (see section \ref{sec. spec_algorithm}). We derive in this appendix how the Beltrami equation can be cast into a linear system
-% \begin{equation}
-% 	\left(\mathbf{A}_l-\mu_l\mathbf{D}_l\right)\mathbf{a_l} = \mathbf{C}_l.
-% \end{equation}
-
-% We rewrite for convenience the magnetic field contravariant components expressed with the vector potential harmonics (Eqs.(\ref{eq.bs contravariant})-(\ref{eq.bz contravariant})),
-% \begin{align}
-% 	B^s &= \frac{1}{\sqrt{g}}\sum_{k=0}^{L_{rad}}\sum_{m=0}^{M_{pol}}\sum_{n=-N_{tor}}^{N_{tor}} -(mA_{l\phi kmn}+nA_{l\theta kmn})T_{km}(s)\sin(m\theta-nN_{fp}\phi) \label{eq. bs app}\\
-% 	B^\theta &= \frac{1}{\sqrt{g}}\sum_{k=0}^{L_{rad}}\sum_{m=0}^{M_{pol}}\sum_{n=-N_{tor}}^{N_{tor}} -A_{l\phi kmn}T_{km}'(s)\cos(m\theta-nN_{fp}\phi)\label{eq. bt app}\\
-% 	B^\phi &= \frac{1}{\sqrt{g}}\sum_{k=0}^{L_{rad}}\sum_{m=0}^{M_{pol}}\sum_{n=-N_{tor}}^{N_{tor}} A_{l\phi kmn}T_{km}'(s)\cos(m\theta-nN_{fp}\phi).\label{eq. bz app}
-% \end{align}
 
 
+\chapter{Derivation of the Beltrami linear system} \label{app. beltrami eq coef derivation}
+Consider the Beltrami equation (\ref{eq.BeltramiEquation}). It is a linear relation between the vector potential Fourier-Chebyshev harmonics $A_{likmn}$ (see section \ref{sec. spec_algorithm}). We derive in this appendix how the Beltrami equation can be cast into a linear system
+\begin{equation}
+	\left(\mathbf{A}_l-\mu_l\mathbf{D}_l\right)\mathbf{a_l} = \mathbf{C}_l.
+\end{equation}
+The right hand side is
+\begin{equation}
+	\mu(\nabla\times\mathbf{B})^q = \mu\frac{\epsilon^{ijq}}{\sqrt{g}}\frac{\partial A_j}{\partial u^i},
+\end{equation}
+where we dropped the volume index, $\mathbf{u}=\{s,\theta,\phi\}$, and $\epsilon^{ijk}$ is the Levi-Civita symbol, defined as
+\begin{equation}
+	\epsilon^{ijk} = \begin{cases}
+		+1 \qquad& \text{if $i,j,k$ form an even permutation of $1,2,3$}\\
+		-1 \qquad& \text{if $i,j,k$ form an odd permutation of $1,2,3$}\\
+		0  \qquad& \text{otherwise}.
+	\end{cases}
+\end{equation}
+The left hand side is obtained by taking twice the curl of the vector potential,
+\begin{align}
+	\left[\nabla\times(\nabla\times\mathbf{A})\right]^q &= \frac{\epsilon^{plq}}{\sqrt{g}}\frac{\partial}{\partial u^p}\left[g_{lk}\frac{\epsilon^{ijk}}{\sqrt{g}}\frac{\partial A_j}{\partial u^i}\right].
+\end{align}
+Gathering all terms, we obtain
+\begin{equation}
+	\epsilon^{plq}\epsilon^{ijk}\left\{\frac{\partial}{\partial u^p}\left(\frac{g_{lk}}{\sqrt{g}}\right)\frac{\partial}{\partial u^i}+\frac{g_{lk}}{\sqrt{g}}\frac{\partial^2}{\partial u^i\partial u^p} - \frac{\mu}{\sqrt{g}}\frac{\partial}{\partial u^i} \right\}}A_j=M^{qj}=0
+\end{equation}
+The derivatives of $A_j$ are
+\begin{align}
+	A_j &= A_{jkmn} T_{km}(s)\cos(m\theta-nN_{fp}\phi)\\
+	\frac{\partial A_j}{\partial u^i} &=  A_{jkmn} \frac{\partial}{\partial u^i}\left[T_{km}(s)\cos(m\theta-nN_{fp}\phi)\right]\\
+	\frac{\partial^2 A_j}{\partial u^i\partial u^p} &=  A_{jkmn} \frac{\partial^2}{\partial u^i\partial u^p}\left[T_{km}(s)\cos(m\theta-nN_{fp}\phi)\right],
+\end{align}
+where summation signes over $k,m,n$ are implicit. In particular, we get
+\begin{align}
+	\frac{\partial A_j}{\partial s} &= A_{jkmn} T_{km}'(s)\cos(m\theta-nN_{fp}\phi)\\
+	\frac{\partial A_j}{\partial \theta} &= -A_{jkmn} T_{km}(s) m\sin(m\theta-nN_{fp}\phi)\\
+	\frac{\partial A_j}{\partial \phi} &= A_{jkmn} T_{km}(s)n\sin(m\theta-nN_{fp}\phi),
+\end{align}
+and
+\begin{align}
+	\frac{\partial^2 A_j}{\partial s\partial s} &= A_{jkmn} T_{km}''(s)\cos(m\theta-nN_{fp}\phi)\\
+	\frac{\partial^2 A_j}{\partial s\partial \theta} &= -A_{jkmn} T_{km}'(s) m\sin(m\theta-nN_{fp}\phi)\\
+	\frac{\partial^2 A_j}{\partial s\partial \phi} &= A_{jkmn} T_{km}'(s)n\sin(m\theta-nN_{fp}\phi)\\
+	\frac{\partial^2 A_j}{\partial \theta\partial \partial} &= -A_{jkmn} T_{km}(s)m^2\cos(m\theta-nN_{fp}\phi)\\
+	\frac{\partial^2 A_j}{\partial \theta\partial \phi} &= -A_{jkmn} T_{km}(s)mn\cos(m\theta-nN_{fp}\phi)\\
+	\frac{\partial^2 A_j}{\partial \phi\partial \phi} &= -A_{jkmn} T_{km}'(s)n^2\cos(m\theta-nN_{fp}\phi).
+\end{align}
+Similarly, we write the metric elements $g_{lk}$ and the jacobian $\sqrt{g}$ as Chebyshev-Fourier series,
+\begin{align}
+	g_{ij} &= g_{ijkmn}T_{km}(s)\cos(m\theta-nN_{fp}\phi) \\
+	\frac{1}{\sqrt{g}} &= j_{kmn}T_{km}(s)\cos(m\theta-nN_{fp}\phi)
+\end{align}
 
-% Derivatives of Eqs.(\ref{eq. bs app})-(\ref{eq. bz app}) with respect to $(s,\theta,\phi)$ are trivial. We have,
-% \begin{align}
-% 	\frac{\partial B^s}{\partial s} &= \frac{\partial}{\partial s}\left(\frac{1}{\sqrt{g}}\right)\sqrt{g}B^s \\
-% 	&+ \frac{1}{\sqrt{g}}\sum_{k=0}^{L_{rad}}\sum_{m=0}^{M_{pol}}\sum_{n=-N_{tor}}^{N_{tor}} -(mA_{l\phi kmn}+nA_{l\theta kmn})T_{km}'(s)\sin(m\theta-nN_{fp}\phi) \label{eq. dbsds app}\\
-% 	\frac{\partial B^\theta}{\partial s} &= \frac{\partial}{\partial s}\left(\frac{1}{\sqrt{g}}\right)\sqrt{g}B^\theta\\
-% 	&+ \frac{1}{\sqrt{g}}\sum_{k=0}^{L_{rad}}\sum_{m=0}^{M_{pol}}\sum_{n=-N_{tor}}^{N_{tor}} -A_{l\phi kmn}T_{km}'(s)\cos(m\theta-nN_{fp}\phi)\label{eq. dbtds app}\\
-% 	\frac{\partial B^\phi}{\partial s} &= \frac{\partial}{\partial s}\left(\frac{1}{\sqrt{g}}\right)\sqrt{g}B^\phi \\
-% 	&+ \frac{1}{\sqrt{g}}\sum_{k=0}^{L_{rad}}\sum_{m=0}^{M_{pol}}\sum_{n=-N_{tor}}^{N_{tor}} A_{l\phi kmn}T_{km}'(s)\cos(m\theta-nN_{fp}\phi).\label{eq. dbzds app}
-% \end{align}
 
 
