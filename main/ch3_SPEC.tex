@@ -547,7 +547,7 @@ Finally, one has to be careful about the truncation of the Force in Fourier spac
 We compare here the solution obtained by SPEC using the Henneberg representation to the one obtained using the standard representation. In addition, we plot the scalar force $|f|$ from Eq.(\ref{eq. l2-norm of the force in spec}), which goes to zero when the equilibrium is found, as a function of the number of force evaluation. 
 
 \subsubsection{Bean shaped tokamak}
-We first look at an axisymmetric configuration with a bean shaped cross-section, proposed by \citet{hirshmanOptimizedFourierRepresentations1985}. The boundary is described by
+We first look at an axisymmetric configuration with a bean shaped cross-section (see Figure \ref{fig. bean shaped tokamak geometry}), proposed by \citet{hirshmanOptimizedFourierRepresentations1985}. The boundary is described by
 \begin{align}
 	R(\theta,\zeta) &= -0.32+1.115\cos\theta+0.383\cos 2\theta-0.0912\cos 3\theta\\
 	&+0.0358\cos 4\theta-0.0164\cos 5\theta\\
@@ -562,6 +562,13 @@ or, using the Henneberg representation,
 	b(\zeta) &= 1.419\\
 	\alpha&=0.
 \end{align}
+\begin{figure}
+	\centering
+	\includegraphics[width=.8\linewidth]{images/HennebergRepresentation/BeanShape_modB_boundary.png}
+	\caption{Tokamak with bean shaped cross-section. Top: top view, bottom: side view. Colors indicate the magnetic field strength in vacuum.}
+	\label{fig. bean shaped tokamak geometry}
+\end{figure}
+
 The poincare section, rotational transform profile and force scalar are plotted on Figure \ref{fig. bean shape henneberg representation}. Both representations are able to find the same equilibrium; the inner volume interface is visually the same, and the rotational transform profiles are very close. Interestingly, we see that SPEC using the Henneberg representation (in blue) requires about twice more force evaluations to find the equilibrium.
 
 \begin{figure}
@@ -574,7 +581,7 @@ The poincare section, rotational transform profile and force scalar are plotted 
 
 
 \subsubsection{Circular cross-section, large torsion configuration}
-The second case of interest is a stellarator with circular cross-section and large magnetic torsion, described by
+The second case of interest is a stellarator with circular cross-section (see Figure \ref{fig. circular stellarator geometry}) and large magnetic torsion, described by
 \begin{align}
 	R(\theta,\zeta) &= 10 + 1.25\cos\theta + \cos(5\zeta)\\
 	Z(\theta,\zeta) &= -1.25\sin\theta - \sin(5\zeta), 
@@ -587,18 +594,25 @@ or, using the Henneberg representation,
 	b(\zeta) &= -1.25\\
 	\alpha &= 0.
 \end{align}
+\begin{figure}
+	\centering
+	\includegraphics[width=.8\linewidth]{images/HennebergRepresentation/CircularTorsion_modB_boundary.png}
+	\caption{Stellarator with circular cross-section and magnetic axis torsion. Top left: top view, bottom: side view. Colors indicate the magnetic field strength in vacuum.}
+	\label{fig. circular stellarator geometry}
+\end{figure}
+
 The poincare section, rotational transform profile and force scalar are plotted on Figure \ref{fig. circular stellarator henneberg represensation}. In this particular case, we see that the SPEC using the Henneberg representation performs better than SPEC with the standard representation. Indeed, SPEC could not find the equilibrium using the standard representation, while the SPEC could find it using the Henneberg representation. Note however that this particular configuration is an extreme case, where the torsion is enormous and generates, by itself, a rotational transform of $\iotabar\sim 5$! Nevertheless, this particular example shows that SPEC, using the standard representation, is having difficulties with configurations that includes torsion. 
 
 \begin{figure}
 	\centering
-	\includegraphics[width=\linewidth]{images/example-image-a.pdf}
+	\includegraphics[width=\linewidth]{images/HennebergRepresentation/CircularTorsion.png}
 	\caption{Circular cross-section stellarator with torsion. Left: Poincare section, with the volume interfaces highlighted in color. Middle: rotational transform profile, and right: scalar force as a function of the iteration number. Red: standard representation and blue: Henneberg representation.}
 	\label{fig. circular stellarator henneberg represensation}
 \end{figure}
 
 
 \subsubsection{Rotating ellipse}
-We now look at the case of a rotating ellipse, whose boundary is described by
+We now look at the case of a rotating ellipse (see Figure \ref{fig. rotating ellipse geometry}), whose boundary is described by
 \begin{align}
 	R(\theta,\zeta) &= 10 - 0.25\cos\theta - 1.25\cos(\theta-5\zeta)\\
 	Z(\theta,\zeta) &= -0.25\sin\theta + 1.25\sin(\theta-5\zeta),
@@ -611,11 +625,17 @@ or, using the Henneberg representation,
 	b(\zeta) &= 1\\
 	\alpha &= 0.5.
 \end{align}
+\begin{figure}
+	\centering
+	\includegraphics[width=.8\linewidth]{images/HennebergRepresentation/RotatingEllipse_modB_boundary.png}
+	\caption{Rotating ellipse. Top: top view, bottom: side view. Colors indicate the magnetic strength in vacuum}
+	\label{fig. rotating ellipse geometry}
+\end{figure}
 Again, the poincare section, rotational transform profile and force scalar are plotted on Figure \ref{fig. classical stellarator henneberg representation}. 
 
 \begin{figure}
 	\centering
-	\includegraphics[width=\linewidth]{images/example-image-a.pdf}
+	\includegraphics[width=\linewidth]{images/HennebergRepresentation/RotatingEllipse.png}
 	\caption{Classical stellarator. Left: Poincare section, with the volume interfaces highlighted in color. Middle: rotational transform profile, and right: scalar force as a function of the iteration number. Red: standard representation and blue: Henneberg representation.}
 	\label{fig classical stellarator henneberg representation}
 \end{figure}
