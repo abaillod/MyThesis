@@ -1,53 +1,9 @@
 \documentclass[my_thesis.tex]{subfiles}
 
 \begin{document}
+
 \chapter{3D magnetic equilibria}
-
-The description of a plasma starts with a mathematical model for its equilibrium. In this chapter, we discuss the phenomenology of magnetic field equilibrium, and what kind of field line topologies exist in 3D equilibria. We then discuss properties of different equilibrium mathematical models, namely the ideal MHD model, the Taylor state, and the MRxMHD model.
-
-\section{Magnetic field line topologies}
-Three dimensional magnetic fields are, in general, composed of  magnetic surfaces, magnetic islands and magnetic field line chaos (see Figure \ref{fig. topology examples}). Measurements in the Wendelstein-7X stellarator via injection of an electron beam in a dilute gas \citep{pedersenConfirmationTopologyWendelstein2016} showed experimentally the existance of magnetic surfaces (Figure \ref{fig w7x magnetic surface}) and of the edge magnetic island chain (Figure \ref{fig w7x magnetic island}).
-
-\begin{figure}%
-	\centering
-	\subfloat[Magnetic surface]{\label{fig w7x magnetic surface}\includegraphics[height=4.8cm]{images/Pedersen2016_MagneticSurface_W7X.pdf}}%
-	\qquad
-	\subfloat[Magnetic islands]{\label{fig w7x magnetic island}\includegraphics[height=4.8cm]{images/Pedersen2016_MagneticIsland_W7X.pdf}}
-	\caption{Measurement of the field line topology in W7-X via injection of an electron beam in a dilute gas \citep{pedersenConfirmationTopologyWendelstein2016}.}
-	\label{fig. w7x topology measurement}%
-\end{figure}
-
-Now, suppose that an equilibrium is given --- by that, we mean that the magnetic field $\mathbf{B}$ is known everywhere, \textit{i.e.} at any position $(r,\theta,\phi)$, where r is a radial coordinate, $\theta$ is a poloidal angle and $\phi$ is the usual cylindrical toroidal angle. To visually see the magnetic field line topologies, a Poincare section can be plotted. To do so, the field line is followed by solving the differential equation
-\begin{equation}
-	\frac{d\theta}{d\phi} = \frac{\mathbf{B}\cdot\nabla\theta}{\mathbf{B}\cdot\nabla\phi},
-\end{equation}
-with initial condition $r(0)=r_0$, $\theta(0)=\theta_0$ where $(r_0,\theta_0)$ are the initial field line position at $\phi=0$. An example of a field line followed on a magnetic surface is shown on Figure \ref{fig. field line tracing}. The field line is followed for multiple toroidal transits, and its position $(r_k,\theta_k)$ is saved whenever $\phi=2k\pi$, with $k\in\mathbb{N}$. The Poincare section is then plotted on the $(R,Z)$ plane. An example of a Poincare section with different field line topologies is shown on Figure \ref{fig topology examples}.
-
-\begin{figure}
-	\centering
-	\subfloat[][Field line]{\label{fig. field line tracing}\includegraphics[height=4cm]{images/3d_field_line_tracing.pdf}}
-	\hfill
-	\subfloat[][Poincare section]{\label{fig. topology examples}\includegraphics[height=4cm]{images/poincare_section_example.pdf}}
-	\caption{Example of field line tracing and Poincare section in a rotating ellipse. Left: 3D mesh of a magnetic surface (red) and a traced field line over two periods (blue). Right: Poincare section of multiple field lines, a magnetic surface (orange), a magnetic island (blue) and a chaotic field line (red).}
-	\label{fig poincare section}
-\end{figure}
-
-%Magnetic surfaces are toroidal surfaces on which the magnetic lays, \textit{i.e.} $\mathbf{B}\cdot\mathbf{n}=0$ with $\mathbf{n}$ a vector normal to the magnetic surface. In axisymmetric devices such as tokamaks, one can prove that nested magnetic surfaces exist everywhere, from the plasma edge to the magnetic axis, which is the innermost field line. Magnetic islands are formed when (i) the magnetic field is perturbed with a mode $\delta B_r \propto exp(i(m\theta-n\phi))$, with $(\theta,\phi)$ a poloidal and toroidal angle, and $m$, $n$ the poloidal and toroidal mode number, and (ii) the rotational transform is a rational number equal to $\iotabar=n/m$. Finally, magnetic field line chaos is formed when two or more island chains overlap --- this is the so-called Chirikov criterion \citep{Chirikov1979}. Further details about these magnetic field line topologies and their hamiltonian description can be found in the review paper by \citet{Meiss1992c} and references therein. 
-
-To accurately model and understand the physics in a stellarator, it is important to consider equilibria that allow magnetic islands and magnetic field line topologies. In what follows, we discuss important properties of the ideal \ac{MHD} model (section \ref{section ideal mhd}), the Taylor relaxation model (section \ref{section taylor state}) and of the \ac{MRxMHD} model (section \ref{section mrxmhd}).
-
-%At zeroth order, particle and energy confinement is obtained on magnetic surfaces; magnetic islands and magnetic field line chaos, on the other hand, may increase radial transport. This is not the full story; structures in regions occupied by chaotic field lines can potentially support pressure gradient \citep{Hudson2008}, but in general the transport in these regions will be greater than in regions occupied by magnetic surfaces. 
-
-% \begin{figure}
-% \centering
-% \includegraphics[width=\linewidth]{images/example-image-a.pdf}
-% \caption{Example of a magnetic surface, a magnetic island chain and magnetic field line chaos.}
-% \label{fig. topology examples}
-% \end{figure}
-
-%In the next sections, we will discuss different mathematical models that have been developed to describe 3D magnetic equilibria, \textit{i.e.} answering the question "\emph{Given a boundary, pressure and current profiles, what is the magnetic field in a plasma?}"
-
-
+The description of a plasma starts with a mathematical model for its equilibrium. In this chapter, we discuss properties of different equilibrium mathematical models, namely the ideal MHD model, the Taylor state, and the MRxMHD model.
 
 
 \section{Ideal MHD}
