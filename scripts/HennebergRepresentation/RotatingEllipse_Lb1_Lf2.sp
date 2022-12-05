@@ -11,17 +11,17 @@
  Nfp         =         5
  Nvol        =         2
  Mpol        =         6
- Ntor        =         7
- Lrad        =                12    12
+ Ntor        =         4
+ Lrad        =                14    12
  tflux       =   3.033538489388870E-01  1.000000000000000E+00
  pflux       =   0.000000000000000E+00 -2.040878894181875E-01
  helicity    =   2.036396095021530E-02  1.559429589793997E-03
  pscale      =   0.000000000000000E-03
  Ladiabatic  =         0
- pressure    =   1.000000000000000E+00  0.000000000000000E+00
+ pressure    =   0.000000000000000E+00  0.000000000000000E+00
  adiabatic   =   1.000000000000000E+00  0.000000000000000E+00
  mu          =  -2.429942657520279E-04 -1.606028675492643E-04
- Lconstraint =         0
+ Lconstraint =         3
  Isurf       =    0    0
  Ivolume     =    0     0
  pl          =                       0                      0                      0
@@ -45,7 +45,7 @@
 /
 &numericlist
  Linitialize =         1
- Ndiscrete   =         2
+ Ndiscrete   =         4
  Nquad       =        -1
  iMpol       =        -4
  iNtor       =        -4
