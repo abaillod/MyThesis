@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 
 plt.rcParams['text.usetex'] = True
 
-ii = 2
+ii = 4
 
 
 bean = ii==1

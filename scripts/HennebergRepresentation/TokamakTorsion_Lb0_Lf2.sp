@@ -104,7 +104,7 @@ Rbc(3,6)    =  0.000000000000000E+00 Zbs(3,6)    =  0.000000000000000E+00 Rbs(3,
 Rbc(4,6)    =  0.000000000000000E+00 Zbs(4,6)    =  0.000000000000000E+00 Rbs(4,6)    =  0.000000000000000E+00 Zbc(4,6)    =  0.000000000000000E+00
 /
 &numericlist
- Linitialize =         0
+ Linitialize =         1
  LautoinitBn =         1
  Lzerovac    =         0
  Ndiscrete   =         2
@@ -124,7 +124,7 @@ Rbc(4,6)    =  0.000000000000000E+00 Zbs(4,6)    =  0.000000000000000E+00 Rbs(4,
 /
 &locallist
  LBeltrami   =         4
- Linitgues   =         1
+ Linitgues   =        1
  Lmatsolver  =         1
  NiterGMRES  =       200
  LGMRESprec  =         1
