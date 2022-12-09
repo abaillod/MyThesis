@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 
 plt.rcParams['text.usetex'] = True
 
-ii = 1
+ii = 2
 
 
 bean = ii==1
@@ -61,7 +61,7 @@ if torsion:
     
     dbs_lb1.plot_iota(ax=ax[1],marker='x')
     dbs_lb0.plot_iota(ax=ax[1],marker='o',facecolor='none',edgecolor='r')
-    ax[1].set_ylim((3,5.5))
+    ax[1].set_ylim((0.42,0.5))
     ax[1].set_xlabel(r'$R$[m]', fontsize=ft)
     ax[1].set_ylabel(r'$\iota$',fontsize=ft+2)
     ax[1].tick_params(axis='both', labelsize=ft)
