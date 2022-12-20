@@ -450,11 +450,9 @@ to obtain $\nabla F_{FD}$, \textit{i.e.} a finite-difference estimate of the for
 In simple geometries, SPEC provides solutions to the MRxMHD equations in a fast and reliable way. For example, see the studies of \citet{Qu2021,Loizu2020} in slab geometry, or \citet{Kumar2021} in cylindrical geometries or \citet{Kumar2022} in some toroidal geometries. However, it is well known by SPEC users that any attempt in strongly shaped geometries will require, at best, a lot of work to help SPEC find a force-balanced equilibrium. In some extreme cases, SPEC does not find an equilibrium, which can either be the case if no solution exist to the equilibrium problem, or if the numerical problem is ill-posed. 
 
 
-One hypothesis is that the spectral condensation generates many local extrema in the parameter space, which causes the hybrid Powell method used by SPEC not to converge. One solution to this problem would be to choose a suitable poloidal angle $\theta_h$ and thus remove the spectral condensation. In this chapter, we will discuss the implementation of an alternative parametrization for the toroidal surfaces proposed by \citet{Henneberg2021}, which uses such a unique angle. 
+One hypothesis is that the spectral condensation generates many local extrema in the parameter space, which causes the hybrid Powell method used by SPEC not to converge. One solution to this problem would be to choose a suitable poloidal angle $\theta_h$ and thus remove the spectral condensation. Of course, there are an infinite number of choices for the poloidal angle $\theta_h$, and many have been proposed in the literature --- see, for example, \citet{hirshmanConvergentSpectralRepresentation1985}, \citet{hirshmanExplicitSpectrallyOptimized1998} and \citet{carlton-jonesComputingShapeGradient2021}. In this chapter, we will discuss the implementation of an alternative parametrization for the toroidal surfaces proposed by \citet{Henneberg2021}, which uses a poloidal angle optimal for representing elliptical surfaces. 
 
-{\color{red} Add examples. Show that SPEC works in vacuum -> Beltrami solver ok; but as soon as there is an interface, it fails.
-
-Short discussion on unique angle representation proposed in literature}
+{\color{red} Add examples. Show that SPEC works in vacuum -> Beltrami solver ok; but as soon as there is an interface, it fails.}
 
 
 

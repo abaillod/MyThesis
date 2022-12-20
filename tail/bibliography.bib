@@ -413,6 +413,22 @@
   file = {/Users/antoinebaillod/Zotero/storage/G5TIC5YJ/Cambon et al. - 2014 - Chaotic motion of charged particles in toroidal ma.pdf}
 }
 
+@article{carlton-jonesComputingShapeGradient2021,
+  title = {Computing the Shape Gradient of Stellarator Coil Complexity with Respect to the Plasma Boundary},
+  author = {{Carlton-Jones}, Arthur and Paul, Elizabeth J. and Dorland, William},
+  year = {2021},
+  month = apr,
+  journal = {Journal of Plasma Physics},
+  volume = {87},
+  number = {2},
+  pages = {905870222},
+  issn = {0022-3778, 1469-7807},
+  doi = {10.1017/S0022377821000386},
+  abstract = {Coil complexity is a critical consideration in stellarator design. The traditional two-step optimization approach, in which the plasma boundary is optimized for physics properties and the coils are subsequently optimized to be consistent with this boundary, can result in plasma shapes which cannot be produced with sufficiently simple coils. To address this challenge, we propose a method to incorporate considerations of coil complexity in the optimization of the plasma boundary. Coil complexity metrics are computed from the current potential solution obtained with the REGCOIL code (Landreman, Nucl. Fusion, vol. 57, 2017, 046003). While such metrics have previously been included in derivative-free fixed-boundary optimization (Drevlak et al., Nucl. Fusion, vol. 59, 2018, 016010), we compute the local sensitivity of these metrics with respect to perturbations of the plasma boundary using the shape gradient (Landreman \& Paul, Nucl. Fusion, vol. 58, 2018, 076023). We extend REGCOIL to compute derivatives of these metrics with respect to parameters describing the plasma boundary. In keeping with previous research on winding surface optimization (Paul et al., Nucl. Fusion, vol. 58, 2018, 076015), the shape derivatives are computed with a discrete adjoint method. In contrast with the previous work, derivatives are computed with respect to the plasma surface parameters rather than the winding surface parameters. To further reduce the resolution required to compute the shape gradient, we present a more efficient representation of the plasma surface which uses a single Fourier series to describe the radial distance from a coordinate axis and a spectrally condensed poloidal angle. This representation is advantageous over the standard cylindrical representation used in the VMEC code (Hirshman \& Whitson, Phys. Fluids, vol. 26, 1983, pp. 3553\textendash 3568), as it provides a uniquely defined poloidal angle, eliminating a null space in the optimization of the plasma surface. In comparison with previous spectral condensation methods (Hirshman \& Breslau, Phys. Plasmas, vol. 5, 1998, p. 2664), the modified poloidal angle is obtained algebraically rather than through the solution of a nonlinear optimization problem. The resulting shape gradient highlights features of the plasma boundary that are consistent with simple coils and can be used to couple coil and fixed-boundary optimization.},
+  langid = {english},
+  file = {/Users/antoinebaillod/Zotero/storage/2PM768QV/Carlton-Jones et al. - 2021 - Computing the shape gradient of stellarator coil c.pdf}
+}
+
 @article{Cary1985,
   title = {Pressure Induced Islands in Three-Dimensional Toroidal Plasma},
   author = {Cary, John R. and Kotschenreuther, M.},
@@ -467,6 +483,12 @@
   doi = {10.1016/0370-1573(79)90023-1},
   abstract = {The purpose of this review article is to demonstrate via a few simple models the mechanism for a very general, universal instability - the Arnold diffusion-which occurs in the oscillating systems having more than two degrees of freedom. A peculiar feature of this instability results in an irregular, or stochastic, motion of the system as if the latter were influenced by a random perturbation even though, in fact, the motion is governed by purely dynamical equations. The instability takes place generally for very special initial conditions (inside the so-called stochastic layers) which are, however, everywhere dense in the phase space of the systsm. The basic and simplest one of the models considered is that of a pendulum under an external periodic perturbation. This model represents the behavior of nonlinear oscillations near a resonance, including the phenomenon of the stochastic instability within the stochastic layer of resonance. All models are treated both analytically and numerically. Some general regulations concerning the stochastic instability are presented, including a general, semi-quantitative method-the overlap criterion-to estimate the conditions for this stochastic instability as well as its main characteristics. \textcopyright{} 1979.},
   file = {/Users/antoinebaillod/Zotero/storage/4RPC7WK8/Chirikov - 1979 - A universal instability of many-dimensional oscillator systems.pdf}
+}
+
+@misc{ComputingShapeGradient,
+  title = {Computing the Shape Gradient of Stellarator Coil Complexity with Respect to the Plasma Boundary | {{Journal}} of {{Plasma Physics}} | {{Cambridge Core}}},
+  howpublished = {https://www.cambridge.org/core/journals/journal-of-plasma-physics/article/computing-the-shape-gradient-of-stellarator-coil-complexity-with-respect-to-the-plasma-boundary/8A0ED88DD11BEA08C92B45B175A50DDE},
+  file = {/Users/antoinebaillod/Zotero/storage/H7QFU845/8A0ED88DD11BEA08C92B45B175A50DDE.html}
 }
 
 @article{Cooper2004,
@@ -797,6 +819,12 @@
   doi = {10.1063/5.0020743},
   abstract = {The new code DESC is presented to solve for fixed-boundary ideal magnetohydrodynamic equilibria in stellarators. The approach directly solves the equilibrium force balance as a system of nonlinear equations in the form f (x) = 0. The independent variables x represent nested magnetic flux surfaces expressed in the inverse representation with toroidal flux coordinates, and the equations f (x) quantify equilibrium force balance errors at discrete points in real space. Discretizing with global Fourier-Zernike basis functions properly treats the magnetic axis and minimizes the number of coefficients needed to describe the flux surfaces. The pseudospectral method provides great flexibility in where the errors are evaluated, and the system of equations is efficiently solved with a Newton-Raphson iteration. Equilibria are computed and compared against VMEC for both axisymmetric and non-axisymmetric examples. The results show fast convergence rates and solutions with low errors throughout the plasma volume.},
   file = {/Users/antoinebaillod/Zotero/storage/8F988U2T/Dudt, Kolemen_2020.pdf}
+}
+
+@misc{ExplicitSpectrallyOptimized,
+  title = {Explicit Spectrally Optimized {{Fourier}} Series for Nested Magnetic Surfaces: {{Physics}} of {{Plasmas}}: {{Vol}} 5, {{No}} 7},
+  howpublished = {https://aip.scitation.org/doi/10.1063/1.872954},
+  file = {/Users/antoinebaillod/Zotero/storage/FRITL33H/1.html}
 }
 
 @article{FerrandoiMargalet2004,
@@ -1451,6 +1479,35 @@
   abstract = {A new solver for rapidly obtaining magnetohydrodynamic (MHD) equilibria in toroidal systems in the presence of islands and stochastic regions is described. It is based on the Kulsrud-Kruskal MHD energy minimization principle. To carry out this minimization, small displacements are made around a convenient set of curvilinear coordinates obtained from a nearby three-dimensional equilibrium that assumes nested surfaces. Because the changes of the magnetic fields and pressure are small, corresponding to small changes in the initial magnetic and kinetic energies, solutions for the linearized perturbations can be used to rapidly and iteratively find lower energy states with magnetic islands. A physics-based preconditioner is developed to accelerate the convergence of the iterative procedure to obtain an ideal MHD equilibrium with broken magnetic surfaces (islands). \textcopyright{} 2011 American Institute of Physics.},
   isbn = {9781622763351},
   file = {/Users/antoinebaillod/Zotero/storage/HHUYXMFS/Hirshman et al. - 2008 - SIESTA A scalable iterative equilibrium solver for toroidal applications.pdf}
+}
+
+@article{hirshmanConvergentSpectralRepresentation1985,
+  title = {A Convergent Spectral Representation for Three-Dimensional Inverse Magnetohydrodynamic Equilibria},
+  author = {Hirshman, S. P. and Weitzner, H.},
+  year = {1985},
+  journal = {Physics of Fluids},
+  volume = {28},
+  number = {4},
+  pages = {1207},
+  issn = {00319171},
+  doi = {10.1063/1.864998},
+  langid = {english},
+  file = {/Users/antoinebaillod/Zotero/storage/XV4AVXXJ/Hirshman et Weitzner - 1985 - A convergent spectral representation for three-dim.pdf}
+}
+
+@article{hirshmanExplicitSpectrallyOptimized1998,
+  title = {Explicit Spectrally Optimized {{Fourier}} Series for Nested Magnetic Surfaces},
+  author = {Hirshman, S. P. and Breslau, J.},
+  year = {1998},
+  month = jul,
+  journal = {Physics of Plasmas},
+  volume = {5},
+  number = {7},
+  pages = {2664--2675},
+  issn = {1070-664X, 1089-7674},
+  doi = {10.1063/1.872954},
+  langid = {english},
+  file = {/Users/antoinebaillod/Zotero/storage/YGK69APA/Hirshman et Breslau - 1998 - Explicit spectrally optimized Fourier series for n.pdf}
 }
 
 @article{hirshmanOptimizedFourierRepresentations1985,
