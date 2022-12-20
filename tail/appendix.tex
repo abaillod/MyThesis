@@ -1,26 +1,5 @@
 \appendix
-\chapter{Analytical solution to force balance equations}
 
-\section{Ideal MHD}
-\label{appendix jxb=grad p solution}
-We solve here the ideal MHD equilibrium equations (\ref{equation perp force balance})-(\ref{equation div B ideal mhd}) in a cylinder or length $L$ and radius $a$. We work with cylindrical coordinate $(r,\theta,z)$. We assume that the cylinder boundary is a perfectly conducting wall, \textit{i.e.} $\mathbf{B}\cdot\nabla r=0$ at $r=a$. Assuming symmetries along $\theta$ and $z$ (equivalent to axisymmetry in a toroidal geometry), we directly get that $p=p(r)$, \textit{i.e.} isopressure surfaces are cylinders with constant radii. Since the magnetic field lies on constant pressure surfaces, axisymmetry implies the existence of magnetic surfaces everywhere.
-
-We now search for a solution to the equilibrium equation. One gets from equation (\ref{equation div B ideal mhd})
-\begin{align}
-\frac{1}{r}\frac{\partial}{\partial r}(r B_r) &= 0, 
-\end{align}
-which, once the boundary condition is applied, leads to $B_r=0$. In addition, exploiting Ampere's law, we write the current densities as
-\begin{align}
-	\mu_0J_r &= 0\\
-	\mu_0J_\theta &= -\frac{\partial B_z}{\partial r}\\
-	\mu_0J_z &= \frac{1}{r}\frac{\partial}{\partial r}(rB_\theta).
-\end{align} 
-Finally, taking the cross product of the current density with the magnetic field and rearranging the terms, one gets
-\begin{equation}
-	\frac{d}{dr}\left(\mu_0p + \frac{B_\theta^2 + B_z^2}{2}\right) + \frac{B_\theta^2}{r} = 0.
-\end{equation}
-
-The equilibrium is thus completely determined if one provides (i) a pressure profile $p(r)$ and (ii) a constraint on either the poloidal or toroidal magnetic field --- for example by providing the poloidal flux profile $\psi_p(r)$ or the rotational transform profile $\iotabar(r)$.
 
 
 \chapter{Linear relation between surface currents and poloidal fluxes}\label{appA1}
@@ -28,10 +7,10 @@ The equilibrium is thus completely determined if one provides (i) a pressure pro
 In this appendix we show the linear relation between the surface currents (\ref{eq.surf_current}) and the poloidal fluxes in an \ac{MRxMHD} equilibrium. We rewrite here Eq.(\ref{eq.surf_current}) for convenience,
 
 \begin{equation}
-	\mu_0I^s_{l,\phi} = 2\pi\left[\left[\tilde{B}_\theta\right]\right]_l.
+	\mu_0I^s_{l,\zeta} = 2\pi\left[\left[\tilde{B}_\theta\right]\right]_l.
 \end{equation}
 
-We use general coordinates notation, with $u^i\equiv\{s,\theta,\phi\}$, $\{\nabla s,\nabla\theta,\nabla\phi\}$ the contravariant basis, and $\mathbf{e_i}\equiv\{\mathbf{e_s},\mathbf{e_\theta},\mathbf{e_\phi}\}$ the covariant basis. This derivation is local to a volume and we drop the subscript $l$ everywhere for simplicity.
+We use general coordinates notation, with $u^i\equiv\{s,\theta,\zeta\}$, $\{\nabla s,\nabla\theta,\nabla\zeta\}$ the contravariant basis, and $\mathbf{e_i}\equiv\{\mathbf{e_s},\mathbf{e_\theta},\mathbf{e_\zeta}\}$ the covariant basis. This derivation is local to a volume and we drop the subscript $l$ everywhere for simplicity.
 
 We first show that the surface currents depend linearly on the vector potential degrees of freedom $\mathbf{a}$. The contravariant components of the magnetic field are obtained from $\nabla\times\mathbf{A}=\mathbf{B}$,
 \begin{equation}
@@ -40,14 +19,14 @@ We first show that the surface currents depend linearly on the vector potential 
 where  $\epsilon^{ijk}$ is the Levi-Civita tensor, $\sqrt{g}$ is the jacobian, and the Einstein summation convention has been used. The covariant component of the magnetic field can then easily be expressed by $B_\theta = g_{k\theta}B^k$. The $m=n=0$ Fourier mode of $B_\theta$ is then
 
 \begin{equation}
-	\tilde{B}_\theta = \frac{1}{S}\int_0^{2\pi}\int_0^{2\pi} g_{k\theta}\epsilon^{ijk}\frac{\partial A_j}{\partial u^i}|\nabla\psi_t| d\theta d\phi, \label{eq.AppA1.1}
+	\tilde{B}_\theta = \frac{1}{S}\int_0^{2\pi}\int_0^{2\pi} g_{k\theta}\epsilon^{ijk}\frac{\partial A_j}{\partial u^i}|\nabla\psi_t| d\theta d\zeta, \label{eq.AppA1.1}
 \end{equation}
 with $S$ the total area of the flux surface, which depends only on geometrical quantities. Derivatives of $A_j$ are
 
 \begin{align}
-	\frac{\partial A_j}{\partial s} &= \sum_{m,n}\sum_{k=0}^{L_{rad}} A_{i,k,m,n}T'_k(s)\cos(m\theta-nN_p\phi) \label{eq.AppA1.2} \\
-	\frac{\partial A_j}{\partial \theta} &= \sum_{m,n}\sum_{k=0}^{L_{rad}} -mA_{i,k,m,n}T_k(s)\sin(m\theta-nN_p\phi) \\
-	\frac{\partial A_j}{\partial \phi} &= \sum_{m,n}\sum_{k=0}^{L_{rad}} nN_pA_{i,k,m,n}T_k(s)\sin(m\theta-nN_p\phi) , \label{eq.AppA1.3}
+	\frac{\partial A_j}{\partial s} &= \sum_{m,n}\sum_{k=0}^{L_{rad}} A_{i,k,m,n}T'_k(s)\cos(m\theta-nN_p\zeta) \label{eq.AppA1.2} \\
+	\frac{\partial A_j}{\partial \theta} &= \sum_{m,n}\sum_{k=0}^{L_{rad}} -mA_{i,k,m,n}T_k(s)\sin(m\theta-nN_p\zeta) \\
+	\frac{\partial A_j}{\partial \zeta} &= \sum_{m,n}\sum_{k=0}^{L_{rad}} nN_pA_{i,k,m,n}T_k(s)\sin(m\theta-nN_p\zeta) , \label{eq.AppA1.3}
 \end{align}
 where the prime denotes the derivative with respect to the main argument. Equations (\ref{eq.AppA1.1}) and (\ref{eq.AppA1.2})-(\ref{eq.AppA1.3}) combined show the linear dependence of $\tilde{B}_\theta$ on $\mathbf{a}$. Finally, the Beltrami equation (\ref{eq.linearized_beltrami_system}) provides a linear relation between $\mathbf{a}$ and $\{\psi_p,\psi_t,\mu\}$. All relations being linear, this shows that the surface currents depend linearly on the poloidal and toroidal magnetic fluxes.
 
@@ -67,10 +46,10 @@ with the matrix $\mathbf{M}_{Fr}$,
 		\vdots  & \ddots  & \ddots & \ddots & \ddots & 0\\
 		0 & 0 & -\dfrac{\partial \tilde{B}^+_{\theta,N_{vol}-1}}{\partial{\psi_{p,N_{vol}-1}}} & \dfrac{\partial \tilde{B}^-_{\theta,N_{vol}}}{\partial{\psi_{p,N_{vol}}}} & 0 & 0 \\
 		\vdots & \cdots & 0 & -\dfrac{\partial \tilde{B}^+_{\theta,N_{vol}}}{\partial{\psi_{p,N_{vol}}}} & \dfrac{\partial \tilde{B}^-_{\theta,V}}{\partial{\psi_{p,V}}} & \dfrac{\partial \tilde{B}^-_{\theta,V}}{\partial{\psi_{t,V}}} \\
-		0 & \cdots & \cdots & 0 & \dfrac{\partial \tilde{B}_{\phi,V}^-}{\partial \psi_{p,V}} & \dfrac{\partial \tilde{B}_{\phi,V}^-}{\partial \psi_{t,V}}
+		0 & \cdots & \cdots & 0 & \dfrac{\partial \tilde{B}_{\zeta,V}^-}{\partial \psi_{p,V}} & \dfrac{\partial \tilde{B}_{\zeta,V}^-}{\partial \psi_{t,V}}
 	\end{bmatrix},
 \end{equation}
-with $\tilde{B}^-_{\phi,V}$ the $m=n=0$ Fourier mode of the covariant toroidal magnetic field on the plasma boundary outer side. Regarding Eq.(\ref{eq.NewtonStep_Solution}), no changes are needed in the plasma volumes. In the vacuum region, however, the toroidal flux is not an input and an additional term is needed,
+with $\tilde{B}^-_{\zeta,V}$ the $m=n=0$ Fourier mode of the covariant toroidal magnetic field on the plasma boundary outer side. Regarding Eq.(\ref{eq.NewtonStep_Solution}), no changes are needed in the plasma volumes. In the vacuum region, however, the toroidal flux is not an input and an additional term is needed,
 
 \begin{equation}
 	A_{V,i} = \overbar{A_{V,i}} - \frac{\partial {A_{V,i}}}{\partial {\psi_{p,V}}} (\overbar{\psi_{p,V}} - \psi_{p,V}) - \frac{\partial {A_{V,i}}}{\partial {\psi_{t,V}}} (\overbar{\psi_{t,V}} - \psi_{t,V}),
@@ -84,7 +63,7 @@ Regarding the force gradient, the derivative of the toroidal flux with respect t
 An additional equation is required for $\dfrac{d\psi_{t,V}}{dx_i}$, and is provided by
 
 \begin{equation}
-	\frac{dI_{coil}}{dx_i} = \frac{2\pi}{\mu_0}\left( \frac{\partial  \tilde{B}^+_{V,\phi}}{\partial x_i} + \frac{\partial  \tilde{B}^+_{V,\phi}}{\partial \psi_{p,V}}\frac{\partial\psi_{p,V}}{\partial x_i} +  \frac{\partial  \tilde{B}^+_{V,\phi}}{\partial \psi_{t,V}}\frac{\partial \psi_{t,V}}{\partial x_i} \right)   =0,
+	\frac{dI_{coil}}{dx_i} = \frac{2\pi}{\mu_0}\left( \frac{\partial  \tilde{B}^+_{V,\zeta}}{\partial x_i} + \frac{\partial  \tilde{B}^+_{V,\zeta}}{\partial \psi_{p,V}}\frac{\partial\psi_{p,V}}{\partial x_i} +  \frac{\partial  \tilde{B}^+_{V,\zeta}}{\partial \psi_{t,V}}\frac{\partial \psi_{t,V}}{\partial x_i} \right)   =0,
 \end{equation}
 leading to
 
@@ -94,7 +73,7 @@ leading to
 		\dfrac{\partial \tilde{B}^+_{\theta,1}}{\partial x_i} - \dfrac{\partial \tilde{B}^-_{\theta,2}}{\partial x_i} \\
 		\vdots \\
 		\dfrac{\partial \tilde{B}^+_{\theta,N_{vol}} } {\partial x_i} - \dfrac{\partial \tilde{B}^-_{\theta,V}}{\partial x_i} \\
-		-\dfrac{\partial\tilde{B}^-_{\phi,V}}{\partial x_i}
+		-\dfrac{\partial\tilde{B}^-_{\zeta,V}}{\partial x_i}
 	\end{bmatrix}
 \end{equation}
 
@@ -104,9 +83,9 @@ leading to
 
 The solution to the Beltrami equation (\ref{eq.BeltramiEquation}) in the $l^{\text{th}}$ volume of an axisymmetric cylinder is
 	\begin{equation}
-		\mathbf{B}_l = \left[c_{l,1}rJ_1(\mu_l r) + c_{l,2}rY_1(\mu_lr)\right] \nabla\theta + \left[c_{l,1}J_0(\mu_l r) + c_{l,2}Y_0(\mu_lr)\right] \nabla\phi,
+		\mathbf{B}_l = \left[c_{l,1}rJ_1(\mu_l r) + c_{l,2}rY_1(\mu_lr)\right] \nabla\theta + \left[c_{l,1}J_0(\mu_l r) + c_{l,2}Y_0(\mu_lr)\right] \nabla\zeta,
 \end{equation}
-where the usual $(r,\theta,\phi)$ cylindrical coordinate system has been used, $J_i$ and $Y_i$ are the Bessel functions of the $i^\text{th}$ order of the first and second kind, respectively, and $c_{l,1}$, $c_{l,2}$ are integration constants. Here $\nabla\theta$ and $\nabla\phi$ are the contravariant basis vectors.
+where the usual $(r,\theta,\zeta)$ cylindrical coordinate system has been used, $J_i$ and $Y_i$ are the Bessel functions of the $i^\text{th}$ order of the first and second kind, respectively, and $c_{l,1}$, $c_{l,2}$ are integration constants. Here $\nabla\theta$ and $\nabla\zeta$ are the contravariant basis vectors.
 
 In addition, since $B_\theta$ must vanish at the origin, we have that $c_{1,2}=0$. Indeed, the asymptotic expansion of $Y_1(x)$ close to $x=0$ gives \citep{abramowitzHandbookMathematicalFunctions1964}
 
@@ -115,18 +94,18 @@ In addition, since $B_\theta$ must vanish at the origin, we have that $c_{1,2}=0
 \end{equation}
 which is only zero if $c_{1,2}=0$. 
 
-We consider now the case of a screw pinch with three inner volumes, $N_{vol}=3$. The assumed constrained profiles are the toroidal flux $\{\psi_{t,l}\}_{l=1,2,3}$, the volume current $\{I^{v}_{l,\phi}\}_{l=1,2,3}$ and the surface current $\{I^{s}_{l,\phi}\}_{l=1,2}$. The constraint on the toroidal flux is
+We consider now the case of a screw pinch with three inner volumes, $N_{vol}=3$. The assumed constrained profiles are the toroidal flux $\{\psi_{t,l}\}_{l=1,2,3}$, the volume current $\{I^{v}_{l,\zeta}\}_{l=1,2,3}$ and the surface current $\{I^{s}_{l,\zeta}\}_{l=1,2}$. The constraint on the toroidal flux is
 
 \begin{align}
-	\psi_{t,l} &= \iint_{S_{l,\phi}} \mathbf{B}\cdot\nabla\phi \sqrt{g} dr d\theta\\
+	\psi_{t,l} &= \iint_{S_{l,\zeta}} \mathbf{B}\cdot\nabla\zeta \sqrt{g} dr d\theta\\
 	&= \int_{R_{l-1}}^{R_l} dr \int_0^{2\pi} d\theta \left[ c_{l,1} J_0(\mu_l r) r + c_{l,2} Y_0(\mu_l r)r \right]\\
 	&\equiv 2\pi c_{l,1} \bar{J}_l + 2\pi c_{l,2} \bar{Y}_l,
 \end{align}
-where $\sqrt{g}=r$ is the jacobian and $S_{l,\phi}$ is a constant-$\phi$ surface in volume $l$. The Bessel function integrals have been renamed as $\bar{J}_l$ and $\bar{Y}_l$, and $R_l$ is the radius of the $l^{\text{th}}$ interface. The constraints on the currents lead to
+where $\sqrt{g}=r$ is the jacobian and $S_{l,\zeta}$ is a constant-$\zeta$ surface in volume $l$. The Bessel function integrals have been renamed as $\bar{J}_l$ and $\bar{Y}_l$, and $R_l$ is the radius of the $l^{\text{th}}$ interface. The constraints on the currents lead to
 
 \begin{align}
-	\mu_0I^{v}_{l,\phi} &= \frac{\mu_l}{\mu_0} \psi_{t,l}\\
-	\mu_0I^{s}_{l,\phi} &= 2\pi R_l \left[ c_{l+1,1}J_1(\mu_{l+1}R_l) - c_{l,1}J_1(\mu_{l}R_l) + c_{l+1,2}Y_1(\mu_{l+1}R_l) -
+	\mu_0I^{v}_{l,\zeta} &= \frac{\mu_l}{\mu_0} \psi_{t,l}\\
+	\mu_0I^{s}_{l,\zeta} &= 2\pi R_l \left[ c_{l+1,1}J_1(\mu_{l+1}R_l) - c_{l,1}J_1(\mu_{l}R_l) + c_{l+1,2}Y_1(\mu_{l+1}R_l) -
 	c_{l,2}Y_1(\mu_{l}R_l)\right],
 \end{align}
 Solving for $\{c_{l,1},c_{l,2}\}$ is equivalent to solving the linear system
@@ -175,85 +154,85 @@ where the $'$ denotes a derivative with respect to the function argument, and al
 
 \chapter{Boozer coordinates}
 \label{appendix boozer coordinates}
-In this appendix, we follow \citet{Helander2014} to derive a transformation from general toroidal coordinates $(p,\theta,\phi)$, where $p$ is the pressure, and $(\theta,\phi)$ are general poloidal and toroidal angles, to boozer coordinates $(\psi_t,\theta_b,\phi_b)$, where $\psi_t$ is the toroidal flux and $(\theta_b,\phi_b)$ are the poloidal and toroidal Boozer angles. We start by considering the force balance equation of ideal MHD, \textit{i.e.} equation (\ref{equation perp force balance}), which implies that $\mathbf{B}\cdot\nabla p =0$. The magnetic field can thus be written as
+In this appendix, we follow \citet{Helander2014} to derive a transformation from general toroidal coordinates $(p,\theta,\zeta)$, where $p$ is the pressure, and $(\theta,\zeta)$ are general poloidal and toroidal angles, to boozer coordinates $(\psi_t,\theta_b,\zeta_b)$, where $\psi_t$ is the toroidal flux and $(\theta_b,\zeta_b)$ are the poloidal and toroidal Boozer angles. We start by considering the force balance equation of ideal MHD, \textit{i.e.} equation (\ref{equation perp force balance}), which implies that $\mathbf{B}\cdot\nabla p =0$. The magnetic field can thus be written as
 \begin{equation}
-	\mathbf{B} = B_1(p,\theta,\phi)\nabla p\times\nabla\theta + B_2(p,\theta,\phi)\nabla\phi\times\nabla p.
+	\mathbf{B} = B_1(p,\theta,\zeta)\nabla p\times\nabla\theta + B_2(p,\theta,\zeta)\nabla\zeta\times\nabla p.
 \end{equation}
 We derive 
 \begin{align}
-	\nabla\cdot[B_1\nabla p \times\nabla\theta] &= \frac{\partial B_1}{\partial \phi}\nabla\phi\cdot(\nabla p \times\nabla\theta)\\
-	\nabla\cdot[B_2\nabla\phi\times\nabla p] &= \frac{\partial B_2}{\partial \phi}\nabla\phi\cdot(\nabla p \times\nabla\theta),
+	\nabla\cdot[B_1\nabla p \times\nabla\theta] &= \frac{\partial B_1}{\partial \zeta}\nabla\zeta\cdot(\nabla p \times\nabla\theta)\\
+	\nabla\cdot[B_2\nabla\zeta\times\nabla p] &= \frac{\partial B_2}{\partial \zeta}\nabla\zeta\cdot(\nabla p \times\nabla\theta),
 \end{align}
 which, according to the equation $\nabla\times\mathbf{B}=0$, imply
 \begin{equation}
-	\left(\frac{\partial B_1}{\partial\phi}+\frac{\partial B_2}{\partial \theta}\right) \nabla p \cdot(\nabla\theta\times\nabla\phi)=0.
+	\left(\frac{\partial B_1}{\partial\zeta}+\frac{\partial B_2}{\partial \theta}\right) \nabla p \cdot(\nabla\theta\times\nabla\zeta)=0.
 \end{equation}
-As we assume our coordinates not to be degenerate, \textit{i.e.} the inverse jacobian never cancels, $\nabla p \cdot(\nabla\theta\times\nabla\phi) = 1/\sqrt{g} \neq 0$, we deduce $\partial B_1/\partial\phi + \partial B_2/\partial\theta =0$. Integrating over a poloidal loop, and leveraging the $2\pi$ periodicity of $\mathbf{B}$ on $\theta$, we get that
+As we assume our coordinates not to be degenerate, \textit{i.e.} the inverse jacobian never cancels, $\nabla p \cdot(\nabla\theta\times\nabla\zeta) = 1/\sqrt{g} \neq 0$, we deduce $\partial B_1/\partial\zeta + \partial B_2/\partial\theta =0$. Integrating over a poloidal loop, and leveraging the $2\pi$ periodicity of $\mathbf{B}$ on $\theta$, we get that
 \begin{align}
-	{}&\frac{\partial}{\partial\phi} \int_0^{2\pi} B_1d\theta =0\qquad\forall\{p,\phi\}\\
+	{}&\frac{\partial}{\partial\zeta} \int_0^{2\pi} B_1d\theta =0\qquad\forall\{p,\zeta\}\\
 	\text{Thus}\qquad &\int_0^{2\pi}B_1 d\theta = g(p)\\
 	\text{and}\qquad&B_1=\frac{\partial f}{\partial\theta} + \frac{g(p)}{2\pi}.
 \end{align}
-with $f=f(p,\theta,\phi)$ and $g=g(p)$ two functions. Similarly, we get for $B_2$,
+with $f=f(p,\theta,\zeta)$ and $g=g(p)$ two functions. Similarly, we get for $B_2$,
 \begin{equation}
-	B_2 = -\frac{\partial f}{\partial \phi} + \frac{h(p)}{2\pi},
+	B_2 = -\frac{\partial f}{\partial \zeta} + \frac{h(p)}{2\pi},
 \end{equation}
-with $h=h(p)$ another function. Defining $\psi_t'(p)=g(p)/2\pi$, $\psi_p'(p)=h(p)/2\pi$ and $\lambda=f(p,\theta,\phi)/\psi_t'(p)$, we get
+with $h=h(p)$ another function. Defining $\psi_t'(p)=g(p)/2\pi$, $\psi_p'(p)=h(p)/2\pi$ and $\lambda=f(p,\theta,\zeta)/\psi_t'(p)$, we get
 \begin{equation}
-	\mathbf{B} = \left(1=\frac{\partial\lambda}{\partial\theta}\right)\psi_t'(p)\nabla p\times\nabla\theta + \left(\psi_p'(p)-\psi_t'(p)\frac{\partial\lambda}{\partial\phi}\right)\nabla\phi\times\nabla p.
+	\mathbf{B} = \left(1=\frac{\partial\lambda}{\partial\theta}\right)\psi_t'(p)\nabla p\times\nabla\theta + \left(\psi_p'(p)-\psi_t'(p)\frac{\partial\lambda}{\partial\zeta}\right)\nabla\zeta\times\nabla p.
 \end{equation}
 We define now the \emph{straight field line angle} $\theta_s$ as 
 \begin{equation}
 	\theta_s = \theta + \lambda.
 \end{equation}
-Using the \emph{straight field line coordinates} $(\psi_t,\theta_s,\phi)$, the magnetic field can be written as
+Using the \emph{straight field line coordinates} $(\psi_t,\theta_s,\zeta)$, the magnetic field can be written as
 \begin{equation}
-	\mathbf{B}=\nabla\psi_t\times\nabla\theta_s + \nabla\phi\times\nabla\psi_t. \label{eq.magnetic field covariant}
+	\mathbf{B}=\nabla\psi_t\times\nabla\theta_s + \nabla\zeta\times\nabla\psi_t. \label{eq.magnetic field covariant}
 \end{equation}
-It can be easily verified that the functions $\psi_t(p)$ and $\psi_p(p)$ are the toroidal and poloidal fluxes respectively. The straight field line coordinates have the property that magnetic field lines are straight when plotted in the $(\theta_s,\phi)$ plane --- indeed, the rotational transform is defined as $\iotabar=d\psi_p/d\psi_t$, and since the poloidal flux depends on the toroidal flux only, $\iotabar=\iotabar(\psi_t)$. We thus have
+It can be easily verified that the functions $\psi_t(p)$ and $\psi_p(p)$ are the toroidal and poloidal fluxes respectively. The straight field line coordinates have the property that magnetic field lines are straight when plotted in the $(\theta_s,\zeta)$ plane --- indeed, the rotational transform is defined as $\iotabar=d\psi_p/d\psi_t$, and since the poloidal flux depends on the toroidal flux only, $\iotabar=\iotabar(\psi_t)$. We thus have
 \begin{equation}
-	\iotabar(\psi_t) = \frac{\nabla\psi_p}{\nabla\psi_t} = \frac{(\nabla\theta_s\times\nabla\phi)\cdot\nabla\psi_p}{(\nabla\theta_s\times\nabla\phi)\cdot\nabla\psi_t} = \frac{(\nabla\phi\times\nabla\psi_p)\cdot\nabla\theta_s}{(\nabla\psi_t\times\nabla\theta_s)\cdot\nabla\phi} = \frac{\mathbf{B}\cdot\nabla\theta_s}{\mathbf{B}\cdot\nabla\phi} = \left.\frac{d\theta_s}{d\phi}\right|_{\text{along }\mathbf{B}}
+	\iotabar(\psi_t) = \frac{\nabla\psi_p}{\nabla\psi_t} = \frac{(\nabla\theta_s\times\nabla\zeta)\cdot\nabla\psi_p}{(\nabla\theta_s\times\nabla\zeta)\cdot\nabla\psi_t} = \frac{(\nabla\zeta\times\nabla\psi_p)\cdot\nabla\theta_s}{(\nabla\psi_t\times\nabla\theta_s)\cdot\nabla\zeta} = \frac{\mathbf{B}\cdot\nabla\theta_s}{\mathbf{B}\cdot\nabla\zeta} = \left.\frac{d\theta_s}{d\zeta}\right|_{\text{along }\mathbf{B}}
 \end{equation}
-\textit{i.e.} field lines are straight in the $(\theta_s,\phi)$ plane. Here, $B^i$ is the contravariant componant of the magnetic field.
+\textit{i.e.} field lines are straight in the $(\theta_s,\zeta)$ plane. Here, $B^i$ is the contravariant componant of the magnetic field.
 
 Equation (\ref{eq.magnetic field covariant}) is the covariant representation of the magnetic field in straight field line coordinates. Leveraging the charge conservation equation $\nabla\cdot\mathbf{J}=0$ and $\nabla\times\mathbf{B}=\mathbf{J}$, one can derive a contravariant representation. We start by noticing that the force balance equation (\ref{equation perp force balance}) implies that $\mathbf{J}\cdot\nabla p =0$. Using the same reasoning as for the magnetic field, we can write
 \begin{equation}
-	\mathbf{J}=J_1\nabla\psi_t\times\nabla\theta_s + J_2\nabla\phi\times\nabla\psi_t.
+	\mathbf{J}=J_1\nabla\psi_t\times\nabla\theta_s + J_2\nabla\zeta\times\nabla\psi_t.
 \end{equation}
 Charge conservation implies
 \begin{align}
-	J_1(\psi_t,\theta_s,\phi) &= I'(\psi_t) - \frac{\partial K}{\partial \theta_s}\\
-	J_2(\psi_t,\theta_s,\phi) &= -G'(\psi_t) + \frac{\partial K}{\partial \phi},
+	J_1(\psi_t,\theta_s,\zeta) &= I'(\psi_t) - \frac{\partial K}{\partial \theta_s}\\
+	J_2(\psi_t,\theta_s,\zeta) &= -G'(\psi_t) + \frac{\partial K}{\partial \zeta},
 \end{align}
-with $I=I(\psi_t)$ and $G=G(\psi_t)$ two functions that depend only on the toroidal flux and $K=K(\psi_t,\theta_s,\phi)$ another function that depends on the position. Now, we notice that the curl of $I\nabla\theta_s + G\nabla\phi + K\nabla\psi_t$ gives
+with $I=I(\psi_t)$ and $G=G(\psi_t)$ two functions that depend only on the toroidal flux and $K=K(\psi_t,\theta_s,\zeta)$ another function that depends on the position. Now, we notice that the curl of $I\nabla\theta_s + G\nabla\zeta + K\nabla\psi_t$ gives
 \begin{equation}
-	\nabla\times(I\nabla\theta_s + G\nabla\phi + K\nabla\psi_t) = \left(I'-\frac{\partial K}{\partial \theta_s}\right) \nabla\psi_t\times\nabla\theta_s + \left(-G'+\frac{\partial K}{\partial \phi}\right) \nabla\psi_t\times\nabla\phi.
+	\nabla\times(I\nabla\theta_s + G\nabla\zeta + K\nabla\psi_t) = \left(I'-\frac{\partial K}{\partial \theta_s}\right) \nabla\psi_t\times\nabla\theta_s + \left(-G'+\frac{\partial K}{\partial \zeta}\right) \nabla\psi_t\times\nabla\zeta.
 \end{equation}
 We can thus identify
 \begin{align}
 	J_1 &= I'-\frac{\partial K}{\partial \theta_s}\\
-	J_2 &= -G'+\frac{\partial K}{\partial \phi}\\
-	\mathbf{B} &= I\nabla\theta_s + G\nabla\phi + K\nabla\psi_t + \nabla H, \label{eq. contravariant magnetic field}
+	J_2 &= -G'+\frac{\partial K}{\partial \zeta}\\
+	\mathbf{B} &= I\nabla\theta_s + G\nabla\zeta + K\nabla\psi_t + \nabla H, \label{eq. contravariant magnetic field}
 \end{align}
-where $H=H(\psi_t,\theta_s,\phi)$ is an integration constant. Equation (\ref{eq. contravariant magnetic field}) is the contravariant representation of the magnetic field in straight field line coordinates. Note that $I$ can easily be identified as the total toroidal current enclosed by the magnetic surface labelled by $\psi_t$ and $G$ as the total poloidal current outside the magnetic surface labelled by $\psi_t$.
+where $H=H(\psi_t,\theta_s,\zeta)$ is an integration constant. Equation (\ref{eq. contravariant magnetic field}) is the contravariant representation of the magnetic field in straight field line coordinates. Note that $I$ can easily be identified as the total toroidal current enclosed by the magnetic surface labelled by $\psi_t$ and $G$ as the total poloidal current outside the magnetic surface labelled by $\psi_t$.
 
-In the straight field line coordinates derived above, the toroidal angle $\phi$ is still completely general --- a straight field line poloidal angle $\theta_s$ exist for any choice of toroidal angle $\phi$. There is however a specific choice of toroidal angle $\phi_b$, called the Boozer angle, for which $H=0$. To derive it, we define a function $\omega=\omega(\psi_t,\theta_s,\phi)$ and the transformation
+In the straight field line coordinates derived above, the toroidal angle $\zeta$ is still completely general --- a straight field line poloidal angle $\theta_s$ exist for any choice of toroidal angle $\zeta$. There is however a specific choice of toroidal angle $\zeta_b$, called the Boozer angle, for which $H=0$. To derive it, we define a function $\omega=\omega(\psi_t,\theta_s,\zeta)$ and the transformation
 \begin{align}
 	\theta_b &= \theta_s -\iotabar\omega\\
-	\phi_b &= \phi - \omega.
+	\zeta_b &= \zeta - \omega.
 \end{align}
 Note that
 \begin{align}
-	\mathbf{B} &= \nabla\psi_t\times\nabla\theta_s + \nabla\phi\times\nabla\psi_p\\
-	&= \nabla\psi_t\times\nabla(\theta_b+\iotabar\omega) + \nabla(\phi_b+\omega)\times\nabla\psi_p\\
-	&= \nabla\psi_t\times\nabla\theta_b + \nabla\phi_b\times\nabla\psi_p + \underbrace{\frac{d\psi_p}{d\psi_t}\nabla\psi_t\times\nabla\omega - \nabla\psi_p\times\nabla\omega}_{=0}\\
-	&= \nabla\psi_t\times\nabla\theta_b + \nabla\phi_b\times\nabla\psi_p,
+	\mathbf{B} &= \nabla\psi_t\times\nabla\theta_s + \nabla\zeta\times\nabla\psi_p\\
+	&= \nabla\psi_t\times\nabla(\theta_b+\iotabar\omega) + \nabla(\zeta_b+\omega)\times\nabla\psi_p\\
+	&= \nabla\psi_t\times\nabla\theta_b + \nabla\zeta_b\times\nabla\psi_p + \underbrace{\frac{d\psi_p}{d\psi_t}\nabla\psi_t\times\nabla\omega - \nabla\psi_p\times\nabla\omega}_{=0}\\
+	&= \nabla\psi_t\times\nabla\theta_b + \nabla\zeta_b\times\nabla\psi_p,
 \end{align}
-\textit{i.e.} the angles $(\theta_b,\phi_b)$ are also straight field line angles. Similarly, 
+\textit{i.e.} the angles $(\theta_b,\zeta_b)$ are also straight field line angles. Similarly, 
 \begin{align}
-	\mathbf{B} &= I\nabla(\theta_b+\iotabar\omega) + G\nabla(\phi_b+\omega) + K \nabla\psi_t + \nabla H\\
-	&= I\nabla\theta_b + G\nabla\phi_b + \left[K-\omega\left(\iotabar\frac{dI}{d\psi_t}+\frac{dG}{d\psi_t}\right)\right]\nabla\psi_t + \nabla\left[H+(I\iotabar+G)\omega\right]\\
-	&= I\nabla\theta_b + G\nabla\phi_b + K_b\nabla\psi_t + \nabla H_b,
+	\mathbf{B} &= I\nabla(\theta_b+\iotabar\omega) + G\nabla(\zeta_b+\omega) + K \nabla\psi_t + \nabla H\\
+	&= I\nabla\theta_b + G\nabla\zeta_b + \left[K-\omega\left(\iotabar\frac{dI}{d\psi_t}+\frac{dG}{d\psi_t}\right)\right]\nabla\psi_t + \nabla\left[H+(I\iotabar+G)\omega\right]\\
+	&= I\nabla\theta_b + G\nabla\zeta_b + K_b\nabla\psi_t + \nabla H_b,
 \end{align}
 where 
 \begin{align}
@@ -276,16 +255,16 @@ we get the Boozer coordinates, where $H_b = 0$.
 %
 %\begin{equation}
 %	\mathbf{x} = \begin{cases}
-%		\theta\hat{\mathbf{i}} + \phi\hat{\mathbf{j}} + R\hat{\mathbf{k}} \qquad &\text{in slab geometry},\\
-%		R\cos\theta\hat{\mathbf{i}} + R\sin\theta\hat{\mathbf{j}} + \phi\hat{\mathbf{k}} \qquad &\text{in cylindrical geometry},\\
-%		R\cos\phi\hat{\mathbf{i}} + R\sin\phi\hat{\mathbf{j}} + Z\hat{\mathbf{k}} \qquad &\text{in toroidal geometry},
+%		\theta\hat{\mathbf{i}} + \zeta\hat{\mathbf{j}} + R\hat{\mathbf{k}} \qquad &\text{in slab geometry},\\
+%		R\cos\theta\hat{\mathbf{i}} + R\sin\theta\hat{\mathbf{j}} + \zeta\hat{\mathbf{k}} \qquad &\text{in cylindrical geometry},\\
+%		R\cos\zeta\hat{\mathbf{i}} + R\sin\zeta\hat{\mathbf{j}} + Z\hat{\mathbf{k}} \qquad &\text{in toroidal geometry},
 %	\end{cases}
 %\end{equation}
-%where $\{\hat{\mathbf{i}},\hat{\mathbf{j}},\hat{\mathbf{k}}\}$ is the unitary Cartesian basis, $\theta$ is a poloidal angle and $\phi$ is the usual toroidal angle. The geometry of interface $\mathcal{I}_l$, are described by decomposing the coordinates $R$ and $Z$ on a Fourier basis,
+%where $\{\hat{\mathbf{i}},\hat{\mathbf{j}},\hat{\mathbf{k}}\}$ is the unitary Cartesian basis, $\theta$ is a poloidal angle and $\zeta$ is the usual toroidal angle. The geometry of interface $\mathcal{I}_l$, are described by decomposing the coordinates $R$ and $Z$ on a Fourier basis,
 %
 %\begin{align}
-%	R_l(\theta,\phi) &= \sum_{m=0}^{M_{pol}}\sum_{n=-N_{tor}}^{N_{tor}}R_{l,m,n} \cos(m\theta-nN_p\phi)\\
-%	Z_l(\theta,\phi) &= \sum_{m=0}^{M_{pol}}\sum_{n=-N_{tor}}^{N_{tor}}Z_{l,m,n} \sin(m\theta-nN_p\phi),
+%	R_l(\theta,\zeta) &= \sum_{m=0}^{M_{pol}}\sum_{n=-N_{tor}}^{N_{tor}}R_{l,m,n} \cos(m\theta-nN_p\zeta)\\
+%	Z_l(\theta,\zeta) &= \sum_{m=0}^{M_{pol}}\sum_{n=-N_{tor}}^{N_{tor}}Z_{l,m,n} \sin(m\theta-nN_p\zeta),
 %\end{align}
 %where $N_p$ is the number of field periods, $M_{pol}$ and $N_{tor}$ are the poloidal and toroidal mode numbers above which Fourier series are truncated, \textit{i.e.} $m=\{0,\ldots,M_{pol}\}$, $n=\{-N_{tor},\ldots,N_{tor}\}$, and stellarator symmetry has been assumed for simplicity. Between interfaces $l$ and $l+1$, coordinates are constructed by linear interpolation of $(R,Z)_l$ and $(R,Z)_{l+1}$ using a radial-like coordinate $s$. 
 The standard representation given in Eqs.(\ref{eq.Rmns})-(\ref{eq.Zmns})) depends on the choice of poloidal angle $\theta$. In SPEC, a so-called \emph{spectral condensation} \citep{Hirshman1986} is implemented to select the poloidal angle. The idea is to minimize the number of Fourier harmonics required to represent a surface, \textit{i.e.} minimize
@@ -294,15 +273,15 @@ The standard representation given in Eqs.(\ref{eq.Rmns})-(\ref{eq.Zmns})) depend
 \end{equation}
 where only variations tangential to the surface are allowed, $\delta R = R_\theta\delta u$ and $\delta Z = Z_\theta\delta u$, where the $X_i$ designates a derivative of $X$ with respect to $i$ and $\delta u$ is arbitrary, and $\lambda$ is a user input. In SPEC, an additional target is included in the minimization, called the \emph{spectral length} --- its role is to ensure smooth transition between the angles used to represent inner plasma interfaces and the plasma boundary. It is expressed for volume $\mathcal{V}_l$ as 
 \begin{equation}
-	L_l = \oint\oint\sum_{i=1}^{N_s}\sqrt{[R_l(\theta,\phi)-R_{l-1}(\theta,\phi)]^2 +  [Z_l(\theta,\phi)-Z_{l-1}(\theta,\phi)]^2}d\theta d\phi, \label{eq.spectral length}
+	L_l = \oint\oint\sum_{i=1}^{N_s}\sqrt{[R_l(\theta,\zeta)-R_{l-1}(\theta,\zeta)]^2 +  [Z_l(\theta,\zeta)-Z_{l-1}(\theta,\zeta)]^2}d\theta d\zeta, \label{eq.spectral length}
 \end{equation}
-where $N_s$ is the number of radial grid points $s_i$. Finally, the zero of the poloidal angle is constrained to be such that ${Z}_l(\theta=0,\phi)$ is equal to the geometrical center of the interface $Z_{l,0}$, which can be enforced by minimizing
+where $N_s$ is the number of radial grid points $s_i$. Finally, the zero of the poloidal angle is constrained to be such that ${Z}_l(\theta=0,\zeta)$ is equal to the geometrical center of the interface $Z_{l,0}$, which can be enforced by minimizing
 \begin{equation}
-	S_l = \frac{1}{2}\oint ({Z}_l(0,\phi) - Z_{l,0})^2 d\phi, \label{eq.spectral zero}
+	S_l = \frac{1}{2}\oint ({Z}_l(0,\zeta) - Z_{l,0})^2 d\zeta, \label{eq.spectral zero}
 \end{equation}
 with
 \begin{equation}
-	Z_{l,0} = \oint d\theta Z_l(\theta,\phi)\sqrt{R_{l,\theta}(\theta,\phi)^2 + Z_{l,\theta}(\theta,\phi)^2}.
+	Z_{l,0} = \oint d\theta Z_l(\theta,\zeta)\sqrt{R_{l,\theta}(\theta,\zeta)^2 + Z_{l,\theta}(\theta,\zeta)^2}.
 \end{equation}
 
 The target ot minimize is then a linear combination of all angular targets, Eqs.(\ref{eq.spectral width})-(\ref{eq.spectral zero}),
@@ -312,12 +291,12 @@ The target ot minimize is then a linear combination of all angular targets, Eqs.
 where $(\alpha_l,\beta_l,\gamma_l)$ are user supplied weights, and $\psi_a$ is the total toroidal flux enclosed by the plasma. One can show that this can be written under the form
 
 \begin{equation}
-	\delta W_{sc} = \oint\oint F^{sc}(\theta,\phi) \delta u d\theta d\phi,
+	\delta W_{sc} = \oint\oint F^{sc}(\theta,\zeta) \delta u d\theta d\zeta,
 \end{equation}
 meaning that the minimum of $W_{sc}$ is found for 
 
 \begin{equation}
-	F^{sc} = \sum_{m=0}^{M_{pol}} \sum_{n=-N_{tor}}^{N_{tor}} F^{sc}_{mn} \sin(m\theta-nN_{fp}\phi) = 0. \label{eq. spectral constraint}
+	F^{sc} = \sum_{m=0}^{M_{pol}} \sum_{n=-N_{tor}}^{N_{tor}} F^{sc}_{mn} \sin(m\theta-nN_{fp}\zeta) = 0. \label{eq. spectral constraint}
 \end{equation}
 
 
@@ -326,11 +305,11 @@ We derive in this appendix the metric and jacobian analytical relations in toroi
 \begin{equation}
 	\mathbf{x}=R(s,\theta,\zeta)\mathbf{e}_R+Z(s,\theta,\zeta)\mathbf{e}_Z,
 \end{equation}
-with $\mathbf{e}_R$, $\mathbf{e}_\phi$, and $\mathbf{e}_Z$ the usual unitary basis vector in cylindrical geometry (see Figure \ref{fig.spec coordinates}). The covariant basis vector are given by $\mathbf{e}_i=\partial\mathbf{x}/\partial u^i$, 
+with $\mathbf{e}_R$, $\mathbf{e}_\zeta$, and $\mathbf{e}_Z$ the usual unitary basis vector in cylindrical geometry (see Figure \ref{fig.spec coordinates}). The covariant basis vector are given by $\mathbf{e}_i=\partial\mathbf{x}/\partial u^i$, 
 \begin{align}
 	\mathbf{e}_s &= R_s\mathbf{e}_R+Z_s\mathbf{e}_Z\\
 	\mathbf{e}_\theta &= R_\theta\mathbf{e}_R+Z_\theta\mathbf{e}_Z\\
-	\mathbf{e}_\zeta &= R_\zeta\mathbf{e}_R+R\mathbf{e}_\phi +Z_\zeta\mathbf{e}_Z,
+	\mathbf{e}_\zeta &= R_\zeta\mathbf{e}_R+R\mathbf{e}_\zeta +Z_\zeta\mathbf{e}_Z,
 \end{align}
 where the subscripts denote partial derivatives. The jacobian is then obtained by taking the triple product between the covariant basis vector, 
 \begin{align}
@@ -345,29 +324,29 @@ The contravariant basis is obtained by taking the cross-product of the covariant
 and similarly
 \begin{align}
 	\nabla\theta &= \frac{RR_s\mathbf{e}_R - (R_s Z_\zeta-R_\zeta Z_s)\mathbf{e}_\zeta - RR_s\mathbf{e}_Z}{\sqrt{g}}\\
-	\nabla\zeta &= \frac{1}{\sqrt{g}}(R_\theta Z_s-R_s Z_\theta)\mathbf{e}_\phi.
+	\nabla\zeta &= \frac{1}{\sqrt{g}}(R_\theta Z_s-R_s Z_\theta)\mathbf{e}_\zeta.
 \end{align}
 Finally, the metric elements $g_{ij}$ are
 \begin{equation}
 	\mathbf{g}=\begin{pmatrix}
-		R_s^2 + Z_s^2 & R_s R_\theta + Z_s Z_\theta &  R_s R_\phi + Z_s Z_\phi\\
-		R_s R_\theta + Z_s Z_\theta & R_\theta^2 + Z_\theta^2 &  R_\theta R_\phi + Z_\theta Z_\phi\\
-		R_s R_\phi + Z_s Z_\phi & R_\theta R_\phi + Z_\theta Z_\phi & R_\phi^2 + R^2 + Z_\phi^2
+		R_s^2 + Z_s^2 & R_s R_\theta + Z_s Z_\theta &  R_s R_\zeta + Z_s Z_\zeta\\
+		R_s R_\theta + Z_s Z_\theta & R_\theta^2 + Z_\theta^2 &  R_\theta R_\zeta + Z_\theta Z_\zeta\\
+		R_s R_\zeta + Z_s Z_\zeta & R_\theta R_\zeta + Z_\theta Z_\zeta & R_\zeta^2 + R^2 + Z_\zeta^2
 	\end{pmatrix}.
 \end{equation}
 
 
 
 \chapter{Derivation of the Beltrami linear system} \label{app. beltrami eq coef derivation}
-Consider the Beltrami equation (\ref{eq.BeltramiEquation}). It is a linear relation between the vector potential Fourier-Chebyshev harmonics $A_{likmn}$ (see section \ref{sec. spec_algorithm}). We derive in this appendix how the Beltrami equation can be cast into a linear system
+Consider the Beltrami equation (\ref{eq.BeltramiEquation}). It is a linear relation between the vector potential Fourier-Chebyshev harmonics $A_{ikmn}$ (see section \ref{sec. spec_algorithm}). We derive in this appendix how the Beltrami equation can be cast into a linear system
 \begin{equation}
-	\left(\mathbf{A}_l-\mu_l\mathbf{D}_l\right)\mathbf{a_l} = \mathbf{C}_l.
+	\left(\mathbf{A}-\mu\mathbf{D}\right)\mathbf{a} = \mathbf{C}.
 \end{equation}
-The right hand side is
+The contravariant component $k$ of the right hand side is
 \begin{equation}
-	\mu(\nabla\times\mathbf{B})^q = \mu\frac{\epsilon^{ijq}}{\sqrt{g}}\frac{\partial A_j}{\partial u^i},
+	\mu(\nabla\times\mathbf{A})^k = \mu\frac{\epsilon^{ijk}}{\sqrt{g}}\frac{\partial A_j}{\partial u^i},
 \end{equation}
-where we dropped the volume index, $\mathbf{u}=\{s,\theta,\phi\}$, and $\epsilon^{ijk}$ is the Levi-Civita symbol, defined as
+where $\mathbf{u}=\{s,\theta,\zeta\}$, and $\epsilon^{ijk}$ is the Levi-Civita symbol, defined as
 \begin{equation}
 	\epsilon^{ijk} = \begin{cases}
 		+1 \qquad& \text{if $i,j,k$ form an even permutation of $1,2,3$}\\
@@ -375,40 +354,72 @@ where we dropped the volume index, $\mathbf{u}=\{s,\theta,\phi\}$, and $\epsilon
 		0  \qquad& \text{otherwise}.
 	\end{cases}
 \end{equation}
-The left hand side is obtained by taking twice the curl of the vector potential,
+The contravariant component $k$ of the left hand side is obtained by taking twice the curl of the vector potential,
 \begin{equation}
-	\left[\nabla\times(\nabla\times\mathbf{A})\right]^q = \frac{\epsilon^{plq}}{\sqrt{g}}\frac{\partial}{\partial u^p}\left[g_{lk}\frac{\epsilon^{ijk}}{\sqrt{g}}\frac{\partial A_j}{\partial u^i}\right].
+	\left[\nabla\times(\nabla\times\mathbf{A})\right]^k = \frac{\epsilon^{ijk}}{\sqrt{g}}\frac{\partial}{\partial u^i}\left[\frac{g_{jn}\epsilon^{lmn}}{\sqrt{g}}\frac{\partial A_m}{\partial u^l}\right].
 \end{equation}
 Gathering all terms, we obtain
 \begin{equation}
-	\epsilon^{plq}\epsilon^{ijk}\left\{\frac{\partial}{\partial u^p}\left(\frac{g_{lk}}{\sqrt{g}}\right)\frac{\partial}{\partial u^i}+\frac{g_{lk}}{\sqrt{g}}\frac{\partial^2}{\partial u^i\partial u^p} - \frac{\mu}{\sqrt{g}}\frac{\partial}{\partial u^i} \right\}A_j=M^{qj}=0
+ 	\frac{\epsilon^{ijk}\epsilon^{lmn}}{\sqrt{g}}\frac{\partial}{\partial u^i}\left[\frac{g_{jn}}{\sqrt{g}}\frac{\partial A_m}{\partial u^l}\right] - \mu\frac{\epsilon^{ijk}}{\sqrt{g}}\frac{\partial A_j}{\partial u^i} = 0.\label{eq.app_ugly}
 \end{equation}
-The derivatives of $A_j$ are
+To construct the matrices $\mathbf{A}$ and $\mathbf{D}$, we project Equation (\ref{eq.app_ugly}) on the Chebyshev-Fourier basis, and use the derivatives of $A_j$,
 \begin{align}
-	A_j &= A_{jkmn} T_{km}(s)\cos(m\theta-nN_{fp}\phi)\\
-	\frac{\partial A_j}{\partial u^i} &=  A_{jkmn} \frac{\partial}{\partial u^i}\left[T_{km}(s)\cos(m\theta-nN_{fp}\phi)\right]\\
-	\frac{\partial^2 A_j}{\partial u^i\partial u^p} &=  A_{jkmn} \frac{\partial^2}{\partial u^i\partial u^p}\left[T_{km}(s)\cos(m\theta-nN_{fp}\phi)\right],
+	A_j &= A_{jkmn} T_{km}(s)\cos(m\theta-nN_{fp}\zeta)\\
+	\frac{\partial A_j}{\partial s} &=  A_{jkmn} T_{km}'(s)\cos(m\theta-nN_{fp}\zeta)\\
+	\frac{\partial A_j}{\partial \theta} &=  -A_{jkmn} mT_{km}(s)\sin(m\theta-nN_{fp}\zeta)\\
+	\frac{\partial A_j}{\partial \zeta} &=  A_{jkmn} nN_{fp}T_{km}(s)\sin(m\theta-nN_{fp}\zeta).
 \end{align}
-where summation signes over $k,m,n$ are implicit. In particular, we get
+As an example, we project the $k=\zeta$ component of the second term of the Eq.(\ref{eq.app_ugly}). We write
+\begin{equation}
+	\epsilon^{ij\zeta}\frac{\partial A_j}{\partial u^i} = \frac{\partial A_\theta}{\partial s} - \frac{\partial A_s}{\partial \theta} = \frac{\partial A_\theta}{\partial s},
+\end{equation} 
+as $A_s=0$. Projecting on the Chebyshev-Fourier basis then leads to
 \begin{align}
-	\frac{\partial A_j}{\partial s} &= A_{jkmn} T_{km}'(s)\cos(m\theta-nN_{fp}\phi)\\
-	\frac{\partial A_j}{\partial \theta} &= -A_{jkmn} T_{km}(s) m\sin(m\theta-nN_{fp}\phi)\\
-	\frac{\partial A_j}{\partial \phi} &= A_{jkmn} T_{km}(s)n\sin(m\theta-nN_{fp}\phi),
+	-\mu\alpha (\nabla\times\mathbf{A})^\zeta_{rpq} &=-\mu\iiint_V \left(\frac{\epsilon^{ij\zeta}}{\sqrt{g}}\frac{\partial A_j}{\partial u^i}\right)\frac{T_{rp}(s)}{\sqrt{1-s^2}}\cos(p\theta-qN_{fp}\zeta)dv \\
+	&=-\mu A_{\theta lmn}\iiint \frac{T'_{lm}(s)T_{rp}(s)}{\sqrt{g}\sqrt{1-s^2}}\cos(m\theta-nN_{fp}\zeta)\cos(p\theta-qN_{fp}\zeta)dv, \label{eq.Dphi}
 \end{align}
-and
+where the summation over $l,m,n$ is implicit, the integration is performed over the entire volume $V$, and the factor $w(s)=1/\sqrt{1-s^2}$ appears because Chebyshev polynomials are orthogonal with respect to the $w$-weighted inner product in the Hilbert space $L^2([-1,1],w(x)dx)$. The factor $\alpha$ is a normalization factor --- it can however be cancelled by normalizing each row of Eq.(\ref{eq.app_ugly}). Similarly, we obtain
 \begin{align}
-	\frac{\partial^2 A_j}{\partial s\partial s} &= A_{jkmn} T_{km}''(s)\cos(m\theta-nN_{fp}\phi)\\
-	\frac{\partial^2 A_j}{\partial s\partial \theta} &= -A_{jkmn} T_{km}'(s) m\sin(m\theta-nN_{fp}\phi)\\
-	\frac{\partial^2 A_j}{\partial s\partial \phi} &= A_{jkmn} T_{km}'(s)n\sin(m\theta-nN_{fp}\phi)\\
-	\frac{\partial^2 A_j}{\partial \theta\partial \partial} &= -A_{jkmn} T_{km}(s)m^2\cos(m\theta-nN_{fp}\phi)\\
-	\frac{\partial^2 A_j}{\partial \theta\partial \phi} &= -A_{jkmn} T_{km}(s)mn\cos(m\theta-nN_{fp}\phi)\\
-	\frac{\partial^2 A_j}{\partial \phi\partial \phi} &= -A_{jkmn} T_{km}'(s)n^2\cos(m\theta-nN_{fp}\phi).
+	-\mu\alpha(\nabla\times\mathbf{A})^\theta_{rpq} &= \mu A_{\zeta lmn}\iiint_V \frac{T'_{lm}(s)T_{rp}(s)}{\sqrt{g}\sqrt{1-s^2}}\cos(m\theta-nN_{fp}\zeta)\cos(p\theta-qN_{fp}\zeta)dv\\
+	-\mu\alpha(\nabla\times\mathbf{A})^s_{rpq} &= -\mu\iiint_V\frac{1}{\sqrt{g}}\left(\frac{\partial A_\zeta}{\partial \theta}-\frac{\partial A_\theta}{\partial \zeta}\right)\frac{T_{rp}(s)}{\sqrt{1-s^2}}\sin(p\theta-qN_{fp}\zeta)dv\\
+	&= \mu A_{\zeta lmn}\iiint_V \frac{T_{lm}(s)T_{rp}(s)}{\sqrt{g}\sqrt{1-s^2}} m\sin(m\theta-nN_{fp}\zeta)\sin(p\theta-qN_{fp}\zeta)dv\\
+	&+ \mu A_{\theta lmn}\iiint_V \frac{T_{lm}(s)T_{rp}(s)}{\sqrt{g}\sqrt{1-s^2}} n\sin(m\theta-nN_{fp}\zeta)\sin(p\theta-qN_{fp}\zeta)dv.\label{eq.Ds2}
 \end{align}
-Similarly, we write the metric elements $g_{lk}$ and the jacobian $\sqrt{g}$ as Chebyshev-Fourier series,
+The volume integrals in Eqs.(\ref{eq.Dphi})-(eq.{Ds}) are then the coefficients of the matrix $\mathbf{D}$. Similar volume integrals can be obtained for the coefficient of $\mathbf{G}$ by projecting the first term of Eq.(\ref{eq.app_ugly}). Finally, the toroidal and poloidal fluxes are enforce with Eqs.(\ref{eq.toroidal flux discrete})-(\ref{eq.poloidal flux discrete}), which we rewrite here fo convenience:
+
 \begin{align}
-	g_{ij} &= g_{ijkmn}T_{km}(s)\cos(m\theta-nN_{fp}\phi) \\
-	\frac{1}{\sqrt{g}} &= j_{kmn}T_{km}(s)\cos(m\theta-nN_{fp}\phi)
+	\psi_{t,l} &= \iint B^\zeta \sqrt{g}d\theta ds\\
+	&= 2\pi\sum_{k=0}^{L_{rad}} A_{l\theta k 0 0 } [T_{k0}(s=1)-T_{k0}(s=-1)] \\
+	\psi_{p,l} &= \iint B^\theta \sqrt{g}d\theta ds\\
+	&= -2\pi\sum_{k=0}^{L_{rad}} A_{l\zeta k 0 0 }[T_{k0}(s=1)-T_{k0}(s=-1)]
 \end{align}
+
+The boundary condition $(\nabla\times\mathbf{A})\cdot\nabla s =0$ on $\delta V$ leads to one final set of equations,
+\begin{align}
+	\sqrt{g}B^s=0 &\Rightarrow -\sum_{k,m,n}(m A_{\zeta kmn}+n A_{\theta kmn}) T_{km}(\pm 1)\sin(m\theta-nN_{fp}\zeta) =0\\
+	&\Rightarrow \sum_{k=0}^{L_{rad}}(mA_{l\zeta k mn}+ n A_{l\theta k mn})T_{km}(\pm 1) = 0.
+\end{align}
+
+% where summation signs over $k,m,n$ are implicit. In particular, we get
+% \begin{align}
+% 	\frac{\partial A_j}{\partial s} &= A_{jkmn} T_{km}'(s)\cos(m\theta-nN_{fp}\zeta)\\
+% 	\frac{\partial A_j}{\partial \theta} &= -A_{jkmn} T_{km}(s) m\sin(m\theta-nN_{fp}\zeta)\\
+% 	\frac{\partial A_j}{\partial \zeta} &= A_{jkmn} T_{km}(s)n\sin(m\theta-nN_{fp}\zeta),
+% \end{align}
+% and
+% \begin{align}
+% 	\frac{\partial^2 A_j}{\partial s\partial s} &= A_{jkmn} T_{km}''(s)\cos(m\theta-nN_{fp}\zeta)\\
+% 	\frac{\partial^2 A_j}{\partial s\partial \theta} &= -A_{jkmn} T_{km}'(s) m\sin(m\theta-nN_{fp}\zeta)\\
+% 	\frac{\partial^2 A_j}{\partial s\partial \zeta} &= A_{jkmn} T_{km}'(s)n\sin(m\theta-nN_{fp}\zeta)\\
+% 	\frac{\partial^2 A_j}{\partial \theta\partial \partial} &= -A_{jkmn} T_{km}(s)m^2\cos(m\theta-nN_{fp}\zeta)\\
+% 	\frac{\partial^2 A_j}{\partial \theta\partial \zeta} &= -A_{jkmn} T_{km}(s)mn\cos(m\theta-nN_{fp}\zeta)\\
+% 	\frac{\partial^2 A_j}{\partial \zeta\partial \zeta} &= -A_{jkmn} T_{km}'(s)n^2\cos(m\theta-nN_{fp}\zeta).
+% \end{align}
+% Similarly, we write the metric elements $g_{lk}$ and the jacobian $\sqrt{g}$ as Chebyshev-Fourier series,
+% \begin{align}
+% 	g_{ij} &= g_{ijkmn}T_{km}(s)\cos(m\theta-nN_{fp}\zeta) \\
+% 	\frac{1}{\sqrt{g}} &= j_{kmn}T_{km}(s)\cos(m\theta-nN_{fp}\zeta)
+% \end{align}
 
 
 

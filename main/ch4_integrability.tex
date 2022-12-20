@@ -1,12 +1,11 @@
 \documentclass[my_thesis.tex]{subfiles}
 
 \begin{document}
-\chapter{Measures of field line integrability}
+\chapter{Measures of field line integrability} \label{ch4.diagnostics}
 
-In view to assess the capability of a magnetic equilibrium to confine a plasma, one has to define physics based metrics. In particular, to assess the quality of its 
-magnetic surfaces, it is important to have numerical diagnostics that can determine the topology of a magnetic field line, and how well it confines a plasma. In this chapter, we introduce three different metrics, namely the Greene's residue \citep{Greene1968,Greene1978}, the volume of chaos \citep{Loizu2017}, and the fraction of net parallel diffusion ({\color{red} cite your paper}).
+In view to assess the capability of a magnetic equilibrium to confine a plasma, one has to define physics based metrics. In particular, to assess the quality of its magnetic surfaces, it is important to have numerical diagnostics that can determine the topology of a magnetic field line, and how well it confines a plasma. In this chapter, we introduce three different metrics, namely the Greene's residue \citep{Greene1968,Greene1978}, the volume of chaos \citep{Loizu2017}, and the fraction of net parallel diffusion ({\color{red} cite your paper}). These metrics will then be used in different applications: the volume of chaos and the fraction of parallel diffusion to measure the equilibrium $\beta$-limit in a classical stellarator (chapter \ref{ch5.equilibrium_beta_limit}), while objective functions will be constructed using the Greene's residues to optimize stellarator equilibria for good magnetic surfaces (chapter \ref{ch6.optimization}).
 
-\section{Greene's residues}
+\section{Greene's residues} \label{sec.greene residue}
 The first metric discussed in this chapter is the Greene's residue  \citep{Greene1968,Greene1978}. The Poincar\'e section of a magnetic equilibrium can be understood as the a map $T(R,Z):\mathbb{R}^2\rightarrow\mathbb{R}^2$, that maps any point $(R_i,Z_i)$ of the $RZ$-plane to another point $(R_{i+1},Z_{i+1})$ after each toroidal transit. One can show that the hamiltonian structure of the magnetic field in a stellarator implies that its Poincar\'e map is a sympleptic twist map \citep{Meiss1992c}. 
 
 Orbits are a sequence of points $\{(R_0,Z_0),\ldots,(R_n,Z_n)\}$, and can form either (i) periodic orbits, which correspond to rational magnetic surfaces, (ii) quasiperiodic orbits, which correspond to irrational surfaces. In case of a resonance, periodic orbits fill a finite volume of the space, \textit{i.e.} a magnetic island is formed. Of particular interests are the O- and X-points of the island chain, thereafter denoted $\mathbf{x}_o$ and $\mathbf{x}_x$ respectively, located at the center and at the edge of the islands. These points are fixed-points of the map $T$, that is $T(\mathbf{x}_{o/x})=\mathbf{x}_{o/x}$. The asymptotic behavior of the orbits close to these points can be studied by looking at the Taylor expansion of the map $T$ around $\mathbf{x}_{o/x}$, 
@@ -29,27 +28,51 @@ The Greene's Residue $R$ is defined as
 \begin{equation}
 	R = \frac{1}{4}\left(2-Tr(J_T)\right).
 \end{equation}
-For reflection hyperbolic orbits, $R>1$; for elliptic orbits, $0<R<1$; for parabolic orbits, $R=1$; and for magnetic surfaces, $R=0$. As an illustrative example, we derive in the next section the eigenvalues around the X- and O-points of the phase space of a pendulum.
+For reflection hyperbolic orbits, $R>1$; for elliptic orbits, $0<R<1$; for parabolic orbits, $R=1$; and for magnetic surfaces, $R=0$. We will discuss in chapter \ref{ch6.optimization} how stellarators can be optimized for good magnetic surfaces by minimizing the square of the Greene's residue of some targeted resonances. As an illustrative example, we describe in the next section the standard map and compute its Greene's Residue.
 
-\subsection{Greene's residue of a pendulum}
-The mechanical energy of a pendulum $E$ is a constant of motion. Setting the gravitational potential energy to zero at the attach point, we find
+\subsection{Standard map}
+The standard map is a canonical example of a 2-dimensional non-linear map. It is defined as $(x',y')= T(x,y)$, with
+\begin{align}
+	y' &= y - \frac{k}{2\pi}\sin(2\pi x) \label{eq.std_map_y}\\
+	x' &= x + y', \label{eq.std_map_x}
+\end{align} 
+with $k$ a parameter, that controls the "strength" of the non-linearity in the system. We plot the phase space of the standard map for four different values of $k$ in Figure \ref{fig.std map phase space}. 
+
+\begin{figure}
+	\centering
+	\includegraphics[width=\linewidth]{images/std_map_phase_space.png}
+	\caption{Phase space of the standard map for four different values of $k$, as described by Eqs.(\ref{eq.std_map_y})-(\ref{eq.std_map_x}).}
+	\label{fig.std map phase space}
+\end{figure}
+
+The points $\mathbf{x}_o=(x=0,y=0)$ and $\mathbf{x}_x=(x=1/2,y=0)$ are both fixed points of the standard map, as $T(\mathbf{x}_{o/x})=\mathbf{x}_{o/x}$. We study the behavior of the orbits close to these points by looking at the jacobian of $T$,
 \begin{equation}
-	E = \frac{1}{2}mL^2\dot{\theta}^2 - mgL\cos\theta, \label{eq.emec_pendulum}
+	J_T = \begin{pmatrix}
+		1-k\cos(2\pi x) & 1 \\
+		-k\cos(2\pi x) & 1
+	\end{pmatrix}.
 \end{equation}
-with $m$ the mass, $L$ the length of the pendulum axis, $g=9.81\text{ms}^{-2}$ the gravitational acceleration on earth, and $\theta$ the angle between the vertical axis and the axis of the pendulum. The notation $\dot\theta$ indicates the time derivative of $\theta$. At $t=0$, the angle is $\theta_0$ and the angular velocity $\dot\theta_0$. Equating the initial mechanical energy to Eq.(\ref{eq.emec_pendulum}), we find
+We notice that the linearized map is sympleptic, since $det(J_T)=1$, which is a necessary and sufficient condition for linear maps to be sympleptic in 2D. The eigenvalues of $J_T$ are then
 \begin{equation}
-	\dot\theta^2-\dot\theta_0^2 - \frac{2g}{L}(\cos\theta-\cos\theta_0) = 0.\label{eq.emec_pendulum_initial_cond}
+	\lambda_\pm = \frac{1}{2}\left(2-k\cos(2\pi x) \pm \sqrt{(2-k\cos(2\pi x))^2-4}\right),
 \end{equation}
+and the Greene's residue is
+\begin{equation}
+	R = \frac{k}{4}\cos(2\pi x).
+\end{equation}
+At $\mathbf{x}_o$, the Greene's residue is zero if and only if $k=0$, which, as seen on top left panel of Figure \ref{fig.std map phase space}, corresponds to a phase space without island. For $0<k<4$, the orbits around the $\mathbf{x}_o$ fixed points are elliptic, and corresponds to the existence of a magnetic island. Finally, for $k>4$, the orbits become hyperbolic. For such large values of $k$ however, the phase space is mostly filled with chaotic orbits, making any observation difficult. Regarding the $\mathbf{x}_x$ fixed-point, it is again zero if and only if $k=0$. For any values of $k>0$ however, the residue is smaller than $0$. Orbits close to the fixed point are hyperbolic, which correspond to an X-point at $\mathbf{x}_o$.
 
-There are two equilibrium positions, found at the extrema of the potential energy. These are $\theta_o=0$ and $\theta_x=\pi$, and are respectively the stable and unstable equilibrium points of the pendulum. Around $\theta_o$, assuming small amplitudes $\theta\ll 1$ and $\theta_0\ll 1$, and no initial angular velocity $\dot\theta_0 = 0$, we Taylor expand to the second order the cosine in Eq.(\ref{eq.emec_pendulum_initial_cond}) and obtain $\dot\theta = -\omega^2(\theta-\theta_0)$, with $\omega=\sqrt{g/L}$.
+
+The Greene's residues are a great measure to assess whether or not a rational surface is resonant and magnetic island are present. However, this measure is a local measure --- as it will be discussed in chapter \ref{ch6.optimization}, this can be a limitation when performing stellarator optimization. In addition, the Greene's residue gives no information on the impact of the field line topology on the plasma confinement.
 
 
 
 
-\section{Volume of chaos}
+
+\section{Volume of chaos} \label{sec.volume chaos}
 One approach to discriminate between a chaotic field line and other magnetic field line topologies is to evaluate the fractal dimension $D$ of the field line Poincar\'e section, for example using a box-counting algorithm \citep{Meiss1992c}. Assume that a field line Poincar\'e section is provided as a set $S$ of $N$ points in the $RZ$-plane, $S\equiv\{(R_i,Z_i)\}_{i=\{1,\ldots,N\}}$. We split the $RZ$-plane in a grid made of squares of dimension $L\times L$ and count the number $N$ of grid element $\Omega_{ij}$ that contains at least one point from the field line,
 \begin{equation}
-    N(L) = |\{\Omega_{ij}|S\cap\Omega_{ij}\neq\emptyset\}|,
+    N(L) = \left|\{\Omega_{ij}|S\cap\Omega_{ij}\neq\emptyset\}\right|,
 \end{equation}
 where $|\cdot|$ denotes the cardinality. The box-counting dimension (or Hausdorff dimension) is then given by
 \begin{equation}
@@ -60,11 +83,18 @@ An almost binary behavior is then observed: either a magnetic field line stays o
 \begin{equation}
 	V_{chaos} = V_{total} \sum_{i=1}^{N_{lines}} \frac{(\psi_{t,i}-\psi_{t,i-1})}{\psi_a}\mathcal{H}(D_i-D_{crit}), \label{eq.volume chaos}
 \end{equation}
-where $N_{lines}$ is the number of considered field lines, $D_i$ is the fractal dimension of the $i^{\text{th}}$ line, $\mathcal{H}$ is the Heaviside function, $V_{total}$ is the total plasma volume, and $\psi_{t,i}-\psi_{t,i-1}$ measures the enclosed toroidal flux between field lines $i$ and $i-1$.
+where $N_{lines}$ is the number of considered field lines, $D_i$ is the fractal dimension of the $i^{\text{th}}$ line, $\mathcal{H}$ is the Heaviside function, $V_{total}$ is the total plasma volume, and $\psi_{t,i}-\psi_{t,i-1}$ measures the enclosed toroidal flux between field lines $i$ and $i-1$. As an illustration of the volume of chaos, it can be evaluated for the standard map defined in Eqs.(\ref{eq.std_map_y})-(\ref{eq.std_map_x}) as a function of the parameter $k$ for different values of $D_{crit}$ (see Figure \ref{fig. std_map_v_chaos}). The same trend is observed for the three considered values of $D_{crit}$: for low values of $k$, the volume of chaos is zero; a critical value of $k$, between $0.5$ and $0.8$, marks the emergence of chaotic orbits; for large values of $k$, the normalized volume of chaos tends to $0.8$ --- the remaining non chaotic orbits are those close to O-points inside islands. This work was part of a summer internship of H. Arbez at the Swiss Plasma Center in 2021 {\color{red} add citation to internal report}. 
+\begin{figure}
+	\centering
+	\includegraphics[width=.7\linewidth]{images/std_map_vchaos.png}
+	\caption{Normalized volume of chaos in the standard map as a function of $k$ for different values of $D_{crit}$ {\color{red} add citation to internal report}.}
+	\label{fig. std_map_v_chaos}
+\end{figure}
 
+When applied to Poincar\'e maps of magnetic field lines, the volume of chaos is a global measure of the amount of chaotic field lines in the system, in opposition to the Greene's residue, which was a local measure of the field line topology (see section \ref{sec.greene residue}). Both measures, however, don't provide information on the plasma confinement properties of the magnetic equilibrium. Indeed, structures present in chaotic magnetic field lines and magnetic islands can, potentially, support temperature and density gradients \citep{Hudson2008,hudsonAreGhostSurfaces2009}. Considering all magnetic islands and chaotic field lines as detrimental for confinement can thus be a pessimistic diagnostic of the confinement properties of the magnetic equilibrium. In the next section, we propose an alternative measure, specific to the Poincar\'e map of stellarator magnetic fields, that counts the fraction of resonances in the equilibrium that are important sources of transport.
 
-\section{Fraction of net parallel diffusion}
-We discuss an alternative measure to the volume of chaos to determine if the destruction of magnetic surfaces significantly impacts the radial transport. Here the parallel and perpendicular direction are defined as the direction along and across the magnetic field respectively, and the radial  direction $r$ as the direction perpendicular to isotherms, $\nabla T\times\nabla r=0$, with $T$ the temperature. In recent work, \citet{paulHeatConductionIrregular2022} discussed the properties of the anisotropic heat diffusion equation, $\nabla\cdot(\kappa_\parallel T + \kappa_\perp T)=0$, where $\kappa_\parallel$ and $\kappa_\perp$ are the parallel and perpendicular heat conductivites. In particular, \citeauthor{paulHeatConductionIrregular2022} demonstrated that, under the assumption that $\boldsymbol{\kappa}$ and $\nabla\cdot\boldsymbol{\kappa}$ are analytical, isotherms are topologically constrained to be toroidal surfaces --- this forbids isotherms to align with the magnetic field in regions occupied by magnetic islands and magnetic field line chaos. Motivated by comparing the local parallel diffusion to the local perpendicular diffusion, \citeauthor{paulHeatConductionIrregular2022} introduced the \emph{volume of effective parallel diffusion}, which is the volume of plasma where the parallel heat transport dominates perpendicular heat transport,
+\section{Fraction of net parallel diffusion}\label{sec.fraction parallel diffusion}
+We discuss an alternative measure to the volume of chaos to determine if the destruction of magnetic surfaces significantly impacts the radial transport. Here the parallel and perpendicular direction are defined as the direction along and across the magnetic field respectively, and the radial  direction $r$ as the direction perpendicular to isotherms, $\nabla T\times\nabla r=0$, with $T$ the temperature. In recent work, \citet{paulHeatConductionIrregular2022} discussed the properties of the anisotropic heat diffusion equation, $\nabla\cdot(\kappa_\parallel T + \kappa_\perp T)=0$, where $\kappa_\parallel$ and $\kappa_\perp$ are the parallel and perpendicular heat conductivities. In particular, \citeauthor{paulHeatConductionIrregular2022} demonstrated that, under the assumption that $\boldsymbol{\kappa}$ and $\nabla\cdot\boldsymbol{\kappa}$ are analytical, isotherms are topologically constrained to be toroidal surfaces --- this forbids isotherms to align with the magnetic field in regions occupied by magnetic islands and magnetic field line chaos. Motivated by comparing the local parallel diffusion to the local perpendicular diffusion, \citeauthor{paulHeatConductionIrregular2022} introduced the \emph{volume of effective parallel diffusion}, which is the volume of plasma where the parallel heat transport dominates perpendicular heat transport,
 \begin{equation}
 V_{PD} = \frac{1}{V_{total}} \int_{V_{total}}\mathcal{H}(\kappa_\parallel|\nabla_\parallel T|^2-\kappa_\perp|\nabla_\perp T|^2) d\mathbf{x}^3, \label{eq.paul_volume_effective_diffusion}
 \end{equation}
@@ -84,15 +114,12 @@ The volume of effective parallel diffusion can thus be written using the criteri
 \begin{equation}
 	V_{PD} \sim \frac{1}{V_{total}} \int_{V_{total}}\mathcal{H}\left(\left[\frac{ B_{r}}{B}\right]^2-\left[\frac{ B_{r,crit}}{B}\right]^2\right) d\mathbf{x}^3.
 \end{equation}
-This measure is however unpractial for the purpose of this paper, as it would require to evaluate the radial magnetic field everywhere in the plasma. Instead, the radial magnetic field is evaluated where it is expected to be the largest, \textit{i.e.} on a selected number of rational surfaces. We then construct \emph{the fraction of parallel diffusion},
+This measure is however unpractical for the purpose of this paper, as it would require to evaluate the radial magnetic field everywhere in the plasma. Instead, the radial magnetic field is evaluated where it is expected to be the largest, \textit{i.e.} on a selected number of rational surfaces. We then construct \emph{the fraction of parallel diffusion},
 \begin{equation}
 	f_{PD} = \frac{1}{N_{res}}\sum_{i=1}^{N_{res}} \mathcal{H}\left(\left[\frac{B_{r}}{B}\right]^2-\left[\frac{B_{r,crit}}{B}\right]^2\right), \label{eq.def metric}
 \end{equation}
 where $N_{res}$ is the number of considered resonances, and the algorithm used to evaluate the radial magnetic field $B_r$ from SPEC equilibria is described in section \ref{sec. measure b r}. The fraction of effective parallel diffusion is then the fraction of resonances in the plasma that contribute to the transport, \textit{i.e.} the fraction of resonances over which the diffusion due to parallel dynamics dominates. Note that $f_{PD}\neq V_{PD}$, but if $f_{PD}=0$, we can expect $\mathcal{V}_{PD}$ to be zero, and the opposite is true as well. The fraction of parallel diffusion can then be used as a proxy function to determine if the volume of parallel diffusion is zero or not. The chaotic equilibrium $\beta$-limit, $\beta^{chaos}_{lim}$, is obtained by taking the value of $\beta$ above which $f_{PD}>0$. 
 
-Note that this does not define an equilibrium $\beta$-limit from an experimental point of view --- the metric $f_{PD}$ is positive as soon as one resonance satisfies Eq.(\ref{eq.bcrit_estimate}), which would, in practice, only flatten the temperature and density profiles locally. It is certainly possible to increase the plasma averaged $\beta$ further by increasing the input power. Our metric $f_{PD}$ however informs us that the effect of field line topology starts to become important and has to be taken into account in transport calculations for $\beta>\beta^{chaos}_{lim}$. One could imagine to combine the volume of chaos given by Eq.(\ref{eq.volume chaos}) with the criterion given by Eq.(\ref{eq.bcrit_estimate}), and only consider resonances that span a sufficiently large volume \emph{and} that contribute significantly to the radial transport. This idea will not be explored in this paper, and is left for future studies.	
-
-In practice, the metric $f_{PD}$ is greater than zero when relatively small islands in comparison to the plasma minor radius emerge (using $ B_{r,crit}/B=10^{-5}$). Thus, as long as the SPEC volumes are large enough to allow these islands to grow, the number of volumes does not affect the metric evaluation. In addition, given a sufficiently large number of volumes, the pressure profile is well resolved by the stepped-pressure approximation and thus the equilibrium does not depend strongly on the number of volumes. In summary, the number of volumes has to be large enough to resolve well the pressure profile, but small enough to allow islands to grow --- this is how it has been decided to use seven plasma volumes (and one vacuum region).
 
 % The metric $f_{PD}$ has the property to be non-zero whenever a resonance in the plasma contributes to the radial transport at least as much as the turbulent transport, according to the equation (\ref{eq.bcrit_estimate}). 
 
