@@ -62,6 +62,30 @@ The rotational transform is the inverse of the safety factor $q=1/\iotabar$, mor
 
 Equation (\ref{equation perp force balance}) implies that $\mathbf{B}\cdot\nabla p=0$, \textit{i.e.} the pressure is constant along a field line. If the pressure profile is smooth and not constant in any region, then equation (\ref{equation perp force balance}) implies that magnetic field lays on surfaces of constant pressure, thereby generating magnetic surfaces. Assuming the existence of rational magnetic surfaces where $\nabla p\neq 0$ is however the source of diverging currents, as we shall discuss in the sections (\ref{sec ideal mhd currents})-(\ref{sec. diverging currents}). 
 
+The normalized pressure is defined as the ration between the plasma pressure and the magnetic pressure,
+\begin{equation}
+	\beta = \frac{2\mu_0 p}{B^2},
+\end{equation}
+with $B=|\mathbf{B}|$. Generally, the normalized pressure is either evaluated on the magnetic axis, with $\beta_0=2\mu_0 p_0/B_0^2$, where the subscript denotes an evaluation on the magnetic axis, or averaged other the plasma volume,
+\begin{equation}
+	\bar\beta = \frac{1}{\mathcal{V}_P} \iiint_{\mathcal{V}_P} \frac{2\mu_0 p}{B^2} dv,
+\end{equation}
+with $\mathcal{V}_P$ the plasma volume and $dv$ a volume element.
+
+To finish this section, we define the flux surface average of a function $f(\psi,\theta,\zeta)$ as the volume average of $f$ between two neighboring magnetic surfaces \citep{helanderTheoryPlasmaConfinement2014}. The volume enclosed by a magnetic surface is
+\begin{equation}
+	V_{\psi_t} = \int_0^{\psi_t} d\psi \int_0^{2\pi} d\theta \int_0^{2\pi} \sqrt{g}d\zeta,
+\end{equation}
+with $\sqrt{g}$ the coordinate $(\psi_t, \theta, \zeta)$ jacobian. The flux surface average of $f$ is then
+\begin{equation}
+	\langle f \rangle = \frac{1}{V'(\psi_t)}\iint \frac{f dS}{|\nabla \psi_t|} = \left.\iint \frac{f dS}{|\nabla \psi_t|} \middle/ \iint\frac{dS}{|\nabla \psi_t|} \right.,
+\end{equation}
+with $dS=\sqrt{g}|\nabla\psi_t|d\theta d\zeta$. One important property of the flux surface average is that
+\begin{equation}
+	\langle \mathbf{B}\cdot\nabla f\rangle = 0. \label{eq.property_flux_average}
+\end{equation}
+
+
 
 \subsection{Ideal MHD solution in an axisymmetric cylinder}\label{appendix jxb=grad p solution}
 As an illustration, we solve here the ideal MHD equilibrium equations (\ref{equation perp force balance})-(\ref{equation div B ideal mhd}) in an axisymmetric cylinder of length $L$ and radius $a$ (see Figure \ref{fig. cylinder sketch}). We work with cylindrical coordinate $(r,\theta,z)$. We assume that the cylinder boundary is a magnetic surface, \textit{i.e.} $\mathbf{B}\cdot\nabla r=0$ at $r=a$. Assuming symmetries along $\theta$ and $z$ (equivalent to axisymmetry in a toroidal geometry), we immediately from Eq.(\ref{equation perp force balance}) get that $p=p(r)$, \textit{i.e.} isopressure surfaces are cylinders with constant radii. Since the magnetic field lies on constant pressure surfaces, axisymmetry implies the existence of magnetic surfaces everywhere.
@@ -116,13 +140,69 @@ Parallel current $J_\parallel$ are then generated to ensure charge conservation 
 \end{equation}
 where $(\psi_t,\theta,\zeta)$ are the toroidal flux, a poloidal angle and a toroidal angle, and $\langle\cdot\rangle$ denotes a flux surface average. Note that here we assume that magnetic surfaces exist, and that the toroidal flux is monotonously increasing from the plasma core to the plasma edge so that it can be used as a radial coordinate. The function $u(\psi_t,\theta,\zeta)$ satisfies
 \begin{equation}
+	\nabla\cdot\left(u\mathbf{B}p'+\frac{\mathbf{B}\times\nabla\psi_t}{B^2}p'\right) = 0.
+\end{equation}
+Using the vectorial identity $\nabla\cdot(f\mathbf{v})=v\cdot\nabla f+f\nabla\cdot\mathbf{v}$, with $f$ a scalar and $\mathbf{v}$ a vector, we get
+\begin{equation}
+	\nabla\cdot\left(u\mathbf{B}+\frac{\mathbf{B}\times\nabla\psi_t}{B^2}\right) = 0, \label{eq.div_eq_u}
+\end{equation}
+which can be casted as a magnetic differential equation for $u$, 
+\begin{equation}
 	\mathbf{B}\cdot\nabla u = -(\mathbf{B}\times\nabla\psi_t)\cdot\nabla\left(\frac{1}{B^2}\right). \label{eq.diff_u}
 \end{equation}
 The total current density is thus
 \begin{equation}
 	\mathbf{J} = \frac{\mathbf{B}\times\nabla p}{\mathbf{B}^2} + \left(u(\psi_t,\theta,\zeta)\frac{dp}{d\psi_t} + \frac{\langle J_\parallel B\rangle}{\langle B^2\rangle}\right)\mathbf{B}, \label{equation current density}
 \end{equation}
-where the first term on the right hand side of Eq.(\ref{equation current density}) is the \emph{diamagnetic current}, the second is the \emph{Pfirsch-Schl\"uter current} and the last term encompasses other parallel currents, such as the externally driven currents (Ohmic, \ac{ECCD}, \ac{NBCD}) or bootstrap current.
+where the first term on the right hand side of Eq.(\ref{equation current density}) is the \emph{diamagnetic current}, the second is the \emph{Pfirsch-Schl\"uter current} and the last term encompasses other parallel currents, such as the externally driven currents (Ohmic, \ac{ECCD}, \ac{NBCD}) or bootstrap current (see section \ref{sec.bootstrap}).
+
+We now discuss the relative importance of the different terms in Eq.(\ref{equation current density}) in setting the net toroidal current in a stellarator. To do so, we work in Boozer coordinates (see appendix \ref{appendix  boozer coordinates}) and we take the flux surface average of the total current density projected in the Boozer toroidal direction, $\mathbf{J}\cdot\nabla\zeta_b$ {\color{red} source from A. Alonso}.
+
+We start by looking at the contribution from the diamagnetic current density. We write the magnetic field in its contravariant form,
+\begin{equation}
+	\mathbf{B} = I(\psi_t)\nabla\theta_b + G(\psi_t)\nabla\zeta_b + K(\psi_t,\theta_b,\zeta_b)\nabla\psi_t, 
+\end{equation}
+with $I(\psi_t)$ the net toroidal current enclosed inside a magnetic surface, $G(\psi_t)$ the net poloidal current outside a magnetic surface, and $K(\psi_t,\theta_b,\zeta_b)$ a function. The diamagnetic current flux surface average is then
+\begin{align}
+	\langle\mathbf{J}_\perp\cdot\nabla\zeta_b\rangle &= p'\left\langle \left(\frac{\mathbf{B}\times\nabla\psi_t}{B^2}\right)\cdot\nabla\zeta_b\right\rangle\\
+	&= p'\left\langle \frac{1}{\sqrt{g}B^2}(I(\psi_t) \mathbf{e}_{\zeta_b} - G(\psi_t)\mathbf{e}_{\theta_b})\cdot\nabla\zeta_b\right\rangle = pI(\psi_t)\left\langle \frac{1}{B^2 \sqrt{g_b}} \right\rangle,
+\end{align} 
+where we used the relation $\mathbf{e}_{\theta_b} = \sqrt{g_b}\nabla\theta_b\times\nabla\psi_t$ and $\mathbf{e}_{\zeta_b} = \sqrt{g_b}\nabla\psi_t\times\nabla\theta_b$, with $\mathbf{e}_{\theta_b},\mathbf{e}_{\zeta_b}$ the covariant basis vector of the Boozer coordinates $\theta_b$ and $\zeta_b$ respectively. Using the expression of the jacobian in Boozer coordinates (Eq.\ref{eq.jacobian_boozer}), we get
+\begin{equation}
+	\langle\mathbf{J}_\perp\cdot\nabla\zeta_b\rangle = \frac{Ip'}{G+\iotabar I}.
+\end{equation}
+Interestingly, the diamagnetic current contributes to the net toroidal current only if there are other sources of toroidal current in the plasma.
+
+To evaluate the contribution from the Pfirsch-Schl\"uter current density, we write the magnetic field using its covariant representation (Eq.(\ref{eq.covariant_b_boozer})), which implies
+\begin{equation}
+	\mathbf{B}\cdot\nabla\zeta_b = (\nabla\psi_t\times\nabla\theta_b + \iotabar \nabla\zeta_b\times\nabla\psi_t)\cdot\nabla\zeta_b = \frac{1}{\sqrt{g_b}}. \label{eq.B_dot_nabla_phi}
+\end{equation}
+We thus obtain
+\begin{equation}
+	\left\langle u\mathbf{B}\cdot\nabla\zeta_b p'\right\rangle = p' \left\langle \frac{u}{\sqrt {g_b}}\right\rangle = \frac{p'}{G+\iotabar I}\langle uB^2 \rangle.
+\end{equation}
+From Eq.(\ref{eq.div_eq_u}), we can write
+\begin{equation}
+	uB^2 = \mathbf{B}\cdot\left(u\mathbf{B}+\frac{\mathbf{B}\times\nabla\psi_t}{B^2}\right) = \mathbf{B}\cdot\nabla f,
+\end{equation}
+where we leveraged the relation $\nabla\cdot\nabla f = 0$. Finally, using the property $\langle \mathbf{B}\cdot\nabla f\rangle = 0$ (Eq.(\ref{eq.property_flux_average})), we obtain that the flux averaged Pfirsch-Schl\"uter current density is
+\begin{equation}
+	\langle  u\mathbf{B}\cdot\nabla\zeta_b p'\rangle = 0.
+\end{equation}
+
+Externally driven currents and the bootstrap current provide a final contribution of 
+\begin{equation}
+	\frac{\langle J_\parallel B\rangle}{\langle B^2\rangle}\langle \mathbf{B}\cdot\nabla\zeta_b\rangle =  \frac{\langle J_\parallel B\rangle}{\langle B^2\rangle} \left\langle\frac{1}{\sqrt{g_b}}\right\rangle = \frac{\langle J_\parallel B\rangle}{G + \iotabar I},
+\end{equation}
+where we used Eq.(\ref{eq.B_dot_nabla_phi}) and the expression of the boozer coordinate jacobian, Eq.(\ref{eq.jacobian_boozer}). The flux surface average of the total current density projected on $\nabla\zeta_b$ is then
+\begin{equation}
+	\langle \mathbf{J}\cdot\nabla\zeta_b\rangle =  \frac{Ip'}{G+\iotabar I} + \frac{\langle J_\parallel B\rangle}{G + \iotabar I}. \label{eq.flux_av_current_mhd}
+\end{equation}
+We are now in position to estimate which current contributes the most to the net toroidal current. Taking the ration of the first and second terms on the right hand side of Eq.(\ref{eq.flux_av_current_mhd}), we find
+\begin{align}
+	\frac{I p'}{\langle J_\parallel B\rangle} \sim \frac{I p }{J_{\parallel,\phi} B \psi_{t}} \sim \frac{I}{I_{\parallel,\phi}} \frac{p}{B^2} \sim \frac{I}{2I_{\parallel,\phi}}  \beta \sim \beta.
+\end{align}
+Here we assumed that $p'\sim p/\psi_t$, with $\psi_t=\pi a^2 B$, and $a$ the minor radius. As the magnetic field is mostly toroidal, $J_{\parallel}\sim J_{\parallel,\phi}$, and the net toroidal current generated by the $J_\parallel$ current density is $I_{\parallel,\phi}\sim J_{\parallel} \pi a^2$. As $\beta\ll 1$, we conclude that the main contribution to the flux averaged current density comes from the externally driven and bootstrap currents. The Pfirsch-Schl\"uter flux averaged current density vanishes, and the diamagnetic flux surface averaged current density is negligible. While the diamagnetic current is by construction included in any magnetic equilibrium calculation, it is thus crucial to include the contribution from the externally driven and bootstrap current to compute the full effect of the currents on the magnetic field.
 
 
 
@@ -151,15 +231,15 @@ and the right hand side as
 \end{align}
 with $\nabla\psi_t\cdot(\nabla\theta_b\times\nabla\zeta_b) = 1/\sqrt{g}$ the inverse of the Boozer coordinate jacobian. Substituting the Fourier series (\ref{eq.u_fourier_expansion})-(\ref{eq.b_fourier_expansion}) for $u$ and $1/B^2$, we finally obtain
 \begin{equation}
-	(m\iotabar - n)u_{mn} = {\color{red}\frac{1}{\sqrt{g}}\frac{1}{\mathbf{B}\cdot\nabla\zeta_b}}(mG + nI)h_{mn}.
+	(m\iotabar - n)u_{mn} = (mG + nI)h_{mn},
 \end{equation}
-Rearranging the terms, we get an expression for $u_{mn}$,
+where we used the property of Boozer coordinates $\sqrt{g_b}^{-1}=\mathbf{B}\cdot\nabla\zeta_b$. Rearranging the terms, we get an expression for $u_{mn}$,
 \begin{equation}
-	u_{mn} = {\color{red}\frac{1}{\sqrt{g}}\frac{1}{\mathbf{B}\cdot\nabla\zeta_b}}\frac{(mG + nI)}{m\iotabar - n}h_{mn} + \Delta_{mn}\delta(\psi_t-\psi_{t,mn}),\label{eq.umn}
+	u_{mn} = \frac{(mG + nI)}{m\iotabar - n}h_{mn} + \Delta_{mn}\delta(\psi_t-\psi_{t,mn}),\label{eq.umn}
 \end{equation}
 where $\Delta_{mn}$ is a constant and $\psi_{t,mn}$ is the toroidal flux enclosed by the rational magnetic surface where $\iotabar=n/m$. The Pfirsch-Schl\"uter current density, Eq.(\ref{equation current density}), has then two parts; one is a delta function, and the other is
 \begin{equation}
-	J_{mn} = {\color{red}\frac{1}{\sqrt{g}}\frac{1}{\mathbf{B}\cdot\nabla\zeta_b}}\frac{(mG + nI)}{m\iotabar - n}h_{mn}p'(\psi_t).\label{diverging current}
+	J_{mn} = \frac{(mG + nI)}{m\iotabar - n}h_{mn}p'(\psi_t).\label{diverging current}
 \end{equation}
 
 At rational surfaces, where $\iotabar=n/m$, the current density (\ref{diverging current}) diverges as a $1/x$ singularity if the pressure gradient is finite and if the magnetic field harmonics $h_{mn}$ is non zero. This particular singularity might be nonphysical since the integrated net toroidal current could diverge; note that the current density $\Delta_{mn} p'(\psi_t) \delta(\psi_t-\psi_{t,mn})$, is on the other hand well defined, since it is a finite quantity once integrated. To circumvent the issue of nonphysical diverging currents and obtain well defined, ideal MHD solutions, one has to consider constrained classes of equilibria.
