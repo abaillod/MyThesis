@@ -226,13 +226,13 @@ Note that
 	\mathbf{B} &= \nabla\psi_t\times\nabla\theta_s + \nabla\zeta\times\nabla\psi_p\\
 	&= \nabla\psi_t\times\nabla(\theta_b+\iotabar\omega) + \nabla(\zeta_b+\omega)\times\nabla\psi_p\\
 	&= \nabla\psi_t\times\nabla\theta_b + \nabla\zeta_b\times\nabla\psi_p + \underbrace{\frac{d\psi_p}{d\psi_t}\nabla\psi_t\times\nabla\omega - \nabla\psi_p\times\nabla\omega}_{=0}\\
-	&= \nabla\psi_t\times\nabla\theta_b + \nabla\zeta_b\times\nabla\psi_p,
+	&= \nabla\psi_t\times\nabla\theta_b + \nabla\zeta_b\times\nabla\psi_p, \label{eq.covariant_b_boozer}
 \end{align}
 \textit{i.e.} the angles $(\theta_b,\zeta_b)$ are also straight field line angles. Similarly, 
 \begin{align}
 	\mathbf{B} &= I\nabla(\theta_b+\iotabar\omega) + G\nabla(\zeta_b+\omega) + K \nabla\psi_t + \nabla H\\
 	&= I\nabla\theta_b + G\nabla\zeta_b + \left[K-\omega\left(\iotabar\frac{dI}{d\psi_t}+\frac{dG}{d\psi_t}\right)\right]\nabla\psi_t + \nabla\left[H+(I\iotabar+G)\omega\right]\\
-	&= I\nabla\theta_b + G\nabla\zeta_b + K_b\nabla\psi_t + \nabla H_b,
+	&= I\nabla\theta_b + G\nabla\zeta_b + K_b\nabla\psi_t + \nabla H_b, \label{eq.contravariant_b_boozer}
 \end{align}
 where 
 \begin{align}
@@ -243,7 +243,15 @@ Thus, choosing the function $\omega$ to be
 \begin{equation}
 	\omega = -\frac{H}{\iotabar I + G},
 \end{equation}
-we get the Boozer coordinates, where $H_b = 0$.
+we get the Boozer coordinates, where $H_b = 0$. The coordinate jacobian, $\sqrt{g_b}$, can be obtained by evaluating $B^2$; taking the product between the covariant (Eq.(\ref{eq.covariant_b_boozer})) and contravariant (Eq.(\ref{eq.contravariant_b_boozer})) representations of $\mathbf{B}$, we obtain
+\begin{align}
+	B^2 &= (\nabla\psi_t\times\nabla\theta_b+\nabla\zeta_b\nabla\psi_p)\cdot(I\nabla\theta_b+G\nabla\zeta_b+K_b\nabla\psi_t)\\
+	&= \frac{G}{\sqrt{g_b}} + \frac{\iotabar I}{\sqrt{I}},
+\end{align}
+which leads to
+\begin{equation}
+	\sqrt{g_b} = \frac{G+\iotabar I}{B^2}.\label{eq.jacobian_boozer}
+\end{equation}
 
 
 
