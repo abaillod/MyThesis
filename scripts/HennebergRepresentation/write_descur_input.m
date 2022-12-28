@@ -1,9 +1,10 @@
 %% read spec output
-d = read_spec('QI_Nfp1_Nvol1.sp.h5');
+%d = read_spec('QI_Nfp1_Nvol1.sp.h5');
+d = read_spec('QH_Nvol1.sp.h5');
 write = true;
 
 %% select surface
-isurf = 8;
+isurf = 28;
 
 R = squeeze(d.poincare.R(isurf,:,:));
 Z = squeeze(d.poincare.Z(isurf,:,:));
@@ -121,7 +122,8 @@ end
 tflux = trapz(sarr,trapz(tarr,integrand,2));
 
 %% Create input file
-nm = SPEC_Namelist('QI_Nfp1_Nvol2.sp');
+%nm = SPEC_Namelist('QI_Nfp1_Nvol2.sp');
+nm = SPEC_Namelist('QH_Nvol2.sp');
 
 fl = nm.physicslist.tflux;
 pe = nm.physicslist.phiedge;
