@@ -2,12 +2,12 @@
 
 \begin{document}
 
-\chapter{3D magnetic equilibria} \label{chap.3d magnetic equilibria}
+\chapter{Three-dimensional magnetic equilibria} \label{chap.3d magnetic equilibria}
 The description of a plasma starts with a mathematical model for its equilibrium. In this chapter, we follow \citet{Freidberg2014} and introduce the ideal MHD model, and in particular its equilibrium equations. Some important properties of ideal 3D ideal MHD equilibria are discussed, and we introduce briefly the problematic of the Pfirsch-Schl\"uter diverging current singularities associated with the assumption of existence of magnetic surfaces \citep{Grad1967}. To avoid these singularities, we introduce then two restricted classes of ideal MHD equilibria, namely the Taylor state \citep{Taylor1974,Taylor1986} and the stepped-pressure equilibrium \citep{Hole2006}. Finally we discuss how these three equilibrium models can be derived by minimizing different energy functionals.
 
 \section{Ideal MHD}
 \label{section ideal mhd}
-Ideal \ac{MHD} is probably the most well-known and used model to describe macroscopic plasma equilibria. It aims at describing slow phenomena on macroscopic scales. Quasi-neutrality is assumed, \textit{i.e.} $n_e=n_i=n$, where $n_e$ and $n_i$ are the electron and ion densities respectively. The plasma is modeled with a single fluid approximation, where the pressure is isotropic and defined as the sum of the ion and electron pressure, $p=p_i+p_e=2nT$, and the temperature is defined as the average of the ion and electron temperature, $T=(T_i+T_e)/2$. In addition, it is assumed that electromagnetic waves have phase velocities negligible in comparison to the speed of light, $\omega/k\ll c$, the thermal velocities of ions and electrons are non-relativistic, $v_{Ti}\ll v_{Te}\ll c$, with $v_{Ti}=(kT_i/m_i)^{1/2}$, $k$ is Boltzmann constant, and $m_i$ the ion mass. Phenomena described by ideal MHD have frequencies smaller than the electron plasma frequency, $\omega\ll \omega_{pe}=(n_ee^2/m_e\epsilon_0)^{1/2}$, where $e$ the elementary charge, $m_e$ the electron mass and $\epsilon_0$ the vacuum permittivity, and have characteristic length larger than the Debye length, $a\gg \lambda_D=(kT_e/4\pi n_e e^2)^{1/2}$. Finally, electron inertia is neglected, \textit{i.e.} their response to a force is instantaneous.
+Ideal \ac{MHD} is probably the most well-known and used model to describe macroscopic plasma equilibria. It aims at describing slow phenomena on macroscopic scales. Quasi-neutrality is assumed, \textit{i.e.} $n_e=n_i=n$, where $n_e$ and $n_i$ are the electron and ion densities respectively. The plasma is modeled with a single fluid approximation, where the pressure is isotropic and defined as the sum of the ion and electron pressure, $p=p_i+p_e=2nT$, and the temperature is defined as the average of the ion and electron temperature, $T=(T_i+T_e)/2$. In addition, it is assumed that electromagnetic waves have phase velocities negligible in comparison to the speed of light, $\omega/k\ll c$, the thermal velocities of ions and electrons are non-relativistic, $v_{Ti}\ll v_{Te}\ll c$, with $v_{Ti}=(kT_i/m_i)^{1/2}$, $k$ is Boltzmann constant, and $m_i$ the ion mass. Phenomena described by ideal MHD have frequencies smaller than the electron plasma frequency, $\omega\ll \omega_{pe}=(n_ee^2/m_e\epsilon_0)^{1/2}$, where $e$ the elementary charge, $m_e$ the electron mass and $\epsilon_0$ the vacuum permittivity, and smaller than the ion gyrofrequency, $\omega\ll\omega_i=q_iB/m_i$, with $q_i$ the ion electric charge, $B$ the magnetic field strength, and $m_i$ the ion mass. In addition, the plasma have a characteristic length larger than the Debye length, $a\gg \lambda_D=(kT_e/4\pi n_e e^2)^{1/2}$. The plasma rotation around the torus, described by the flow velocity $u$, is assumed to be smaller than the ion gyromotion, \textit{i.e.} $(\rho_i/a)(v_{Ti}/u)\ll 1$, with $\rho_i$ the ion gyroradius (see Eq.(eq.gyroradius)). Finally, electron inertia is neglected, \textit{i.e.} their response to a force is instantaneous.
 
 The ideal \ac{MHD} equations are \citep{Freidberg2014},
 \begin{align}
@@ -30,13 +30,13 @@ At equilibrium, all time derivatives vanish ($\partial/\partial t = 0$), and ass
 	\nabla\times\mathbf{B} &=\mu_0\mathbf{J}\\
 	\nabla\cdot\mathbf{B}&=0.\label{equation div B ideal mhd}
 \end{align}
-Note that flows are damped in general magnetic equilibria, making the assumption $\mathbf{v}=0$ reasonable. Special cases are quasi-symmetric fields \citep{boozerTransportIsomorphicEquilibria1983,nuhrenbergQuasihelicallySymmetricToroidal1988,helanderTheoryPlasmaConfinement2014a,rodriguezNecessarySufficientConditions2020}, where strong flows can be generated in the direction of the symmetry \citep{spongGenerationDampingNeoclassical2005,helanderIntrinsicAmbipolarityRotation2008,simakovPlasmaRotationQuasisymmetric2011}. In tokamaks, spontaneous rotation occurs \citep{diamondPhysicsNondiffusiveTurbulent2009}, and can be generated by external drives, such as \ac{NBI} \citep{suckewerToroidalPlasmaRotation1979}. In this thesis, we neglect flow. 
+Note that flows are damped in general magnetic equilibria, making the assumption $\mathbf{v}=0$ reasonable. Special cases are quasi-symmetric fields \citep{boozerTransportIsomorphicEquilibria1983,nuhrenbergQuasihelicallySymmetricToroidal1988,helanderTheoryPlasmaConfinement2014,rodriguezNecessarySufficientConditions2020}, where strong flows can be generated in the direction of the symmetry \citep{spongGenerationDampingNeoclassical2005,helanderIntrinsicAmbipolarityRotation2008,simakovPlasmaRotationQuasisymmetric2011}. In tokamaks, spontaneous rotation occurs \citep{diamondPhysicsNondiffusiveTurbulent2009}, and can be generated by external drives, such as \ac{NBI} \citep{suckewerToroidalPlasmaRotation1979}. In this thesis, we neglect flow. 
 
 
 
 % ============================================= FIGURE OF MERITS ===========================================
 \subsection{Figures of merit of magnetic equilibria}
-We consider a toroidal plasma volume $\mathcal{V}_P$ at equilibrium, in which the pressure $p$ and magnetic field $\mathbf{B}$ is known everywhere. We define a poloidal angle $\theta$ and a toroidal angle $\zeta$, and their corresponding basis vector $\mathbf{e}_\theta$ and $\mathbf{e}_\zeta$. We assume that the magnetic field has a unique magnetic axis, and construct a radial coordinate $s$, where $s=0$ on the magnetic axis, $s=1$ at the plasma boundary, and $s=c$ on a magnetic surface parametrized by $\mathbf{x}=R(\theta,\zeta)\mathbf{e}_R + Z(\theta,\zeta)\mathbf{e}_Z$, with $(\mathbf{e}_R,\mathbf{e}_\zeta,\mathbf{e}_Z)$ the usual cylindrical coordinate basis. On the magnetic surface, 
+We consider a toroidal plasma volume $\mathcal{V}_P$ at equilibrium, in which the pressure $p$ and magnetic field $\mathbf{B}$ is known everywhere. We define a poloidal angle $\theta$ and a toroidal angle $\zeta$, and their corresponding basis vector $\mathbf{e}_\theta$ and $\mathbf{e}_\zeta$. We assume that the magnetic field has a unique magnetic axis, and construct a radial coordinate $s$, where $s=0$ on the magnetic axis, $s=1$ at the plasma boundary, and $s=c$ on a magnetic surface parametrized by $\mathbf{x}=R(\theta,\zeta)\mathbf{e}_R + Z(\theta,\zeta)\mathbf{e}_Z$, with $(\mathbf{e}_R,\mathbf{e}_\zeta,\mathbf{e}_Z)$ the usual cylindrical coordinate basis. For more details about the toroidal coordinate system, and the derivation of the covariant basis vector, the contravariant basis vector, and the jacobian, see appendix \ref{app. toroidal coordinates}. On the magnetic surface, 
 \begin{align}
 	\mathbf{e}_\theta &= \frac{\partial R}{\partial \theta}\mathbf{e}_R + \frac{\partial Z}{\partial \theta}\mathbf{e}_Z\\
 	\mathbf{e}_\zeta &= \frac{\partial R}{\partial \theta}\mathbf{e}_R + R\mathbf{e}_\zeta + \frac{\partial Z}{\partial \theta}\mathbf{e}_Z\\
@@ -47,7 +47,9 @@ where $\mathbf{n}$ is a vector normal the magnetic surface and pointing outwards
 	\psi_t &= \iint_{S[\zeta=\text{const}]} \mathbf{B}\cdot \mathbf{dS} = \int_0^{2\pi}\int_0^c B^\zeta \sqrt{g}d\theta ds\\
 	\psi_p &= \iint_{S[\theta=\text{const}]} \mathbf{B}\cdot \mathbf{dS} = \int_0^{2\pi}\int_0^c B^\theta \sqrt{g}d\zeta ds,
 \end{align}
-where $\sqrt{g}$ is the jacobian of the coordinate $(s,\theta,\zeta)$. As $S[s=c]$ is a magnetic surface, the magnetic field is everywhere tangential to the surface, $\mathbf{B}\cdot\mathbf{n}=0$, and wraps around the surface. A crucial figure of merit is the \emph{rotational transform} $\iotabar$ which is a measure of the tilt of the field line in the $(\theta,\zeta)$ plane, and is defined as
+where $\sqrt{g}$ is the jacobian of the coordinate $(s,\theta,\zeta)$. 
+
+As $S[s=c]$ is a magnetic surface, the magnetic field is everywhere tangential to the surface, $\mathbf{B}\cdot\mathbf{n}=0$, and wraps around the surface. A crucial figure of merit is the \emph{rotational transform} $\iotabar$ which is a measure of the tilt of the field line in the $(\theta,\zeta)$ plane, and is defined as
 \begin{equation}
 	\iotabar = \frac{d\psi_p}{d\psi_t}=\frac{\mathbf{B}\cdot\nabla\theta_s}{\mathbf{B}\cdot\nabla\zeta}.
 \end{equation}
@@ -62,17 +64,17 @@ The rotational transform is the inverse of the safety factor $q=1/\iotabar$, mor
 
 Equation (\ref{equation perp force balance}) implies that $\mathbf{B}\cdot\nabla p=0$, \textit{i.e.} the pressure is constant along a field line. If the pressure profile is smooth and not constant in any region, then equation (\ref{equation perp force balance}) implies that magnetic field lays on surfaces of constant pressure, thereby generating magnetic surfaces. Assuming the existence of rational magnetic surfaces where $\nabla p\neq 0$ is however the source of potentially diverging currents, as we shall discuss in the sections (\ref{sec ideal mhd currents})-(\ref{sec. diverging currents}). 
 
-The normalized pressure is defined as the ration between the plasma pressure and the magnetic pressure,
+Another figure of merit is the normalized pressure, defined as the ratio between the plasma pressure and the magnetic pressure. It is usually evaluated on the magnetic axis,
 \begin{equation}
-	\beta = \frac{2\mu_0 p}{B^2},
+	\beta_0 = \frac{2\mu_0 p_0}{B_0^2},
 \end{equation}
-with $B=|\mathbf{B}|$. Generally, the normalized pressure is either evaluated on the magnetic axis, with $\beta_0=2\mu_0 p_0/B_0^2$, where the subscript denotes an evaluation on the magnetic axis, or averaged other the plasma volume,
+or averaged other the plasma volume,
 \begin{equation}
-	\bar\beta = \frac{1}{\mathcal{V}_P} \iiint_{\mathcal{V}_P} \frac{2\mu_0 p}{B^2} dv,
+	\beta = \frac{1}{\mathcal{V}_P} \iiint_{\mathcal{V}_P} \frac{2\mu_0 p}{B^2} dv,
 \end{equation}
 with $\mathcal{V}_P$ the plasma volume and $dv$ a volume element.
 
-We now define two useful quantities, the plasma energy $W$ and the magnetic helicity $K$. The plasma energy is defined as 
+We now define two useful quantities for describe plasma equilibria from energy principles (see section \ref{sec.energy principle}): the plasma energy $W$ and the magnetic helicity $K$. The plasma energy is defined as 
 \begin{equation}
 	W = \iiint_{\mathcal{V}_P} dv \left(\frac{\mathbf{B}^2}{2} + \frac{p}{\gamma-1}\right), \label{eq. energy functional}
 \end{equation}
@@ -80,7 +82,7 @@ while the magnetic helicity is
 \begin{equation}
 	K = \iiint_{\mathcal{V}_P} dv \mathbf{A} \cdot \mathbf{B},
 \end{equation}
-with $\mathbf{A}$ the magnetic vector potential, $\mathbf{B}=\nabla\times\mathbf{A}$. As we will discuss in section \ref{sec.energy principle}, the plasma energy and the magnetic helicity are two important quantities to describe the plasma equilibrium from an energy principle.
+with $\mathbf{A}$ the magnetic vector potential, $\mathbf{B}=\nabla\times\mathbf{A}$.
 
 To finish this section, we define the flux surface average of a function $f(\psi,\theta,\zeta)$ as the volume average of $f$ between two neighboring magnetic surfaces \citep{helanderTheoryPlasmaConfinement2014}. The volume enclosed by a magnetic surface is
 \begin{equation}
@@ -98,7 +100,7 @@ with $dS=\sqrt{g}|\nabla\psi_t|d\theta d\zeta$. One important property of the fl
 
 
 \subsection{Ideal MHD solution in an axisymmetric cylinder}\label{appendix jxb=grad p solution}
-As an illustration, we solve here the ideal MHD equilibrium equations (\ref{equation perp force balance})-(\ref{equation div B ideal mhd}) in an axisymmetric cylinder of length $L$ and radius $a$ (see Figure \ref{fig. cylinder sketch}). We work with cylindrical coordinate $(r,\theta,z)$. We assume that the cylinder boundary is a magnetic surface, \textit{i.e.} $\mathbf{B}\cdot\nabla r=0$ at $r=a$. Assuming symmetries along $\theta$ and $z$ (equivalent to axisymmetry in a toroidal geometry), we immediately from Eq.(\ref{equation perp force balance}) get that $p=p(r)$, \textit{i.e.} isopressure surfaces are cylinders with constant radii. Since the magnetic field lies on constant pressure surfaces, axisymmetry implies the existence of magnetic surfaces everywhere.
+As an illustration, we solve here the ideal MHD equilibrium equations (\ref{equation perp force balance})-(\ref{equation div B ideal mhd}) in an axisymmetric cylinder of length $L$ and radius $a$ (see Figure \ref{fig. cylinder sketch}). We work with cylindrical coordinate $(r,\theta,z)$. We assume that the cylinder boundary is a magnetic surface, \textit{i.e.} $\mathbf{B}\cdot\nabla r=0$ at $r=a$. Assuming symmetries along $\theta$ and $z$ (equivalent to axisymmetry in a toroidal geometry), we immediately get from Eq.(\ref{equation perp force balance}) that $p=p(r)$, \textit{i.e.} isopressure surfaces are cylinders with constant radii. Since the magnetic field lies on constant pressure surfaces, axisymmetry implies the existence of magnetic surfaces everywhere.
 
 \begin{figure}
 	\centering
@@ -169,9 +171,7 @@ The total current density is thus
 \end{equation}
 where the first term on the right hand side of Eq.(\ref{equation current density}) is the \emph{diamagnetic current}, the second is the \emph{Pfirsch-Schl\"uter current} and the last term encompasses other parallel currents, such as the externally driven currents (Ohmic, \ac{ECCD}, \ac{NBCD}) or bootstrap current (see section \ref{sec.bootstrap}).
 
-We now discuss the relative importance of the different terms in Eq.(\ref{equation current density}) in setting the net toroidal current in a stellarator. To do so, we work in Boozer coordinates (see appendix \ref{appendix  boozer coordinates}) and we take the flux surface average of the total current density projected in the Boozer toroidal direction, $\mathbf{J}\cdot\nabla\zeta_b$ {\color{red} source from A. Alonso}.
-
-We start by looking at the contribution from the diamagnetic current density. We write the magnetic field in its contravariant form,
+We now discuss the relative importance of the different terms in Eq.(\ref{equation current density}) in setting the net toroidal current in a stellarator. To do so, we work in Boozer coordinates (see appendix \ref{appendix  boozer coordinates}) and we take the flux surface average of the total current density projected in the Boozer toroidal direction, $\mathbf{J}\cdot\nabla\zeta_b$ (J. A. Alonso, personal communication, 2023). We start by looking at the contribution from the diamagnetic current density. We write the magnetic field in its contravariant form,
 \begin{equation}
 	\mathbf{B} = I(\psi_t)\nabla\theta_b + G(\psi_t)\nabla\zeta_b + K(\psi_t,\theta_b,\zeta_b)\nabla\psi_t, 
 \end{equation}
@@ -184,9 +184,7 @@ where we used the relation $\mathbf{e}_{\theta_b} = \sqrt{g_b}\nabla\theta_b\tim
 \begin{equation}
 	\langle\mathbf{J}_\perp\cdot\nabla\zeta_b\rangle = \frac{Ip'}{G+\iotabar I}.
 \end{equation}
-Interestingly, the diamagnetic current contributes to the net toroidal current only if there are other sources of toroidal current in the plasma.
-
-To evaluate the contribution from the Pfirsch-Schl\"uter current density, we write the magnetic field using its covariant representation (Eq.(\ref{eq.covariant_b_boozer})), which implies
+Interestingly, the diamagnetic current contributes to the net toroidal current only if there are other sources of toroidal current in the plasma. To evaluate the contribution from the Pfirsch-Schl\"uter current density, we write the magnetic field using its covariant representation (Eq.(\ref{eq.covariant_b_boozer})), which implies
 \begin{equation}
 	\mathbf{B}\cdot\nabla\zeta_b = (\nabla\psi_t\times\nabla\theta_b + \iotabar \nabla\zeta_b\times\nabla\psi_t)\cdot\nabla\zeta_b = \frac{1}{\sqrt{g_b}}. \label{eq.B_dot_nabla_phi}
 \end{equation}
@@ -256,9 +254,9 @@ where $\Delta_{mn}$ is a constant and $\psi_{t,mn}$ is the toroidal flux enclose
 \end{equation}
 which is called the Pfirsch-Schl\"uter current.
 
-At rational surfaces, where $\iotabar=n/m$, the current density (\ref{diverging current}) diverges as a $1/x$ singularity if the pressure gradient is finite and if the magnetic field harmonics $h_{mn}$ is non zero. This particular singularity might be nonphysical since the integrated net toroidal current could diverge; note that the current density $\Delta_{mn} p'(\psi_t) \delta(\psi_t-\psi_{t,mn})$, is on the other hand well defined, since it is a finite quantity once integrated. To circumvent the issue of nonphysical diverging currents and obtain well defined, ideal MHD solutions, one has to consider constrained classes of equilibria.
+At rational surfaces, where $\iotabar=n/m$, the current density (\ref{diverging current}) diverges as a $1/x$ singularity if the pressure gradient is finite and if the magnetic field harmonic $h_{mn}$ is non zero. This particular singularity might be nonphysical since the integrated net toroidal current could diverge; note that the current density $\Delta_{mn} p'(\psi_t) \delta(\psi_t-\psi_{t,mn})$, is on the other hand well defined, since it is a finite quantity once integrated. To circumvent the issue of nonphysical diverging currents and obtain well defined, ideal MHD solutions, one has to consider constrained classes of equilibria.
 
-One possibility is to consider equilibria where the inverse magnetic field squared resonant harmonic is zero at each rational surface, \emph{i.e.} $h_{mn}=0$, discussed by \citet{Weitzner2014}. Another is to relax the assumption of smooth, continuous solutions, and consider rotational transform profiles that are stepped --- essentially jumping from irrational to irrational values, and entirely avoiding rational surfaces. This has been discussed by \citet{Loizu2015a}. Similarly, one could consider equilibria where the pressure is constant around resonant surfaces. Since rationals are dense in $\mathbb{R}$, the pressure profile is either stepped or fractal. Stepped pressure equilibria have been proven to exist close to axisymmetry by \citet{Bruno1996}. A combination of the second and third class discussed above, where the rotational transform profile and the pressure profile are alternatively constant, can be constructed to obtain solution with continuous profiles \citep{Hudson2017a}. Recently, a final class of equilibria has been proposed by Y-H. Huang {\color{red} add source}, where the delta function current densities in Eq.(\ref{eq.umn}) would modify the radial dependency of $G$, $I$, $p$ and $\iotabar$ such that the current density $J_{mn}$ does not diverge at rational surfaces.
+One possibility is to consider equilibria where the inverse magnetic field squared resonant harmonic is zero at each rational surface, \emph{i.e.} $h_{mn}=0$, discussed by \citet{Weitzner2014}. Another is to relax the assumption of smooth, continuous solutions, and consider rotational transform profiles that are stepped --- essentially jumping from irrational to irrational values, and entirely avoiding rational surfaces. This has been discussed by \citet{Loizu2015a}. Similarly, one could consider equilibria where the pressure is constant around resonant surfaces. Since rationals are dense in $\mathbb{R}$, the pressure profile is either stepped or fractal. Stepped pressure equilibria have been proven to exist close to axisymmetry by \citet{Bruno1996}. A combination of the second and third class discussed above, where the rotational transform profile and the pressure profile are alternatively constant, can be constructed to obtain solution with continuous profiles \citep{Hudson2017a}. Recently, a final class of equilibria has been proposed by Y.-M. Huang {\color{red} add source} \cite{yiminpaper}, where the delta function current densities in Eq.(\ref{eq.umn}) would modify the radial dependency of $G$, $I$, $p$ and $\iotabar$ such that the current density $J_{mn}$ does not diverge at rational surfaces.
 
 In the remaining of this thesis, we will work with stepped-pressure equilibria. The reason is three-fold: (i) these equilibria are numerically tractable, \textit{e.g.} there are no fractal structures in the considered profiles, (ii) solutions with magnetic islands and chaos can be obtained and (iii) solutions have been proven to exist under some conditions. In particular, we will work with \ac{MRxMHD} equilibria, which are a specific class of stepped-pressure equilibria and can be seen as a combination of Taylor states, described in the following section.
 
@@ -272,7 +270,7 @@ The Taylor state \citep{Taylor1974,Taylor1986} is a particular case of force-fre
 \begin{equation}
 	\nabla\times\mathbf{B}=\mu\mathbf{B}. \label{equation Taylor state}
 \end{equation}
-Solution to the equation (\ref{equation Taylor state}) in a slab and a cylinder are derived below.
+Solutions to the equation (\ref{equation Taylor state}) in a slab and a cylinder are derived below.
 
 \subsection{Solution in a plasma slab}
 We solve equation (\ref{equation Taylor state}) in a plasma Slab. We use Cartesian coordinates $(x,y,z)$ with $(\mathbf{e}_x,\mathbf{e}_y,\mathbf{e}_z)$ the basis vector. The plasma slab is bounded by two surfaces at $x=0$ and $x=a$, and we assume that these surfaces are magnetic surfaces, \textit{i.e.} $\mathbf{B}\cdot\mathbf{e}_x=0$. We assume periodic boundary conditions in the $y$ and $z$ directions, and that the equilibrium is independent on the $y$ and $z$ coordinates, \textit{i.e.} $\mathbf{B}=\mathbf{B}(x)$ (see Figure \ref{fig. plasma slab}).
@@ -324,12 +322,12 @@ Defining $x=\mu r$, we thus obtain
 \begin{equation}
 	x^2 \frac{\partial^2 B_\theta}{\partial x^2} + x \frac{\partial B_\theta}{\partial x} + (x^2-1) B_\theta = 0,
 \end{equation}
-which we identify to Bessel's differential equation. The solutions are then
+which we identify to be Bessel's differential equation. The solutions are then
 \begin{align}
 	B_\theta &= B_0 J_1(\mu r)\\
 	B_z &= B_0 J_0(\mu r),
 \end{align}
-where $J_i$ is the Bessel function of the $i^{\text{th}}$ order, and $B_0$ is an integration constant, which can be fixed by providing an additional constraint, for example the toroidal flux. Note that in a cylinder only two constants (or constraints) $(\mu,B_0)$ have to be provided to fully determine the equilibrium. This is in opposition to the plasma slab case, where three constants had to be provided. This difference is intransically linked to the topology of the domain; in a slab, there are two boundaries to the plasma, one at $x=0$ and one at $x=a$, while in a cylinder there is only one boundary, at $r=a$. 
+where $J_i$ is the Bessel function of the $i^{\text{th}}$ order, and $B_0$ is an integration constant, which can be fixed by providing an additional constraint, for example the toroidal flux. Note that in a cylinder only two constants (or constraints) $(\mu,B_0)$ have to be provided to fully determine the equilibrium. This is in opposition to the plasma slab case, where three constants had to be provided. This difference is intrinsically linked to the topology of the domain; in a slab, there are two boundaries to the plasma, one at $x=0$ and one at $x=a$, while in a cylinder there is only one boundary, at $r=a$. 
 
 These important topological properties are also true in toroidal geometries; two constants are required to fully determine the Taylor state in a torus, while three constants are required in a toroidal annulus.
 
@@ -337,17 +335,17 @@ These important topological properties are also true in toroidal geometries; two
 \label{section mrxmhd}
 %The \ac{MRxMHD} theory \citep{Dewar2015, Hole2006} has been developed to address this question. \ac{MRxMHD} minimizes the \ac{MHD} energy functional \citep{kruskal_equilibrium_1958} while keeping the magnetic helicity and the magnetic fluxes constant \citep{Dewar2015} in a finite set of $N_{vol}$ nested volumes $\mathcal{V}_l$ at constant pressure (see Figure \ref{fig:Illustration_SPEC}) but otherwise allowing arbitrary, non-ideal variations in the magnetic field. Interfaces $\delta\mathcal{V}_l$ separating the volumes are ideal flux surfaces which therefore cannot undergo magnetic re-connection, effectively constraining discretely the magnetic field topology. In the limit of a single volume, $N_{vol}=1$, Taylor states \citep{Taylor1974, Taylor1986} are recovered, while in the limit of an infinite number of volumes, $N_{vol}\rightarrow\infty$, it has been proven that \ac{MRxMHD} recovers ideal \ac{MHD} (section \ref{section ideal mhd}) \citep{Dennis2013} in the limit of continuously nested flux surfaces, thereby bridging the gap between both theories.
 
-Taylor states can not describe plasma equilibria with pressure profile. An alternative is proposed by the MRxMHD equilibrium model, which describes solutions to equations (\ref{equation perp force balance})-(\ref{equation div B ideal mhd}) assuming stepped-pressure profiles. The pressure steps are supported by magnetic surfaces $\mathcal{I}_l$, $l\in\{1,\ldots,N_{vol}\}$, with irrational rotational transform, \textit{i.e.} $\iotabar\in\mathbb{R}\setminus\mathbb{Q}$, which defines a finite number of volumes $\mathbf{V}_l$ between each pair of interface (see Figure \ref{fig:Illustration_SPEC}). In each volume, the magnetic field is described by a Taylor state, 
+Taylor states can not describe plasma equilibria with pressure profiles. An alternative is proposed by the MRxMHD equilibrium model, which describes weak solutions to equations (\ref{equation perp force balance})-(\ref{equation div B ideal mhd}) assuming stepped-pressure profiles. The pressure steps are supported by magnetic surfaces $\mathcal{I}_l$, $l\in\{1,\ldots,N_{vol}\}$, with irrational rotational transform, \textit{i.e.} $\iotabar\in\mathbb{R}\setminus\mathbb{Q}$, which defines a finite number of volumes $\mathcal{V}_l$ between each pair of interfaces (see Figure \ref{fig:Illustration_SPEC}). In each volume, the magnetic field is described by a Taylor state, 
 \begin{equation}
 	\nabla\times\mathbf{B}=\mu_l\mathbf{B}. \label{eq.BeltramiEquation}
 \end{equation}
-We remark that while ideal \ac{MHD} equilibria are defined by two free functions (\textit{e.g.} the pressure and the rotational transform profiles, $p(\psi_t)$ and $\iotabar(\psi_t)$, or the pressure and the current profiles, $p(\psi_t)$ and $I_\zeta(\psi_t)$), \ac{MRxMHD} requires two scalars to determine the solution in a volume $\mathcal{V}_l$, in addition to the pressure and toroidal flux. This can be considered as three independent discrete profiles that are required to determine an equilibrium. Examples are $\{p_l, \mu_l, \psi_{p,l}\}_{l=1,\ldots,N_{vol}}$, $\{p_l, \mu_l, K_l\}_{l=1,\ldots,N_{vol}}$, with $K_l$ the magnetic helicity in volume $\mathcal{V}_l$, or $\{p_l,\iotabar^-_l,\iotabar^+_l\}_{l=1,\ldots,N_{vol}}$, with $\iotabar^\pm_l$ the rotational transform on the inner and outer side of the interface $\mathcal{I}_l$, as functions of $\{\psi_{t,l}\}_{l=1,\ldots,N_{vol}}$. The innermost volume is a special case, since it only has one boundary; the magnetic field in the innermost volume is thus fully determined by two scalars, for example $(\mu_1,\psi_{t,1})$.
+We remark that while ideal \ac{MHD} equilibria are defined by two free functions (\textit{e.g.} the pressure and the rotational transform profiles, $p(\psi_t)$ and $\iotabar(\psi_t)$, or the pressure and the net toroidal current profiles, $p(\psi_t)$ and $I_\zeta(\psi_t)$), \ac{MRxMHD} requires two scalars to determine the solution in a volume $\mathcal{V}_l$, in addition to the pressure and toroidal flux. This can be considered as three independent discrete profiles that are required to determine an equilibrium. Examples are $\{p_l, \mu_l, \psi_{p,l}\}_{l=1,\ldots,N_{vol}}$, $\{p_l, \mu_l, K_l\}_{l=1,\ldots,N_{vol}}$, with $K_l$ the magnetic helicity in volume $\mathcal{V}_l$, or $\{p_l,\iotabar^-_l,\iotabar^+_l\}_{l=1,\ldots,N_{vol}}$, with $\iotabar^\pm_l$ the rotational transform on the inner and outer side of the interface $\mathcal{I}_l$, as functions of $\{\psi_{t,l}\}_{l=1,\ldots,N_{vol}}$. The innermost volume is a special case, since it only has one boundary; the magnetic field in the innermost volume is thus fully determined by two scalars, for example $(\mu_1,\psi_{t,1})$.
 
-The geometry of the volumes' boundary is chosen such that force balance is achieved, \textit{i.e.} the total pressure (plasma and magnetic pressure) is continuous across each volume interface $\mathcal{I}_l$,
+The geometry of the volumes' boundary is obtained such that force balance is achieved, \textit{i.e.} the total pressure (plasma and magnetic pressure) is continuous across each volume interface $\mathcal{I}_l$,
 \begin{equation}
 	\left[\left[p + \frac{B^2}{2\mu_0}\right]\right]_l = 0, \label{eq.force_balance}
 \end{equation}
-where $[[x]]_l\equiv x_{l+1}-x_l$ denotes the discontinuity across interface $l^{\text{th}}$. The MRxMHD equilibrium can then be seen as a collection of nested Taylor state at equilibrium with one another. 
+where $[[x]]_l\equiv x_{l+1}-x_l$ denotes the discontinuity across interface $l^{\text{th}}$. The MRxMHD equilibrium can then be seen as a collection of nested Taylor states at equilibrium with one another. 
 
 \begin{figure}
 	\centering
@@ -368,7 +366,7 @@ where $[[x]]_l\equiv x_{l+1}-x_l$ denotes the discontinuity across interface $l^
 	\label{fig:Illustration_SPEC}
 \end{figure}
 
-The MRxMHD class of equilibrium thus extends the Taylor state to equilibria with pressure gradients. Magnetic field line topologies are discretely constrained to be magnetic surfaces at the volumes' boundaries, while magnetic islands and magnetic field line chaos can be present in the volumes between the interfaces. Diverging currents, as described in section \ref{sec. diverging currents}, are avoided since pressure gradients are only supported by irrational magnetic surfaces. There are however some drawbacks; the magnetic field, and so the rotational transform, pressure and other physical profiles, are in general discontinuous across the interfaces. Finally, interfaces may not always exist --- either a magnetic island or magnetic field line chaos is present, or the pressure jump is too large for a single surface to support it \citep{Qu2021}. Therefore, care must be taken when constructing MRxMHD equilibria, and in their analysis. 
+The MRxMHD class of equilibria thus extends the Taylor state to equilibria with pressure gradients. Magnetic field lines are discretely constrained to lay on magnetic surfaces at the volumes' boundaries, while magnetic islands and magnetic field line chaos can be present in the volumes between the interfaces. Diverging currents, as described in section \ref{sec. diverging currents}, are avoided since pressure gradients are only supported by irrational magnetic surfaces. There are however some drawbacks; the magnetic field, and so the rotational transform, pressure and other physical profiles, are in general discontinuous across the interfaces. Finally, interfaces may not always exist. If the an interface is close to a magnetic island chain or chaotic field lines, the surface might be fractal and might be unable to support a pressure gradient. Another possibility is that the pressure jump is too large for a single surface to support it \citep{Qu2021}. Therefore, care must be taken when constructing MRxMHD equilibria, and in their analysis. 
 
 
 %In each volume $\mathcal{V}_l$, the solution to Eq.(\ref{eq.BeltramiEquation}) is completely determined by three scalars (for example $\{\mu_l,\psi_{t,l},\psi_{p,l}\}$), the geometry of interfaces bounding the volume and a boundary condition for the magnetic field normal to the interfaces $\mathbf{B}_l\cdot\hat{\mathbf{n}}_k$, $k=\{l-1,l\}$, with $\hat{\mathbf{n}}_k$ a unit vector perpendicular to the interface $k$. In \ac{MRxMHD}, the interfaces are imposed to be flux surfaces, with $\mathbf{B}_l\cdot\hat{\mathbf{n}}_k=0$. In the innermost volume, which is topologically different from the others, only two scalars are required in addition to the geometrical degrees of freedom and the condition $\mathbf{B}_1\cdot\hat{\mathbf{n}}_1=0$.
@@ -377,20 +375,46 @@ The MRxMHD class of equilibrium thus extends the Taylor state to equilibria with
 \subsection{Currents in MRxMHD}\label{ch2.mrxmhd_currents}
 
 
-\textit{Disclaimer: this section is heavily based on the publication by \citet{Baillod2021}.}
+%\textit{Disclaimer: this section is heavily based on the publication by \citet{Baillod2021}.}
 
-One important part of the work presented in this thesis is the implementation of a new capability in the SPEC code (introduced in chapter \ref{ch3.SPEC}) to run at fixed net toroidal current profile. The numerical implementation will be explained in great details in section \ref{sec. current constraint}; we describe in this section how currents are represented in the MRxMHD theory.
+One important part of the work presented in this thesis is the implementation of a new capability in the SPEC code (introduced in chapter \ref{ch3.SPEC}) to run at fixed net toroidal current profile. The numerical implementation will be explained in great details in section \ref{sec. current constraint}; we describe in this section how currents are represented in the MRxMHD theory, following the publication by \citet{Baillod2021}.
 
 In \ac{MRxMHD}, two spatially distinct net toroidal current profiles co-exist, namely currents flowing in the volumes, $\{I^v_{l,\zeta}\}_{l=\{1,\ldots,N_{vol}\}}$, and surface currents flowing at the volumes' interfaces, $\{I^s_{l,\zeta}\}_{l=\{1,\ldots,N_{vol}-1\}}$ (current sheets), where the subscript $\zeta$ refers to the toroidal angle. The volume current $I^v_{l,\zeta}$ in volume $\mathcal{V}_l$ is easily evaluated using Eq.(\ref{eq.BeltramiEquation}) and Ampere's law,
 \begin{equation}
-    \mu_0I^v_{l,\zeta} = \mu_l\iint_{\mathcal{S}_{l,\zeta}} \mathbf{B}\cdot\mathbf{dS}_{l,\zeta} = \mu_l \psi_{t,l},
+    \mu_0I^v_{l,\zeta} = \iint_{S[\zeta=\text{const}]} (\nabla\times\mathbf{B})_l\cdot \mathbf{dS} = \mu_l\iint_{S[\zeta=\text{const}]} \mathbf{B}_l\cdot\mathbf{dS} = \mu_l \psi_{t,l},
     \label{eq.volume_current}
 \end{equation}
-where $\mathcal{S}_{l,\zeta}$ is a constant-$\zeta$ surface in volume $\mathcal{V}_l$ and $\mathbf{dS}_{l,\zeta}$ is the differential surface element normal to $\mathcal{S}_{l,\zeta}$. Volume currents include externally driven currents such as \ac{ECCD}, \ac{NBCD} or Ohmic current. Eq.(\ref{eq.volume_current}) might be surprising since toroidal currents are usually expressed in terms of functions of the poloidal fluxes and not the toroidal fluxes. In essence, the poloidal flux dependence is contained in $\mu_l$, which is related to the parallel current density, as $\mu_l = \mu_0 \mathbf{j}_l\cdot\mathbf{B}_l / B_l^2$, with $\mathbf{j}_l$ the current density in volume $\mathcal{V}_l$. The surface current $I^s_{l,\zeta}$ at interface $\mathcal{I}_l$ can be evaluated using Ampere's law
+where $S[\zeta=\text{const}]$ is a constant-$\zeta$ surface in volume $\mathcal{V}_l$ and $\mathbf{dS}$ is the differential surface element. Volume currents represent externally driven currents such as \ac{ECCD}, \ac{NBCD} or Ohmic current. Eq.(\ref{eq.volume_current}) might be surprising since toroidal currents are usually expressed in terms of functions of the poloidal fluxes and not the toroidal fluxes. In essence, the poloidal flux dependence is contained in $\mu_l$, which is related to the parallel current density, as $\mu_l = \mu_0 \mathbf{j}_l\cdot\mathbf{B}_l / B_l^2$, with $\mathbf{j}_l$ the current density in volume $\mathcal{V}_l$. The surface current $I^s_{l,\zeta}$ at interface $\mathcal{I}_l$ can be evaluated using Ampere's law
 \begin{equation}
-    \mu_0I^s_{l,\zeta} = \int_{\Gamma _l} \left[\left[ \mathbf{B} \right]\right]_l \cdot \mathbf{dl} = \oint_0^{2\pi} \left[\left[B_\theta\right]\right] d\theta \equiv 2\pi \left[\left[ \tilde{B}_{\theta} \right]\right]_l, \label{eq.surf_current}
+    \mu_0I^s_{l,\zeta} = \int_{\Gamma_{\theta,l}} \left[\left[ \mathbf{B} \right]\right]_l \cdot \mathbf{dl} = \oint_0^{2\pi} \left[\left[B_\theta\right]\right] _ld\theta \equiv 2\pi \left[\left[ \tilde{B}_{\theta} \right]\right]_l, \label{eq.surf_current}
 \end{equation}
-where $\Gamma_l$ is a closed curve following the interface $\mathcal{I}_l$ poloidally and $\tilde{B}_{\theta}$ is the $m=n=0$ Fourier mode of the covariant component of the poloidal magnetic field. In Eq.(\ref{eq.surf_current}), the poloidal and toroidal angles, $\theta$ and $\zeta$, are as-of-yet arbitrary. However the surface currents $I^s_{l,\zeta}$ are, as expected, independent of these angles choice, since the surface currents only depend on the $m=n=0$ mode of the field. Surface currents represent all equilibrium pressure-driven currents, such as diamagnetic, Pfirsch-Schl\"uter, and bootstrap currents, as well as shielding currents arising when an ideal interface is positioned on a resonance \citep{Loizu2015}.
+where $\Gamma_{\theta,l}$ is a closed curve following the interface $\mathcal{I}_l$ poloidally and $\tilde{B}_{\theta}$ is the $m=n=0$ Fourier mode of the covariant component of the poloidal magnetic field. In Eq.(\ref{eq.surf_current}), the poloidal and toroidal angles, $\theta$ and $\zeta$, are as-of-yet arbitrary. However the surface currents $I^s_{l,\zeta}$ are, as expected, independent of these angles choice, since the surface currents only depend on the $m=n=0$ mode of the field. Surface currents represent all equilibrium pressure-driven currents, such as diamagnetic, Pfirsch-Schl\"uter, and bootstrap currents, as well as shielding currents arising when an ideal interface is positioned on a resonance \citep{Loizu2015}. Note that the net poloidal current at the interface $\mathcal{I}_l$ can be obtained by considering integrals over $\Gamma_{\zeta,l}$, \textit{i.e.} a closed curve following the interface toroidally, as
+\begin{equation}
+    \mu_0I^s_{l,\theta} = \int_{\Gamma_{\zeta,l}} \left[\left[ \mathbf{B} \right]\right]_l \cdot \mathbf{dl} = \oint_0^{2\pi} \left[\left[B_\zeta\right]\right]_ld\zeta \equiv 2\pi \left[\left[ \tilde{B}_{\zeta} \right]\right]_l, \label{eq.surf_current_poloidal}	
+\end{equation}
+where $\tilde{B}_{\zeta}$ is the $m=n=0$ Fourier mode of the covariant component of the toroidal magnetic field
+
+The current density at the interface is 
+\begin{equation}
+	\mu_0\mathbf{j}^s_l = \nabla\psi_t \times \left[\left[\mathbf{B}\right]\right] \delta(\psi_t-\psi_{t,l}). \label{eq.surface_current_density}
+\end{equation}
+This statement can be proven in its weak form by taking surface integrals. Decomposing the cross-product component by component, and leveraging that at the interface $\mathcal{I}_l$, we have $\mathbf{B}\cdot\nabla\psi_t=B_\psi=0$, we find
+\begin{align}
+	\mu_0\mathbf{j}^s_l &= \left(\nabla\psi_t\times\nabla\theta \left[\left[B_\theta\right]\right] + \nabla\psi_t\times\nabla\zeta \left[\left[B_\zeta\right]\right]\right) \delta(\psi_t-\psi_{t,l}).
+\end{align}
+Integrating over a toroidal surface $S[\zeta=\text{const}]$, we obtain the net toroidal current at the interface,
+\begin{align}
+	\mu_0\iint_{S[\zeta=\text{const}]}\mathbf{j}^s_l\cdot \mathbf{dS} &= \iint_{S[\zeta=\text{const}]} \nabla\psi_t\times\nabla\theta \left[\left[B_\theta\right]\right] \cdot \nabla\zeta \delta(\psi_t-\psi_{t,l}) \sqrt{g}d\psi_t d\theta\\
+	&= \iint_{S[\zeta=\text{const}]} \left[\left[B_\theta\right]\right] \delta(\psi_t-\psi_{t,l})d\psi_t d\theta\\
+	&= \oint \left[\left[B_\theta\right]\right]_l d\theta = \mu_0 I^s_{l,\zeta}, \label{eq.toroidal_current_weak}
+\end{align}
+retrieving Eq.(\ref{eq.surf_current}). The net poloidal current at the interface is obtained similarly by integrating over a poloidal surface $S[\theta=\text{const}]$,
+\begin{align}
+	\mu_0\iint_{S[\theta=\text{const}]}\mathbf{j}^s_l\cdot \mathbf{dS} &= \iint_{S[\theta=\text{const}]} \nabla\psi_t\times\nabla\zeta \left[\left[B_\zeta\right]\right] \cdot \nabla\theta \delta(\psi_t-\psi_{t,l}) \sqrt{g}d\psi_t d\zeta\\
+	&= \iint_{S[\theta=\text{const}]} \left[\left[B_\zeta\right]\right] \delta(\psi_t-\psi_{t,l})d\psi_t d\zeta\\
+	&= \oint \left[\left[B_\zeta\right]\right]_l d\zeta = \mu_0 I^s_{l,\theta}. \label{eq.poloidal_current_weak}
+\end{align}
+Equations (\ref{eq.toroidal_current_weak}) and (\ref{eq.poloidal_current_weak}) show that the current density (\ref{eq.surface_current_density}) lead to the same net toroidal and poloidal current as obtained with Ampere's law in Eqs.(\ref{eq.surf_current})-(\ref{eq.surf_current_poloidal}).
 
 
 \subsubsection{Currents discretization}
@@ -433,7 +457,7 @@ with
     \frac{\psi_{t,l} + \psi_{t,l+1}}{2} & \text{otherwise}
     \end{cases},\label{eq.surf_disc2}
 \end{align}
-with $\psi_{a}$ the total toroidal magnetic flux enclosed by the plasma. In Eqs.(\ref{eq.surf_disc1})-(\ref{eq.surf_disc2}), care has been taken for the first and last interfaces, where the surface of integration has been extended to include the current density from the magnetic axis and up to the plasma boundary. Note that this difference in the definition of the first and last surface currents vanishes as the number of volumes $N_{vol}$ is increased. Eqs.(\ref{eq.rep_volume_current})-(\ref{eq.surf_disc2}) are only one possible discretization of the continuous current profiles, proposed by the authors for illustration. Advantages of this particular representation are (1) that the total toroidal current is always preserved and (2) that the currents are approximately localized at the same location in the discretized than in the continuous case.
+with $\psi_{a}$ the total toroidal magnetic flux enclosed by the plasma. In Eqs.(\ref{eq.surf_disc1})-(\ref{eq.surf_disc2}), care has been taken for the first and last interfaces, where the surface of integration has been extended to include the current density from the magnetic axis and up to the plasma boundary. Note that this difference in the definition of the first and last surface currents vanishes as the number of volumes $N_{vol}$ is increased. Eqs.(\ref{eq.rep_volume_current})-(\ref{eq.surf_disc2}) are only one possible discretization of the continuous current profiles, proposed here for illustration. Advantages of this particular representation are (1) that the total toroidal current is always preserved and (2) that the currents are approximately localized at the same location in the discretized than in the continuous case.
 
 
 \begin{figure}
@@ -461,12 +485,22 @@ An important property of the ideal MHD model is that the magnetic helicity $K$ i
 \end{equation}
 where $\mathbf{A}=\nabla\times\mathbf{B}$ is the magnetic vector potential. Indeed, we find
 \begin{align}
-	\frac{dK}{dt} &= \iiint_{\mathcal{V}_i} d\mathbf{x}^3 \frac{d\mathbf{A}}{dt}\cdot\mathbf{B} + \mathbf{A}\cdot\frac{d\mathbf{B}}{dt} + \iint_{\delta\mathcal{V}_i} \mathbf{A}\cdot\mathbf{B}(\mathbf{n}\cdot\mathbf{v})d\mathbf{x}^2, \\
-	&= -2\iiint_{\mathcal{V}_i}\mathbf{E}\cdot\mathbf{B} d\mathbf{x}^3 + \iint_{\delta\mathcal{V}_i}(\mathbf{n}\times\mathbf{A})\cdot(\mathbf{E}+\mathbf{v}\times\mathbf{B})d\mathbf{x}^2,
+	\frac{\partial K}{\partial t} &= \iiint_{\mathcal{V}_i} d\mathbf{x}^3 \frac{\partial\mathbf{A}}{\partial t}\cdot\mathbf{B} + \mathbf{A}\cdot\frac{\partial \mathbf{B}}{\partial t} + \iint_{\delta\mathcal{V}_i} \mathbf{A}\cdot\mathbf{B}(\mathbf{n}\cdot\mathbf{v})d\mathbf{x}^2. \label{eq.derivative_helicity_1}
 \end{align}
-where $\mathcal{V}_i$ is any volume in the plasma bounded by magnetic surfaces, $\mathbf{n}$ is a unit vector normal to $\delta \mathcal{V}_i$, and $\mathbf{v}$ is the velocity describing the motion of the boundary $\delta\mathcal{V}_i$. Applying the ideal Ohm's law (Eq.(\ref{ideal Ohms law})), we obtain $dK/dt = 0$, \textit{i.e.} the magnetic helicity is conserved everywhere in the plasma according to ideal MHD. Indeed, the magnetic helicity has been shown to be approximately conserved during fast reconnection events \citep{bergerIntroductionMagneticHelicity1999}, and has been observed to be conserved in tokamak sawtooth crashes \citep{Heidbrink2000}. 
+where $\mathcal{V}_i$ is any volume in the plasma bounded by magnetic surfaces, $\mathbf{n}$ is a unit vector normal to $\delta \mathcal{V}_i$, and $\mathbf{v}$ is the velocity describing the motion of the boundary $\delta\mathcal{V}_i$. The first term of the right hand side of Eq.(\ref{eq.derivative_helicity_1}) can be simplified using Faraday's law,
+\begin{align}
+	\frac{\partial}{\partial t}(\mathbf{A}\cdot\mathbf{B}) &= \frac{\partial\mathbf{A}}{\partial t}\cdot \mathbf{B} - \mathbf{A}\cdot(\nabla\times\mathbf{E})\\
+	&= \mathbf{E}\cdot\mathbf{B} + \mathbf{B}\cdot\frac{\partial \mathbf{A}}{\partial t} - \nabla\cdot(\mathbf{E}\times\mathbf{A})\\
+	&= -2\mathbf{E}\cdot\mathbf{B} - \nabla\cdot(\phi \mathbf{B}+\mathbf{E}\times\mathbf{A}), \label{eq.derivative_helicity_2}
+\end{align}
+where we used the relation $\nabla\cdot(\mathbf{A}\times\mathbf{E})=\mathbf{A}\cdot\nabla\times\mathbf{E}+\mathbf{E}\cdot\mathbf{B}$ to get to the second equation, and the electric field was expressed in terms of the electrostatic potential $\phi$ as $\mathbf{E}=-\nabla\phi-\partial\mathbf{A}/\partial t$ to get the third equation. Using the divergence theorem to rewrite the second term of Eq.(\ref{eq.derivative_helicity_2}) as a surface integral, and noting that $\mathbf{B}\cdot\mathbf{n}=0$ since $\delta\mathcal{V}_i$ are magnetic surfaces, we obtain
+\begin{align}
+	\frac{\partial K}{\partial t} &= -2\iiint_{\mathcal{V}_i}\mathbf{E}\cdot\mathbf{B} d\mathbf{x}^3 + \iint_{\delta\mathcal{V}_i}()\mathbf{A}\cdot\mathbf{B}(\mathbf{n}\cdot\mathbf{v}) -  \mathbf{E}\times\mathbf{A}) d\mathbf{x}^2\\
+	&= -2\iiint_{\mathcal{V}_i}\mathbf{E}\cdot\mathbf{B} d\mathbf{x}^3 + \iint_{\delta\mathcal{V}_i}(\mathbf{n}\times\mathbf{A})\cdot(\mathbf{E}+\mathbf{v}\times\mathbf{B})d\mathbf{x}^2.
+\end{align}
+Applying the ideal Ohm's law (Eq.(\ref{ideal Ohms law})), we obtain $\partial K/\partial t = 0$, \textit{i.e.} the magnetic helicity is conserved everywhere in the plasma according to ideal MHD. Interestingly, it has been shown that the magnetic helicity is approximately conserved during non-ideal processes, such as fast reconnection events \citep{bergerIntroductionMagneticHelicity1999}, and tokamak sawtooth crashes \citep{Heidbrink2000}. 
 
-Magnetic helicity can be linked to the magnetic field line topologies. One can show \citep{moffattDegreeKnottednessTangled1969, arnoldTopologicalPropertiesMagnetic1998, bergerIntroductionMagneticHelicity1999} that the magnetic helicity is the sum of the Gauss linking number over every pair of field lines within a volume, where the Gauss linking number is a measure of how intertwined field lines are (see Figure \ref{fig gauss linking number}). Note the following implication: in ideal MHD, the magnetic helicity is conserved \emph{everywhere}, meaning that the magnetic topology is conserved during plasma motion. Therefore, no magnetic reconnection event can be discribed by ideal MHD dynamics.
+Magnetic helicity can be linked to the magnetic field line topologies. One can show \citep{moffattDegreeKnottednessTangled1969, arnoldTopologicalPropertiesMagnetic1998, bergerIntroductionMagneticHelicity1999} that the magnetic helicity is the sum of the Gauss linking number over every pair of field lines within a volume, where the Gauss linking number is a measure of how intertwined field lines are (see Figure \ref{fig gauss linking number}). Note the following implication: in ideal MHD, the magnetic helicity is conserved \emph{everywhere}, meaning that the magnetic topology is conserved during plasma motion. Therefore, no magnetic reconnection event can be described by ideal MHD dynamics.
 
 \begin{figure}
 	\hspace{.125\linewidth}
@@ -485,30 +519,26 @@ Magnetic helicity can be linked to the magnetic field line topologies. One can s
 The ideal MHD equilibrium equations, Eqs.(\ref{equation perp force balance})-(\ref{equation div B ideal mhd}), the Taylor state, Eq.(\ref{equation Taylor state}), and the MRxMHD equilibrium equations, Eqs.(\ref{eq.BeltramiEquation})-(\ref{eq.force_balance}), can be derived from an energy principle. Each derivation is detailed below.
 
 \subsubsection{Ideal MHD} \label{energy principle ideal mhd}
-Consider the plasma potential energy, given as the sum of the gas potential energy and the magnetic potential energy, 
-\begin{equation}
-	W = \iiint_{\mathcal{V}_P} d\mathbf{x}^3 \left(\frac{\mathbf{B}^2}{2} + \frac{p}{\gamma-1}\right), \label{eq. energy functional}
-\end{equation}
-where $\mathcal{V}_P$ is the plasma volume, $d\mathbf{x}^3$ is a volume element. We now follow \citet{kruskalEquilibriumMagneticallyConfined1958} to minimize $W$ under ideal MHD motions. We assume that the plasma is in an initial state with magnetic surfaces; in general, this initial state will however not be at equilibrium. We now wish to minimize $W$ while conserving the same magnetic topology, \textit{i.e.} conserving the magnetic helicity.
+Consider a plasma filled with nested magnetic surfaces and initially at rest with potential energy $W$ given by Eq.(\ref{eq. energy functional}). In general, this initial state will not be at equilibrium. We follow \citet{kruskalEquilibriumMagneticallyConfined1958} to minimize $W$ under ideal MHD motions while conserving the same magnetic topology, \textit{i.e.} conserving the magnetic helicity.
 
-The first step in the derivation is to exploit property of ideal MHD to describe the plasma as a fluid --- a fluid mass element $dm=\rho dv$ is then conserved. Leveraging the ideal gas law, another constant, namely $p^{1/\gamma} / \rho$ is derived. We can thus define the conserved quantity $M(c)$,
+The first step in the derivation is to find a new time-invariant of the system. From Eq.(\ref{energy equation}), we find that $p^{1/\gamma} = k\rho$, with $k$ a constant. Multiplying both side by a volume element $dv$, we get $p^{1/\gamma}dv = k\rho dv = k dm$, with $dm$ the mass contained in $dv$. As Ideal MHD assumes that the plasma is incompressible, $dm$ is a constant, and thus $p^{1/\gamma}dv$ is also constant in time. We can thus define the conserved quantity $M(c)$,
 \begin{equation}
-	M(c) = \int_{\psi_t\leq c} p^{1/\gamma}d\mathbf{x}^3, \label{eq. def M}
+	M(c) = \int_{\psi_t\leq c} p^{1/\gamma}dv, \label{eq. def M}
 \end{equation}
 where $c$ is a flux surface label, and $c=C$ is the plasma boundary. Variation of $M$ with respect to $p$ gives
 \begin{align}
-	0=\delta M &= \frac{1}{\gamma}\int_{\psi_t\leq c} p^{1/\gamma-1}\delta pd\mathbf{x}^3\\
-	&=\frac{1}{\gamma}\int_0^c dc \int_{\psi_t=c} p^{1/\gamma-1}\delta p\frac{dS}{|\nabla\psi_t|}, \label{eq. variation M w.r.t p}
+	0=\delta M &= \frac{1}{\gamma}\int_{\psi_t\leq c} p^{1/\gamma-1}\delta pdv\\
+	&=\frac{1}{\gamma}\int_0^c dc \iint_{S[\psi_t=c]} p^{1/\gamma-1}\delta p\frac{dS}{|\nabla\psi_t|}, \label{eq. variation M w.r.t p}
 \end{align}
 while variation of the energy with respect to $p$ gives
 \begin{align}
-	0=\delta W &= \frac{1}{\gamma-1} \int_0^C dc \int_{\psi_t=c} \frac{dS}{|\nabla\psi_t|}\delta p. \label{eq. variation W w.r.t p}
+	0=\delta W &= \frac{1}{\gamma-1} \int_0^C dc \iint_{S[\psi_t=c]} \frac{dS}{|\nabla\psi_t|}\delta p. \label{eq. variation W w.r.t p}
 \end{align}
 Both equation (\ref{eq. variation M w.r.t p}) and (\ref{eq. variation W w.r.t p}) have to be satisfied for any variation $\delta p$; in particular, we can choose a variation such that $p^{1/\gamma-1}\delta p/|\nabla \psi_t| = \delta(\mathbf{x}-\mathbf{x}_1)-\delta(\mathbf{x}-\mathbf{x}_2)$, with $\mathbf{x}_i$ a point on the surface $\psi_t=c$. Then equation (\ref{eq. variation M w.r.t p}) is satisfied by construction, and equation (\ref{eq. variation W w.r.t p}) implies
 \begin{equation}
-	0 = \int_{\psi_t=c}\frac{\delta p}{|\nabla \psi_t|} = \int_{\psi_t=c}\frac{1}{p^{1/\gamma-1}}\delta(\mathbf{x}-\mathbf{x}_1)-\delta(\mathbf{x}-\mathbf{x}_2),
+	0 = \iint_{S[\psi_t=c]}\frac{\delta p}{|\nabla \psi_t|} = \iint_{S[\psi_t=c]}\frac{1}{p^{1/\gamma-1}}\delta(\mathbf{x}-\mathbf{x}_1)-\delta(\mathbf{x}-\mathbf{x}_2),
 \end{equation}
-which is satisfied if $p(\mathbf{x}_1)=p(\mathbf{x}_2)$. Since the $\mathbf{x}_i$ are arbitrary, the pressure must be a function of $c$, \textit{i.e.} $p = p(c)$. Equation (\ref{eq. def M}) can thus be used to express $p(c)$ as
+which is satisfied if $p(\mathbf{x}_1)=p(\mathbf{x}_2)$. Since the $\mathbf{x}_i$ are arbitrary, the pressure must be a function of $c$, \textit{i.e.} $p = p(c)$. Taking the derivative of equation (\ref{eq. def M}) with respect to $c$, we can write
 \begin{equation}
 	p(c) = \left[\frac{M'(c)}{\int_{\psi_t=c}dS/|\nabla\psi_t|}\right]^\gamma.
 \end{equation}
@@ -529,7 +559,7 @@ which implies
 \begin{equation}
 	\nabla\psi_t\cdot(\nabla\times\mathbf{B})=0,
 \end{equation}
-\textit{i.e.} magnetic surfaces are current surfaces as well. The final stage of the derivation is to consider variations of $W$ with respect to the toroidal flux. Careful consideration of how the pressure varies as the toroidal flux is varied lead to
+\textit{i.e.} magnetic surfaces are current surfaces as well. The final stage of the derivation is to consider variations of $W$ with respect to the toroidal flux. Careful consideration of how the pressure varies as the toroidal flux is varied leads to
 \begin{align}
 	\int_{\mathcal{V}_P} \delta p(c) \mathbf{x}^3 &= \int_{\mathcal{V}_P}p  \delta \log p\mathbf{x}^3 = \int_0^C dc \int_{\psi_t=c} \frac{dS}{|\nabla\psi_t|} p \gamma \delta\left[\log \left(\frac{M'(c)}{\int dS/|\nabla\psi_t|}\right)\right].
 \end{align}
@@ -554,14 +584,15 @@ where we integrated by part the first equation, and used the assumption that $\d
 	&= d\mathbf{x}^3 \left[\mathbf{B}\cdot (\nabla\delta\psi_t\times\nabla\nu + \nabla\psi_t\times\nabla\delta\nu) -P'\delta\psi_t\right]\\
 	&= d\mathbf{x}^3 \delta\psi_t\left[(\nabla\times\mathbf{B})\cdot\nabla\nu -p'\right].
 \end{align}
-To obtain the force balance equation, one needs to take the product between $\nabla\times\mathbf{B}$ and $\mathbf{B}$. We get
+To obtain the force balance equation, one needs to take the cross product between $\nabla\times\mathbf{B}$ and $\mathbf{B}$. We get
 \begin{equation}
 	\mathbf{B}\times(\nabla\times\mathbf{B}) = [(\nabla\times\mathbf{B})\cdot\nabla\psi_t]\nabla\nu + [(\nabla\times\mathbf{B})\cdot\nabla\nu]\nabla\psi_t = = -p'\nabla\psi_t,
 \end{equation}
 which is equivalent to
 \begin{equation}
-	(\nabla\times\mathbf{B})\times\mathbf{B} = \nabla p.
+	(\nabla\times\mathbf{B})\times\mathbf{B} = \nabla p,
 \end{equation}
+thereby retrieving the force balance equation (\ref{equation perp force balance}). The plasma state that extremizes the energy $W$ under ideal MHD variations is thus described by the MHD equilibrium equation. Since only ideal MHD variations were allowed, the magnetic field line topologies are conserved between the initial and final state --- the equilibrium is thus filled with nested magnetic surfaces.
 
 
 
@@ -571,29 +602,29 @@ which is equivalent to
 
 
 \subsubsection{Taylor state}
-Taylor states do not assume the existence of magnetic surfaces; as a matter of fact, the magnetic helicity is conserved globally, to the opposite of its conservation everywhere in ideal MHD. To enforce this constraint in the energy minimization, we employ the Lagrange multiplier method and minimize the functional
+Taylor states do not assume the existence of magnetic surfaces; as a matter of fact, the magnetic helicity is conserved globally, as opposed to its local conservation in ideal MHD. To enforce this constraint in the energy minimization, we employ the Lagrange multiplier method and minimize the functional
 \begin{equation}
 	F = \int_{\mathcal{V}_P} \left(\frac{p}{\gamma-1}+\frac{B^2}{2\mu_0}\right)dv - \mu(K-K_0),
 \end{equation}
 where $K_0$ is the magnetic helicity of the initial state. Variation with respect to $\mu$ enforces the constraint $K=K_0$, while variation with respect to the vector potential $\mathbf{A}$ gives
 \begin{align}
 	0 = \delta F &= \delta W - \mu(\delta K - K_0)\\
-	&= \int_{\mathcal{V}_P} B\delta B dV - \mu \int_V \delta A \cdot B + A \cdot \delta B\\
-	&=\int_{\mathcal{V}_P} \left(B \cdot \nabla \times \delta A + A\cdot \delta B - \mu B \cdot \delta A\right) d^3x\\
-	&=\int_{\mathcal{V}_P} \left( \nabla \times B - \mu B \right) \cdot \delta Ad^3x + \int_{\mathcal{V}_P}A \cdot \nabla \times \delta A d^3x, \label{eq. taylor state energy 1}
+	&= \int_{\mathcal{V}_P} \mathbf{B}\delta \mathbf{B} dv - \mu \int_{\mathcal{V}_P} (\delta \mathbf{A} \cdot \mathbf{B} + \mathbf{A} \cdot \delta \mathbf{B})dv\\
+	&=\int_{\mathcal{V}_P} \left(\mathbf{B} \cdot \nabla \times \delta \mathbf{A} + \mathbf{A}\cdot \delta \mathbf{B} - \mu \mathbf{B} \cdot \delta \mathbf{A}\right) dv\\
+	&=\int_{\mathcal{V}_P} \left( \nabla \times \mathbf{B} - \mu \mathbf{B} \right) \cdot \delta \mathbf{A}dv + \int_{\mathcal{V}_P}\mathbf{A} \cdot \nabla \times \delta \mathbf{A} dv. \label{eq. taylor state energy 1}
 \end{align}
-We wish now to prove that the second term of equation (\ref{eq. taylor state energy 1}) vanishes. We write $\nabla\times\delta\mathbf{A}=\delta\mathbf{B}$ and we make use of Faraday's law to write $\delta\mathbf{B} = \nabla\times\mathbf{E}\delta t$ where $\delta t$ is an infinitesimal time over which the plasma motion takes place. We thus get
+Note that here, the variation $\delta \mathbf{A}$ is completely arbitrary, reflecting the possibility of magnetic field line reconnection. We wish now to prove that the second term of equation (\ref{eq. taylor state energy 1}) vanishes. We write $\nabla\times\delta\mathbf{A}=\delta\mathbf{B}$ and we make use of Faraday's law to write $\delta\mathbf{B} = \nabla\times\mathbf{E}\delta t$ where $\delta t$ is an infinitesimal time over which the plasma motion takes place. We thus get
 \begin{align}
 	\mathbf{A}\cdot\delta\mathbf{B}&=\left[\nabla\cdot(\mathbf{E}\times\mathbf{A}-\mathbf{E}\cdot\mathbf{B})\right]\delta t\\
 	&= \nabla\cdot(\mathbf{E}\times\mathbf{A})\delta t,
 \end{align}
 where we used Ohm's law (\ref{ideal Ohms law}) to find $\mathbf{E}\cdot\mathbf{B}=0$. Finally, taking the integral over the plasma volume and applying the divergence theorem, we get
 \begin{equation}
-	\int_{\mathcal{V}_P}A \cdot \nabla \times \delta A d^3x = \int_{\Gamma_{PB}}  (\mathbf{E}\times\mathbf{A})\cdot\mathbf{dS}\delta t = \int_{\Gamma_{PB}}  \mathbf{E}\cdot(\mathbf{A}\times\mathbf{dS})\delta t = 0,
+	\int_{\mathcal{V}_P}\mathbf{A} \cdot \nabla \times \delta \mathbf{A} dv = \int_{\Gamma_{PB}}  (\mathbf{E}\times\mathbf{A})\cdot\mathbf{dS}\delta t = \int_{\Gamma_{PB}}  \mathbf{A}\cdot(\mathbf{dS}\times\mathbf{E})\delta t = 0,
 \end{equation}
-where we applied the boundary condition $\mathbf{n}\times\mathbf{E}=0$ on the plasma boundary $\Gamma_{PB}$. Equation (\ref{eq. taylor state energy 1}) reduces then to
+where we applied the boundary condition $\mathbf{dS}\times\mathbf{E}=0$ on the plasma boundary $\Gamma_{PB}$. Equation (\ref{eq. taylor state energy 1}) reduces then to
 \begin{equation}
-	\int_{\mathcal{V}_P} \left( \nabla \times B - \mu B \right) \cdot \delta Ad^3x = 0,
+	\int_{\mathcal{V}_P} \left( \nabla \times \mathbf{B} - \mu \mathbf{B} \right) \cdot \delta \mathbf{A}dv = 0,
 \end{equation}
 which implies the Taylor equilibrium equation (\ref{equation Taylor state}).
 
@@ -602,9 +633,17 @@ MRxMHD equations derive as well from an energy principle \citep{Dewar2015}. As d
 \begin{equation}
 	F = \sum_{l=1}^{N_{vol}} \int_{\mathcal{V}_l} \left[\frac{p}{\gamma-1}+\frac{\mathbf{B^2}}{2\mu_0}\right]d\mathbf{x}^3 + \mu_l(K_l-K_{l,0}). \label{eq.mrxmhd energy functional}
 \end{equation}
-Minimization with respect to variation in the magnetic field will lead to the Taylor state equation (\ref{eq.BeltramiEquation}) in each volume $\mathcal{V}_l$, while variation with respect to the volume's boundary motion will lead to the equilibrium condition (\ref{eq.force_balance}). The derivation is rather tedious --- further details can be found in the paper by \citet{Dewar2015}.
+Minimization with respect to variations in the magnetic field leads to the Taylor state equation (\ref{eq.BeltramiEquation}) in each volume $\mathcal{V}_l$, while variation with respect to the volume's boundary motion leads to the equilibrium condition (\ref{eq.force_balance}). The derivation is rather tedious --- further details can be found in the paper by \citet{Dewar2015}.
 
-The ideal MHD, Taylor state and MRxMHD equilibrium equations derive all from an energy principle, as shown in section \ref{energy principle ideal mhd}. This property is leveraged by different numerical codes to find 3D equilibria --- indeed, the equilibrium can directly be computed from an initial state by minimizing an energy functional instead of computing the entire time evolution and trajectory of the plasma. While the time evolution can be of great importance for some applications, it is often a waste of computational time and ressources if only the equilibrium state is sought. For example, the \ac{VMEC} \citep{Hirshman1983,Hirshman1986} finds ideal 3D MHD equilibria by minimizing Eq.(\ref{eq. energy functional}), and the \ac{SPEC} code \citep{hudsonComputationMultiregionRelaxed2012,Hudson2020c} can find MRxMHD equilibrium by minimizing the equation (\ref{eq.mrxmhd energy functional}). The next chapter will focus on describing the \ac{SPEC} code, and how the capability to constraint net toroidal currents has been implemented.
+\subsection{Summary}
+
+This chapter introduced the ideal MHD model which can be used to describe plasma equilibria in stellarators. Important figures of merit have been defined, in particular the normalized pressure, $\beta$, which is a crucial parameter for the efficiency of the reactor. We also discussed the different kinds of current that are presents in ideal MHD equilibria. The diamagnetic current is generated by the plasma to satisfy the force balance equation, while the Pfirsch-Schl\"uter current emerges to satisfy the charge conservation equation. Calculating the flux averaged current density of both currents, we showed that only the diamagnetic current contributes in setting a net toroidal current in the plasma, and only if there are other sources of net toroidal current --- for example the bootstrap current, or externally driven currents. Furthermore, estimates showed that the net toroidal current in the system is dominated by the bootstrap and externally driven currents, which strongly motivates their inclusion in the calculation of any magnetic equilibria. As we shall see in chapter \ref{ch5.equilibrium_beta_limit}, the bootstrap current has indeed a strong effect on the equilibrium.
+
+Furthermore, we discussed the singular properties of the Pfirsch-Schl\"uter current. Different classes of equilibria have been proposed to keep the Pfirsch-Schl\"uter current integrable. In particular, we discussed the Taylor state, which is a particular case of a force-free field which allow the emergence of magnetic islands and chaos, and the stepped-pressure equilibrium, where the pressure gradient is supported by a finite number of interfaces. We introduced the MRxMHD equilibrium equations, which describe the plasma as a set of nested Taylor states at constant pressure, with pressure discontinuities at the volume's interfaces. This class of equilibrium is of particular interest because it (i) allows the emergence of magnetic islands and magnetic field line chaos, (ii) describes equilibria with finite pressure gradients, (iii) does not have singular Pfirsch-Schl\"uter current densities, and (iv) has been proven to have solutions in 3D under some conditions. In this thesis, we will uniquely work with MRxMHD equilibria. 
+
+In this chapter, we also discussed some of the properties of the MRxMHD equilibria. We showed that there are two types of current in MRxMHD equilibria, namely volume currents, that are parallel to the magnetic field and flow in the volumes, and surface currents, that are current sheets with zero width that flow at the volume's interfaces. Volume currents encompasses all externally driven currents, while interface currents represents the pressure-driven currents and shielding currents that emerge when an ideal interface is positioned on a resonance.
+
+Finally, we discussed how the ideal MHD, the Taylor state and the MRxMHD equilibrium equations could be derived from an energy principle. This property is leveraged by different numerical codes to find 3D equilibria --- indeed, the equilibrium can directly be computed from an initial state by minimizing an energy functional instead of computing the entire time evolution and trajectory of the plasma. While the time evolution can be of great importance for some applications, it is often a waste of computational time and ressources if only the equilibrium state is sought. For example, the \ac{VMEC} \citep{Hirshman1983,Hirshman1986} finds ideal 3D MHD equilibria by minimizing Eq.(\ref{eq. energy functional}), and the \ac{SPEC} code \citep{hudsonComputationMultiregionRelaxed2012,Hudson2020c} can find MRxMHD equilibrium by minimizing the equation (\ref{eq.mrxmhd energy functional}). The next chapter will focus on describing the \ac{SPEC} code, and how the capability to constraint the net volume and surface toroidal currents has been implemented.
 
 
 
